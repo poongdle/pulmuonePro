@@ -4,7 +4,9 @@
 	<div class="container">
 		<div class="header-logo">
 			<h1>
-				<img src="/resources/assets/images/main_logo.png" alt="풀무원녹즙">
+				<a href="/">
+					<img src="/resources/assets/images/main_logo.png" alt="풀무원녹즙">				
+				</a>
 			</h1>
 		</div>
 		<nav id="gnb">
@@ -17,7 +19,7 @@
 				<li><a href=""><span>맞춤큐레이션</span></a></li>
 				<li><a href=""><span>시음선물</span></a></li>
 				<li><a href=""><span>이벤트</span></a></li>
-				<li><a href=""><span>고객기쁨센터</span></a></li>
+				<li><a href="/forum/faq/list.do"><span>고객기쁨센터</span></a></li>
 			</ul>
 		</nav>
 		<div class="member-search-area">
@@ -25,9 +27,9 @@
 				<a href="/mypage" data-require-login="true"> <i
 					class="ico ico-myIcon"></i> <span class="hide">로그인 페이지 / 마이
 						페이지로 가기</span>
-				</a> <a href="/cart/daily">
-					<div class="counter hide" data-cart-size=""></div> <i
-					class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
+				</a>
+				 <a href="/cart/daily">
+					<div class="counter hide" data-cart-size=""></div> <i class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
 				</a>
 			</div>
 			<form class="search-area" action="/product/search">
