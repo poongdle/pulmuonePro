@@ -10,9 +10,11 @@ public class FaqList implements CommandHandler {
 
 
 	@Override
-	public String process(HttpServletRequest req, HttpServletResponse res) 
+	public String process(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
 		System.out.println("> FaqList.process..");
+		
+		String category = request.getParameter("category");
 		
 		return "/WEB-INF/views/faq/list.jsp";
 	}
