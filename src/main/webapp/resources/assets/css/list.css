@@ -396,6 +396,38 @@
 .gift-info span {font-size: 14px; line-height: 1.36; letter-spacing: -1.05px; color: #666;}
 .prd-detail .price-info {display: flex; flex: 1; justify-content: flex-end; align-items: baseline; margin-top: 25px;}
 
+/* 버튼 영역 */
+.btn-area-column button:not(:last-of-type), .btn-area-column a:not(:last-of-type) {margin-bottom: 10px;}
+.btn-area {display: flex; flex: 1; justify-content: space-between; margin: 0 -5px;}
+.btn-area button, .btn-area a {margin: 0 5px;}
+.btn-area-center {display: flex; justify-content: center;}
+.btn-area-right {display: flex; justify-content: flex-end;}
+.btn-area-right button, .btn-area-right a {flex: none;}
+.btn-area-right * + * { margin-left:10px; }
+.btn-area-fixed {display: flex; flex: 1; position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;}
+.btn-area-fixed button, .btn-area-fixed button a {border-radius: 0;}
+
+/* 라운드 버튼 공통 */
+.btn-round {display: flex; justify-content: center; align-items: center; width: 42px; height: 42px; border-radius: 50%; background-color: #7acc12;}
+.btn-round2 {display: flex; justify-content: center; align-items: center; height: 32px; margin-left: 15px; padding: 0 16px; background-color: #fff; border-radius: 16px; border: 1px solid #e5e5e5; font-size: 14px; letter-spacing: -0.98px; color: #666;}
+
+/* 버튼 스타일 */
+.btn-textL {justify-content: flex-start;}
+.btn-white {background-color: #fff; border: 1px solid #e5e5e5; color: #666; font-weight: 400;}
+.btn-yellow {background-color: #fee500; color: #181600; font-weight: 400;}
+.btn-gray {background-color: #e5e5e5; color: #fff;}
+.btn-black {background-color: #333; color: #fff;}
+.btn-blue {background-color: #4d51dd; color: #fff;}
+.btn-green {background-color: #7acc12; color: #fff;}
+
+.btn-white:disabled {
+    background: #fafafa;
+    border-color: #e5e5e5;
+    color: #999999;
+}
+
+/* 찜하기 버튼 */
+.wishlistBtn {background-color: transparent; border: 0;}
 
 /**********************************************************************************
 ** icon

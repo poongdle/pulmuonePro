@@ -14,14 +14,15 @@ public class DailyList implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(">DailyList.process ");
+		System.out.println(">DailyList.process ");		
+		String path = request.getRequestURI();		
+		System.out.println(path);
 		ListService listService = ListService.getInstance();
-	    List<ProductsDTO> list = listService.select();
+	    List<ProductsDTO> list = listService.select(path);
 		
 		
 		//1.  포워딩 전 데이터 저장
-		request.setAttribute("list", list);
-		request.setAttribute("pageBlock", "[1] 2 3 4 5 6 7 8 9 10 >");
+		request.setAttribute("list", list);		
 
 		return "/WEB-INF/views/product/DailyList.jsp";
 		

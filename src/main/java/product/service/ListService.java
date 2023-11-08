@@ -22,14 +22,19 @@ public class ListService {
 		}
 		return instance;
 	}
-	public List<ProductsDTO> select(){
+	public List<ProductsDTO> select(String path){
 		//
 		Connection con = null;
 		try {
 			con = ConnectionProvider.getConnection();
 			ProductsDAO dao = ProductsDAO.getInstance();
 			List<ProductsDTO> list = null;
-			list = dao.selectList(con);
+			int count = path.indexOf("daily");			
+			if(count!=-1) {			
+			list = dao.selectdaily(con);
+			}else {
+			list = dao.selectbox(con);
+			}
 			return list;
 		} catch (NamingException | SQLException e) { 
 			//e.printStackTrace();  syso("ListService.select() 에러 : ")

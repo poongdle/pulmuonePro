@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,14 +17,14 @@
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
 <link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="/resources/assets/css/owl.theme.default.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css">
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 <link rel="stylesheet" href="/resources/assets/css/list.css">
 <script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
 <script src="/resources/assets/js/owl.carousel.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/request.js"></script>
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/design.js"></script>
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
@@ -871,15 +873,15 @@ $(document).ready(function () {
 				</div>
 				<form id="searchForm">
 					<input type="hidden" name="category" value=""> 
-					<input type="hidden" name="tags" value="[478]"> 
+					<input type="hidden" name="tags" value=""> 
 					<div class="cbody-wrap">
 						<div class="bg-light-gray over-section"
 							style="margin-bottom: 120px">
 							<div class="container">
 								<div class="tag-place">
-									<button data-idx="242" type="button" class="tag-btn item ">유기농</button>
+									<button data-idx="242" type="submit" class="tag-btn item ">유기농</button>
 									<button data-idx="7"   type="button" class="tag-btn item ">융복합녹즙</button>
-									<button data-idx="478" type="button" class="tag-btn item active ">케일</button>
+									<button data-idx="478" type="button" class="tag-btn item ">케일</button>
 									<button data-idx="479" type="button" class="tag-btn item ">양배추</button>
 									<button data-idx="262" type="button" class="tag-btn item ">식물성유산균</button>
 									<button data-idx="327" type="button" class="tag-btn item ">발효유</button>
@@ -889,12 +891,48 @@ $(document).ready(function () {
 								<div class="tab-content" id="tab-content-depth2">
 									<div class="prd-list-head">
 										<p class="count">
-											총 <em>7</em>건의 상품이 있습니다.
+											총 <em>${fn:length(list) }</em>건의 상품이 있습니다.
 										</p>
 									</div>
-									<div class="prd-list wrap" data-list-object="append"
-										id="product-items">
-										<div class="prd-area">
+									<div class="prd-list wrap" data-list-object="append" id="product-items">
+									<c:forEach var="dto" items="${list }">
+ 										<div class="prd-area">
+											<a href="/product/daily/${dto.products_tag }?eventIdx=" title="제품 상세페이지로 가기">
+												<div class="badges">
+													<span class="badge">BEST</span>
+												</div>
+												<div class="thumb">
+													<img src="/file/download/product/${dto.system_name }" alt="제품명">
+												</div>
+												<div class="prd-info">
+													<div class="prd-title-wrapper">
+														<b class="prd-title"> ${dto.products_name } </b>
+													</div>
+													<div class="price-info" style="margin-bottom: 5px;">
+														<b class="now-price"><fmt:formatNumber value="${dto.price }" pattern="#,###"/>  
+														<span> 원</span>														
+														</b>
+													</div>
+													<span class="volume">(${dto.products_size })</span>
+												</div>
+											</a>
+											<div class="btn-area btn-area-center">
+												<button type="button" data-wish-id="${dto.products_tag }"
+													data-wish-type="daily"
+													class="btn-round btn-white wishlistBtn ">
+													<i class="ico ico-prd-wish"></i> <span class="hide">제품
+														찜하기</span>
+												</button>
+												<button type="button" data-cart-id="${dto.products_no }"
+													data-cart-type="daily" data-cart-event=""
+													class="btn-round addCartBtn">
+													<i class="ico ico-prd-cart"></i> 
+													<span class="hide">장바구니에 담기</span>
+												</button>
+											</div>
+										</div>								
+									</c:forEach>
+<!-- 										<div class="prd-area">
 											<a href="/product/daily/278?eventIdx=" title="제품 상세페이지로 가기">
 												<div class="badges">
 													<span class="badge">BEST</span>
@@ -1142,7 +1180,7 @@ $(document).ready(function () {
 														담기</span>
 												</button>
 											</div>
-										</div>
+										</div> -->
 									</div>
 									<div class="button-set mb60" data-list-more="#product-items" data-param="2">
 								 	  <button type="button" class="basic-big-button">더보기</button>
