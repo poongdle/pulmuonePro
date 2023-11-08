@@ -14,8 +14,8 @@
 				<li><button class="btn-menu">
 						<i class="ico ico-menu"></i><span>메뉴보기</span>
 					</button></li>
-				<li><a href=""><span>매일배송</span></a></li>
-				<li><a href=""><span>택배배송</span></a></li>
+				<li><a href="/product/daily/dailylist.do"><span>매일배송</span></a></li>
+				<li><a href="/product/box/boxlist.do"><span>택배배송</span></a></li>
 				<li><a href=""><span>맞춤큐레이션</span></a></li>
 				<li><a href=""><span>시음선물</span></a></li>
 				<li><a href=""><span>이벤트</span></a></li>
