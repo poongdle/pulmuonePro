@@ -75,6 +75,10 @@ button {
   font-size: 1rem;
 }
 
+main {
+  min-height: 500px;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -586,4 +590,60 @@ footer .page-footer-typo > li > span {
   line-height: 1.5;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.breadcrumb-style {
+  padding-top: 17px;
+  margin-bottom: 3px;
+}
+.breadcrumb-style > .wrap:after {
+  content: "";
+  display: inline-block;
+  clear: both;
+}
+.breadcrumb-style ul {
+  float: right;
+}
+.breadcrumb-style ul li {
+  display: inline-block;
+  position: relative;
+}
+.breadcrumb-style ul li a {
+  font-size: 14px;
+  color: #666;
+}
+.breadcrumb-style ul li a.active {
+  color: #333;
+  font-weight: 500;
+}
+.breadcrumb-style ul li + li {
+  margin-left: 25px;
+}
+.breadcrumb-style ul li + li:before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: -13px;
+  width: 1px;
+  height: 7px;
+  transform: rotate(45deg);
+  background: #333;
+}
+.breadcrumb-style ul li + li:after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: -13px;
+  width: 1px;
+  height: 7px;
+  transform: rotate(-45deg);
+  background: #333;
+}
+.breadcrumb-style:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.breadcrumb-style.fff {
+  background: #fff;
 }/*# sourceMappingURL=style.css.map */
