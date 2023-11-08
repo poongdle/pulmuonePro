@@ -5,7 +5,7 @@
 		<div class="header-logo">
 			<h1>
 				<a href="/">
-					<img src="/pulmuonePro/resources/assets/images/main_logo.png" alt="풀무원녹즙">				
+					<img src="/resources/assets/images/main_logo.png" alt="풀무원녹즙">				
 				</a>
 			</h1>
 		</div>
@@ -16,7 +16,7 @@
 					</button></li>
 				<li><a href=""><span>매일배송</span></a></li>
 				<li><a href=""><span>택배배송</span></a></li>
-				<li><a href=""><span>맞춤큐레이션</span></a></li>
+				<li><a href="/customer/product/product.do"><span>맞춤큐레이션</span></a></li>
 				<li><a href=""><span>시음선물</span></a></li>
 				<li><a href=""><span>이벤트</span></a></li>
 				<li><a href="/forum/faq/list.do"><span>고객기쁨센터</span></a></li>

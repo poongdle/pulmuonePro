@@ -1,19 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% String path = request.getContextPath(); %>
 <html lang="ko">
 <head>
 <title>풀무원 녹즙 | 맞춤큐레이션</title>
 <meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/curation_start.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/curation.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/a-guide.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/bootstrap.min.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/layout_style.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/style.css">
-<link rel="shortcut icon" href="/pulmuonePro/resources/assets/images/pul_favicon.png">
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link rel="stylesheet" href="/customer/curation_css/curation.css">
+<link rel="stylesheet" href="/customer/curation_css/a-guide.css">
+<link rel="stylesheet" href="/customer/curation_css/bootstrap.min.css">
+<link rel="stylesheet" href="/customer/curation_css/layout_style.css">
+<link rel="stylesheet" href="/customer/curation_css/style.css">
+<link rel="shortcut icon" href="/resources/assets/images/pul_favicon.png">
 
+<script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/resources/assets/js/jquery.form.min.js"></script>
 <style type="text/css">
 @media (min-width: 768px){
 .container, .container-md, .container-sm {
@@ -60,7 +59,7 @@
 							녹즙 프로그램을 큐레이션 해드립니다.
 						</h3>
 					</div>
-					<a href="<%= path %>/customer/product/step1.jsp" style="font-size: 16px" class="button-basic primary sessionReset">맞춤큐레이션 시작</a>
+					<a href="/customer/product/step1.do" style="font-size: 16px" class="button-basic primary sessionReset">맞춤큐레이션 시작</a>
 				</div>
 				<div class="kids-depth" style="padding-top: 30px">
 					<div class="text-wrapper" style="margin-bottom: 35px">
@@ -69,7 +68,7 @@
 							<b>키즈제품</b>을 원하시나요?
 						</h3>
 					</div>
-					<a href="<%=path %>/customer/product/result/kids.jsp?singleYn=N" class="button-basic border" style="font-size: 16px">키즈제품 바로가기</a>
+					<a href="/customer/product/result/kids.jsp?singleYn=N" class="button-basic border" style="font-size: 16px">키즈제품 바로가기</a>
 				</div>
 			</div>
 		</div>
@@ -78,8 +77,8 @@
 </div>
 
 
-<!--E:cbody-->
 </form>
+<!--E:cbody-->
 
 <script>
 
@@ -118,11 +117,11 @@ $(function(){
 
 </script>
 <div style="display: none" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/pulmuonePro/resources/assets/images/quick4.png" alt=""></a>
-	<a href="#"><img src="/pulmuonePro/resources/assets/images/quickTop.png" alt=""></a>
+	<a href="/mypage/drink/drink"><img src="/resources/assets/images/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/assets/images/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/assets/images/quickTop.png" alt=""></a>
 </div>
 </main>
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>

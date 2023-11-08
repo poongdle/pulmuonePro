@@ -1,37 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+KR:300,400,500');
 
-:root {
-    --blue: #007bff;
-    --indigo: #6610f2;
-    --purple: #6f42c1;
-    --pink: #e83e8c;
-    --red: #dc3545;
-    --orange: #fd7e14;
-    --yellow: #ffc107;
-    --green: #28a745;
-    --teal: #20c997;
-    --cyan: #17a2b8;
-    --white: #fff;
-    --gray: #6c757d;
-    --gray-dark: #343a40;
-    --primary: #007bff;
-    --secondary: #6c757d;
-    --success: #28a745;
-    --info: #17a2b8;
-    --warning: #ffc107;
-    --danger: #dc3545;
-    --light: #f8f9fa;
-    --dark: #343a40;
-    --breakpoint-xs: 0;
-    --breakpoint-sm: 576px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 992px;
-    --breakpoint-xl: 1200px;
-    --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace
-}
-
 /* 사용자 에이전트 스타일시트 */
 div {
     display: block;
@@ -140,7 +109,7 @@ html {
 .visual-area.curation .txt-area p { font-size:32px; letter-spacing: -2.4px; color:#f6fcee; font-weight:400; text-shadow: 0 0 1px rgba(129,179,76,0.05); }
 .visual-area.curation .txt-area h1 { font-size:46px; letter-spacing: -2.4px; color:#fff; font-weight:500; margin:0; line-height: 1; text-shadow: 0 0 1px rgba(129,179,76,0.05);}
 .visual-area.curation .txt-area span { margin-top:20px; font-size:20px; letter-spacing: -1.5px; color:#f6fcee; font-weight:400; text-shadow: 0 0 1px rgba(129,179,76,0.05); }
-.visual-area.curation .bg-img { background: url('/pulmuonePro/resources/assets/images/curation_bg_img.png') no-repeat right center; position: absolute; top:0; bottom:0; right:0; left:0; }
+.visual-area.curation .bg-img { background: url('/resources/assets/images/curation_bg_img.png') no-repeat right center; position: absolute; top:0; bottom:0; right:0; left:0; }
 
 .texture-depth { position: relative; background: #fafafa; }
 .texture-depth:before { top:0; left:0; right:0; content:''; position:absolute; height:80px; border-top: 2px #fff solid; background: rgb(242,242,242); background: linear-gradient(180deg, rgba(242,242,242,1) 0%, rgba(250,250,250,1) 100%); }
@@ -174,22 +143,22 @@ html {
 
 .question-part .filled-radio-group .item input { display: none; }
 .question-part .filled-radio-group .item input+p { position:relative; font-size:14px; color:#666; font-weight:400; line-height:1; border-radius: 10px 0 10px 0; border:1px #e5e5e5 solid; height:120px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.question-part .filled-radio-group .item input+p:before { width:42px; height:42px; content:''; background:url('/pulmuonePro/resources/assets/images/curation_icon01.png') no-repeat; display: block; margin-bottom:20px; }
-.question-part .filled-radio-group .item input+p:after { width:42px; height:42px; content:''; background:url('/pulmuonePro/resources/assets/images/curation_icon01_on.png') no-repeat; position: absolute; left:50%; margin-left:-21px; top:21px; opacity: 0; transition-duration: .3s; }
+.question-part .filled-radio-group .item input+p:before { width:42px; height:42px; content:''; background:url('/resources/assets/images/curation_icon01.png') no-repeat; display: block; margin-bottom:20px; }
+.question-part .filled-radio-group .item input+p:after { width:42px; height:42px; content:''; background:url('/resources/assets/images/curation_icon01_on.png') no-repeat; position: absolute; left:50%; margin-left:-21px; top:21px; opacity: 0; transition-duration: .3s; }
 .question-part .filled-radio-group .item input:checked+p { background:#7acc12; transition-duration: .3s; color:#fff; }
 .question-part .filled-radio-group .item input:checked+p:before { opacity: 0; transition-duration: .3s; }
 .question-part .filled-radio-group .item input:checked+p:after { opacity: 1; transition-duration: .3s; }
 .question-part .filled-radio-group .item:hover input+p { border-color:#7acc12; transition-duration: .3s;  }
-.question-part .filled-radio-group .item:nth-child(2) input+p:before { background:url('/pulmuonePro/resources/assets/images/curation_icon02.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(2) input+p:after { background:url('/pulmuonePro/resources/assets/images/curation_icon02_on.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(3) input+p:before { background:url('/pulmuonePro/resources/assets/images/curation_icon03.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(3) input+p:after { background:url('/pulmuonePro/resources/assets/images/curation_icon03_on.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(4) input+p:before { background:url('/pulmuonePro/resources/assets/images/curation_icon04.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(4) input+p:after { background:url('/pulmuonePro/resources/assets/images/curation_icon04_on.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(5) input+p:before { background:url('/pulmuonePro/resources/assets/images/curation_icon05.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(5) input+p:after { background:url('/pulmuonePro/resources/assets/images/curation_icon05_on.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(6) input+p:before { background:url('/pulmuonePro/resources/assets/images/curation_icon06.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(6) input+p:after { background:url('/pulmuonePro/resources/assets/images/curation_icon06_on.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(2) input+p:before { background:url('/resources/assets/images/curation_icon02.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(2) input+p:after { background:url('/resources/assets/images/curation_icon02_on.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(3) input+p:before { background:url('/resources/assets/images/curation_icon03.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(3) input+p:after { background:url('/resources/assets/images/curation_icon03_on.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(4) input+p:before { background:url('/resources/assets/images/curation_icon04.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(4) input+p:after { background:url('/resources/assets/images/curation_icon04_on.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(5) input+p:before { background:url('/resources/assets/images/curation_icon05.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(5) input+p:after { background:url('/resources/assets/images/curation_icon05_on.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(6) input+p:before { background:url('/resources/assets/images/curation_icon06.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(6) input+p:after { background:url('/resources/assets/images/curation_icon06_on.png') no-repeat; }
 
 
 .prd-detail-title-area {display: flex; justify-content: space-between; align-items: flex-start;}
@@ -644,15 +613,15 @@ div.daterangepicker td.active, div.daterangepicker td.active:hover { background:
 .result-select-group label input+div { border:1px #e5e5e5 solid; border-radius: 20px 0; width:315px; display: block; padding:30px 20px; position: relative; }
 .result-select-group label input+div span { color:#666; font-size:16px; line-height: 1.5; letter-spacing: -1.2px; }
 .result-select-group label input+div span b { font-weight:500; }
-.result-select-group label input+div .check { background: #fff url('//pulmuonePro/customer/curation_image/ico_check_solo.png') center center no-repeat; width:34px; height:34px; border:2px #e5e5e5 solid; border-radius: 50%; margin-bottom:20px;  }
+.result-select-group label input+div .check { background: #fff url('//resources/assets/images/ico_check_solo.png') center center no-repeat; width:34px; height:34px; border:2px #e5e5e5 solid; border-radius: 50%; margin-bottom:20px;  }
 .result-select-group label input:checked+div { background: #7acc12; border-color:#7acc12; }
 .result-select-group label input:checked+div span { color:#fff; }
-.result-select-group label input:checked+div .check { border-color:#fff; background: #fff url('/pulmuonePro/customer/curation_image/ico_check_solo_fill.png') center center no-repeat;  }
+.result-select-group label input:checked+div .check { border-color:#fff; background: #fff url('/resources/assets/images/ico_check_solo_fill.png') center center no-repeat;  }
 
-.result-select-group label.package input+div:after { content:''; width:56px; height:52px; right:20px; bottom:30px; position: absolute; background:url('/pulmuonePro/customer/curation_image/ico_bottle_group.png'); }
-.result-select-group label.package input:checked+div:after { background:url('/pulmuonePro/customer/curation_image/ico_bottle_group_on.png'); }
-.result-select-group label.single input+div:after { content:''; width:56px; height:52px; right:20px; bottom:30px; position: absolute; background:url('/pulmuonePro/customer/curation_image/ico_bottle_solo.png'); }
-.result-select-group label.single input:checked+div:after { background:url('/pulmuonePro/customer/curation_image/ico_bottle_solo_on.png'); }
+.result-select-group label.package input+div:after { content:''; width:56px; height:52px; right:20px; bottom:30px; position: absolute; background:url('/resources/assets/images/ico_bottle_group.png'); }
+.result-select-group label.package input:checked+div:after { background:url('/resources/assets/images/ico_bottle_group_on.png'); }
+.result-select-group label.single input+div:after { content:''; width:56px; height:52px; right:20px; bottom:30px; position: absolute; background:url('/resources/assets/images/ico_bottle_solo.png'); }
+.result-select-group label.single input:checked+div:after { background:url('/resources/assets/images/ico_bottle_solo_on.png'); }
 
 .alert-area { border-top:1px #e5e5e5 solid; padding-top:40px; padding-bottom:40px; }
 .alert-area h4 { font-size:15px; line-height: 1; color: #333; margin-bottom:16px; letter-spacing: -1.5px; font-weight: 400; }
@@ -744,29 +713,6 @@ div.daterangepicker td.active, div.daterangepicker td.active:hover { background:
 .button-basic.link i { background: url("/resources/images/common/ico_button_link.png") no-repeat; }
 .border {
     border: 1px solid #dee2e6!important;
-}
-
-/* 라운드 버튼 공통 */
-.btn-round {display: flex; justify-content: center; align-items: center; width: 42px; height: 42px; border-radius: 50%; background-color: #7acc12;}
-.btn-round2 {display: flex; justify-content: center; align-items: center; height: 32px; margin-left: 15px; padding: 0 16px; background-color: #fff; border-radius: 16px; border: 1px solid #e5e5e5; font-size: 14px; letter-spacing: -0.98px; color: #666;}
-
-/* 사각형 버톤 */
-.btn-square {display: flex; justify-content: center; align-items: center; height: 50px; border-radius: 0.5px; background-color: #7acc12; padding: 0 26px;  font-size: 14px; font-weight: 500; letter-spacing: -1.05px; color: #fff; font-weight: 300;}
-.form-input .btn-square {height: 58px; font-size: 16px; min-width: 100px;}
-
-/* 버튼 스타일 */
-.btn-textL {justify-content: flex-start;}
-.btn-white {background-color: #fff; border: 1px solid #e5e5e5; color: #666; font-weight: 400;}
-.btn-yellow {background-color: #fee500; color: #181600; font-weight: 400;}
-.btn-gray {background-color: #e5e5e5; color: #fff;}
-.btn-black {background-color: #333; color: #fff;}
-.btn-blue {background-color: #4d51dd; color: #fff;}
-.btn-green {background-color: #7acc12; color: #fff;}
-
-.btn-white:disabled {
-    background: #fafafa;
-    border-color: #e5e5e5;
-    color: #999999;
 }
 
 

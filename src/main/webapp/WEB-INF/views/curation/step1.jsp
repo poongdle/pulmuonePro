@@ -1,38 +1,26 @@
 <%@ page trimDirectiveWhitespaces="true" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<% String path = request.getContextPath(); %>
-<% String url = request.getServerName().toString();
-request.setAttribute("url", url); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>풀무원 녹즙 | 맞춤큐레이션</title>
 <meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/curation_start.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/curation.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/a-guide.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/bootstrap.min.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/layout_style.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/style.css">
-<link rel="shortcut icon" href="/pulmuonePro/resources/assets/images/pul_favicon.png">
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link rel="stylesheet" href="/customer/curation_css/curation.css">
+<link rel="stylesheet" href="/customer/curation_css/bootstrap-fdd.css">
+<link rel="stylesheet" href="/customer/curation_css/a-guide.css">
+<link rel="stylesheet" href="/customer/curation_css/bootstrap.min.css">
+<link rel="stylesheet" href="/customer/curation_css/layout_style.css">
+<link rel="stylesheet" href="/customer/curation_css/style.css">
+<link rel="shortcut icon" href="/resources/assets/images/pul_favicon.png">
 
+<script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/resources/assets/js/jquery.form.min.js"></script>
 <style type="text/css">
-
-/* body */
-
-*, html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    vertical-align: baseline;
-    font-style: normal;
-}
-
 </style>
 </head>
-<body class="modal-open" style="padding-right: 17px;">
+<body >
 <div class="wrapper">
 <%@ include file="/WEB-INF/views/layouts/header.jsp" %>
 <main class="step1">
@@ -132,7 +120,7 @@ request.setAttribute("url", url); %>
              <button class="submit button-basic primary wide" id="nextPage">다음으로</button>
        </div>
 
-<div class="modal fade show" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: block; display:none; padding-right: 17px;" aria-modal="true" role="dialog">
+<div class="modal fade show" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display:none; ">
 	<div class="modal-dialog modal-dialog-centered">
 		<div id="modal" class="modal-content">
 			<div class="modal-header">
@@ -150,30 +138,6 @@ request.setAttribute("url", url); %>
 </form>
 
 <script>
-
-
-// 체크박스 선택 없으면 모달창
-$("#nextPage").on("click", function() {
-	if($("input:checkbox:checked").is(":checked") == true){
-		var data = $(this).val();
-		if (data.length > 0) {
-			$(this).attr("checked", true);
-		}
-		$("#alertModal").hide();
-		location.href= "<%=path%>/customer/product/step2.jsp"
-	}else{
-		$("#alertModal").show();
-		return;
-	}	
-})
-
-// 모달창 닫기
-$(".modal-footer").click(function() {
-	$("#alertModal").fadeOut();
-	return;
-})
-
-
   $(function(){
 
     axios.get('/user_summary/default').then(function (response) {
@@ -208,17 +172,17 @@ $(".modal-footer").click(function() {
   })
 </script>
 <div style="display: none" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/pulmuonePro/resources/assets/images/quick4.png" alt=""></a>
-	<a href="#"><img src="/pulmuonePro/resources/assets/images/quickTop.png" alt=""></a>
+	<a href="/mypage/drink/drink"><img src="/resources/assets/images/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/assets/images/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/assets/images/quickTop.png" alt=""></a>
 </div>
 </div>
 
 <%-- <form method="post" action="<%= path%>/customer/product/step1.jsp"></form> --%>
 
-<script type="text/javascript">
+<script>
 
 // BMI 계산
   function getBmi(w, h) {
@@ -287,7 +251,7 @@ $(".modal-footer").click(function() {
         }
       }
       sessionStorage.setItem('req1', JSON.stringify(requestBody));
-      location.href = '<%=path%>/customer/product/step2';
+      location.href = '/WEB-INF/viwes/curation/product/step2';
     })
   })
 </script>

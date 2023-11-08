@@ -1,5 +1,5 @@
 package curation.persistence;
 
-public class KidsResultDAO {
+public class CurationDAO {
 
 }

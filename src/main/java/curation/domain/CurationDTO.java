@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class CurationResultDTO {
+public class CurationDTO {
 
 	   private int program_no;         		// 프로그램번호
 	   private int img_no;	     	 			// 작성자

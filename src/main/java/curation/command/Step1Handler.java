@@ -5,16 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import mvc.command.CommandHandler;
 
-public class CkidsresultHandler implements CommandHandler{
+public class Step1Handler implements CommandHandler{
 
+	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String method = request.getMethod();
-		if (method.equals("GET")) {
-			System.out.println("Kid result Start");
-			
-			return "/pulmuonePro/customer/product/result/kids.jsp";
-		} 
-		return null;
+		System.out.println("> Step1 start");
+		return "/WEB-INF/views/curation/step1.jsp";
 	}
 
 }

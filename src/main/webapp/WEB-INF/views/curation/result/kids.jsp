@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/pulmuonePro/customer/curation_css/curation.css">
 <link rel="stylesheet" href="/pulmuonePro/customer/curation_css/a-guide.css">
 <link rel="stylesheet" href="/pulmuonePro/customer/curation_css/bootstrap.min.css">
+<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/bootstrap-fdd.css">
 <link rel="stylesheet" href="/pulmuonePro/customer/curation_css/layout_style.css">
 <link rel="stylesheet" href="/pulmuonePro/customer/curation_css/style.css">
 <link rel="shortcut icon" href="/pulmuonePro/resources/assets/images/pul_favicon.png">

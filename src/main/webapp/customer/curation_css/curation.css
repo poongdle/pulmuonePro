@@ -10,7 +10,7 @@
 .visual-area.curation .txt-area p { font-size:32px; letter-spacing: -2.4px; color:#f6fcee; font-weight:400; text-shadow: 0 0 1px rgba(129,179,76,0.05); }
 .visual-area.curation .txt-area h1 { font-size:46px; letter-spacing: -2.4px; color:#fff; font-weight:500; margin:0; line-height: 1; text-shadow: 0 0 1px rgba(129,179,76,0.05);}
 .visual-area.curation .txt-area span { margin-top:20px; font-size:20px; letter-spacing: -1.5px; color:#f6fcee; font-weight:400; text-shadow: 0 0 1px rgba(129,179,76,0.05); }
-.visual-area.curation .bg-img { background: url('/pulmuonePro/resources/assets/images/curation_bg_img.png') no-repeat right center; position: absolute; top:0; bottom:0; right:0; left:0; }
+.visual-area.curation .bg-img { background: url('/resources/assets/images/curation_bg_img.png') no-repeat right center; position: absolute; top:0; bottom:0; right:0; left:0; }
 
 .texture-depth { position: relative; background: #fafafa; }
 .texture-depth:before { top:0; left:0; right:0; content:''; position:absolute; height:80px; border-top: 2px #fff solid; background: rgb(242,242,242); background: linear-gradient(180deg, rgba(242,242,242,1) 0%, rgba(250,250,250,1) 100%); }
@@ -44,22 +44,22 @@
 
 .question-part .filled-radio-group .item input { display: none; }
 .question-part .filled-radio-group .item input+p { position:relative; font-size:14px; color:#666; font-weight:400; line-height:1; border-radius: 10px 0 10px 0; border:1px #e5e5e5 solid; height:120px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.question-part .filled-radio-group .item input+p:before { width:42px; height:42px; content:''; background:url('/pulmuonePro/resources/assets/images/curation_icon01.png') no-repeat; display: block; margin-bottom:20px; }
-.question-part .filled-radio-group .item input+p:after { width:42px; height:42px; content:''; background:url('/pulmuonePro/resources/assets/images/curation_icon01_on.png') no-repeat; position: absolute; left:50%; margin-left:-21px; top:21px; opacity: 0; transition-duration: .3s; }
+.question-part .filled-radio-group .item input+p:before { width:42px; height:42px; content:''; background:url('/resources/assets/images/curation_icon01.png') no-repeat; display: block; margin-bottom:20px; }
+.question-part .filled-radio-group .item input+p:after { width:42px; height:42px; content:''; background:url('/resources/assets/images/curation_icon01_on.png') no-repeat; position: absolute; left:50%; margin-left:-21px; top:21px; opacity: 0; transition-duration: .3s; }
 .question-part .filled-radio-group .item input:checked+p { background:#7acc12; transition-duration: .3s; color:#fff; }
 .question-part .filled-radio-group .item input:checked+p:before { opacity: 0; transition-duration: .3s; }
 .question-part .filled-radio-group .item input:checked+p:after { opacity: 1; transition-duration: .3s; }
 .question-part .filled-radio-group .item:hover input+p { border-color:#7acc12; transition-duration: .3s;  }
-.question-part .filled-radio-group .item:nth-child(2) input+p:before { background:url('/pulmuonePro/resources/assets/images/curation_icon02.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(2) input+p:after { background:url('/pulmuonePro/resources/assets/images/curation_icon02_on.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(3) input+p:before { background:url('/pulmuonePro/resources/assets/images/curation_icon03.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(3) input+p:after { background:url('/pulmuonePro/resources/assets/images/curation_icon03_on.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(4) input+p:before { background:url('/pulmuonePro/resources/assets/images/curation_icon04.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(4) input+p:after { background:url('/pulmuonePro/resources/assets/images/curation_icon04_on.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(5) input+p:before { background:url('/pulmuonePro/resources/assets/images/curation_icon05.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(5) input+p:after { background:url('/pulmuonePro/resources/assets/images/curation_icon05_on.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(6) input+p:before { background:url('/pulmuonePro/resources/assets/images/curation_icon06.png') no-repeat; }
-.question-part .filled-radio-group .item:nth-child(6) input+p:after { background:url('/pulmuonePro/resources/assets/images/curation_icon06_on.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(2) input+p:before { background:url('/resources/assets/images/curation_icon02.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(2) input+p:after { background:url('/resources/assets/images/curation_icon02_on.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(3) input+p:before { background:url('/resources/assets/images/curation_icon03.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(3) input+p:after { background:url('/resources/assets/images/curation_icon03_on.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(4) input+p:before { background:url('/resources/assets/images/curation_icon04.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(4) input+p:after { background:url('/resources/assets/images/curation_icon04_on.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(5) input+p:before { background:url('/resources/assets/images/curation_icon05.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(5) input+p:after { background:url('/resources/assets/images/curation_icon05_on.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(6) input+p:before { background:url('/resources/assets/images/curation_icon06.png') no-repeat; }
+.question-part .filled-radio-group .item:nth-child(6) input+p:after { background:url('/resources/assets/images/curation_icon06_on.png') no-repeat; }
 
 
 .prd-detail-title-area {display: flex; justify-content: space-between; align-items: flex-start;}
@@ -796,8 +796,8 @@ input::-webkit-calendar-picker-indicator{
 .card-item .product-radio-group label p { flex:1; font-size:16px; margin:0; color:#999; letter-spacing: -1.2px; line-height: 1.2; font-weight: 400; }
 
 
-.card-item .product-radio-group label input+.check-display { background: #fff url('/pulmuonePro/resources/assets/images/ico_check_solo.png') center center no-repeat; width:34px; height:34px; border:2px #e5e5e5 solid; border-radius: 50%; margin-bottom:0px; }
-.card-item .product-radio-group label input:checked+.check-display { background: #fff url('/pulmuonePro/resources/assets/images/ico_check_solo_fill.png') center center no-repeat; border-color: #7acc12; }
+.card-item .product-radio-group label input+.check-display { background: #fff url('/resources/assets/images/ico_check_solo.png') center center no-repeat; width:34px; height:34px; border:2px #e5e5e5 solid; border-radius: 50%; margin-bottom:0px; }
+.card-item .product-radio-group label input:checked+.check-display { background: #fff url('/resources/assets/images/ico_check_solo_fill.png') center center no-repeat; border-color: #7acc12; }
 
 
 .result-select-group label+label { margin-left:20px; }
@@ -805,15 +805,15 @@ input::-webkit-calendar-picker-indicator{
 .result-select-group label input+div { border:1px #e5e5e5 solid; border-radius: 20px 0; width:315px; display: block; padding:30px 20px; position: relative; }
 .result-select-group label input+div span { color:#666; font-size:16px; line-height: 1.5; letter-spacing: -1.2px; }
 .result-select-group label input+div span b { font-weight:500; }
-.result-select-group label input+div .check { background: #fff url('/pulmuonePro/resources/assets/images/ico_check_solo.png') center center no-repeat; width:34px; height:34px; border:2px #e5e5e5 solid; border-radius: 50%; margin-bottom:20px;  }
+.result-select-group label input+div .check { background: #fff url('/resources/assets/images/ico_check_solo.png') center center no-repeat; width:34px; height:34px; border:2px #e5e5e5 solid; border-radius: 50%; margin-bottom:20px;  }
 .result-select-group label input:checked+div { background: #7acc12; border-color:#7acc12; }
 .result-select-group label input:checked+div span { color:#fff; }
-.result-select-group label input:checked+div .check { border-color:#fff; background: #fff url('/pulmuonePro/resources/assets/images/ico_check_solo_fill.png') center center no-repeat;  }
+.result-select-group label input:checked+div .check { border-color:#fff; background: #fff url('/resources/assets/images/ico_check_solo_fill.png') center center no-repeat;  }
 
-.result-select-group label.package input+div:after { content:''; width:56px; height:52px; right:20px; bottom:30px; position: absolute; background:url('/pulmuonePro/resources/assets/images/ico_bottle_group.png'); }
-.result-select-group label.package input:checked+div:after { background:url('//pulmuoneProresources/assets/images/ico_bottle_group_on.png'); }
-.result-select-group label.single input+div:after { content:''; width:56px; height:52px; right:20px; bottom:30px; position: absolute; background:url('/pulmuonePro/resources/assets/images//ico_bottle_solo.png'); }
-.result-select-group label.single input:checked+div:after { background:url('/pulmuonePro/resources/assets/images/ico_bottle_solo_on.png'); }
+.result-select-group label.package input+div:after { content:''; width:56px; height:52px; right:20px; bottom:30px; position: absolute; background:url('/resources/assets/images/ico_bottle_group.png'); }
+.result-select-group label.package input:checked+div:after { background:url('/resources/assets/images/ico_bottle_group_on.png'); }
+.result-select-group label.single input+div:after { content:''; width:56px; height:52px; right:20px; bottom:30px; position: absolute; background:url('/resources/assets/images//ico_bottle_solo.png'); }
+.result-select-group label.single input:checked+div:after { background:url('/resources/assets/images/ico_bottle_solo_on.png'); }
 
 .alert-area { border-top:1px #e5e5e5 solid; padding-top:40px; padding-bottom:40px; }
 .alert-area h4 { font-size:15px; line-height: 1; color: #333; margin-bottom:16px; letter-spacing: -1.5px; font-weight: 400; }
@@ -845,13 +845,13 @@ input::-webkit-calendar-picker-indicator{
 .result-text p { color:#333; font-weight:400; font-size:16px; line-height:1.5; letter-spacing: -1.2px; }
 
 
-.member-close { width:33px; height:33px; display: block; position: absolute; right:0; top:40px; background: url("/pulmuonePro/resources/assets/images/button_layer_close.png") no-repeat; }
+.member-close { width:33px; height:33px; display: block; position: absolute; right:0; top:40px; background: url("/resources/assets/images/button_layer_close.png") no-repeat; }
 
 
 .account-wrapper { width:640px; margin:0 auto; }
 .account-wrapper.lg { width:680px; margin:0 auto; }
 .account-wrapper .account-logo-wrapper { padding-top:40px; margin-bottom: 40px;}
-.account-wrapper .account-logo { display: block; margin:40px auto 20px; width:94px; height:67px; background: url('/pulmuonePro/resources/assets/images/account_logo.png') no-repeat; }
+.account-wrapper .account-logo { display: block; margin:40px auto 20px; width:94px; height:67px; background: url('/resources/assets/images/account_logo.png') no-repeat; }
 .account-wrapper .title { font-size:24px; line-height:30px; letter-spacing: -1.8px; color:#333; font-weight:300; flex:1; }
 .account-wrapper .title b { font-weight:400; }
 .account-wrapper .title em { font-weight:500; color:#e7740e; font-style:normal; }
@@ -895,7 +895,7 @@ input::-webkit-calendar-picker-indicator{
 
 .caution-unit.page { margin:40px auto; }
 .caution-unit { text-align: center; }
-.caution-unit .mark { width:100px; height:100px;margin:0 auto 10px; display: block; border-radius: 50%; background: #e5e5e5 url("/pulmuonePro/resources/assets/images/ico_caution.png") no-repeat center center; }
+.caution-unit .mark { width:100px; height:100px;margin:0 auto 10px; display: block; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ico_caution.png") no-repeat center center; }
 .caution-unit h3 { font-size:26px; color:#333; font-weight: 500; letter-spacing: -2px; line-height:40px; margin-top:30px; display: block; }
 .caution-unit h4 { font-size:20px; color:#333; font-weight: 400; letter-spacing: -1.5px; line-height:28px; margin-top:26px; display: block;}
 .caution-unit h4 b { color:#7acc12; }
@@ -903,7 +903,7 @@ input::-webkit-calendar-picker-indicator{
 .caution-unit p.small { margin-top:12px; font-size:16px; color:#999; }
 .caution-unit p.small-xs { margin-top:12px; font-size:15px; color:#999; }
 
-.caution-unit.confirm .mark { width:140px; height:140px; border:2px #7acc12 solid; background: #fff url("/pulmuonePro/resources/assets/images/ico_check03_big.png") no-repeat center center; }
+.caution-unit.confirm .mark { width:140px; height:140px; border:2px #7acc12 solid; background: #fff url("/resources/assets/images/ico_check03_big.png") no-repeat center center; }
 .caution-unit.confirm h4 { font-size:30px; letter-spacing: -2.2px; line-height: 1; margin-top:40px; }
 .caution-unit.confirm p { margin-top:25px; }
 
@@ -912,8 +912,8 @@ input::-webkit-calendar-picker-indicator{
 .agree-box li { display: flex; align-items: center; }
 .agree-box label { display: flex; align-items: center; flex:1; height:30px; position: relative; }
 .agree-box label input { display: none; }
-.agree-box label input+span:before {position:absolute; top:6px; left:-7px; content:''; width:17px; height:12px; background: url('/pulmuonePro/resources/assets/images/ico_check_solo.png') no-repeat; }
-.agree-box label input:checked+span:before {position:absolute; content:''; width:17px; height:12px; background: url('/pulmuonePro/resources/assets/images/ico_check_solo_fill.png') no-repeat; }
+.agree-box label input+span:before {position:absolute; top:6px; left:-7px; content:''; width:17px; height:12px; background: url('/resources/assets/images/ico_check_solo.png') no-repeat; }
+.agree-box label input:checked+span:before {position:absolute; content:''; width:17px; height:12px; background: url('/resources/assets/images/ico_check_solo_fill.png') no-repeat; }
 .agree-box label input:checked ~ span { color:#333; }
 .agree-box label span { flex:1; font-size:14px; padding:0 34px; color:#666; letter-spacing: -1px; font-weight:300;}
 .agree-box a { border-bottom:1px #7acc12 solid; }
@@ -943,14 +943,14 @@ input::-webkit-calendar-picker-indicator{
 .sns-selector-group .item .ico { width:40px; height:40px; border:1px #e5e5e5 solid; background: #fff; border-radius:50%; display: flex; align-items: center; justify-content: center; }
 .sns-selector-group .item .ico i { width:30px; height:30px; }
 .sns-selector-group .item.kakao .ico { background: #fee500; border-color:#fee500; }
-.sns-selector-group .item.kakao .ico i { background: url("/pulmuonePro/resources/assets/images/ico_button_kakao.png") no-repeat; }
+.sns-selector-group .item.kakao .ico i { background: url("/resources/assets/images/ico_button_kakao.png") no-repeat; }
 .sns-selector-group .item.naver .ico { background:#03c65a; border-color:#03c65a; }
-.sns-selector-group .item.naver .ico i { background: url("/pulmuonePro/resources/assets/images/ico_button_naver_wt.png") no-repeat center center; }
-.sns-selector-group .item.phone .ico i { background: url("/pulmuonePro/resources/assets/images/ico_button_phone.png") no-repeat center center; }
-.sns-selector-group .item.mail .ico i { background: url("/pulmuonePro/resources/assets/images/ico_button_mail.png") no-repeat center center; }
+.sns-selector-group .item.naver .ico i { background: url("/resources/assets/images/ico_button_naver_wt.png") no-repeat center center; }
+.sns-selector-group .item.phone .ico i { background: url("/resources/assets/images/ico_button_phone.png") no-repeat center center; }
+.sns-selector-group .item.mail .ico i { background: url("/resources/assets/images/ico_button_mail.png") no-repeat center center; }
 
 .sns-selector-group .item input { display: none; }
-.sns-selector-group .item input+p:before {position: absolute; right:0; top:13px; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/pulmuonePro/resources/assets/images/ico_check_solo_wt.png") no-repeat center center; }
+.sns-selector-group .item input+p:before {position: absolute; right:0; top:13px; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ico_check_solo_wt.png") no-repeat center center; }
 .sns-selector-group .item input:checked+p:before { background-color: #7acc12; transition-duration: .2s; }
 
 .sns-selector-group.toggle-style .item .ico { width:46px; height:46px; }
@@ -968,13 +968,13 @@ input::-webkit-calendar-picker-indicator{
 .member-type .item .ico { width:40px; height:40px; border:1px #e5e5e5 solid; background: #fff; border-radius:50%; display: flex; align-items: center; justify-content: center; }
 .member-type .item .ico i { width:30px; height:30px; }
 .member-type .item.kakao .ico { background: #fee500; border-color:#fee500; }
-.member-type .item.kakao .ico i { background: url("/pulmuonePro/resources/assets/images/ico_button_kakao.png") no-repeat center center; }
+.member-type .item.kakao .ico i { background: url("/resources/assets/images/ico_button_kakao.png") no-repeat center center; }
 .member-type .item.naver .ico { background:#03c65a; border-color:#03c65a; }
-.member-type .item.naver .ico i { background: url("/pulmuonePro/resources/assets/images/ico_button_naver_wt.png") no-repeat center center; }
+.member-type .item.naver .ico i { background: url("/resources/assets/images/ico_button_naver_wt.png") no-repeat center center; }
 
 .member-type.sm .item .ico { width:34px; height:34px; }
-.member-type.sm .item.kakao .ico i { background: url("/pulmuonePro/resources/assets/images/ico_button_kakao.png") no-repeat center center; background-size:18px; }
-.member-type.sm .item.naver .ico i { background: url("/pulmuonePro/resources/assets/images/ico_button_naver_wt.png") no-repeat center center; background-size:12px; }
+.member-type.sm .item.kakao .ico i { background: url("/resources/assets/images/ico_button_kakao.png") no-repeat center center; background-size:18px; }
+.member-type.sm .item.naver .ico i { background: url("/resources/assets/images/ico_button_naver_wt.png") no-repeat center center; background-size:12px; }
 .member-type.sm .item p { padding-left:13px; }
 
 
@@ -984,7 +984,7 @@ input::-webkit-calendar-picker-indicator{
 .aside { min-width:240px; margin-right:40px; flex:0; padding-top:28px; }
 .aside .title { font-size:32px; line-height:1; letter-spacing: -2.4px; color:#333; font-weight:500; margin-bottom:20px; }
 .aside .lnb-style { border-top:1px #e5e5e5 solid; }
-.aside .lnb-style .indepth>a:before { content:''; position:absolute; right:0; top:50%; width:15px; height:8px; background: url('/pulmuonePro/resources/assets/images/arrow_lnb.png') no-repeat; transform:translateY(-50%) rotate(180deg); transition-duration: .2s; opacity:.5; }
+.aside .lnb-style .indepth>a:before { content:''; position:absolute; right:0; top:50%; width:15px; height:8px; background: url('/resources/assets/images/arrow_lnb.png') no-repeat; transform:translateY(-50%) rotate(180deg); transition-duration: .2s; opacity:.5; }
 .aside .lnb-style a {cursor: pointer;height:60px; display: block; align-items: center; display: flex; font-size:16px; color:#333; line-height:24px; letter-spacing: -1.2px; font-weight:400; position: relative; }
 .aside .lnb-style .active a { font-weight:500; color:#7acc12; }
 .aside .lnb-style .indepth.active>a:before { transform:translateY(-50%) rotate(0deg); transition-duration: .2s; opacity:1; }
@@ -1023,7 +1023,7 @@ input::-webkit-calendar-picker-indicator{
 .box-partition .part-head a,
 .box-partition .part-head h5 { font-size:20px; padding-right:17px; letter-spacing: -1.5px; line-height:1.3; color:#333; font-weight:500; position: relative; }
 .box-partition .part-head h5 { flex:1; }
-.box-partition .part-head a:after {position: absolute; right:0; top:50%; content:''; display: block; background: url('/pulmuonePro/resources/assets/images/arrow_lnb.png') no-repeat; width:15px; height:15px; transform: translateY(-50%) rotate(90deg); }
+.box-partition .part-head a:after {position: absolute; right:0; top:50%; content:''; display: block; background: url('/resources/assets/images/arrow_lnb.png') no-repeat; width:15px; height:15px; transform: translateY(-50%) rotate(90deg); }
 .box-partition .part-head.desc { flex-direction: column; align-items: flex-start; }
 .box-partition .part-head.desc p { color:#666; font-size:16px; line-height: 1.5; margin-top:10px; letter-spacing: -1.2px; }
 .box-partition .part:last-child { border-bottom:0; }
@@ -1100,14 +1100,14 @@ input::-webkit-calendar-picker-indicator{
 .refund .document-style li+li { margin-top:12px; }
 
 button.nickname-format { position: relative; }
-button.nickname-format:after { content:''; width:32px; height:32px; border:1px #e5e5e5 solid; border-radius: 50%; margin-left:20px; background: url('/pulmuonePro/resources/assets/images/arrow_lnb.png') no-repeat center center; background-size:12px; transform: rotate(180deg); }
+button.nickname-format:after { content:''; width:32px; height:32px; border:1px #e5e5e5 solid; border-radius: 50%; margin-left:20px; background: url('/resources/assets/images/arrow_lnb.png') no-repeat center center; background-size:12px; transform: rotate(180deg); }
 
 button.date-picker {display: flex; align-items: center; }
 a.date-picker {display: flex; align-items: center; }
 button.date-picker span { font-weight:700; font-family: Roboto; color:#333; font-size:28px; letter-spacing: -2px; line-height: 1; }
 a.date-picker span { font-weight:700; font-family: Roboto; color:#333; font-size:28px; letter-spacing: -2px; line-height: 1; }
-button.date-picker:after { content:''; width:32px; height:32px; border:1px #e5e5e5 solid; border-radius: 50%; margin-left:20px; background: url('/pulmuonePro/resources/assets/images/arrow_lnb.png') no-repeat center center; background-size:12px; transform: rotate(180deg); }
-a.date-picker:after { content:''; width:32px; height:32px; border:1px #e5e5e5 solid; border-radius: 50%; margin-left:20px; background: url('/pulmuonePro/resources/assets/images/arrow_lnb.png') no-repeat center center; background-size:12px; transform: rotate(180deg); }
+button.date-picker:after { content:''; width:32px; height:32px; border:1px #e5e5e5 solid; border-radius: 50%; margin-left:20px; background: url('/resources/assets/images/arrow_lnb.png') no-repeat center center; background-size:12px; transform: rotate(180deg); }
+a.date-picker:after { content:''; width:32px; height:32px; border:1px #e5e5e5 solid; border-radius: 50%; margin-left:20px; background: url('/resources/assets/images/arrow_lnb.png') no-repeat center center; background-size:12px; transform: rotate(180deg); }
 
 .nickname-format { display: flex; align-items: center; }
 .nickname-format label { display: flex; width:54px; height:28px; margin-right:10px; border-radius: 14px; background: #7acc12; color:#fff; align-items: center; justify-content: center; font-size:14px; font-weight:500; color:#fff;  }
@@ -1157,8 +1157,8 @@ a.date-picker:after { content:''; width:32px; height:32px; border:1px #e5e5e5 so
 .addiction-info { display: flex; align-items: center; }
 .addiction-info li { display: flex; align-items: center; }
 .addiction-info li label { display: flex; align-items: center; justify-content: center; width:34px !important; height:34px; border-radius: 50%; border:1px #e5e5e5 solid; background: #fff; margin-right:9px; }
-.addiction-info li.tel label:after { content:''; display: block; width:16px; height:16px; background: url('/pulmuonePro/resources/assets/images/ico_franchisee_tel.png') no-repeat; }
-.addiction-info li.phone label:after { content:''; display: block; width:16px; height:16px; background: url('/pulmuonePro/resources/assets/images/ico_franchisee_phone.png') no-repeat; }
+.addiction-info li.tel label:after { content:''; display: block; width:16px; height:16px; background: url('/resources/assets/images/ico_franchisee_tel.png') no-repeat; }
+.addiction-info li.phone label:after { content:''; display: block; width:16px; height:16px; background: url('/resources/assets/images/ico_franchisee_phone.png') no-repeat; }
 .addiction-info li+li { margin-left:20px; }
 .addiction-info li p { font-size:16px; color:#333; font-weight:400; letter-spacing: -1.2px; }
 .box-layout .half-area.end { justify-content: flex-end; }
@@ -1166,7 +1166,7 @@ a.date-picker:after { content:''; width:32px; height:32px; border:1px #e5e5e5 so
 .delivery-process { display: flex; padding-top:6px; justify-content: space-between; }
 .delivery-process li { flex:0; min-width:140px; position: relative; }
 .delivery-process li a { display: flex; flex-direction: column; align-items: center; }
-.delivery-process li:after { content:''; position: absolute; right:-52px; top:66px; width:15px; height:8px; transform: rotate(90deg); background: url('/pulmuonePro/resources/assets/images/arrow_lnb.png') no-repeat; }
+.delivery-process li:after { content:''; position: absolute; right:-52px; top:66px; width:15px; height:8px; transform: rotate(90deg); background: url('/resources/assets/images/arrow_lnb.png') no-repeat; }
 .delivery-process li:last-child:after { display: none; }
 .delivery-process li .thumb { width:140px; height:140px; display: flex; align-items: center; justify-content: center; border-radius: 20px 0; border:1px #e5e5e5 solid; }
 .delivery-process li .thumb img { opacity: .2; width:60px; height:60px; }
@@ -1218,7 +1218,7 @@ table .t-left { text-align:left !important; }
 .bill-contents { background: #fafafa; padding-bottom:63px; }
 .bill-contents .nickname-format { background: #fff; border-bottom:1px #e5e5e5 solid; margin-top:-1px; padding:0 30px 20px; }
 .bill-contents .bill-info { position: relative; display: flex; padding:20px 30px; flex-direction: column; background: #fff; }
-.bill-contents .bill-info:after { position: absolute; bottom:-13px; height:13px; left:0; right:0; width:100%; content:''; background: url("/pulmuonePro/resources/assets/images/bg_bill_effect.png") repeat-x bottom left; }
+.bill-contents .bill-info:after { position: absolute; bottom:-13px; height:13px; left:0; right:0; width:100%; content:''; background: url("/resources/assets/images/bg_bill_effect.png") repeat-x bottom left; }
 .bill-contents .bill-info .flex-area { display: flex; border-bottom:1px #e5e5e5 solid; padding-bottom:20px; align-items: center; }
 .bill-contents .bill-info .date-info { flex:1; display: flex; flex-direction: column; }
 .bill-contents .bill-info .date-info h4 { font-family: Roboto; font-size:20px; color:#333; letter-spacing: -1.5px; font-weight:500; line-height: 1; margin-bottom:14px; }
@@ -1357,7 +1357,7 @@ table .t-left { text-align:left !important; }
 .coupon-selector-list li+li { margin-top:20px; }
 
 .coupon-selector-list li input { display: none; }
-.coupon-selector-list li input+.item:before {position: absolute; left:0; top:24px; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/pulmuonePro/resources/assets/images/ico_check_solo_wt.png") no-repeat center center; }
+.coupon-selector-list li input+.item:before {position: absolute; left:0; top:24px; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ico_check_solo_wt.png") no-repeat center center; }
 .coupon-selector-list li input:checked+.item:before { background-color: #7acc12; transition-duration: .2s; }
 
 .coupon-selector-list .item { margin-left:49px; border:1px #e5e5e5 solid; overflow: hidden; background: #fff; flex:1; border-radius:14px;  }
@@ -1404,7 +1404,7 @@ table .t-left { text-align:left !important; }
 .product-week .contents li:last-of-type .item { margin: 0 0 14px 0; }
 .product-week .contents li .item .thumb { width:70px; height:70px; border-radius: 16px 0; border:1px #e5e5e5 solid; }
 .product-week .contents li .item .number { position:absolute; right:-5px; bottom:-4px; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size:12px; border-radius: 14px; background-color: #7acc12; color:#fff; font-family: Roboto; }
-.product-week .contents li .item.blank { background: #fafafa url('/pulmuonePro/resources/assets/images/img_blank_drink.png') no-repeat center center; }
+.product-week .contents li .item.blank { background: #fafafa url('/resources/assets/images/img_blank_drink.png') no-repeat center center; }
 
 .product-week .contents li.other { margin-top:22px; border-top:1px #e5e5e5 solid; padding-top:22px; padding-bottom:22px; }
 
@@ -1517,7 +1517,7 @@ table .t-left { text-align:left !important; }
 .product-content-list.check-style .item .contents { flex:1; }
 
 .product-content-list.check-style input { display: none; }
-.product-content-list.check-style input+.item:before {margin-right:16px; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/pulmuonePro/resources/assets/images/ico_check_solo_wt.png") no-repeat center center; }
+.product-content-list.check-style input+.item:before {margin-right:16px; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ico_check_solo_wt.png") no-repeat center center; }
 .product-content-list.check-style input:checked+.item:before { background-color: #7acc12; transition-duration: .2s; }
 
 
@@ -1555,7 +1555,7 @@ table .t-left { text-align:left !important; }
 .vertical-radio-group label input:checked ~ p { color:#333; }
 .vertical-radio-group label p { padding-left:15px; flex:1; font-size:16px; margin:0; color:#999; letter-spacing: -1.2px; line-height: 1.2; font-weight: 400; }
 
-.coupon-img { width:295px; margin:16px auto 0; flex-direction: column; height:123px; display: flex; padding-left:40px; align-items: flex-start; padding-top:19px; background:url('/pulmuonePro/resources/assets/images/bg_coupon_img.png') no-repeat; }
+.coupon-img { width:295px; margin:16px auto 0; flex-direction: column; height:123px; display: flex; padding-left:40px; align-items: flex-start; padding-top:19px; background:url('/resources/assets/images/bg_coupon_img.png') no-repeat; }
 .coupon-img label { font-size:12px; line-height:1; color:#fff; letter-spacing: -0.9px; }
 .coupon-img h4 { font-size:25px; line-height:1; font-weight:700; letter-spacing: -1.88px; color:#fff; margin:10px 0; }
 .coupon-img span { color:#fff; opacity:0.7; font-size:12px; line-height:18px; letter-spacing: -0.9px; }
@@ -1644,7 +1644,7 @@ table .t-left { text-align:left !important; }
 .delivery-order-list.check-style li { padding-left:20px; }
 .delivery-order-list.check-style li .foot { margin-left:52px; }
 .delivery-order-list.check-style input { display: none; }
-.delivery-order-list.check-style input+.item:before {margin-right:20px; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/pulmuonePro/resources/assets/images/ico_check_solo_wt.png") no-repeat center center; }
+.delivery-order-list.check-style input+.item:before {margin-right:20px; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ico_check_solo_wt.png") no-repeat center center; }
 .delivery-order-list.check-style input:checked+.item:before { background-color: #7acc12; transition-duration: .2s; }
 
 .dual-layout > * { display: flex; align-items: stretch; flex:1; }
@@ -1693,7 +1693,7 @@ table .t-left { text-align:left !important; }
 
 .complete-copy-wrapper { background:#fff; display: flex; align-items: center; height:60px; justify-content: center; border:1px #e5e5e5 solid; border-radius: 10px; }
 .complete-copy { font-size:16px; letter-spacing: -1.2px; color:#333; display: flex; align-items: center; }
-.complete-copy:before { width:32px; height:32px; background: #7acc12 url("/pulmuonePro/resources/assets/images/ico_caution.png") no-repeat center center; background-size:3px; border-radius: 50%; margin-right:10px; content:''; display: block; }
+.complete-copy:before { width:32px; height:32px; background: #7acc12 url("/resources/assets/images/ico_caution.png") no-repeat center center; background-size:3px; border-radius: 50%; margin-right:10px; content:''; display: block; }
 
 
 .delivery-order-list.gift>ul>li { padding-right:29px; padding-bottom:38px; padding-left:28px; }
@@ -1720,7 +1720,7 @@ table .t-left { text-align:left !important; }
 .drinkchange-list.favorite .item-wrapper { display: flex; flex:1; }
 .drinkchange-list.favorite .item { flex:1; }
 .drinkchange-list.favorite input { display: none; }
-.drinkchange-list.favorite input+.item:before {margin-right:20px; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/pulmuonePro/resources/assets/images/ico_check_solo_wt.png") no-repeat center center; }
+.drinkchange-list.favorite input+.item:before {margin-right:20px; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ico_check_solo_wt.png") no-repeat center center; }
 .drinkchange-list.favorite input:checked+.item:before { background-color: #7acc12; transition-duration: .2s; }
 .drinkchange-list.favorite .btn-delete .ico-prd-delete { width:24px; height:24px; }
 .drinkchange-list.review li { align-items: center; padding-bottom:30px; }
@@ -1907,10 +1907,10 @@ table .t-left { text-align:left !important; }
 .interest-wrapper li label { width:100%; }
 .interest-wrapper li input+.item { transition-duration: .2s; border:1px #e5e5e5 solid; border-radius: 20px 0; height:70px; background: #fff; display: flex; align-items: center; justify-content: center; flex:1; }
 .interest-wrapper li input+.item p { transition-duration: .2s; font-size:16px; color:#666; letter-spacing: -1.2px; margin-left:10px; margin-right:8px; font-weight:500; }
-.interest-wrapper li input+.item:before { transition-duration: .2s; content:''; background: url("/pulmuonePro/resources/assets/images/ico_check02.png") no-repeat center center; background-size:14px; width:14px; height:10px; display: block;  }
+.interest-wrapper li input+.item:before { transition-duration: .2s; content:''; background: url("/resources/assets/images/ico_check02.png") no-repeat center center; background-size:14px; width:14px; height:10px; display: block;  }
 .interest-wrapper li input:checked+.item { border-color:#7acc12; background: #7acc12; transition-duration: .2s; }
 .interest-wrapper li input:checked+.item p { color: #fff; transition-duration: .2s; }
-.interest-wrapper li input:checked+.item:before { background: url("/pulmuonePro/resources/assets/images/ico_check01.png") no-repeat center center; background-size:14px; }
+.interest-wrapper li input:checked+.item:before { background: url("/resources/assets/images/ico_check01.png") no-repeat center center; background-size:14px; }
 
 
 .bgfff { background: #fff; }
@@ -1997,8 +1997,8 @@ table .t-left { text-align:left !important; }
 .option-selector .radio-item .item .check-list input[type="checkbox"] { display: none; }
 .option-selector .radio-item .item .check-list input[type="checkbox"]+span { border-radius: 10px; height:46px; display: flex; flex:1; border:1px #e5e5e5 solid; background: #eee; align-items: center; justify-content: center; font-size: 15px; font-weight: 500; letter-spacing: -1.2px; color: #aaa; }
 .option-selector .radio-item .item .check-list input[type="checkbox"]:checked+span { background: #7acc12; border-color:#7acc12; color:#fff; }
-.option-selector .radio-item .item .check-list input[type="checkbox"]+span:before { content:''; background: url('/pulmuonePro/resources/assets/images/ico_check02.png') no-repeat center center; margin-right:5px; width:14px; height:14px; background-size:14px;  }
-.option-selector .radio-item .item .check-list input[type="checkbox"]:checked+span:before { background: url('/pulmuonePro/resources/assets/images/ico_check01.png') no-repeat center center; background-size:14px;  }
+.option-selector .radio-item .item .check-list input[type="checkbox"]+span:before { content:''; background: url('/resources/assets/images/ico_check02.png') no-repeat center center; margin-right:5px; width:14px; height:14px; background-size:14px;  }
+.option-selector .radio-item .item .check-list input[type="checkbox"]:checked+span:before { background: url('/resources/assets/images/ico_check01.png') no-repeat center center; background-size:14px;  }
 .option-selector .button-set { padding-left:54px; margin:37px 0 0; }
 .option-selector .product-set { margin-bottom:0px; padding-bottom:0px; border-bottom:0; }
 .option-selector .product-set .product-item { width:82px; }
@@ -2095,7 +2095,7 @@ table .t-left { text-align:left !important; }
 .faq-product .container { display: flex; align-items: baseline; position: relative;}
 .faq-product .part-title { margin:0; }
 .faq-product p { margin-left:29px; font-size: 20px; letter-spacing: -1.5px; color: #666; font-weight: 300; }
-.faq-product .container:after { width:16px; height:31px; transform: translateY(-50%); top:50%; content:''; position:absolute; right:0; background: url('/pulmuonePro/resources/assets/images/arr_big.png') no-repeat; background-size:16px;  }
+.faq-product .container:after { width:16px; height:31px; transform: translateY(-50%); top:50%; content:''; position:absolute; right:0; background: url('/resources/assets/images/arr_big.png') no-repeat; background-size:16px;  }
 .modal-dialog.modal-review { max-width:960px; }
 
 .modal-review .foot-case { display: flex; align-items: center; justify-content: flex-end; position: absolute; right:0; bottom:0; left:0; padding:40px; background: #fff; }
@@ -2194,7 +2194,7 @@ table .t-left { text-align:left !important; }
     width:42px;
     height:42px;
     content:'';
-    background: url('/pulmuonePro/resources/assets/images/icon_faq_q_no.png') no-repeat;
+    background: url('/resources/assets/images/icon_faq_q_no.png') no-repeat;
     background-size:100%;
     border-radius: 50%;
     overflow: hidden;
@@ -2203,7 +2203,7 @@ table .t-left { text-align:left !important; }
     transition-duration: .2s;
 }
 .accordion.faq-list>.card.active>.card-header button:before {
-    background: url('/pulmuonePro/resources/assets/images/icon_faq_q.png') no-repeat;
+    background: url('/resources/assets/images/icon_faq_q.png') no-repeat;
     background-size:100%;
     transition-duration: .2s;
 }
@@ -2215,7 +2215,7 @@ table .t-left { text-align:left !important; }
     width:42px;
     height:42px;
     content:'';
-    background: url('/pulmuonePro/resources/assets/images/icon_faq_a.png') no-repeat;
+    background: url('/resources/assets/images/icon_faq_a.png') no-repeat;
     background-size:100%;
     border-radius: 50%;
     overflow: hidden;
@@ -2375,7 +2375,7 @@ table .t-left { text-align:left !important; }
 .dropdown.selectc .dropdown-menu a { text-align: center; }
 
 #calendar-left-btn {
-    background: url("/pulmuonePro/resources/assets/images/calendar_arrow.png") no-repeat center;
+    background: url("/resources/assets/images/calendar_arrow.png") no-repeat center;
     background-size: contain;
     transform: rotate(180deg);
     width: 8px;
@@ -2383,7 +2383,7 @@ table .t-left { text-align:left !important; }
 }
 
 #calendar-right-btn {
-    background: url("/pulmuonePro/resources/assets/images/calendar_arrow.png") no-repeat center;
+    background: url("/resources/assets/images/calendar_arrow.png") no-repeat center;
     background-size: contain;
 
     width: 8px;
@@ -2483,7 +2483,7 @@ table .t-left { text-align:left !important; }
 
 
 .date-picker-single { display: flex; position: relative; flex:1; align-items: center; }
-.form-input dl.date-complex .date-picker-single.disabled::after { width:22px; height:22px; content:''; background:url('/pulmuonePro/pulmuonePro/resources/assets/images/ico_calendar.png') no-repeat; opacity: 0.5 !important;}
+.form-input dl.date-complex .date-picker-single.disabled::after { width:22px; height:22px; content:''; background:url('/resources/assets/images/ico_calendar.png') no-repeat; opacity: 0.5 !important;}
 .form-input dd .date-picker-single span { font-size:16px; font-family: 'Roboto', Sans-serif; color:#333; font-weight:400; display: block; position: absolute; left:86px; }
 .date-picker-single input { font-family: 'Roboto',Sans-serif; font-weight:400; color:#333 }
 
