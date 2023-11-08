@@ -95,7 +95,44 @@ $(document).ready(function () {
 								<div class="owl-stage-outer">
 									<div class="owl-stage"
 										style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 6170px;">
+										<c:forEach var="dto" items="${dailylist }">
 										<div class="owl-item active" style="width: 308.5px;">
+											<div class="prd-area">
+												<a href="/product/daily/${dto.products_tag }?eventIdx=" title="제품 상세페이지로 가기">
+													<div class="badges">
+														<span class="badge">BEST</span>
+													</div>
+													<div class="thumb">
+														<img src="/file/download/product/${dto.system_name }" alt="제품명">
+													</div>
+													<div class="prd-info">
+														<div class="prd-title-wrapper">
+															<b class="prd-title">${dto.products_name }</b>
+														</div>
+														<div class="price-info" style="margin-bottom: 5px;">
+															<b class="now-price"><fmt:formatNumber value="${dto.price }" pattern="#,###"/><span> 원</span></b>
+														</div>
+														<span class="volume">(${dto.products_size })</span>
+													</div>
+												</a>
+												<div class="btn-area btn-area-center">
+													<button type="button" data-wish-id="281"
+														data-wish-type="daily"
+														class="btn-round btn-white wishlistBtn ">
+														<i class="ico ico-prd-wish"></i> <span class="hide">제품
+															찜하기</span>
+													</button>
+													<button type="button" data-cart-id="0071654"
+														data-cart-type="daily" data-cart-event=""
+														class="btn-round addCartBtn">
+														<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+															담기</span>
+													</button>
+												</div>
+											</div>
+										</div>										
+										</c:forEach>
+										<!-- <div class="owl-item active" style="width: 308.5px;">
 											<div class="prd-area">
 												<a href="/product/daily/281?eventIdx=" title="제품 상세페이지로 가기">
 													<div class="badges">
@@ -838,7 +875,7 @@ $(document).ready(function () {
 													</button>
 												</div>
 											</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 <!-- 								<div class="owl-nav"> -->
