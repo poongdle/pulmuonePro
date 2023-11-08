@@ -5,7 +5,7 @@
 		<div class="header-logo">
 			<h1>
 				<a href="/">
-					<img src="/resources/assets/images/main_logo.png" alt="풀무원녹즙">				
+					<img src="/pulmuonePro/resources/assets/images/main_logo.png" alt="풀무원녹즙">				
 				</a>
 			</h1>
 		</div>
@@ -25,8 +25,7 @@
 		<div class="member-search-area">
 			<div class="head-util-area">
 				<a href="/mypage" data-require-login="true"> <i
-					class="ico ico-myIcon"></i> <span class="hide">로그인 페이지 / 마이
-						페이지로 가기</span>
+					class="ico ico-myIcon"></i> <span class="hide">로그인 페이지 / 마이 페이지로 가기</span>
 				</a>
 				 <a href="/cart/daily">
 					<div class="counter hide" data-cart-size=""></div> <i class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
