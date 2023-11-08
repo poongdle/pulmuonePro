@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 public class NullHandler implements CommandHandler {
 
 	@Override
-	public String process(HttpServletRequest req, HttpServletResponse res)
+	public String process(HttpServletRequest request, HttpServletResponse response)
 	throws Exception {
-		res.sendError(HttpServletResponse.SC_NOT_FOUND);
+		response.sendError(HttpServletResponse.SC_NOT_FOUND);
 		return null;
 	}
 
