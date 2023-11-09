@@ -28,14 +28,35 @@ public class ListService {
 		try {
 			con = ConnectionProvider.getConnection();
 			ProductsDAO dao = ProductsDAO.getInstance();
-			List<ProductsDTO> list = null;
+			List<ProductsDTO> list = null;			
 			int count = path.indexOf("daily");			
 			if(count!=-1) {			
-			list = dao.selectdaily(con);
+			list = dao.selectdaily(con);		
 			}else {
 			list = dao.selectbox(con);
 			}
 			return list;
+		} catch (NamingException | SQLException e) { 
+			//e.printStackTrace();  syso("ListService.select() 에러 : ")
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(con);
+		}
+	}   
+	public List<ProductsDTO> bestselect(String path){
+		//
+		Connection con = null;
+		try {
+			con = ConnectionProvider.getConnection();
+			ProductsDAO dao = ProductsDAO.getInstance();
+			List<ProductsDTO> dailylist = null;			
+			int count = path.indexOf("daily");			
+			if(count!=-1) {			
+			dailylist =	dao.selectdailybest(con);		
+			}else {
+			dailylist =	dao.selectdailybest(con);
+			}
+			return dailylist;
 		} catch (NamingException | SQLException e) { 
 			//e.printStackTrace();  syso("ListService.select() 에러 : ")
 			throw new RuntimeException(e);

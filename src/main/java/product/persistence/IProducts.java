@@ -8,9 +8,10 @@ import product.domain.ProductsDTO;
 
 public interface IProducts {
 	
-	   // 1. 매일배송 글 목록
+	   // 1. 매일배송 상품 목록
 	   List<ProductsDTO> selectdaily(Connection con) throws SQLException;	  
-	   // 1. 택배배송 글 목록
+	   // 1. 택배배송 상품 목록
 	   List<ProductsDTO> selectbox(Connection con) throws SQLException;	 
 	   
+	   List<ProductsDTO> selectdailybest(Connection con) throws SQLException;
 }

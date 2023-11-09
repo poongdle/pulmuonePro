@@ -19,10 +19,11 @@ public class DailyList implements CommandHandler{
 		System.out.println(path);
 		ListService listService = ListService.getInstance();
 	    List<ProductsDTO> list = listService.select(path);
-		
+	    List<ProductsDTO> dailylist = listService.bestselect(path);
 		
 		//1.  포워딩 전 데이터 저장
-		request.setAttribute("list", list);		
+		request.setAttribute("list", list);
+		request.setAttribute("dailylist", dailylist);	
 
 		return "/WEB-INF/views/product/DailyList.jsp";
 		
