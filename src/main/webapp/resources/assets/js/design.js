@@ -19,4 +19,14 @@ $(function(){
           $("#lnb-item").slideDown();
         }
     }
+
+
+    $(document).on("click", "#pagable-list .card-header", function () {
+        var card = $(this).parents(".card");
+        if (card.hasClass("active")) {
+          card.removeClass("active");
+        } else {
+          card.addClass("active");
+        }
+    });
 })
