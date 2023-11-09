@@ -34,7 +34,7 @@ public class FaqList implements CommandHandler {
 		if( pcategory != null && !pcategory.equals("") ) {
 			category = Integer.parseInt(pcategory);
 		}
-		if( ppageNo != null && !pcategory.equals("") ) {
+		if( ppageNo != null && !ppageNo.equals("") ) {
 			pageNo = Integer.parseInt(ppageNo);
 		}
 		
