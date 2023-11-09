@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <!-- header -->
 <header class="main_header">
+	
 	<div class="container">
 		<div class="header-logo">
 			<h1>
@@ -20,6 +21,7 @@
 				<li><a href=""><span>시음선물</span></a></li>
 				<li><a href=""><span>이벤트</span></a></li>
 				<li><a href="/forum/faq/list.do"><span>고객기쁨센터</span></a></li>
+				<li><a href="/order/list.do"><span>주문</span></a></li>
 			</ul>
 		</nav>
 		<div class="member-search-area">
