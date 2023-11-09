@@ -26,7 +26,7 @@
 						<h2 class="title">고객기쁨센터</h2>
 						<ul class="lnb-style">
 							<li class="active">
-								<a href="/forum/faq.do?category=1">FAQ</a>
+								<a href="/forum/faq/list.do">FAQ</a>
 							</li>
 							<li>
 								<a href="/forum/action/counsel/write">1:1 문의</a>
@@ -43,7 +43,6 @@
 					<div class="page-content">
 						<form id="searchForm">
 							<input type="hidden" id="category" name="category" value="<%=category%>">
-							<input type="hidden" id="cTitle" name="cTitle" value="">
 							<div class="border-wrapper">
 								<h2 class="container-title">
 									FAQ
@@ -53,7 +52,7 @@
 								<div class="form-input none-dt">
 									<dl>
 										<dd>
-											<input title="검색어 입력" type="text" id="searchKeyword" name="searchKeyword" placeholder="궁금하신 내용을 입력해주세요." value="" maxlength="30">
+											<input title="검색어 입력" type="text" id="searchKeyword" name="searchKeyword" placeholder="궁금하신 내용을 입력해주세요." value="${param.searchKeyword }" autofocus maxlength="30">
 											<button class="btn-square" id="faqSearchBtn">검색</button>
 										</dd>
 									</dl>
@@ -66,7 +65,7 @@
 									<ul class="nav nav-tabs" role="tablist">
 				
 										<li>
-											<a href="/forum/faq/list.do?category=0">TOP 10</a>
+											<a href="/forum/faq/list.do">TOP 10</a>
 										</li>
 										
 											<li>
@@ -94,49 +93,74 @@
 											</li>
 									</ul>
 								</div>
-									
+								
+								<c:if test="${ not empty param.searchKeyword }">
+									<div class="search-result-box">
+										<p><span>"${ param.searchKeyword }"</span> 검색결과 총 <span>${total }</span>건</p>
+									</div>
+								</c:if>
 								<div class="accordion faq-list" id="pagable-list" data-list-object="replace">
+									<c:choose>
 										
-									<c:forEach items="${ list }" var="item">
-										<div class="card">
-											<div class="card-header">
-												<h2 class="mb-0" style="width: 100%">
-													<button class="btn btn-link btn-block text-left"
-														type="button" style="width: 100%">${ item.question }</button>
-												</h2>
-											</div>
-											<div class="faq-contents-area">
-												<div class="card-body">
-													<p>
-														<span
-															style="font-family: Arial; color: rgb(119, 119, 119);"><span
-															style="font-size: 13.3333px;">${ item.answer }</span></span>&nbsp;
-													</p>
-												</div>
-											</div>
-										</div>
-									</c:forEach>
-									
-								</div>
-								<nav aria-label="Page navigation example" class="pagenavi-area" data-pagination="">
-									<input type="hidden" id="pageNo" name="pageNo">
-									<ul class="pagination">
-										<c:forEach begin="${ paging.start }" end="${ paging.end }" step="1" var="i">
+										<c:when test="${ param.category == null && param.category != '' }">
+											<%@ include file="top10.jsp" %>
+										</c:when>
+										<c:otherwise>
 											<c:choose>
-												<c:when test="${ i eq paging.currentPage }">
-													<li class="page-item active">
-														<a class="page-link active">${i }</a>
-													</li>	
+												<c:when test="${ list.size() eq null }">
+													<div class="empty-area" style="padding: 160px 0">
+														<img src="/resources/assets/images/ico-alert.png" alt="empty">
+														<b>검색결과가 없습니다.</b>
+													</div>
 												</c:when>
 												<c:otherwise>
-													<li class="page-item">
-														<a class="page-link" data-list-more="#pagable-list" data-param="${i }">${i }</a>
-													</li>
+													<c:forEach items="${ list }" var="item">
+														<div class="card">
+															<div class="card-header">
+																<h2 class="mb-0" style="width: 100%">
+																	<button class="btn btn-link btn-block text-left"
+																		type="button" style="width: 100%">${ item.question }</button>
+																</h2>
+															</div>
+															<div class="faq-contents-area">
+																<div class="card-body">
+																	<p>
+																		<span
+																			style="font-family: Arial; color: rgb(119, 119, 119);"><span
+																			style="font-size: 13.3333px;">${ item.answer }</span></span>&nbsp;
+																	</p>
+																</div>
+															</div>
+														</div>
+													</c:forEach>
 												</c:otherwise>
 											</c:choose>
-										</c:forEach>
-									</ul>
-								</nav>
+										</c:otherwise>
+									</c:choose>
+									
+									
+								</div>
+								<c:if test="${ param.category != null }">
+									<nav aria-label="Page navigation example" class="pagenavi-area" data-pagination="">
+										<input type="hidden" id="pageNo" name="pageNo">
+										<ul class="pagination">
+											<c:forEach begin="${ paging.start }" end="${ paging.end }" step="1" var="i">
+												<c:choose>
+													<c:when test="${ i eq paging.currentPage }">
+														<li class="page-item active">
+															<a class="page-link active" data-param="${i }" >${i }</a>
+														</li>	
+													</c:when>
+													<c:otherwise>
+														<li class="page-item">
+															<a class="page-link" data-list-more="#pagable-list" data-param="${i }">${i }</a>
+														</li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</ul>
+									</nav>
+								</c:if>
 								
 							</div>
 						</form>
@@ -152,8 +176,24 @@
 <script>
 	$(function(){
 		
-		$(".tab-area ul li a").removeClass("active");
-		$(".tab-area ul li").eq(<%=category%>).find("a").addClass("active");
+		$(".faq .tab-area ul li a").removeClass("active");
+		$(".faq .tab-area ul li").eq(<%=category%>).find("a").addClass("active");
+		
+		let $pageItem = $(".faq .pagenavi-area .pagination .page-item a");
+		
+		$("#searchForm").submit(function(e){
+			$("#category").val("");
+			if( $("#searchKeyword").val() == "" ){
+				e.preventDefault();
+				location.href= "/forum/faq/list.do";
+			}
+		})
+		
+		$pageItem.each(function(i, el) {
+			let aparam = $(this).data("param");
+			$(this).attr("href", `/forum/faq/list.do?category=${ param.category }&pageNo=\${aparam}`)
+		})
+	
 	})
 </script>
 </body>
