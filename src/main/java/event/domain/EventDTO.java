@@ -16,5 +16,5 @@ public class EventDTO {
 	private Date event_start;
 	private Date event_end;
 	private String event_notice;
-			
+	
 }

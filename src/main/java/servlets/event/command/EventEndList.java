@@ -16,7 +16,7 @@ import event.persistence.EventDAO;
 import jdbc.connection.ConnectionProvider;
 import mvc.command.CommandHandler;
 
-public class EventList implements CommandHandler {
+public class EventEndList implements CommandHandler {
 
 	@Override
     public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -37,18 +37,18 @@ public class EventList implements CommandHandler {
         try {
             Connection conn = ConnectionProvider.getConnection();
             EventDAO dao = new EventDAO(conn);
-            eventMap = dao.select(currentPage, numberPerPage, true);
-            totalPages = dao.getTotalPages(numberPerPage, true); // 이벤트중
+            eventMap = dao.select(currentPage, numberPerPage, false);
+            totalPages = dao.getTotalPages(numberPerPage, false);
             PageDTO pDto = new PageDTO(currentPage, numberPerPage, numberOfPageBlock, totalPages);
             
             // 진행 중인 이벤트 리스트를 가져옵니다.
-            ArrayList<EventDTO> onEvent = eventMap.get("onEvent");
+            ArrayList<EventDTO> endEvent = eventMap.get("endEvent");
 
             // 1. 포워딩 전 데이터 저장
-            request.setAttribute("onEvent", onEvent);
+            request.setAttribute("endEvent", endEvent);
             request.setAttribute("pDto", pDto);
             // 2. 포워딩
-            String path = "/WEB-INF/views/event/list.jsp";
+            String path = "/WEB-INF/views/event/end/EndList.jsp";
             RequestDispatcher dispatcher = request.getRequestDispatcher(path);
             dispatcher.forward(request, response);
 

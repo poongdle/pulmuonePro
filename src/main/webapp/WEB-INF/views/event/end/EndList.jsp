@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
@@ -17,14 +18,14 @@
 
 					<div class="tab-pane fade show active" id="profile" role="tabpanel"
 						aria-labelledby="profile-t">
-
-						<h3 class="hide">진행중이벤트</h3>
+						<!--S:종료된이벤트-->
+						<h3 class="hide">종료된이벤트</h3>
 						<ul class="event-list" id="pagable-list"
 							data-list-object="replace">
-							
-							<c:forEach var="event" items="${onEvent}">
+
+							<c:forEach var="event" items="${endEvent}">
 								<li>
-									<a href="/event/event/view/${event.event_no}">
+									<a href="/event/event/view/${event.event_no}" class="disabled" onclick="return false">
 										<div class="img-area">
 											<img src="/webapp/resources/assets/event_thumbnail/099a10d6-31c7-4708-b2b3-48d464038fe1.png" alt="${event.event_name}">
 										</div>
@@ -37,7 +38,7 @@
 									</a>
 								</li>
 							</c:forEach>
-							
+
 							<%-- 
 							<c:if test="${empty list}">
 								<p>list is empty or null.</p>
@@ -46,20 +47,24 @@
 								<p>list is not empty. It has ${fn:length(list)} items.</p>
 							</c:if>
 							 --%>
-							
+
 						</ul>
 						<nav aria-label="Page navigation example" class="pagenavi-area"
 							data-pagination="">
 							<input type="hidden" id="pageNo" name="pageNo">
 							<ul class="pagination">
 								<c:forEach var="i" begin="1" end="${pDto.totalPages}">
-								    <li class="page-item <c:if test="${i == pDto.currentPage}">active</c:if>">
-								        <a class="page-link" href="/event/event/list.do?currentpage=${i}">${i}</a>
-								    </li>
+									<li
+										class="page-item <c:if test="${i == pDto.currentPage}">active</c:if>">
+										<a class="page-link"
+										href="/event/event/end/list.do?currentpage=${i}">${i}</a>
+									</li>
 								</c:forEach>
 							</ul>
 						</nav>
+						<!--E:종료된이벤트-->
 					</div>
+
 				</div>
 			</div>
 		</main>
