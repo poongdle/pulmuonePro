@@ -1,16 +1,21 @@
-package persistence.order.box;
+package persistence.order;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import domain.order.box.BoxOrderDTO;
 import domain.order.box.BoxOrderProductsDTO;
 import domain.order.box.BoxPayDTO;
 import domain.order.box.BoxShipDTO;
-public interface BoxOrderImpl {
+import domain.order.box.ProductsDTO;
 
+public interface BoxOrderImpl {
+	
+	// 상품 정보 조회
+	List<ProductsDTO> selectProducts(Connection conn, String [] productsNo) throws SQLException;
+	
 	// 1. 주문, 주문 상품 정보, 배송지 정보 추가
 	int insertBoxOrder(Connection conn, BoxOrderDTO dto) throws SQLException;
 	int insertBoxOrderProducts(Connection conn, BoxOrderProductsDTO dto) throws SQLException;

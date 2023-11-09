@@ -1,4 +1,4 @@
-package persistence.order.drk;
+package persistence.order;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -22,7 +22,7 @@ public interface DrkOrderImpl {
 	int insertAcntInfo(Connection conn, AcntInfoDTO dto) throws SQLException;
 	
 	// 2. 주문 취소
-	int deleteOrder(Connection conn, DrkOrderDTO oDto, DrkShipDTO sDto, CardInfoDTO cDto, AcntInfoDTO aDto) throws SQLException;
+	int deleteOrder(Connection conn, int drkOrderNo) throws SQLException;
 	
 	
 	// 가맹점 확정 후
@@ -35,14 +35,31 @@ public interface DrkOrderImpl {
 	// 4. 매달 25일 - 결제 추가
 	int insertPay(Connection conn, DrkPayDTO dto) throws SQLException;
 	
-	// 5. 음용스케줄 변경
-	int updateDrkScedule(Connection conn, DrkScheduleDTO dto) throws SQLException;
-	int updateDrkHistory(Connection conn, DrkHistoryDTO dto) throws SQLException;
-	int updateDrkChanges(Connection conn, DrkChangesDTO dto) throws SQLException;
-	
 	
 	// 조회
-	// 6. 주문 내역 조회
-	List<DrkOrderDTO> selectList(Connection conn, int memberNo);
+	// 5. 음용 내역 조회
+	List<DrkOrderDTO> selectList(Connection conn, int memberNo, int drkStatus) throws SQLException;
+	
+	// 6. 음용 상세 내역 조회
+	DrkOrderDTO selectOne(Connection conn, int drkOrderNo) throws SQLException;
+	 
+	// 7. 애칭 수정
+	int updateDrkOrderName(Connection conn, String name) throws SQLException;
+	
+	// 8. 결제 수단 변경
+	int updateDrkPay(Connection conn, CardInfoDTO cDto, AcntInfoDTO aDto) throws SQLException;
+
+	// 9. 음용 중지 신청
+	int updateDrkOrder(Connection conn, int drkOrderNo, String stopDate) throws SQLException;
+	
+	// 10. 음용스케줄, 음용스케줄변경내역 추가, 음용내역 변경
+	int changeDrkScedule(Connection conn, DrkScheduleDTO sDto, DrkChangesDTO cDto) throws SQLException;
+	// updateDrkHistory
+	
+	// 11. 변경 내역 조회
+	List<DrkChangesDTO> selectChangesList(Connection conn, int memberNo) throws SQLException;
+	
+	// 12. 변경 상세 내역 조회
+	DrkChangesDTO selectChangesOne(Connection conn, int drkChangesNo) throws SQLException;
 	
 }
