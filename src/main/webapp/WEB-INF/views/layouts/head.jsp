@@ -11,4 +11,12 @@
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="/resources/assets/js/design.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
+<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
+<link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
+<link rel="stylesheet" href="/resources/assets/css/contents2.css">
+<link rel="stylesheet" href="/resources/assets/css/curation.css">
+<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css">
+<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
+<link rel="stylesheet" href="/resources/assets/css/notosanskr.css">
 </head>

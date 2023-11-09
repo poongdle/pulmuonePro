@@ -18,7 +18,7 @@
 				<li><a href=""><span>택배배송</span></a></li>
 				<li><a href=""><span>맞춤큐레이션</span></a></li>
 				<li><a href=""><span>시음선물</span></a></li>
-				<li><a href=""><span>이벤트</span></a></li>
+				<li><a href="/event/event/list.do"><span>이벤트</span></a></li>
 				<li><a href="/forum/faq/list.do"><span>고객기쁨센터</span></a></li>
 			</ul>
 		</nav>
