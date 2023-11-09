@@ -35,13 +35,14 @@ public class FaqList implements CommandHandler {
 		if( ppageNo != null ) {
 			pageNo = Integer.parseInt(ppageNo);
 		}
-
+		
 		ArrayList<FaqDTO> faqList =  listService.getFaqList(pageNo, category, numberPerPage);
 		totalPages = listService.getFaqTotalPage(numberPerPage, category);
-		System.out.println(totalPages);
 		paging = new PageDTO(pageNo, numberPerPage, numberOfPageBlock, totalPages);
+		
 		request.setAttribute("list", faqList);
 		request.setAttribute("paging", paging);
+		
 		return "/WEB-INF/views/faq/list.jsp";
 	}
 

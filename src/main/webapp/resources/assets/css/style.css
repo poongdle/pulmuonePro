@@ -722,6 +722,47 @@ footer .page-footer-typo > li > span {
   box-shadow: none;
 }
 
+.empty-area {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+}
+.empty-area img {
+  width: 106px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.empty-area b {
+  display: block;
+  margin-bottom: 11px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  color: #333;
+}
+.empty-area > span {
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: -1.2px;
+  color: #999;
+}
+.empty-area.mypage img {
+  width: 90px;
+}
+.empty-area.mypage b {
+  font-size: 20px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  margin-bottom: 0px;
+  letter-spacing: -1.5px;
+  text-align: center;
+  color: #999;
+}
+
 /********** FAQ **********/
 .faq .page-wrap {
   display: flex;
