@@ -18,12 +18,12 @@ public class BoxList implements CommandHandler{
 		String path = request.getRequestURI();		
 		System.out.println(path);
 		ListService listService = ListService.getInstance();
-		List<ProductsDTO> list = listService.select(path);
-		
+		List<ProductsDTO> list = listService.select(path, 0);
+		List<ProductsDTO> bestlist = listService.bestselect(path);
 		
 		//1.  포워딩 전 데이터 저장
 		request.setAttribute("list", list);
-
+		request.setAttribute("bestlist", bestlist);	
 		return "/WEB-INF/views/product/BoxList.jsp";
 		
 		

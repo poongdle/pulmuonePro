@@ -22,7 +22,7 @@ public class ListService {
 		}
 		return instance;
 	}
-	public List<ProductsDTO> select(String path){
+	public List<ProductsDTO> select(String path, int num){
 		//
 		Connection con = null;
 		try {
@@ -31,7 +31,7 @@ public class ListService {
 			List<ProductsDTO> list = null;			
 			int count = path.indexOf("daily");			
 			if(count!=-1) {			
-			list = dao.selectdaily(con);		
+			list = dao.selectdaily(con,num);		
 			}else {
 			list = dao.selectbox(con);
 			}
@@ -49,19 +49,35 @@ public class ListService {
 		try {
 			con = ConnectionProvider.getConnection();
 			ProductsDAO dao = ProductsDAO.getInstance();
-			List<ProductsDTO> dailylist = null;			
+			List<ProductsDTO> bestlist = null;			
 			int count = path.indexOf("daily");			
 			if(count!=-1) {			
-			dailylist =	dao.selectdailybest(con);		
+				bestlist =	dao.selectdailybest(con);		
 			}else {
-			dailylist =	dao.selectdailybest(con);
+				bestlist =	dao.selectboxbest(con);
 			}
-			return dailylist;
+			return bestlist;
 		} catch (NamingException | SQLException e) { 
 			//e.printStackTrace();  syso("ListService.select() 에러 : ")
 			throw new RuntimeException(e);
 		} finally {
 			JdbcUtil.close(con);
 		}
-	}   	
+	}
+	public List<ProductsDTO> search(String tags){
+		//
+		Connection con = null;
+		try {
+			con = ConnectionProvider.getConnection();
+			ProductsDAO dao = ProductsDAO.getInstance();
+			List<ProductsDTO> searchlist = null;												
+			searchlist =	dao.search(con,tags);
+			return searchlist;
+		} catch (NamingException | SQLException e) { 
+			//e.printStackTrace();  syso("ListService.select() 에러 : ")
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(con);
+		}
+	}   
 }

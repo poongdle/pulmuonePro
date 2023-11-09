@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,113 +14,208 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
+<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="/resources/assets/css/owl.theme.default.css">
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 <link rel="stylesheet" href="/resources/assets/css/list.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/resources/assets/js/jquery.form.min.js"></script>
+<script src="/resources/assets/js/owl.carousel.min.js"></script>
+<script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/request.js"></script>
+<script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/design.js"></script>
+<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".visual-area").fddCarousel({
+			auto : 5000
+		});
+		$("#head-items").owlCarousel({
+			items : 4,
+			nav : true,
+		})
+	});
+</script>
 </head>
 <body>
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
-		<main class="page-dailylist">
-		<div class="container full">
-		<div class="img-area">				
-			<div class="slideshow-container">
-				<div class="mySlides fade">
-					<div class="numbertext">1 / 5</div>
-					<a class="item" href="https://greenjuice.pulmuone.com/product/daily/732" title="제품 상세페이지로 가기" style="background-color: #111111">
-				<img src="/file/download//banner/84c3f8d0-5ae5-462b-9fea-cac7bc1d34fd.png" alt="">
-					</a>
+		<main class="page-boxlist">
+			<div id="container-wrapper" class="container-wrapper">
+				<!--S: 메인 비주얼-->
+				<div class="visual-area">
+					<div class="controller">
+						<button class="arrow left" data-carousel="prev">
+							<span></span> <span></span>
+						</button>
+						<div class="number">
+							<p data-carousel="current">1</p>
+							<span></span>
+							<p data-carousel="max">5</p>
+						</div>
+						<button class="arrow right" data-carousel="next">
+							<span></span> <span></span>
+						</button>
+					</div>
+					<div class="vis-list" data-carousel="items">
+						<a class="item active"
+							href="https://greenjuice.pulmuone.com/product/daily/732"
+							title="제품 상세페이지로 가기" style="background-color: #111111"> <img
+							src="/file/download/banner/ed3f2371-dd7a-48fc-844c-b68638b48431.png"
+							alt="">
+						</a> <a class="item right"
+							href="https://greenjuice.pulmuone.com/product/search?searchKeyword=%ED%95%B8%EB%94%94%EB%B0%80"
+							title="제품 상세페이지로 가기" style="background-color: #ffffff"> <img
+							src="/file/download/banner/f2ef74c2-9c45-4218-84c9-ce5b1d8ace5f.png"
+							alt="">
+						</a> <a class="item right"
+							href="https://greenjuice.pulmuone.com/product/daily?category=&amp;tags=478"
+							title="제품 상세페이지로 가기" style="background-color: #ffffff"> <img
+							src="/file/download/banner/a4b8f03b-534c-4fc1-ae12-1cb7e697bd45.png"
+							alt="">
+						</a> <a class="item" target="_blank"
+							href="https://greenjuice.pulmuone.com/product/daily/315?eventIdx="
+							title="제품 상세페이지로 가기" style="background-color: #111111"> <img
+							src="/file/download/banner/2227741e-b8db-4b79-8b0e-fba88ef415e7.png"
+							alt="">
+						</a>
+					</div>
+				</div>				
+				<div class="section best-section">
+					<div class="container">
+						<h2 class="part-title">BEST &amp; NEW</h2>
+						<div class="prd-list">
+							<div id="head-items" class="owl-carousel owl-loaded owl-drag">
+								<div class="owl-stage-outer">
+									<div class="owl-stage"
+										style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 6170px;">
+										<c:forEach var="dto" items="${bestlist }">
+											<div class="owl-item active" style="width: 308.5px;">
+												<div class="prd-area">
+													<a href="/product/daily/${dto.products_tag }?eventIdx="
+														title="제품 상세페이지로 가기">
+														<div class="badges">
+															<span class="badge">BEST</span>
+														</div>
+														<div class="thumb">
+															<img src="/file/download/product/${dto.system_name }"
+																alt="제품명">
+														</div>
+														<div class="prd-info">
+															<div class="prd-title-wrapper">
+																<b class="prd-title">${dto.products_name }</b>
+															</div>
+															<div class="price-info" style="margin-bottom: 5px;">
+																<b class="now-price"><fmt:formatNumber
+																		value="${dto.price }" pattern="#,###" /><span>
+																		원</span></b>
+															</div>
+															<span class="volume">(${dto.products_size })</span>
+														</div>
+													</a>
+													<div class="btn-area btn-area-center">
+														<button type="button" data-wish-id="281"
+															data-wish-type="daily"
+															class="btn-round btn-white wishlistBtn ">
+															<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																찜하기</span>
+														</button>
+														<button type="button" data-cart-id="0071654"
+															data-cart-type="daily" data-cart-event=""
+															class="btn-round addCartBtn">
+															<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																담기</span>
+														</button>
+													</div>
+												</div>
+											</div>
+										</c:forEach>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="mySlides fade">
-					<div class="numbertext">2 / 5</div>
-					<a class="item" href="https://greenjuice.pulmuone.com/product/search?searchKeyword=%ED%95%B8%EB%94%94%EB%B0%80" title="제품 상세페이지로 가기" style="background-color: #ffffff">
-				<img src="/file/download//banner/35b19bec-324b-41d6-812d-cdf8f00eb6cb.png" alt="">
-					</a>
-				</div>
-				<div class="mySlides fade">
-					<div class="numbertext">3 / 5</div>
-					<a class="item" href="https://greenjuice.pulmuone.com/product/daily?category=&amp;tags=478" title="제품 상세페이지로 가기" style="background-color: #ffffff">
-				<img src="/file/download//banner/67c0a15e-a321-4513-8015-a973651fb8e8.png" alt="">
-					</a>
-				</div>
-				<div class="mySlides fade">
-					<div class="numbertext">4 / 5</div>
-					<a class="item" target="_blank" href="https://greenjuice.pulmuone.com/product/daily/315?eventIdx=" title="제품 상세페이지로 가기" style="background-color: #111111">
-				<img src="/file/download//banner/6c036b45-96cf-4189-812a-82f2b36f7bcb.png" alt="">
-					</a>
-				</div>
-				<div class="mySlides fade">
-					<div class="numbertext">5 / 5</div>
-					<a class="item" href="https://greenjuice.pulmuone.com/product/daily/430" title="제품 상세페이지로 가기" style="background-color: #f7f0d6">
-				<img src="/file/download//banner/2b301cd0-0431-47b6-ab77-9c180e55ef96.png" alt="">
-					</a>
-				</div>
-				<button class="arrow left" onclick="changeSlide(-1)">
-					<span></span> <span></span>
-				</button>				
-				<button class="arrow right" onclick="changeSlide(1)">
-					<span></span> <span></span>
-				</button>
+				<form id="searchForm">
+					<input type="hidden" name="category" value=""> <input
+						type="hidden" name="tags" value="">
+					<div class="cbody-wrap">
+						<div class="bg-light-gray over-section"
+							style="margin-bottom: 120px">
+							<div class="container">
+								<div class="tag-place">
+									<button data-idx="335" type="button" class="tag-btn item ">프레시업</button>
+									<button data-idx="339" type="button" class="tag-btn item ">프레시스무디</button>
+									<button data-idx="341" type="button" class="tag-btn item ">클렌즈주스</button>
+									<button data-idx="485" type="button" class="tag-btn item ">양배추</button>
+									<button data-idx="343" type="button" class="tag-btn item ">건강즙</button>
+									<button data-idx="351" type="button" class="tag-btn item ">건강기능식품</button>
+									<button data-idx="347" type="button" class="tag-btn item ">어린이</button>
+								</div>
+								<div class="tab-content" id="tab-content-depth2">
+									<div class="prd-list-head">
+										<p class="count">
+											총 <em>${fn:length(list) }</em>건의 상품이 있습니다.
+										</p>
+									</div>
+									<div class="prd-list wrap" data-list-object="append"
+										id="product-items">
+										<c:forEach var="dto" items="${list }">
+											<div class="prd-area">
+												<a href="/product/daily/${dto.products_tag }?eventIdx="
+													title="제품 상세페이지로 가기">
+													<div class="badges">
+														<span class="badge">BEST</span>
+													</div>
+													<div class="thumb">
+														<img src="/file/download/product/${dto.system_name }"
+															alt="제품명">
+													</div>
+													<div class="prd-info">
+														<div class="prd-title-wrapper">
+															<b class="prd-title"> ${dto.products_name } </b>
+														</div>
+														<div class="price-info" style="margin-bottom: 5px;">
+															<b class="now-price"><fmt:formatNumber
+																	value="${dto.price }" pattern="#,###" /> <span>
+																	원</span> </b>
+														</div>
+														<span class="volume">(${dto.products_size })</span>
+													</div>
+												</a>
+												<div class="btn-area btn-area-center">
+													<button type="button" data-wish-id="${dto.products_tag }"
+														data-wish-type="daily"
+														class="btn-round btn-white wishlistBtn ">
+														<i class="ico ico-prd-wish"></i> <span class="hide">제품
+															찜하기</span>
+													</button>
+													<button type="button" data-cart-id="${dto.products_no }"
+														data-cart-type="daily" data-cart-event=""
+														class="btn-round addCartBtn">
+														<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+															담기</span>
+													</button>
+												</div>
+											</div>
+										</c:forEach>
+									</div>
+									<div class="button-set mb60" data-list-more="#product-items"
+										data-param="2">
+										<button type="button" class="basic-big-button">더보기</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
+		</main>
+		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
 	</div>
-	<div class="breadcrumb-style" style="padding-top:32px; margin-bottom: 0px;background: #fff">
-	<div class="container">
-		<ul style="float:right;">
-			<li><a>홈</a></li>
-			<li><a href="/product/daily" class="active">
-					매일배송
-			</a></li>
-			
-		</ul>
-	</div>
-</div>
-<div class="full">
- <c:choose>
-       <c:when test="${not empty list }">
-         <c:forEach var="dto" items="${list }">
-           <tr style="display: block;">                        
-             <td>${dto.products_name }</td><br>
-             <td>${dto.price }</td><br>
-             <td>${dto.products_size }</td><br>
-           </tr>
-         </c:forEach>      
-       </c:when>
-       <c:otherwise>
-         <tr>
-           <td colspan="5">등록된 게시글 없다람쥐.</td>
-         </tr>
-       </c:otherwise>
-     </c:choose>
-</div>
-	</div>	
-	</main>
-	<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
-	</div>
-	<script type="text/javascript">
-		let slideIndex = 0;
-		function showSlides(slideIndex) {
-			$(".slideshow-container .mySlides").css("display", "none");
-			// 	$(".dots span.dot").removeClass("active");
-			$(".slideshow-container .mySlides").eq(slideIndex).css("display",
-					"block");
-			// 	$(".dots span.dot").eq(slideIndex).addClass("active");
-		}
-		showSlides(slideIndex);
-		function changeSlide(value) {
-			slideIndex += value;
-			if (slideIndex == -1) {
-				slideIndex = 2;
-			} else if (slideIndex == 5) {
-				slideIndex = 0;
-			}
-			showSlides(slideIndex);
-		}
-		function dotSlide(value) {
-			slideIndex = value;
-			showSlides(slideIndex);
-		}
-	</script>
 </body>
 </html>

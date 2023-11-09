@@ -249,52 +249,21 @@
   background: url('/resources/assets/images/arrow_best.png') no-repeat;
   background-size: contain;
 }
-
-
 /**********************************************************************************
-** main
+** icon
 ***********************************************************************************/
-.part-title { font-family: 'Roboto','Noto Sans KR'; font-weight: 500; font-size:32px; line-height:1; margin-bottom:10px; letter-spacing: -2px; }
+/* 공통 */
+.ico {background-image: none; background-size: 100%; background-position: center; background-repeat: no-repeat; vertical-align: middle; background-color: transparent;}
 
-.breadcrumb-style { padding-top:17px; margin-bottom:3px; }
-.breadcrumb-style ul {
-    float:right;
-}
-.breadcrumb-style li { display: inline-block; position: relative; }
-.breadcrumb-style li a { font-size:14px; color:#666; }
-.breadcrumb-style li a.active { color:#333; font-weight: 500; }
-.breadcrumb-style li+li { margin-left:25px; }
-.breadcrumb-style li+li:before { content:''; position: absolute; top:9px; left:-13px; width:1px; height:7px; transform:rotate(45deg); background: #333; }
-.breadcrumb-style li+li:after { content:''; position: absolute; bottom:9px; left:-13px; width:1px; height:7px; transform:rotate(-45deg); background: #333; }
-.breadcrumb-style:after { display: block; content:''; clear: both; }
-.breadcrumb-style.fff { background:#fff; }
+/* 아이콘 스타일 */
+.ico-prd-wish {width: 20px; height: 18px; background-image: url("/resources/assets/images/ico_wish_off02.png");}
+.wishlistBtn.active .ico-prd-wish {background-image: url("/resources/assets/images/ico_wish_on.png");}
+.ico-prd-cart {width: 42px; height: 42px; background-image: url("/resources/assets/images/ico_cart02.png");}
 
-
-.best-section { background: #fff; border-bottom:1px #e5e5e5 solid; padding-bottom:20px; margin-bottom:30px; padding-top:24px; }
-.best-section .part-title { margin-bottom: 22px }
-
-.tag-place { display: flex; flex-wrap: wrap; border-bottom:1px #e5e5e5 solid; padding:0px 0px 15px; align-items: center; justify-content: center; }
-.tag-place .item { height:50px; margin-bottom:15px; transition-duration: .2s; padding-right:20px; padding-left:40px; border:1px #e5e5e5 solid; border-radius: 25px; display: flex; align-items: center; font-size:16px; color:#333; background:#fff url("/resources/assets/images/ico_tag.png") 20px center no-repeat;  }
-.tag-place .item+.item { margin-left:20px; }
-.tag-place .item.active,
-.tag-place .item:hover,
-.tag-place .item:focus { border-color:#7acc12; transition-duration: .2s; color:#fff; background:#7acc12 url("/resources/assets/images/ico_tag_wt.png") 20px center no-repeat; }
-
-.tag-place.sm { margin-top:20px; }
-.tag-place.sm .item { height:38px; padding-left:32px; padding-right:18px; font-size:14px; background:#fff url("/resources/assets/images/ico_tag.png") 15px center no-repeat; background-size:10px; }
-.tag-place.sm .item+.item { margin-left:8px; }
-.tag-place.sm .item.active,
-.tag-place.sm .item:hover,
-.tag-place.sm .item:focus { border-color:#7acc12; transition-duration: .2s; color:#fff; background:#7acc12 url("/resources/assets/images/ico_tag_wt.png") 15px center no-repeat; background-size:10px; }
-
-.prd-list-head  { display:flex; justify-content:space-between; align-items: center; margin:27px 0 36px;}
-.prd-list-head .count {font-size:15px; color:#333; flex:1; text-align: center; line-height: 20px; font-weight: 300; }
-.prd-list-head .count em{color:#7acc12;}
-
-.button-set { display: flex; align-items: center; justify-content: center; margin:36px 0;}
-.button-set.mgsm { margin:20px 0; }
-.button-set.b0 { margin-bottom:0; }
-.button-set.mb60 { margin-bottom:120px; }
+/* slide dots */
+.owl-carousel .owl-dots {display: flex; flex: 1; justify-content: center; align-items: center; padding-top: 30px;}
+.owl-carousel .owl-dots button {width: 8px; height: 8px; margin: 0 1.5px; background-color: #e0e0e0; border-radius: 4px;}
+.owl-carousel .owl-dots button.active {width: 12px; background-color: #93d576;}
 
 /**********************************************************************************
 ** common
@@ -430,17 +399,47 @@
 .wishlistBtn {background-color: transparent; border: 0;}
 
 /**********************************************************************************
-** icon
+** main
 ***********************************************************************************/
-/* 공통 */
-.ico {background-image: none; background-size: 100%; background-position: center; background-repeat: no-repeat; vertical-align: middle; background-color: transparent;}
+.part-title { font-family: 'Roboto','Noto Sans KR'; font-weight: 500; font-size:32px; line-height:1; margin-bottom:10px; letter-spacing: -2px; }
 
-/* 아이콘 스타일 */
-.ico-prd-wish {width: 20px; height: 18px; background-image: url("/resources/assets/images/ico_wish_off02.png");}
-.wishlistBtn.active .ico-prd-wish {background-image: url("/resources/assets/images/ico_wish_on.png");}
-.ico-prd-cart {width: 42px; height: 42px; background-image: url("/resources/assets/images/ico_cart02.png");}
+.breadcrumb-style { padding-top:17px; margin-bottom:3px; }
+.breadcrumb-style ul {
+    float:right;
+}
+.breadcrumb-style li { display: inline-block; position: relative; }
+.breadcrumb-style li a { font-size:14px; color:#666; }
+.breadcrumb-style li a.active { color:#333; font-weight: 500; }
+.breadcrumb-style li+li { margin-left:25px; }
+.breadcrumb-style li+li:before { content:''; position: absolute; top:9px; left:-13px; width:1px; height:7px; transform:rotate(45deg); background: #333; }
+.breadcrumb-style li+li:after { content:''; position: absolute; bottom:9px; left:-13px; width:1px; height:7px; transform:rotate(-45deg); background: #333; }
+.breadcrumb-style:after { display: block; content:''; clear: both; }
+.breadcrumb-style.fff { background:#fff; }
 
-/* slide dots */
-.owl-carousel .owl-dots {display: flex; flex: 1; justify-content: center; align-items: center; padding-top: 30px;}
-.owl-carousel .owl-dots button {width: 8px; height: 8px; margin: 0 1.5px; background-color: #e0e0e0; border-radius: 4px;}
-.owl-carousel .owl-dots button.active {width: 12px; background-color: #93d576;}
+
+.best-section { background: #fff; border-bottom:1px #e5e5e5 solid; padding-bottom:20px; margin-bottom:30px; padding-top:24px; }
+.best-section .part-title { margin-bottom: 22px }
+
+.tag-place { display: flex; flex-wrap: wrap; border-bottom:1px #e5e5e5 solid; padding:0px 0px 15px; align-items: center; justify-content: center; }
+.tag-place .item { height:50px; margin-bottom:15px; transition-duration: .2s; padding-right:20px; padding-left:40px; border:1px #e5e5e5 solid; border-radius: 25px; display: flex; align-items: center; font-size:16px; color:#333; background:#fff url("/resources/assets/images/ico_tag.png") 20px center no-repeat;  }
+.tag-place .item+.item { margin-left:20px; }
+.tag-place .item.active,
+.tag-place .item:hover,
+.tag-place .item:focus { border-color:#7acc12; transition-duration: .2s; color:#fff; background:#7acc12 url("/resources/assets/images/ico_tag_wt.png") 20px center no-repeat; }
+
+.tag-place.sm { margin-top:20px; }
+.tag-place.sm .item { height:38px; padding-left:32px; padding-right:18px; font-size:14px; background:#fff url("/resources/assets/images/ico_tag.png") 15px center no-repeat; background-size:10px; }
+.tag-place.sm .item+.item { margin-left:8px; }
+.tag-place.sm .item.active,
+.tag-place.sm .item:hover,
+.tag-place.sm .item:focus { border-color:#7acc12; transition-duration: .2s; color:#fff; background:#7acc12 url("/resources/assets/images/ico_tag_wt.png") 15px center no-repeat; background-size:10px; }
+
+.prd-list-head  { display:flex; justify-content:space-between; align-items: center; margin:27px 0 36px;}
+.prd-list-head .count {font-size:15px; color:#333; flex:1; text-align: center; line-height: 20px; font-weight: 300; }
+.prd-list-head .count em{color:#7acc12;}
+
+.button-set { display: flex; align-items: center; justify-content: center; margin:36px 0;}
+.button-set.mgsm { margin:20px 0; }
+.button-set.b0 { margin-bottom:0; }
+.button-set.mb60 { margin-bottom:120px; }
+.basic-big-button { display: flex; align-items: center; justify-content: center; height:70px; border:1px #e5e5e5 solid; border-radius: 20px 0 20px 0; background: #fff; color:#666; font-size:18px; min-width:460px; }
