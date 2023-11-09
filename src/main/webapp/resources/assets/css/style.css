@@ -1011,6 +1011,19 @@ footer .page-footer-typo > li > span {
   transition-duration: 0.2s;
   transition-duration: 0.2s;
 }
+.faq .search-result-box {
+  padding: 25px 0;
+}
+.faq .search-result-box p {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+}
+.faq .search-result-box p span {
+  font-weight: 500;
+  color: #7acc12;
+}
 .faq .accordion.faq-list {
   margin-bottom: 30px;
 }
