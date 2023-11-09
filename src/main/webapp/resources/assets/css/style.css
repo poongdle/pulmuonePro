@@ -34,9 +34,10 @@ body {
   line-height: 1;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 62.5%;
-  background: #fafafa;
 }
-
+@media screen and (max-width: 1240px) {
+    body {min-width: 1240px; overflow-x: auto;}
+}
 ol, ul {
   list-style: none;
 }
@@ -70,7 +71,6 @@ button {
 
 .wrapper {
   width: 100%;
-  min-width: 1200px;
   min-height: 100vh;
   font-size: 1rem;
 }
@@ -130,7 +130,7 @@ header.main_header #gnb > ul > li .ico-menu {
   display: inline-block;
   width: 18px;
   height: 16px;
-  background: url("../images/ico_menu_bar.png") no-repeat;
+  background: url("/resources/assets/images/ico_menu_bar.png") no-repeat;
   background-size: 18px;
   margin-right: 14px;
 }
@@ -381,7 +381,7 @@ header.main_header #gnb > ul > li:focus > a {
   overflow: hidden;
   position: relative;
   display: inline-block;
-  background: url("../images/ico_sprite_pc.png") no-repeat -10px -10px;
+  background: url("/resources/assets/images/ico_sprite_pc.png") no-repeat -10px -10px;
   background-size: 500px;
   vertical-align: top;
   background-size: 100%;
@@ -394,37 +394,34 @@ header.main_header #gnb > ul > li:focus > a {
 .ico-srh1 {
   width: 20px;
   height: 20px;
-  background-image: url("../images/ico-srh01.png");
+  background-image: url("/resources/assets/images/ico-srh01.png");
 }
 
 .ico-myIcon {
   width: 22px;
   height: 22px;
-  background-image: url("../images/ico_member02.png");
+  background-image: url("/resources/assets/images/ico_member02.png");
 }
 
 .ico-cart1 {
   width: 23px;
   height: 22px;
-  background-image: url("../images/ico_cart01.png");
+  background-image: url("/resources/assets/images/ico_cart01.png");
 }
 
 .ico-close {
   width: 14px;
   height: 14px;
-  background-image: url("../images/ico-close01.png");
+  background-image: url("/resources/assets/images/ico-close01.png");
 }
 
 .fc-green {
   color: #7acc12 !important;
 }
 
-footer > .container {
-  padding: 0px 20px 148px;
-  box-sizing: border-box;
-}
 footer.page-footer {
   background: #f5f5f5;
+  padding: 0px 20px 148px;
   border-top: 1px solid #e5e5e5;
 }
 footer.page-footer .quick-menu {
@@ -507,7 +504,7 @@ footer .col-auto .dropdown-toggle::after {
   top: 50%;
   margin-top: -4px;
   border: 0;
-  background: url("../images/ui_select_down.png") no-repeat center;
+  background: url("/resources/assets/images/ui_select_down.png") no-repeat center;
   background-size: 12px;
   width: 12px;
   height: 8px;
