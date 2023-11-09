@@ -15,30 +15,14 @@
                     <div class="wrap">
                         <ul>
                             <li><a href="/">홈</a></li>
-                            <li><a href="/forum/faq?category=top10">고객기쁨센터</a></li>
+                            <li><a href="/forum/faq/list.do?">고객기쁨센터</a></li>
                             <li><a class="active">FAQ</a></li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="page-wrap">
-					<div class="aside">
-						<h2 class="title">고객기쁨센터</h2>
-						<ul class="lnb-style">
-							<li class="active">
-								<a href="/forum/faq/list.do">FAQ</a>
-							</li>
-							<li>
-								<a href="/forum/action/counsel/write">1:1 문의</a>
-							</li>
-							<li>
-								<a href="/forum/notice">공지사항</a>
-							</li>
-							<li>
-								<a href="/search/branch">배송가능지역 검색</a>
-							</li>
-						</ul>
-					</div>
+					<%@ include file="/WEB-INF/views/layouts/forum/aside.jsp" %>
 
 					<div class="page-content">
 						<form id="searchForm">

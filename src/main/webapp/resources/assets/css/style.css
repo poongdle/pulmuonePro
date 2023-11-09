@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -1132,4 +1133,55 @@ footer .page-footer-typo > li > span {
 }
 .faq .accordion.faq-list .card-body * {
   font-size: 14px !important;
+}
+
+/*********** Notice ***********/
+/* 게시판 갯수 */
+.list-head {
+  display: block;
+  margin-bottom: 27px;
+}
+.list-head em {
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  color: #333;
+}
+.list-head span {
+  color: #7acc12;
+}
+.list-head.center {
+  text-align: center;
+}
+
+.list-area .tbl-col {
+  border-top: 1px solid #000;
+}
+.list-area .tbl-col tbody td {
+  height: 81px;
+  vertical-align: middle;
+  border-bottom: 1px #e5e5e5 solid;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
+  letter-spacing: -1.35px;
+  text-align: left;
+  color: #333;
+  border-color: #e5e5e5;
+}
+
+.event-winner-list {
+  width: 100%;
+  margin-bottom: 27px;
+}
+.event-winner-list.tbl-col tbody td.al a {
+  font-size: 18px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+}
+.event-winner-list a span {
+  font-weight: normal;
+  margin-top: 2px;
 }/*# sourceMappingURL=style.css.map */
