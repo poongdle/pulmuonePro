@@ -43,7 +43,6 @@
 					<div class="page-content">
 						<form id="searchForm">
 							<input type="hidden" id="category" name="category" value="<%=category%>">
-							<input type="hidden" id="cTitle" name="cTitle" value="">
 							<div class="border-wrapper">
 								<h2 class="container-title">
 									FAQ
@@ -53,7 +52,7 @@
 								<div class="form-input none-dt">
 									<dl>
 										<dd>
-											<input title="검색어 입력" type="text" id="searchKeyword" name="searchKeyword" placeholder="궁금하신 내용을 입력해주세요." value="" maxlength="30">
+											<input title="검색어 입력" type="text" id="searchKeyword" name="searchKeyword" placeholder="궁금하신 내용을 입력해주세요." value="${param.searchKeyword }" autofocus maxlength="30">
 											<button class="btn-square" id="faqSearchBtn">검색</button>
 										</dd>
 									</dl>
@@ -94,13 +93,16 @@
 											</li>
 									</ul>
 								</div>
-									
-									
-									
+								
+								<c:if test="${ not empty param.searchKeyword }">
+									<div class="search-result-box">
+										<p><span>"${ param.searchKeyword }"</span> 검색결과 총 <span>${total }</span>건</p>
+									</div>
+								</c:if>
 								<div class="accordion faq-list" id="pagable-list" data-list-object="replace">
 									<c:choose>
 										
-										<c:when test="${ param.category == null }">
+										<c:when test="${ param.category == null && param.category != '' }">
 											<%@ include file="top10.jsp" %>
 										</c:when>
 										<c:otherwise>
@@ -178,6 +180,14 @@
 		$(".faq .tab-area ul li").eq(<%=category%>).find("a").addClass("active");
 		
 		let $pageItem = $(".faq .pagenavi-area .pagination .page-item a");
+		
+		$("#searchForm").submit(function(e){
+			$("#category").val("");
+			if( $("#searchKeyword").val() == "" ){
+				e.preventDefault();
+				location.href= "/forum/faq/list.do";
+			}
+		})
 		
 		$pageItem.each(function(i, el) {
 			let aparam = $(this).data("param");

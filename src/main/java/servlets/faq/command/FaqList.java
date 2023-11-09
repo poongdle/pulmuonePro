@@ -21,26 +21,35 @@ public class FaqList implements CommandHandler {
 		
 		String pcategory = request.getParameter("category");
 		String ppageNo = request.getParameter("pageNo");
+		
 		int category = 1;
 		int pageNo = 1;
 		int numberPerPage = 5; // 페이지당 글 수
 		int totalPages = 0; // 총 페이지수
+		int total = 0;
 		int numberOfPageBlock = 5;
 		
-		servlets.faq.model.PageDTO paging = null;
+		PageDTO paging = null;
 		
-		if( pcategory != null ) {
+		if( pcategory != null && !pcategory.equals("") ) {
 			category = Integer.parseInt(pcategory);
 		}
-		if( ppageNo != null ) {
+		if( ppageNo != null && !pcategory.equals("") ) {
 			pageNo = Integer.parseInt(ppageNo);
 		}
 		
-		ArrayList<FaqDTO> faqList =  listService.getFaqList(pageNo, category, numberPerPage);
-		totalPages = listService.getFaqTotalPage(numberPerPage, category);
+		// 검색
+		String searchKeyword = request.getParameter("searchKeyword");
+		if( searchKeyword == null ) searchKeyword = "";
+		
+		ArrayList<FaqDTO> faqList =  listService.getFaqList(pageNo, category, numberPerPage, searchKeyword);
+		totalPages = listService.getFaqTotalPage(numberPerPage, category, searchKeyword);
+		total = listService.getFaqTotal(category, searchKeyword);
+		
 		paging = new PageDTO(pageNo, numberPerPage, numberOfPageBlock, totalPages);
 		
 		request.setAttribute("list", faqList);
+		request.setAttribute("total", total);
 		request.setAttribute("paging", paging);
 		
 		return "/WEB-INF/views/faq/list.jsp";
