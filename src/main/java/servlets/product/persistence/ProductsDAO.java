@@ -1,4 +1,4 @@
-package product.persistence;
+package servlets.product.persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import jdbc.JdbcUtil;
-import product.domain.ProductsDTO;
+import servlets.product.domain.ProductsDTO;
 
 public class ProductsDAO implements IProducts {
 	// 1. 싱글톤

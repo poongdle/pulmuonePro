@@ -1,4 +1,4 @@
-package product.command;
+package servlets.product.command;
 
 
 import java.util.List;
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mvc.command.CommandHandler;
-import product.domain.ProductsDTO;
-import product.service.ListService;
+import servlets.product.domain.ProductsDTO;
+import servlets.product.service.ListService;
 
 public class DailyList implements CommandHandler{
 

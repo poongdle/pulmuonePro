@@ -1,4 +1,4 @@
-package product.service;
+package servlets.product.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -7,8 +7,8 @@ import java.util.List;
 import javax.naming.NamingException;
 
 import jdbc.connection.ConnectionProvider;
-import product.domain.ProductsDTO;
-import product.persistence.ProductsDAO;
+import servlets.product.domain.ProductsDTO;
+import servlets.product.persistence.ProductsDAO;
 import jdbc.JdbcUtil;
 
 public class ListService {

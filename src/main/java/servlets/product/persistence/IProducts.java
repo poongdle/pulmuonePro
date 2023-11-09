@@ -1,10 +1,10 @@
-package product.persistence;
+package servlets.product.persistence;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import product.domain.ProductsDTO;
+import servlets.product.domain.ProductsDTO;
 
 public interface IProducts {
 	

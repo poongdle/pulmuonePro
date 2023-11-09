@@ -1,4 +1,4 @@
-package product.domain;
+package servlets.product.domain;
 
 import java.util.Date;
 
