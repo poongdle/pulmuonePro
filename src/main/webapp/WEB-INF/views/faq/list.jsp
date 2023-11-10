@@ -52,7 +52,7 @@
 								<div class="form-input none-dt">
 									<dl>
 										<dd>
-											<input title="검색어 입력" type="text" id="searchKeyword" name="searchKeyword" placeholder="궁금하신 내용을 입력해주세요." value="${param.searchKeyword }" autofocus maxlength="30">
+											<input title="검색어 입력" type="text" id="searchKeyword" name="searchKeyword" placeholder="궁금하신 내용을 입력해주세요."  maxlength="30" autocomplete="off">
 											<button class="btn-square" id="faqSearchBtn">검색</button>
 										</dd>
 									</dl>
@@ -175,6 +175,11 @@
 	
 <script>
 	$(function(){
+		$("#searchKeyword").focus();
+		$("#searchKeyword").select();
+		
+ 		
+		$("#searchKeyword").val( `${param.searchKeyword }`);
 		
 		$(".faq .tab-area ul li a").removeClass("active");
 		$(".faq .tab-area ul li").eq(<%=category%>).find("a").addClass("active");
@@ -183,10 +188,6 @@
 		
 		$("#searchForm").submit(function(e){
 			$("#category").val("");
-			if( $("#searchKeyword").val() == "" ){
-				e.preventDefault();
-				location.href= "/forum/faq/list.do";
-			}
 		})
 		
 		$pageItem.each(function(i, el) {
