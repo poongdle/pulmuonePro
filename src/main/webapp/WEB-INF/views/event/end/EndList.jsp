@@ -27,7 +27,7 @@
 								<li>
 									<a href="/event/event/view/${event.event_no}" class="disabled" onclick="return false">
 										<div class="img-area">
-											<img src="/webapp/resources/assets/event_thumbnail/099a10d6-31c7-4708-b2b3-48d464038fe1.png" alt="${event.event_name}">
+										    <img src="${event.thumbnail.img_path}" alt="${event.event_name}">
 										</div>
 										<div class="text-area">
 											<b>${event.event_name}</b> <span class="text-day">

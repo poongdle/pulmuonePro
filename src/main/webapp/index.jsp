@@ -11,6 +11,7 @@
 				페이지 코딩 container class 에 full 클래스 붙히면 width 100%
 			</div>
 		</main>
+		
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
  
  	</div>

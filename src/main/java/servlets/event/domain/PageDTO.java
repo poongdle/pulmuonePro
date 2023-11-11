@@ -1,4 +1,4 @@
-package event.domain;
+package servlets.event.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

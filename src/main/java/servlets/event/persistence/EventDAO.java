@@ -1,4 +1,4 @@
-package event.persistence;
+package servlets.event.persistence;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -9,7 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import event.domain.EventDTO;
+import servlets.event.domain.EventDTO;
+import servlets.event.domain.EventThumbnailDTO;
 
 public class EventDAO implements IEvent{
 	private Connection conn;
@@ -43,7 +44,8 @@ public class EventDAO implements IEvent{
 					rs.getString("event_name"),
 					rs.getDate("event_start"),
 					rs.getDate("event_end"),
-					rs.getString("event_notice")
+					rs.getString("event_notice"),
+					null
 					);
 			return event;
 		} else {
@@ -82,9 +84,11 @@ public class EventDAO implements IEvent{
 	                + "FROM ( "
 	                + "        SELECT ROWNUM no, t.* "
 	                + "        FROM ("
-	                + "                SELECT event_no, event_name, event_start, event_end, event_notice "
-	                + "                FROM event WHERE event_end >= SYSDATE "
-	                + "                ORDER BY event_no DESC "
+	                + "                SELECT e.event_no, e.event_name, e.event_start, e.event_end, e.event_notice, "
+	                + "       				et.img_no, et.system_name, et.origin_name, et.img_size, et.img_type, et.img_path "
+					+ "                FROM event e LEFT JOIN event_thumbnail et ON e.event_no = et.event_no "
+					+ "                WHERE e.event_end >= SYSDATE "
+					+ "                ORDER BY e.event_no DESC "
 	                + "        ) t"
 	                + ") "
 	                + "WHERE no BETWEEN ? AND ?";
@@ -93,9 +97,11 @@ public class EventDAO implements IEvent{
 	                + "FROM ( "
 	                + "        SELECT ROWNUM no, t.* "
 	                + "        FROM ("
-	                + "                SELECT event_no, event_name, event_start, event_end, event_notice "
-	                + "                FROM event WHERE event_end < SYSDATE "
-	                + "                ORDER BY event_no DESC "
+	                + "                SELECT e.event_no, e.event_name, e.event_start, e.event_end, e.event_notice, "
+	                + "              		et.img_no, et.system_name, et.origin_name, et.img_size, et.img_type, et.img_path "
+	                + "				   FROM event e LEFT JOIN event_thumbnail et ON e.event_no = et.event_no "
+	                + "				   WHERE event_end < SYSDATE "
+	                + "                ORDER BY e.event_no DESC "
 	                + "        ) t"
 	                + ") "
 	                + "WHERE no BETWEEN ? AND ?";
@@ -129,6 +135,16 @@ public class EventDAO implements IEvent{
 	                eventStart = rs.getDate("event_start");
 	                eventEnd = rs.getDate("event_end");
 	                eventNotice = rs.getString("event_notice");
+	                
+	                EventThumbnailDTO thumbnail = EventThumbnailDTO.builder()
+	                        .img_no(rs.getInt("img_no"))
+	                        .event_no(rs.getInt("event_no"))
+	                        .system_name(rs.getString("system_name"))
+	                        .origin_name(rs.getString("origin_name"))
+	                        .img_size(rs.getString("img_size"))
+	                        .img_type(rs.getString("img_type"))
+	                        .img_path(rs.getString("img_path"))
+	                        .build();
 
 	                event = EventDTO.builder()
 	                        .event_no(eventNo)
@@ -136,8 +152,9 @@ public class EventDAO implements IEvent{
 	                        .event_start(eventStart)
 	                        .event_end(eventEnd)
 	                        .event_notice(eventNotice)
+	                        .thumbnail(thumbnail)
 	                        .build();
-
+	                        
 	                // 이벤트가 진행 중인지 확인
 	                if (!event.getEvent_end().toLocalDate().isBefore(LocalDate.now())) {
 	                    onEvent.add(event);  // 진행 중인 이벤트 추가

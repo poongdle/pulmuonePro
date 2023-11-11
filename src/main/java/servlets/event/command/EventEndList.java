@@ -10,11 +10,11 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import event.domain.EventDTO;
-import event.domain.PageDTO;
-import event.persistence.EventDAO;
 import jdbc.connection.ConnectionProvider;
 import mvc.command.CommandHandler;
+import servlets.event.domain.EventDTO;
+import servlets.event.domain.PageDTO;
+import servlets.event.persistence.EventDAO;
 
 public class EventEndList implements CommandHandler {
 

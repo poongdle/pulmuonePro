@@ -1,10 +1,10 @@
-package event.persistence;
+package servlets.event.persistence;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import event.domain.EventDTO;
+import servlets.event.domain.EventDTO;
 
 public interface IEvent {
 

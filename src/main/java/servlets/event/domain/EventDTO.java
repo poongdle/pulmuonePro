@@ -1,4 +1,4 @@
-package event.domain;
+package servlets.event.domain;
 
 import java.sql.Date;
 
@@ -16,5 +16,7 @@ public class EventDTO {
 	private Date event_start;
 	private Date event_end;
 	private String event_notice;
+	
+	private EventThumbnailDTO thumbnail;
 	
 }
