@@ -24,9 +24,9 @@
 		</nav>
 		<div class="member-search-area">
 			<div class="head-util-area">
-				<a href="/mypage" data-require-login="true"> <i
-					class="ico ico-myIcon"></i> <span class="hide">로그인 페이지 / 마이
-						페이지로 가기</span>
+				<a href="/member/login.jsp" data-require-login="true"> 
+					<i class="ico ico-myIcon"></i>
+					<span class="hide">로그인 페이지 / 마이 페이지로 가기</span>
 				</a>
 				 <a href="/cart/daily">
 					<div class="counter hide" data-cart-size=""></div> <i class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
