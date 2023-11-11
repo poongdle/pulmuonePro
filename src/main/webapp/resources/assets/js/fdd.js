@@ -369,6 +369,7 @@ function addLike(type, itemCode, options) {
     return false;
   })
 
+let timer;
   window.alert = function (message, callback, okBtnText) {
     $("#alertModalLabel").html("");
     $("#alertModal .modal-body").html(message);
@@ -384,6 +385,7 @@ function addLike(type, itemCode, options) {
 
       });
     }
+
       $("#alertModal").on("hide.bs.modal", function () {
         $('#alertModal .modal-footer').removeClass('disabled')
         $('#alertModal .modal-footer').prop('disabled',false);

@@ -1,4 +1,4 @@
-package curation.controller;
+package servlets.curation.controller;
 
 import java.io.FileReader;
 import java.io.IOException;

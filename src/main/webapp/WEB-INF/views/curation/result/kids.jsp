@@ -1,26 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<% String path = request.getContextPath(); %>
 <html lang="ko">
 <head>
 <title>풀무원 녹즙 | 맞춤큐레이션</title>
-<meta name="description"content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/curation_start.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/curation.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/a-guide.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/bootstrap.min.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/bootstrap-fdd.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/layout_style.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/style.css">
-<link rel="shortcut icon" href="/pulmuonePro/resources/assets/images/pul_favicon.png">
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-	
+<meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
+<meta name="viewport"     content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="/resources/assets/css/curation.css">
+<link rel="stylesheet" href="/resources/assets/css/content2.css">
+<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css">
+<!-- <link rel="stylesheet" href="/customer/curation_css/bootstrap.min.css"> -->
+<link rel="stylesheet" href=/resources/assets/css/layout_style.css">
+<link rel="stylesheet" href="/resources/assets/css/style.css">
+<link rel="shortcut icon" href="/resources/assets/images/pul_favicon.png">
+
+<script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/request.js"></script>
+<script src="/resources/assets/js/clipboard.min.js"></script>
+<script src="/resources/assets/js/design.js"></script>
+<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/resources/assets/js/owl.carousel.min.js"></script>
+<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/resources/assets/js/jquery.form.min.js"></script>
+
+
 <style type="text/css">
-img {
-    overflow-clip-margin: content-box;
-    overflow: clip;
-}
+
 </style>
 </head>
 <body>
@@ -64,17 +69,6 @@ img {
 
 
 <div id="container-wrapper" class="container-wrapper"> <!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
-
-
-
-
-
-
-
-
-
-
-
 
 <script type="text/javascript">
   var singleYn = 'N' == 'Y';
@@ -191,74 +185,28 @@ img {
                     당신에게 추천드리는
                     <b>녹즙 프로그램</b>
                 </h3>
-            
-            
-        </div>
-
-
-        
-            <div class="card-item">
+       </div>
+       
+  <div class="card-item">
                 <div class="product-wrapper">
                     
                         <p style="margin-bottom: 12px">키즈</p>
                     
-                    
+      
                     <ul class="product-list" id="order2">
+                        <c:forEach var="dto" items="${list}">
                         
                             <li data-item-index="0" data-item-link="product/daily/430" data-item-image="https://mgreenjuice.pulmuone.com/file/download/product/20210923/ecc8e6be-08ba-42a0-a9f9-a620944fe11d.jpg" data-item-title="슈퍼키즈하이" data-item-desc="2000">
-                                <input value="0072840" name="itemCode" type="hidden">
+                                <input value="${dto.products_no }" name="itemCode" type="hidden">
                                 <a class="item" data-product-preview="430">
-                                    <label>월</label>
-                                    <div class="thumb"><img src="/pulmuonePro/resources/assets/images/kidshigh.jpg" onerror="this.src='/resources/images/common/no_img.png'" alt=""></div>
+                                    <label>${dto.dayweek }</label>
+                                    <div class="thumb"><img src="/resources/assets/images/${dto.system_name }" onerror="this.src='/resources/images/common/no_img.png'" alt=""></div>
                                     <div class="text-wrapper">
-                                        <span>슈퍼키즈하이</span>
+                                        <span>${dto.products_name }</span>
                                     </div>
                                 </a>
-                            </li>
-                        
-                            <li data-item-index="1" data-item-link="product/daily/438" data-item-image="https://mgreenjuice.pulmuone.com/file/download/product/20220323/7bad52bc-f656-493c-856e-8ed41dc487dc.jpg" data-item-title="채소습관 케일" data-item-desc="1600">
-                                <input value="0072976" name="itemCode" type="hidden">
-                                <a class="item" data-product-preview="438">
-                                    <label>화</label>
-                                    <div class="thumb"><img src="/pulmuonePro/resources/assets/images/vegekale.jpg" onerror="this.src='/resources/images/common/no_img.png'" alt=""></div>
-                                    <div class="text-wrapper">
-                                        <span>채소습관 케일</span>
-                                    </div>
-                                </a>
-                            </li>
-                        
-                            <li data-item-index="2" data-item-link="product/daily/430" data-item-image="https://mgreenjuice.pulmuone.com/file/download/product/20210923/ecc8e6be-08ba-42a0-a9f9-a620944fe11d.jpg" data-item-title="슈퍼키즈하이" data-item-desc="2000">
-                                <input value="0072840" name="itemCode" type="hidden">
-                                <a class="item" data-product-preview="430">
-                                    <label>수</label>
-                                    <div class="thumb"><img src="/pulmuonePro/resources/assets/images/kidshigh.jpg" onerror="this.src='/resources/images/common/no_img.png'" alt=""></div>
-                                    <div class="text-wrapper">
-                                        <span>슈퍼키즈하이</span>
-                                    </div>
-                                </a>
-                            </li>
-                        
-                            <li data-item-index="3" data-item-link="product/daily/438" data-item-image="https://mgreenjuice.pulmuone.com/file/download/product/20220323/7bad52bc-f656-493c-856e-8ed41dc487dc.jpg" data-item-title="채소습관 케일" data-item-desc="1600">
-                                <input value="0072976" name="itemCode" type="hidden">
-                                <a class="item" data-product-preview="438">
-                                    <label>목</label>
-                                    <div class="thumb"><img src="/pulmuonePro/resources/assets/images/vegekale.jpg" onerror="this.src='/resources/images/common/no_img.png'" alt=""></div>
-                                    <div class="text-wrapper">
-                                        <span>채소습관 케일</span>
-                                    </div>
-                                </a>
-                            </li>
-                        
-                            <li data-item-index="4" data-item-link="product/daily/430" data-item-image="https://mgreenjuice.pulmuone.com/file/download/product/20210923/ecc8e6be-08ba-42a0-a9f9-a620944fe11d.jpg" data-item-title="슈퍼키즈하이" data-item-desc="2000">
-                                <input value="0072840" name="itemCode" type="hidden">
-                                <a class="item" data-product-preview="430">
-                                    <label>금</label>
-                                    <div class="thumb"><img src="/pulmuonePro/resources/assets/images/kidshigh.jpg" onerror="this.src='/resources/images/common/no_img.png'" alt=""></div>
-                                    <div class="text-wrapper">
-                                        <span>슈퍼키즈하이</span>
-                                    </div>
-                                </a>
-                            </li>
+                            </li>                            
+                      </c:forEach> 
                         
                     </ul>
                 </div>
@@ -266,16 +214,12 @@ img {
                     <button id="cartBtn" class="button-basic black">장바구니</button>
                     <button id="orderBtn" class="button-basic primary">주문하기</button>
                 </div>
+                
             </div>
-        
-
-        
-
-        <div class="result-text">
-            우리 아이를 위한 대표 어린이녹즙 슈퍼키즈하이는 유기농 케일에 사과, 오렌지 등 과일 농축액으로 맛까지 챙겼어요. 또한 면역력 증진과 함께 피부 건강에 도움을 줄 수 있다고 알려진 알로에겔이 함유되어 있답니다. 
+         <div class="result-text">
+           ${list[0].program_content }
         </div>
-        
-            <div class="button-set">
+         <div class="button-set">
                 <button class="button-basic kakao prefix" onclick="javascript:sendKakao()">
                     <i class="ico"></i>
                     카카오톡으로 공유
@@ -284,7 +228,7 @@ img {
    
     </div>
 </div>
-
+</div>
 
 <script>
   $(function(){
@@ -320,12 +264,12 @@ img {
 
   })
 </script>
-<div style="display: none" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/pulmuonePro/resources/assets/images/quick4.png" alt=""></a>
-	<a href="#"><img src="/pulmuonePro/resources/assets/images/quickTop.png" alt=""></a>
+<div style="display: none;" id="mini-side-nav">
+	<a href="/mypage/drink/drink"><img src="/resources/assets/images/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/assets/images/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/assets/images/quickTop.png" alt=""></a>
 </div>
 </main>
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>

@@ -5,24 +5,32 @@
 <head>
 <title>풀무원 녹즙 | 맞춤큐레이션</title>
 <meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/curation_start.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/curation.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/a-guide.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/bootstrap.min.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/layout_style.css">
-<link rel="stylesheet" href="/pulmuonePro/customer/curation_css/style.css">
-<link rel="shortcut icon" href="/pulmuonePro/resources/assets/images/pul_favicon.png">
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-	
-<script type="text/javascript">
-</script>
+<meta name="viewport"     content="width=device-width,initial-scale=1.0">
+<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/resources/assets/js/fdd.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/curation.css">
+<link rel="stylesheet" href="/resources/assets/css/contents2.css">
+<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
+<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
+<!-- <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
+<link rel="shortcut icon" href="/resources/assets/images/pul_favicon.png">
 
+<!-- <script src="/resources/assets/js/fdd.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
+<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="/resources/assets/js/request.js"></script> -->
+<script src="/resources/assets/js/clipboard.min.js"></script>
+<script src="/resources/assets/js/owl.carousel.min.js"></script>
+<script src="/resources/assets/js/jquery.form.min.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css">
+
+<link rel="stylesheet" href="/resources/assets/css/style.css">
 </head>
 <body>
-<div class="wrapper">
-<%@ include file="/WEB-INF/views/layouts/header.jsp" %>
-<main class="step3">
+
 <script>
 	function getBmi (w,h){
 		return (w / ((h * h) / 10000)).toFixed(2);
@@ -125,7 +133,7 @@
 				const body = Object.entries(data).filter(v => !!parseInt(v[0])).map(
 						v => ({idx: v[0], answer: v[1]}));
 				newPost({
-					url: '/pulmuonePro/customer/product/result/',
+					url: '/customer/product/result/',
 					data: {singleYn, answerList: body}
 				}, function (data) {
 					var bmi = data.RESULT_MSG.bmi || 0;
@@ -156,7 +164,9 @@
         })
 	})
 </script>
-
+<div class="wrapper">
+<%@ include file="/WEB-INF/views/layouts/header.jsp" %>
+<main class="step3">
 <div class="breadcrumb-style">
 	<div class="container">
 		<ul>
@@ -370,15 +380,17 @@
 </style>
 
 <script>
-
-	if($("input[id=package]").is("checked")){
-	$("#nextPage").click(function() {
-	location.href="/pulmuonePro/customer/product/result/programs.jsp"
-	} else {
-		location.href="/pulmuonePro/customer/product/result/products.jsp"
-	}
-})
-
+//   $("#nextPage").on("click", function() {
+//   	if($("input:checkbox:checked").is(":checked") == true){
+//   		var data = $(this).val();
+//   		if (data.length > 0) {
+//   			$(this).attr("checked", true);
+//   		}
+//   		$("#alertModal").hide();
+//   		location.href= "/customer/product/step2.do"
+//   	}	
+//   })
+  
   $(function(){
 
     axios.get('/user_summary/default').then(function (response) {
@@ -413,11 +425,11 @@
   })
 </script>
 <div style="display: none" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/pulmuonePro/resources/assets/images/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/pulmuonePro/resources/assets/images/quick4.png" alt=""></a>
-	<a href="#"><img src="/pulmuonePro/resources/assets/images/quickTop.png" alt=""></a>
+	<a href="/mypage/drink/drink"><img src="/resources/assets/images/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/assets/images/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/assets/images/quickTop.png" alt=""></a>
 </div>
 </main>
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>

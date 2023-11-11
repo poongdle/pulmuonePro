@@ -1,18 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="ko">
 <head>
 <title>풀무원 녹즙 | 맞춤큐레이션</title>
 <meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
-<link rel="stylesheet" href="/customer/curation_css/curation.css">
-<link rel="stylesheet" href="/customer/curation_css/a-guide.css">
-<link rel="stylesheet" href="/customer/curation_css/bootstrap.min.css">
-<link rel="stylesheet" href="/customer/curation_css/layout_style.css">
-<link rel="stylesheet" href="/customer/curation_css/style.css">
+<meta name="viewport"     content="width=device-width,initial-scale=1.0">
+<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/resources/assets/js/fdd.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/curation.css">
+<link rel="stylesheet" href="/resources/assets/css/contents2.css">
+<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
+<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
+<!-- <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
 <link rel="shortcut icon" href="/resources/assets/images/pul_favicon.png">
 
-<script src="/resources/assets/js/fdd.js"></script>
-<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
+<!-- <script src="/resources/assets/js/fdd.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
+<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="/resources/assets/js/request.js"></script> -->
+<script src="/resources/assets/js/clipboard.min.js"></script>
+<script src="/resources/assets/js/owl.carousel.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css">
+
+<link rel="stylesheet" href="/resources/assets/css/style.css">
 <style type="text/css">
 @media (min-width: 768px){
 .container, .container-md, .container-sm {
@@ -68,16 +82,15 @@
 							<b>키즈제품</b>을 원하시나요?
 						</h3>
 					</div>
-					<a href="/customer/product/result/kids.jsp?singleYn=N" class="button-basic border" style="font-size: 16px">키즈제품 바로가기</a>
+					<a href="/customer/product/result/kids.do?singleYn=N" class="button-basic border" style="font-size: 16px">키즈제품 바로가기</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+</form>
 </div>
 
-
-</form>
 <!--E:cbody-->
 
 <script>

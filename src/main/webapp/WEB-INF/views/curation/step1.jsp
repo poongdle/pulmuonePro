@@ -6,25 +6,110 @@
 <meta charset="UTF-8">
 <title>풀무원 녹즙 | 맞춤큐레이션</title>
 <meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
-<link rel="stylesheet" href="/customer/curation_css/curation.css">
-<link rel="stylesheet" href="/customer/curation_css/bootstrap-fdd.css">
-<link rel="stylesheet" href="/customer/curation_css/a-guide.css">
-<link rel="stylesheet" href="/customer/curation_css/bootstrap.min.css">
-<link rel="stylesheet" href="/customer/curation_css/layout_style.css">
-<link rel="stylesheet" href="/customer/curation_css/style.css">
+<meta name="viewport"     content="width=device-width,initial-scale=1.0">
+<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/resources/assets/js/fdd.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/curation.css">
+<link rel="stylesheet" href="/resources/assets/css/contents2.css">
+<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
+<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
+<!-- <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
 <link rel="shortcut icon" href="/resources/assets/images/pul_favicon.png">
 
-<script src="/resources/assets/js/fdd.js"></script>
-<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
+<!-- <script src="/resources/assets/js/fdd.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
+<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="/resources/assets/js/request.js"></script> -->
+<script src="/resources/assets/js/clipboard.min.js"></script>
+<script src="/resources/assets/js/owl.carousel.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
-<style type="text/css">
-</style>
+<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css">
+
+<link rel="stylesheet" href="/resources/assets/css/style.css">
 </head>
+
 <body >
 <div class="wrapper">
 <%@ include file="/WEB-INF/views/layouts/header.jsp" %>
 <main class="step1">
 <div id="container-wrapper" class="container-wrapper"> <!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
+
+<script>
+
+// BMI 계산
+  function getBmi(w, h) {
+    return (w / ((h * h) / 10000)).toFixed(2);
+  }
+
+  let historyItem = {}
+  $(function () {
+      if(sessionStorage.getItem('req1')){
+          const prevReq1 = JSON.parse(sessionStorage.getItem('req1'))
+          console.log('req1', prevReq1)
+          const prevReqKey = Object.keys(prevReq1)
+          $('input[name=tallness]').val(prevReq1.tallness)
+          $('input[name=weight]').val(prevReq1.weight)
+          $('.filled-radio-group').children().each((i,v)=>{
+              console.log(prevReqKey)
+              prevReqKey.forEach((value, index) => {
+                  if(value===$(v).children().prop('name')){
+                      $(v).children().prop('checked',true)
+                  }
+              })
+              console.log($(v).children().prop('name'))
+          })
+
+      }
+
+    $(document).on('keyup', "input[name=tallness],[name=weight]", function () { // 키 소수점 1자리까지 입력 제한
+      var value = $(this).val();
+
+      var nExp = /[^0-9\.]/g;
+      if (nExp.test(value)) {
+        console.log("set value", value, value.replace(/[^0-9\.]/g, ""))
+        $(this).val(value.replace(nExp, ""));
+      }
+      var regExp = /^\d{0,10}(\.\d{0,1})?$/;
+      if (!regExp.test(this.value)) {
+        $(this).val(value.substring(0, value.length - 1));
+      }
+    });
+
+    $('.bmi-chk').change(function () {
+      if ($(this).prop('checked')) {
+        $(".bmi-wrapper").addClass('active')
+      } else {
+        $(".bmi-wrapper").children().each((i, v) => $(v).val(undefined))
+        $(".bmi-wrapper").removeClass('active')
+      }
+    })
+
+    $('form.curation').submit(function (e) {
+      e.preventDefault();
+      const requestBody = $(this).serializeObject();
+      const goal = Object.keys(requestBody).find(e => e > 0) // 건강목표 유효성 체크
+      if (!goal) {
+        alert('1개 이상의 목표를 선택해 주세요')
+        return;
+      }
+      // 체중 키 입력 필수 아니라고 함
+      if (requestBody[6]) {
+        if (!requestBody.tallness) {
+          alert('체중 및 키를 입력해 주세요');
+        } else if (!requestBody.weight) {
+          alert('체중 및 키를 입력해 주세요');
+        } else {
+          requestBody[6] = getBmi(requestBody.weight, requestBody.tallness);
+        }
+      }
+      sessionStorage.setItem('req1', JSON.stringify(requestBody));
+      location.href = '/customer/product/step2.do';
+    })
+  })
+</script>
 
 <div class="breadcrumb-style">
     <div class="container">
@@ -117,7 +202,10 @@
             <span style="margin-top:12px; display: block; text-align: center;" class="description">키와 몸무게 정보는 큐레이션에만 활용되며 별도 저장되지 않습니다.</span>
         </div>
         <div class="button-set">
-             <button class="submit button-basic primary wide" id="nextPage">다음으로</button>
+             <button class="submit button-basic primary wide" id="nextPage">
+<!--              <a href="/customer/product/step2.do"></a> -->
+             다음으로
+             </button>
        </div>
 
 <div class="modal fade show" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display:none; ">
@@ -133,11 +221,57 @@
 		</div>
 	</div>
 </div>
-
+<div class="modal-backdrop fade show"></div>
     </div>
 </form>
 
 <script>
+
+// 모달창 닫기
+// $(".modal-footer").click(function() {
+// 	$("#alertModal").fadeOut();
+// 	return;
+// })
+
+let timer;
+  window.alert = function (message, callback, okBtnText) {
+    $("#alertModalLabel").html("");
+    $("#alertModal .modal-body").html(message);
+    $("#alertModal").modal('show');
+    if (okBtnText) {
+      $("#alertModal").find('.modal-footer').text(okBtnText);
+    }
+    if (callback && typeof callback == 'function') {
+      $("#alertModal .modal-footer").on("click", function () {
+        $("#alertModal").find('.modal-footer').text('확인');
+        callback();
+        $("#alertModal .modal-footer").off("click")
+
+      });
+    }
+      $("#alertModal").on("hide.bs.modal", function () {
+        $('#alertModal .modal-footer').removeClass('disabled')
+        $('#alertModal .modal-footer').prop('disabled',false);
+        $("#alertModal .modal-footer").off("click")
+        $("#alertModal").find('.modal-footer').text('확인');
+        clearTimeout(timer)
+      });
+  }
+
+//체크박스 선택 없으면 모달창
+  $("#nextPage").on("click", function() {
+  	if($("input:checkbox:checked").is(":checked") == true){
+  		var data = $(this).val();
+  		if (data.length > 0) {
+  			$(this).attr("checked", true);
+  		}
+  		$("#alertModal").hide();
+  		location.href= "/customer/product/step2.do"
+  	}	
+  })
+  
+
+
   $(function(){
 
     axios.get('/user_summary/default').then(function (response) {
@@ -180,81 +314,19 @@
 </div>
 </div>
 
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script>
+<script type="text/javascript">
+  if (!wcs_add) var wcs_add={};
+  wcs_add["wa"] = "s_3b444dd717b5";
+  if (!_nasa) var _nasa={};
+  if(window.wcs){
+    wcs.inflow();
+    wcs_do(_nasa);
+  }
+</script>
 <%-- <form method="post" action="<%= path%>/customer/product/step1.jsp"></form> --%>
 
-<script>
 
-// BMI 계산
-  function getBmi(w, h) {
-    return (w / ((h * h) / 10000)).toFixed(2);
-  }
-
-  let historyItem = {}
-  $(function () {
-      if(sessionStorage.getItem('req1')){
-          const prevReq1 = JSON.parse(sessionStorage.getItem('req1'))
-          console.log('req1', prevReq1)
-          const prevReqKey = Object.keys(prevReq1)
-          $('input[name=tallness]').val(prevReq1.tallness)
-          $('input[name=weight]').val(prevReq1.weight)
-          $('.filled-radio-group').children().each((i,v)=>{
-              console.log(prevReqKey)
-              prevReqKey.forEach((value, index) => {
-                  if(value===$(v).children().prop('name')){
-                      $(v).children().prop('checked',true)
-                  }
-              })
-              console.log($(v).children().prop('name'))
-          })
-
-      }
-
-    $(document).on('keyup', "input[name=tallness],[name=weight]", function () { // 키 소수점 1자리까지 입력 제한
-      var value = $(this).val();
-
-      var nExp = /[^0-9\.]/g;
-      if (nExp.test(value)) {
-        console.log("set value", value, value.replace(/[^0-9\.]/g, ""))
-        $(this).val(value.replace(nExp, ""));
-      }
-      var regExp = /^\d{0,10}(\.\d{0,1})?$/;
-      if (!regExp.test(this.value)) {
-        $(this).val(value.substring(0, value.length - 1));
-      }
-    });
-
-    $('.bmi-chk').change(function () {
-      if ($(this).prop('checked')) {
-        $(".bmi-wrapper").addClass('active')
-      } else {
-        $(".bmi-wrapper").children().each((i, v) => $(v).val(undefined))
-        $(".bmi-wrapper").removeClass('active')
-      }
-    })
-
-    $('form.curation').submit(function (e) {
-      e.preventDefault();
-      const requestBody = $(this).serializeObject();
-      const goal = Object.keys(requestBody).find(e => e > 0) // 건강목표 유효성 체크
-      if (!goal) {
-        alert('1개 이상의 목표를 선택해 주세요')
-        return;
-      }
-      // 체중 키 입력 필수 아니라고 함
-      if (requestBody[6]) {
-        if (!requestBody.tallness) {
-          alert('체중 및 키를 입력해 주세요');
-        } else if (!requestBody.weight) {
-          alert('체중 및 키를 입력해 주세요');
-        } else {
-          requestBody[6] = getBmi(requestBody.weight, requestBody.tallness);
-        }
-      }
-      sessionStorage.setItem('req1', JSON.stringify(requestBody));
-      location.href = '/WEB-INF/viwes/curation/product/step2';
-    })
-  })
-</script>
 </main>
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
 </div>
