@@ -1,15 +1,17 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="domain.order.box.ProductsDTO"%>
+<%@page import="domain.order.box.BoxOrderProductDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
+<style>
+	
+</style>
 <body>
 	<div class="wrapper">
-<%  %>
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 		<main class="page order">
 			<div class="container">
@@ -18,7 +20,7 @@
 					<%@ include file="/WEB-INF/views/layouts/orderForm.jsp"%>
 						<div class="checkout-title-area">
 						<%
-							String [] prod = request.getParameterValues("produtsNo");
+							String [] prod = request.getParameterValues("productsNo");
 							int prdCnt = prod.length;
 						%>
 							<strong class="list-amount">주문상품 <em class="prd-count" style="padding: 0 16px; margin-left: 2px"><%= prdCnt %></em></strong>
@@ -38,12 +40,12 @@
 												</a>
 												<div class="prd-info-select-amount">
 													<a href="/product/box/728?eventIdx=" class="prd-info">
-														<em>${ dto.productsType }</em> <b class="prd-title"></b>
+														<em>${ dto.productsType }</em> <b class="prd-title">${ dto.productsName }</b>
 														<span class="volume">(${ dto.productsSize })</span>
 													</a>
-													<input type="hidden" data-count="0" value="${ param.produtsCnt }">
+													<input type="hidden" data-count="0" value="${ param.productsCnt }">
 													<div class="prd-select-amount">
-														<em>${ param.produtsCnt }</em>개
+														<em>${ param.productsCnt }</em>개
 													</div>
 												</div>
 											</div>
@@ -52,14 +54,13 @@
 												<div></div>
 												<div class="price-info">
 													<em class="before-price">
-														<em data-print-price="${ dto.price * param.produtsCnt }">${ dto.price * param.produtsCnt }</em> <span>원</span>
+														<em data-print-price="${ dto.price * param.productsCnt }">${ dto.price * param.productsCnt }</em> <span>원</span>
 													</em>
 													<b class="now-price">
-														<b data-print-price="${ dto.eventPrice * param.produtsCnt }">${ dto.eventPrice * param.produtsCnt }</b> <span>원</span>
+														<b data-print-price="${ dto.eventPrice * param.productsCnt }">${ dto.eventPrice * param.productsCnt }</b> <span>원</span>
 													</b>
 												</div>
 											</div>
-										
 										</div>
 									</li>
 								</c:forEach>
@@ -67,110 +68,13 @@
 							</ul>
 						</div>
 
-						<div class="checkout-input-area">
-							<div class="checkout-input-title-area">
-								<h3 class="checkout-input-title">배송정보</h3>
-								<button type="button">
-									<i class="ico ico-down"></i> <span class="hide">현재화면 닫기</span>
-								</button>
-							</div>
-											
-							<div class="checkout-input-box">
-								<div class="prd-cart-all-select">
-									<div class="checkbox chk-type3">
-										<input type="checkbox" name="chk-same" id="chk-same" checked="">
-										<label for="chk-same">고객정보와 동일</label>
-									</div>
-									<button id="addressBtn" type="button" class="btn-round2">주소록</button>
-								</div>
-
-								<div class="form-input">
-									<dl>
-										<dt>
-											<label for="receiver">받으시는분</label>
-										</dt>
-										<dd>
-											<input type="text" data-receiver="" id="receiver" name="orderName" title="이름을 입력하세요"
-												placeholder="이름을 입력하세요" value="이지현" data-init="이지현" data-require="" data-name="받는사람" maxlength="10">
-										</dd>
-									</dl>
-								</div>
-												
-								<div class="form-input">
-									<dl>
-										<dt>
-											<label for="phone">휴대폰번호</label>
-										</dt>
-										<dd>
-											<input type="hidden" id="phone" name="orderPhone" maxlength="13" title="휴대폰번호를 입력하세요" data-call-text=""
-												placeholder="휴대폰번호를 입력하세요" value="01055234090" data-init="01055234090" data-require="" data-name="휴대폰번호">
-											<input type="tel" name="_x_orderPhone" maxlength="13" title="휴대폰번호를 입력하세요"
-												placeholder="휴대폰번호를 입력하세요" value="01055234090" data-init="01055234090" data-require="" data-name="휴대폰번호">
-										</dd>
-									</dl>
-								</div>
-												
-								<div class="form-input">
-									<dl>
-										<dt>
-											<label for="zipcode">우편번호</label>
-										</dt>
-										<dd>
-											<input id="zipcode" readonly="" name="zipCode" title="주소찾기 버튼을 눌러주세요" placeholder="주소찾기 버튼을 눌러주세요"
-												value="" data-init="" data-require="" style="background: #fff" data-name="우편번호">
-											<input type="hidden" name="orderStreetAddress" id="orderStreetAddress" value="">
-											<button type="button" id="searchPostcode" class="btn-square btn-black">주소찾기</button>
-										</dd>
-									</dl>
-								</div>
-												
-								<div class="form-input">
-									<dl>
-										<dt>
-											<label for="addrRoad">주소</label>
-										</dt>
-										<dd>
-											<input type="text" id="addrRoad" name="addrRoad" title="주소 입력" placeholder="" readonly="" value=""
-												data-init="" data-require="" style="background: #fff" data-name="주소">
-										</dd>
-									</dl>
-								</div>
-												
-								<div class="form-input">
-									<dl>
-										<dt>
-											<label for="addrDetail">상세주소</label>
-										</dt>
-										<dd>
-											<input type="text" id="addrDetail" name="addrDetail" title="상세주소 입력" placeholder="상세주소 입력" value=""
-												data-init="" data-require="" data-name="상세주소" maxlength="100">
-										</dd>
-									</dl>
-								</div>
-												
-								<div class="form-input">
-									<dl>
-										<dt>
-											<label for="memo">배송메모</label>
-										</dt>
-										<dd>
-											<input id="memo" name="orderMemo" title="배송메모를 입력하세요" placeholder="배송메모를 입력하세요" value="" data-init="">
-										</dd>
-									</dl>
-								</div>
-
-								<div class="checkbox chk-type3" style="margin-top: 28px">
-									<input type="checkbox" id="saveAddrChk" name="saveAddrChk" value="Y">
-									<label for="saveAddrChk">주소록에 저장</label>
-								</div>
-							</div>
-						</div>
+						<%@ include file="/WEB-INF/views/layouts/addrInputForm.jsp"%>
 
 						<div class="checkout-input-area" style="padding-bottom: 32px" id="coupon-pane">
 							<div class="checkout-input-title-area" style="margin-bottom: 17px">
 								<h3 class="checkout-input-title">쿠폰적용</h3>
 							</div>
-											
+							
 							<div class="checkout-input-box">
 								<div class="form-input">
 									<dl>
@@ -178,14 +82,30 @@
 											<label for="input01">쿠폰선택</label>
 										</dt>
 										<dd>
-											<select id="coupon-selector" class="form-select form-select-lg" disabled="">
-												<option selected="" value="">사용 가능한 쿠폰이 없습니다.</option>
+											<select id="coupon-selector" class="form-select form-select-lg">
+												<c:choose>
+													<c:when test="${ empty couponList }">
+														<option value="" selected>사용 가능한 쿠폰이 없습니다.</option>
+														<script>
+															$("#coupon-selector").prop("disabled", true);
+														</script>
+													</c:when>
+													<c:otherwise>
+														<option value="" selected>= 쿠폰 선택 =</option>
+														<c:forEach items="${ couponList }" var="coupon">
+															<option value="">${ coupon.couponName }&nbsp&nbsp|&nbsp&nbsp${ coupon.discount }원</option>
+														</c:forEach>
+													</c:otherwise>
+												</c:choose>
 											</select>
 										</dd>
 									</dl>
 								</div>
+								<!-- 
+								일단 주석... - 지현
 								<ul class="file-list-area" id="apply-coupon-list">
 								</ul>
+								-->
 							</div>
 						</div>
 
@@ -199,7 +119,7 @@
 									<li class="nav-item" role="presentation">
 										<a href="#" class="nav-link active" id="checkout-type-tab1" data-target="#checkout-type1" data-value="Card"
 											data-toggle="tab" role="tab" aria-controls="checkout-type1" aria-selected="true">
-											<img src="/resources/images/common/checkout-item01.png" alt="">
+											<img src="/resources/assets/images/ui/ico-checkout-item01-on.png" alt="" width="90%" height="90%">
 											<span>카드결제</span>
 										</a>
 									</li>
@@ -287,9 +207,61 @@
 					</div>
 				</div>
 			</div>
-		</form>
+		</form></div>
+
+	<div class="modal show" id="addressModal" tabindex="-1" aria-labelledby="addressModal" style="display: block; padding-left: 19px;" aria-modal="true" role="dialog">
+		<div class="modal-dialog modal-dialog-centered" style="max-width: 500px; margin: 1.75rem auto;">
+			<div class="modal-content ">
+				<div class="modal-header">
+					<h5 class="modal-title" id="emailPolicyLabel">주소록</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body" style="max-height: 80vh; overflow-y: scroll">
+					<div class="drinking-list address" style="margin: 0">
+						<div class="item" style="margin: 0; border-radius: 0">
+							<div class="head">
+								<div class="nickname-format xl">
+									<h5>이지현</h5>
+								</div>
+								<ul class="info" style="margin-top: 15px; padding-left: 1px;">
+									<li>
+										<p>이지현</p>
+									</li>
+									<li>
+										<p>010-5523-4090</p>
+									</li>
+									<li>
+										<p>(08843) 서울 관악구 문성로32가길 17 201호</p>
+									</li>
+								</ul>
+							</div>
+							<div class="tail">
+								<button type="button" class="adapt-address rounded-button">선택</button>
+							</div>
+						</div>
+					</div>
+					<div style="padding: 20px; display: none;">
+						<button class="btn-default btn-white" style="width: 100%">더보기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(function() {
+			$("#addressModal").dialog({
+				autoOpen : false,
+				modal : true
+			});
+
+			$("#addressBtn").on("click", function() {
+				$("#addressModal").dialog("open");
+			});
+		});
+	</script>
 </div>
-</div>
+
 </main>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
 </div>

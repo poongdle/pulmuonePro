@@ -6,13 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import domain.order.box.BoxOrderDTO;
-import domain.order.box.BoxOrderProductsDTO;
+import domain.order.box.BoxOrderProductDTO;
 import domain.order.box.BoxPayDTO;
 import domain.order.box.BoxShipDTO;
-import domain.order.box.ProductsDTO;
+import domain.order.box.OrderCouponDTO;
 import jdbc.JdbcUtil;
 
 public class BoxOrderDAO implements BoxOrderImpl {
@@ -25,7 +24,7 @@ public class BoxOrderDAO implements BoxOrderImpl {
 	}
 	
 	@Override
-	public ArrayList<ProductsDTO> selectProducts(Connection conn, String [] productsNo) throws SQLException {
+	public ArrayList<BoxOrderProductDTO> selectProducts(Connection conn, String [] productsNo) throws SQLException {
 		String sql = " SELECT p.products_no, category_no, products_name, products_type, products_size, price, event_price, img_path, origin_name "
 				+ " FROM products p JOIN products_img i ON p.products_no = i.products_no "
 				+ " WHERE p.products_no IN( ";
@@ -34,20 +33,18 @@ public class BoxOrderDAO implements BoxOrderImpl {
 				} // for
 				sql += " -1 ) ";
 				
-		ArrayList<ProductsDTO> list = null;
-		ProductsDTO dto = null;
+		BoxOrderProductDTO dto = null;
+		ArrayList<BoxOrderProductDTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
 			if (rs.next()) {
 				list = new ArrayList<>();
-				
 				do {
-					dto = new ProductsDTO();
+					dto = new BoxOrderProductDTO();
 					dto.setProductsNo(rs.getInt("products_no"));
 					dto.setCategoryNo(rs.getInt("category_no"));
 					dto.setProductsName(rs.getString("products_name"));
@@ -72,13 +69,80 @@ public class BoxOrderDAO implements BoxOrderImpl {
 	} // selectProducts
 
 	@Override
+	public int getProductsPrice(Connection conn, String[] productsNo) {
+		String sql = " SELECT SUM(price) "
+				+ " FROM products "
+				+ " WHERE products_no IN ( ";
+		for (int i = 0; i < productsNo.length; i++) {
+			sql += productsNo[i] + " , ";
+		}
+		sql += " -1) ";
+		
+		int price = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					price += rs.getInt("price");
+				} while (rs.next());
+			} // if
+		} catch (Exception e) {
+			System.out.println("BoxOrderDAO getProductsPrice() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);
+		} // try
+		
+		return price;
+	}
+
+	@Override
+	public ArrayList<OrderCouponDTO> selectCoupon(Connection conn, int memberNo, int priductsPrice) throws SQLException {
+		String sql = " SELECT coupon_name, discount "
+				+ " FROM have_coupon h JOIN coupon c ON h.coupon_no = c.coupon_no "
+				+ " WHERE member_no = " + memberNo + " AND delivery_type = 1 AND used = 0 AND c.discount <= " + priductsPrice;
+		
+		OrderCouponDTO dto = null;
+		ArrayList<OrderCouponDTO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					dto = new OrderCouponDTO();
+					dto.setCouponName(rs.getString("coupon_name"));
+					dto.setDiscount(rs.getInt("discount"));
+					list.add(dto);
+				} while (rs.next());
+			} // if
+		} catch (Exception e) {
+			System.out.println("BoxOrderDAO selectCoupon() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);
+		} // try
+		
+		return list;
+	} // selectCoupon
+
+	@Override
 	public int insertBoxOrder(Connection conn, BoxOrderDTO dto) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int insertBoxOrderProducts(Connection conn, BoxOrderProductsDTO dto) throws SQLException {
+	public int insertBoxOrderedProducts(Connection conn, BoxOrderProductDTO dto) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -90,8 +154,7 @@ public class BoxOrderDAO implements BoxOrderImpl {
 	}
 
 	@Override
-	public List<BoxOrderDTO> selectList(Connection conn, int memberNo, Date startSearchDate, Date endSearchDate,
-			int pageNo) throws SQLException {
+	public ArrayList<BoxOrderDTO> selectList(Connection conn, int memberNo, Date startSearchDate, Date endSearchDate, int pageNo) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

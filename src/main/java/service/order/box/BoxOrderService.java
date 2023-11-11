@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.order.box.ProductsDTO;
+import domain.order.box.OrderCouponDTO;
+import domain.order.box.BoxOrderProductDTO;
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import persistence.order.BoxOrderDAO;
@@ -24,11 +25,11 @@ public class BoxOrderService {
 	
 	private Connection conn = null;
 	
-	public ArrayList<ProductsDTO> selectProducts(String [] productsNo) {
+	public ArrayList<BoxOrderProductDTO> selectProducts(String [] productsNo) {
 		try {
 			conn = ConnectionProvider.getConnection();
 			BoxOrderDAO dao = BoxOrderDAO.getInstance();
-			ArrayList<ProductsDTO> list = null;
+			ArrayList<BoxOrderProductDTO> list = null;
 			list = dao.selectProducts(conn, productsNo);
 			return list;
 		} catch (Exception e) {
@@ -39,5 +40,24 @@ public class BoxOrderService {
 			JdbcUtil.close(conn);
 		} // try
 	} // selectProducts()
+	
+	public ArrayList<OrderCouponDTO> selectCoupon(int memberNo, String [] productsNo) {
+		try {
+			conn = ConnectionProvider.getConnection();
+			BoxOrderDAO dao = BoxOrderDAO.getInstance();
+			// 상품 가격 구하기
+			int priductsPrice = dao.getProductsPrice(conn, productsNo);
+			// 사용 가능한 쿠폰 조회 하기
+			ArrayList<OrderCouponDTO> list = null;
+			list = dao.selectCoupon(conn, memberNo, priductsPrice);
+			return list;
+		} catch (Exception e) {
+			System.out.println("BoxOrderService.selectCoupon() 에러");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(conn);
+		} // try
+	} // selectCoupon()
 	
 }
