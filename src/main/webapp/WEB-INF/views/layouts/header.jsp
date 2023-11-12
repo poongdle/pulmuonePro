@@ -5,7 +5,7 @@
 		<div class="header-logo">
 			<h1>
 				<a href="/">
-					<img src="/resources/assets/images/main_logo.png" alt="풀무원녹즙">				
+					<img src="/resources/assets/images/common/main_logo.png" alt="풀무원녹즙">				
 				</a>
 			</h1>
 		</div>
