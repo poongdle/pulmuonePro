@@ -9,14 +9,14 @@ import mvc.command.CommandHandler;
 import servlets.curation.domain.CurationDTO;
 import servlets.curation.domain.KidsDTO;
 import servlets.curation.service.KidService;
-import servlets.curation.service.ProdustService;
+import servlets.curation.service.ProductService;
 
 public class Product implements CommandHandler{
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 				
 			System.out.println("> Products select start..");
-			ProdustService pd = ProdustService.getInstance();
+			ProductService pd = ProductService.getInstance();
 			List<CurationDTO> list = pd.select();
 			
 			request.setAttribute("list", list);

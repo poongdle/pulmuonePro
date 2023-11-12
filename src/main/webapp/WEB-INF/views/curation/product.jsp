@@ -27,12 +27,6 @@
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css">
 
 <link rel="stylesheet" href="/resources/assets/css/style.css">
-<style type="text/css">
-@media (min-width: 768px){
-.container, .container-md, .container-sm {
-    max-width: 720px;
-}
-</style>
 </head>
 <body>
 <div class="wrapper">
@@ -40,7 +34,7 @@
 <main class="step1">
 <div id="container-wrapper" class="container-wrapper"> <!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
 
-<form id="customerForm" action="/customer/product/result" method="post">
+<form id="customerForm" action="/customer/product/result/programs.do" method="post">
 <input type="hidden" name="customerType" />
 <input type="hidden" name="value" />
 <div class="visual-area curation">

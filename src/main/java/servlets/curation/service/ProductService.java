@@ -13,14 +13,14 @@ import servlets.curation.domain.KidsDTO;
 import servlets.curation.persistence.CurationDAO;
 import servlets.curation.persistence.DAOImpl;
 
-public class ProdustService {
+public class ProductService {
 	
 	 // 1. 싱글톤
-	   private ProdustService() {}      
-	   private static ProdustService instance = null;  
-	   public static ProdustService getInstance() {   
+	   private ProductService() {}      
+	   private static ProductService instance = null;  
+	   public static ProductService getInstance() {   
 	      if(   instance == null  ) {
-	         instance = new ProdustService();
+	         instance = new ProductService();
 	      }
 	      return instance;
 	   }
