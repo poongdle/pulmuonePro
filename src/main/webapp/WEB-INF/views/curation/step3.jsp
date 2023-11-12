@@ -374,7 +374,6 @@
 	</div>
 	<div class="button-set w220">
 		<button class="prev-btn button-basic border" type="button" id="prevPage">이전으로</button>
-<!-- 		<a href="javascript:history.back()" type="button" class="button-basic border">이전으로</a> -->
 		<button class="next-btn button-basic primary" type="button" id="nextPage">
 <!-- 		<a href="/customer/product/result/products.do?singleYn=Y&bmi=?&questions=?" class="button-basic border" style="font-size: 16px">키즈제품 바로가기</a> -->
 		다음으로
