@@ -18,10 +18,10 @@
 <link rel="stylesheet" href="/resources/assets/css/layout_style.css">
 <link rel="shortcut icon" href="/resources/assets/images/pul_favicon.png">
 
-<!-- <script src="/resources/assets/js/fdd.js"></script> -->
+<script src="/resources/assets/js/fdd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
-<!-- <script src="/resources/assets/js/request.js"></script> -->
+<script src="/resources/assets/js/request.js"></script>
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/owl.carousel.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
@@ -168,13 +168,16 @@
 <%@ include file="/WEB-INF/views/layouts/header.jsp" %>
 <main class="step3">
 <div class="breadcrumb-style">
-	<div class="container">
-		<ul>
-			<li><a>홈</a></li>
-			<li><a class="active">맞춤큐레이션</a></li>
-		</ul>
-	</div>
+    <div class="container">
+		<div class="container">
+			<ul>
+				<li><a>홈</a></li>
+				<li><a class="active">맞춤큐레이션</a></li>
+			</ul>
+		</div>
+    </div>
 </div>
+<form class="curation">
 <div class="container curation">
 	<div class="curation-progress-bar">
 		<ul>
@@ -363,13 +366,13 @@
 		</ul>
 	</div>
 	<div class="button-set w220">
-		<button class="prev-btn button-basic border" type="button" id="prevPage">이전으로</button>
-<!-- 		<a href="javascript:history.back()" type="button" class="button-basic border">이전으로</a> -->
+<!-- 		<button class="prev-btn button-basic border" type="button" id="prevPage">이전으로</button> -->
+		<a href="javascript:history.back()" type="button" class="button-basic border">이전으로</a>
 		<button class="next-btn button-basic primary" type="button" id="nextPage">다음으로</button>
 	</div>
-</div>
+</form>
+	
 
-</div>
 <style>
 	.question-section > div {
 		display: none;
@@ -390,6 +393,33 @@
 //   		location.href= "/customer/product/step2.do"
 //   	}	
 //   })
+  
+  
+let timer;
+  window.alert = function (message, callback, okBtnText) {
+    $("#alertModalLabel").html("");
+    $("#alertModal .modal-body").html(message);
+    $("#alertModal").modal('show');
+    if (okBtnText) {
+      $("#alertModal").find('.modal-footer').text(okBtnText);
+    }
+    if (callback && typeof callback == 'function') {
+      $("#alertModal .modal-footer").on("click", function () {
+        $("#alertModal").find('.modal-footer').text('확인');
+        callback();
+        $("#alertModal .modal-footer").off("click")
+
+      });
+    }
+      $("#alertModal").on("hide.bs.modal", function () {
+        $('#alertModal .modal-footer').removeClass('disabled')
+        $('#alertModal .modal-footer').prop('disabled',false);
+        $("#alertModal .modal-footer").off("click")
+        $("#alertModal").find('.modal-footer').text('확인');
+        clearTimeout(timer)
+      });
+  }
+
   
   $(function(){
 
