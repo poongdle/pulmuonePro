@@ -58,7 +58,7 @@
 
 							<div class="button-set b0 inquiry" style="margin-top:39px;">
 								<button type="button" id="noticeWriteBtn" data-toggle="modal" data-target="#alertModal" class="basic-big-button primary" style="min-width:280px; max-width:280px;">글쓰기</button>
-								<button type="button" onclick="javascript:history.back()" id="cancelBtn" class="basic-big-button" style="margin-left:20px; min-width:280px; max-width:280px;">목록으로</button>
+								<button type="button" onclick="javascript:history.back()" id="cancelBtn" class="basic-big-button" style="margin-left:20px; min-width:280px; max-width:280px;">취소</button>
 							</div>
 							
 						</div>
