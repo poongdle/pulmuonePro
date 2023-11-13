@@ -24,7 +24,8 @@
 		</nav>
 		<div class="member-search-area">
 			<div class="head-util-area">
-				<a href="/member/login.jsp" data-require-login="true"> 
+				<a href="/member/login.do">로그인 버튼(임시)</a>
+				<a href="/mypage" data-require-login="true"> 
 					<i class="ico ico-myIcon"></i>
 					<span class="hide">로그인 페이지 / 마이 페이지로 가기</span>
 				</a>
