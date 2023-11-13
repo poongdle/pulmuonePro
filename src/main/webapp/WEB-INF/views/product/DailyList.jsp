@@ -32,9 +32,9 @@
 var category = "${param.category}";
 var pbtn = "${param.tags}";
 $(document).on("click", ".tag-btn", function () {	
-	var idxs = [];	
+	var idxs = [];		
 	$(".tag-btn.active").each(function (i, el) {
-		idxs.push($(el).attr("data-idx"));
+		idxs.push($(el).attr("data-idx"));		
 	});
 	var nowIdx = $(this).attr("data-idx");
 	
@@ -42,9 +42,9 @@ $(document).on("click", ".tag-btn", function () {
 		idxs.splice(idxs.indexOf(nowIdx), 1);
 	} else {
 		idxs.push(nowIdx);
-	}
-	
+	}	
 	location.replace(location.pathname + "?category=" + category + "&tags=" + encodeURIComponent(idxs.join(",")));		
+// 	location.replace(location.pathname + "?category=" + category + "&tags=" + idxs.join(","));
 });
 
 	$(document).ready(function() {
@@ -55,26 +55,14 @@ $(document).on("click", ".tag-btn", function () {
 			items : 4,
 			nav : true,
 		});		
-		var len = $(".tag-btn").length;
-		for(var i=0; i<len; i++){
-		var btn = $(".tag-btn").eq(i).val();
-			if(btn==pbtn){
-				console.log($(".tag-btn").eq(i).hasClass("active"));
-				if(!$(".tag-btn").eq(i).hasClass("active")){
-					$(".tag-btn").eq(i).addClass("active");					
-					console.log(btn);					
-				}else{
-					$(".tag-btn").eq(i).removeClass("active");					
-				}				
-			}
-		}				
-		$(".tag-btn").click(function() {			
-			if(!$(this).hasClass("active")){
-				$(this).addClass("active");					
-			}else{
-				$(this).removeClass("active");				
-			}					
-		});
+		var ppbtn = pbtn.split(",");			
+			for(var i=0; i<8; i++){
+				for(var j=0; j<8; j++){
+					if(ppbtn[j] == $(".tag-btn").eq(i).attr("data-idx")){				
+						$(".tag-btn").eq(i).addClass('active');
+					}					
+				}
+		}					
 	});
 </script>
 	<div class="wrapper">
@@ -98,7 +86,7 @@ $(document).on("click", ".tag-btn", function () {
 					</div>
 					<div class="vis-list" data-carousel="items">
 						<a class="item"
-							href="https://greenjuice.pulmuone.com/product/daily/732"
+							href="/product/daily/view.do?tag=732"
 							title="제품 상세페이지로 가기" style="background-color: #111111"> <img
 							src="/file/download/banner/84c3f8d0-5ae5-462b-9fea-cac7bc1d34fd.png"
 							alt="">
@@ -107,18 +95,18 @@ $(document).on("click", ".tag-btn", function () {
 							title="제품 상세페이지로 가기" style="background-color: #ffffff"> <img
 							src="/file/download/banner/35b19bec-324b-41d6-812d-cdf8f00eb6cb.png"
 							alt="">
-						</a> <a class="item"
-							href="https://greenjuice.pulmuone.com/product/daily?category=&amp;tags=478"
+						</a> <a class="item"						
+							href="/product/daily/dailylist.do?category=&amp;tags=478"
 							title="제품 상세페이지로 가기" style="background-color: #ffffff"> <img
 							src="/file/download/banner/67c0a15e-a321-4513-8015-a973651fb8e8.png"
 							alt="">
 						</a> <a class="item" target="_blank"
-							href="https://greenjuice.pulmuone.com/product/daily/315?eventIdx="
+							href="/product/daily/view.do?tag=315"
 							title="제품 상세페이지로 가기" style="background-color: #111111"> <img
 							src="/file/download/banner/6c036b45-96cf-4189-812a-82f2b36f7bcb.png"
 							alt="">
 						</a> <a class="item"
-							href="https://greenjuice.pulmuone.com/product/daily/430"
+							href="/product/daily/view.do?tag=430"
 							title="제품 상세페이지로 가기" style="background-color: #f7f0d6"> <img
 							src="/file/download/banner/2b301cd0-0431-47b6-ab77-9c180e55ef96.png"
 							alt="">
@@ -136,7 +124,7 @@ $(document).on("click", ".tag-btn", function () {
 										<c:forEach var="dto" items="${bestlist }">
 											<div class="owl-item active" style="width: 308.5px;">
 												<div class="prd-area">
-													<a href="/product/daily/${dto.products_tag }?eventIdx="
+													<a href="/product/daily/view.do?tag=${dto.products_tag }&eventIdx="
 														title="제품 상세페이지로 가기">
 														<div class="badges">
 															<span class="badge">BEST</span>
@@ -187,22 +175,23 @@ $(document).on("click", ".tag-btn", function () {
 						<div class="bg-light-gray over-section" style="margin-bottom: 120px">
 							<div class="container">
 								<div class="tag-place">
-									<!-- <button data-idx="242" value="242" type="button" class="tag-btn item">유기농</button>	
-									<button data-idx="7" value="7"   type="button" class="tag-btn item">융복합녹즙</button>
-									<button data-idx="478" value="478" type="button" class="tag-btn item">케일</button>
-									<button data-idx="479" value="479" type="button" class="tag-btn item">양배추</button>
-									<button data-idx="262" value="262" type="button" class="tag-btn item">식물성유산균</button>
-									<button data-idx="327" value="327" type="button" class="tag-btn item">발효유</button>
-									<button data-idx="395" value="395" type="button" class="tag-btn item">식사대용</button>
-									<button data-idx="457" value="457" type="button" class="tag-btn item">이달의녹즙</button> -->
-								 <a href="/product/daily/dailylist.do?category=${param.category }&tags=242"><button data-idx="242" value="242" type="button" class="tag-btn item">유기농</button></a>
-									<a href="/product/daily/dailylist.do?category=${param.category }&tags=7">  <button data-idx="7" value="7"   type="button" class="tag-btn item">융복합녹즙</button></a>
-									<a href="/product/daily/dailylist.do?category=${param.category }&tags=478"><button data-idx="478" value="478" type="button" class="tag-btn item">케일</button></a>
-									<a href="/product/daily/dailylist.do?category=${param.category }&tags=479"><button data-idx="479" value="479" type="button" class="tag-btn item">양배추</button></a>
-									<a href="/product/daily/dailylist.do?category=${param.category }&tags=262"><button data-idx="262" value="262" type="button" class="tag-btn item">식물성유산균</button></a>
-									<a href="/product/daily/dailylist.do?category=${param.category }&tags=327"><button data-idx="327" value="327" type="button" class="tag-btn item">발효유</button></a>
-									<a href="/product/daily/dailylist.do?category=${param.category }&tags=395"><button data-idx="395" value="395" type="button" class="tag-btn item">식사대용</button></a>
-									<a href="/product/daily/dailylist.do?category=${param.category }&tags=457"><button data-idx="457"value="457" type="button" class="tag-btn item">이달의녹즙</button></a> 
+									<button data-idx="242"  type="button" class="tag-btn item">유기농</button>	
+									<button data-idx="7"    type="button" class="tag-btn item">융복합녹즙</button>
+									<button data-idx="478"  type="button" class="tag-btn item">케일</button>
+									<button data-idx="479"  type="button" class="tag-btn item">양배추</button>
+									<button data-idx="262"  type="button" class="tag-btn item">식물성유산균</button>
+									<button data-idx="327"  type="button" class="tag-btn item">발효유</button>
+									<button data-idx="395"  type="button" class="tag-btn item">식사대용</button>
+									<button data-idx="457"  type="button" class="tag-btn item">이달의녹즙</button> 
+<%-- 								 	<a href="/product/daily/dailylist.do?category=${param.category }&tags=242"><button data-idx="242" value="242" type="button" class="tag-btn item">유기농</button></a> --%>
+<%-- 									<a href="/product/daily/dailylist.do?category=${param.category }&tags=7">  <button data-idx="7" value="7"   type="button" class="tag-btn item">융복합녹즙</button></a> --%>
+<%-- 									<a href="/product/daily/dailylist.do?category=${param.category }&tags=478"><button data-idx="478" value="478" type="button" class="tag-btn item">케일</button></a> --%>
+<%-- 									<a href="/product/daily/dailylist.do?category=${param.category }&tags=479"><button data-idx="479" value="479" type="button" class="tag-btn item">양배추</button></a> --%>
+<%-- 									<a href="/product/daily/dailylist.do?category=${param.category }&tags=262"><button data-idx="262" value="262" type="button" class="tag-btn item">식물성유산균</button></a> --%>
+<%-- 									<a href="/product/daily/dailylist.do?category=${param.category }&tags=327"><button data-idx="327" value="327" type="button" class="tag-btn item">발효유</button></a> --%>
+<%-- 									<a href="/product/daily/dailylist.do?category=${param.category }&tags=395"><button data-idx="395" value="395" type="button" class="tag-btn item">식사대용</button></a> --%>
+<%-- 									<a href="/product/daily/dailylist.do?category=${param.category }&tags=457"><button data-idx="457"value="457" type="button" class="tag-btn item">이달의녹즙</button></a>									 --%>
+									
 								</div>
 								<div class="tab-content" id="tab-content-depth2">
 									<div class="prd-list-head">
@@ -263,7 +252,7 @@ $(document).on("click", ".tag-btn", function () {
 										<c:otherwise>
 										<c:forEach var="dto" items="${list }">
 											<div class="prd-area">
-												<a href="/product/daily/${dto.products_tag }?eventIdx="
+												<a href="/product/daily/view.do?tag=${dto.products_tag }&eventIdx="
 													title="제품 상세페이지로 가기">
 													<div class="badges">
 														<span class="badge">BEST</span>

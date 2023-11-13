@@ -17,4 +17,10 @@ public interface IProducts {
 	   // 3. 공용 상품 조회	   
 	   List<ProductsDTO> search(Connection con, String tags) throws SQLException;
 	   
+	   // 4. 공용 상품 카운트
+	   int count(Connection con, String path) throws SQLException;
+	   
+	   // 5. 공용 상품 상세보기
+//	   ProductsDTO view(Connection con, int tag) throws Exception;
+	   List<ProductsDTO> view(Connection con, int tag) throws SQLException, Exception;
 }

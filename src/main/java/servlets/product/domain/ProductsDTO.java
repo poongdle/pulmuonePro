@@ -3,12 +3,14 @@ package servlets.product.domain;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ProductsDTO {
 	
 	   private String products_no;         // 상품번호
@@ -29,6 +31,7 @@ public class ProductsDTO {
 	   private int products_tag;         // 상품태그
 	   private Date reg_date;         // 등록날
 	   
-	   private String system_name;         // 배송방식
+	   private String system_name;         // 이미지
+	   private String origin_name;         // 이미지
 	   
 }
