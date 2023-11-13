@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css">
 
 <link rel="stylesheet" href="/resources/assets/css/style.css">
+
 </head>
 
 <body >
@@ -270,8 +271,6 @@ let timer;
   	}	
   })
   
-
-
   $(function(){
 
     axios.get('/user_summary/default').then(function (response) {

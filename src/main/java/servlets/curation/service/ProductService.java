@@ -32,7 +32,7 @@ public class ProductService {
 	         con = ConnectionProvider.getConnection();
 	          DAOImpl dao = DAOImpl.getInstance();
 	         List<CurationDTO> list = null;
-	         list = dao.selectPG(con);	        	
+	         list = dao.selectPD(con);	        	
 	         return list;
 	      } catch (NamingException | SQLException e) { 
 	         //e.printStackTrace();  syso("ListService.select() 에러 : ")

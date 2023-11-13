@@ -20,6 +20,7 @@
 <script src="/resources/assets/js/fdd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="/resources/assets/js/alert.js"></script> -->
 <script src="/resources/assets/js/request.js"></script>
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/owl.carousel.min.js"></script>
@@ -37,6 +38,7 @@
 </style>
 </head>
 <body>
+
 
 <script>
 	function getBmi (w,h){
@@ -76,7 +78,7 @@
 	$(function (){
 
 		if(!sessionStorage.getItem('req2')||!sessionStorage.getItem('req1')){
-//             location.href='/pulmuonePro/customer/product/step1.jsp'
+//             location.href='/customer/product/step1.do'
 		}
 		if(sessionStorage.getItem('req3')){
 			const prevReq3 = JSON.parse(sessionStorage.getItem('req3'))
@@ -123,35 +125,37 @@
 				location.replace("/customer/product/step2.do");
             }
 		})
-
+	
         $('.next-btn').click(function (){
             const lastSection = $('.last-page-section')
 			if (lastSection.css('display') !== 'none') {
 				const singleYn = lastSection.find('input[type=radio]:checked').val();
-				if (!singleYn) {
-					return alert('상품 추천 방식을 선택 해 주세요');
-				}
-
+				
 				const req1 = JSON.parse(sessionStorage.getItem('req1'))
 				const req2 = JSON.parse(sessionStorage.getItem('req2'))
 				const req3 = JSON.parse(sessionStorage.getItem('req3'))
 
+					if (singleYn=='N') {
+						location.href="/customer/product/result/programs.do";
+					}	else { 
+						location.href="/customer/product/result/products.do";
+					}
+					
 				const data = {...req1, ...req2, ...req3}
 				const body = Object.entries(data).filter(v => !!parseInt(v[0])).map(
 						v => ({idx: v[0], answer: v[1]}));
-				newPost({
-					url: '/customer/product/result',
-					data: {singleYn, answerList: body}
-				}, function (data) {
+				newPost({ data: {singleYn, answerList: body} 	},
+				function (data) {
 					var bmi = data.RESULT_MSG.bmi || 0;
 					if (bmi == 0 && req1.weight && req1.tallness) {
 						bmi = getBmi(req1.weight, req1.tallness)
 					}
-					location.href = '/customer/product/result/' + data.RESULT_MSG.execution.idx
-							+ '?singleYn=' + singleYn + '&bmi=' + bmi + '&questions='
-							+ data.RESULT_MSG.questions.join(',');
-				});
-			}
+// 					location.href = '/customer/product/result/products.do' + data.RESULT_MSG.execution.idx
+// 					+ '?singleYn=' + singleYn + '&bmi=' + bmi + '&questions='
+// 					+ data.RESULT_MSG.questions.join(',');
+			})
+
+	}
             if (currentPage <= totalCnt) {
 				const data = {}
 				$('.question-section').children().each((i, v) => {
@@ -170,6 +174,7 @@
             }
         })
 	})
+	
 </script>
 <div class="wrapper">
 <%@ include file="/WEB-INF/views/layouts/header.jsp" %>
@@ -374,10 +379,7 @@
 	</div>
 	<div class="button-set w220">
 		<button class="prev-btn button-basic border" type="button" id="prevPage">이전으로</button>
-		<button class="next-btn button-basic primary" type="button" id="nextPage">
-<!-- 		<a href="/customer/product/result/products.do?singleYn=Y&bmi=?&questions=?" class="button-basic border" style="font-size: 16px">키즈제품 바로가기</a> -->
-		다음으로
-		</button>
+		<button class="next-btn button-basic primary" type="button" id="nextPage" >다음으로</button>
 	</div>
 	
 	<div class="modal fade show" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-modal="true" role="dialog" style="display: hidden;">
@@ -442,7 +444,6 @@ let timer;
         clearTimeout(timer)
       });
   }
-
   
   $(function(){
 

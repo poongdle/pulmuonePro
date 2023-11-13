@@ -16,10 +16,10 @@ public class Product implements CommandHandler{
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 				
 			System.out.println("> Products select start..");
-			ProductService pd = ProductService.getInstance();
-			List<CurationDTO> list = pd.select();
+		ProductService pd = ProductService.getInstance();
+		List<CurationDTO> list = pd.select();
 			
-			request.setAttribute("list", list);
+		request.setAttribute("list", list);
 		
 			return "/WEB-INF/views/curation/result/products.jsp";
 	}

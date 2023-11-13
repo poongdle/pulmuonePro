@@ -23,11 +23,12 @@ public interface CurationDAO {
 //  List<CurationDTO> step3List(Connection con) throws SQLException;
 
   // 5. step3 결과(프로그램/상품 선택 창)
-//   ArrayList<CurationDTO> selectOne(int proNo) throws SQLException;
+//   ArrayList<CurationDTO> selectOne(Connection con) throws SQLException;
 
    // 6. 맞춤 프로그램
 //   ArrayList<CurationDTO> selectPG(int proNo, String proName) throws SQLException;
    List<CurationDTO> selectPG(Connection con) throws SQLException;
+//   CurationDTO selectPG(Connection con) throws SQLException;
    
    //   // 7. 맞춤 상품
 //   ArrayList<CurationDTO> selectPD(int proNo, String proName) throws SQLException;
@@ -37,4 +38,6 @@ public interface CurationDAO {
 //   KidsDTO select(Connection con, int num) throws SQLException;
    List<KidsDTO> selectList(Connection con) throws SQLException;
 
+   // 프로그램 넘버로 찾기
+   CurationDTO selectOne( Connection con, int num) throws SQLException;
 }
