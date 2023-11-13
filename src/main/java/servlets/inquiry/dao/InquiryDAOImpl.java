@@ -45,13 +45,13 @@ public class InquiryDAOImpl implements InquiryDAO{
 	}
 
 	@Override
-	public ArrayList<InquiryDTO> select(Connection conn, String category) throws SQLException {
+	public ArrayList<InquiryDTO> select(Connection conn, String user_id, String category) throws SQLException {
 		String sql = " SELECT * "
-				+ " FROM inquiry ";
-				if( category != null || !category.equals("")) {
-					sql += " WHERE inquiry_cate = ? ";
+				+ " FROM inquiry "
+				+ " WHERE member_id = ? ";
+				if( category != "all" ) {
+					sql += "AND inquiry_cate = ? ";
 				}
-		System.out.println("__________--");
 		System.out.println(category);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -71,8 +71,9 @@ public class InquiryDAOImpl implements InquiryDAO{
 		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			if( category != null || !category.equals("")) {
-				pstmt.setString(1, category);
+			pstmt.setString(1, user_id);
+			if( category != "all" ) {
+				pstmt.setString(2, category);
 			}
 			rs = pstmt.executeQuery();
 			
@@ -103,6 +104,41 @@ public class InquiryDAOImpl implements InquiryDAO{
 			JdbcUtil.close(pstmt);
 		}
 		return list;
+	}
+
+	@Override
+	public int selectCount(Connection conn, String user_id, String category) throws SQLException {
+		String sql = " SELECT COUNT(*) "
+				+ " FROM inquiry "
+				+ " WHERE member_id = ? ";
+		
+		if( category != "all" ) {
+			sql += "AND inquiry_cate = ? ";
+		}
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			if( category != "all" ) {
+				pstmt.setString(2, category);
+			}
+			rs = pstmt.executeQuery();
+			
+			if( rs.next() ) return rs.getInt(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return 0;
 	}
 
 }

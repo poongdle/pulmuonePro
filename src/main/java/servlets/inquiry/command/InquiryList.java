@@ -17,15 +17,21 @@ public class InquiryList implements CommandHandler {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String pcategory = request.getParameter("category");
-		String category = "";
+		String category = "all";
+		String user_id = "aaaaaaaa";
+		int totalCount = 0;
 		
-		if( pcategory != null || !pcategory.equals("") ) {
+		if( pcategory != null && pcategory != "" ) {
 			category = pcategory;
 		}
+		
 		ArrayList<InquiryDTO> list = null;
-		list = inquiryListService.select(category);
-		System.out.println(list);
+		
+		list = inquiryListService.select(user_id, category);
+		totalCount = inquiryListService.selectCount(user_id, category);
+		
 		request.setAttribute("list", list);
+		request.setAttribute("totalCount", totalCount);
 		
 		return "/WEB-INF/views/inquiry/list.jsp";
 	}

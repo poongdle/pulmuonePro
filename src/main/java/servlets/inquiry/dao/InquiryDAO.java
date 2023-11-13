@@ -11,5 +11,8 @@ public interface InquiryDAO {
 	int write (Connection conn, InquiryDTO dto) throws SQLException;
 	
 	// 문의 목록
-	ArrayList<InquiryDTO> select (Connection conn, String category) throws SQLException;
+	ArrayList<InquiryDTO> select (Connection conn, String user_id, String category) throws SQLException;
+	
+	// 문의 갯수 
+	int selectCount (Connection conn, String user_id, String category) throws SQLException;
 }

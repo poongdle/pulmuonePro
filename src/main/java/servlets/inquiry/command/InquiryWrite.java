@@ -32,9 +32,12 @@ public class InquiryWrite implements CommandHandler{
 			
 			insertRow = inquiryWriteService.write(dto);
 			
-			System.out.println(insertRow);
+			if( insertRow > 0 ) {
+				response.sendRedirect("/mypage/inquiry/list.do");
+			}else {
+				response.sendRedirect("/mypage/inquiry/write.do?fail");				
+			}
 			
-			response.sendRedirect("/forum/inquiry/write.do");
 		}
 		
 		
