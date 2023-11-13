@@ -12,7 +12,7 @@ import servlets.member.dto.MemberDTO;
 public class MemberLoginService {
 	
 	// 1. 로그인 처리를 위한 MemberDTO 리턴
-	public MemberDTO login(String memberID, String pwd) {
+	public MemberDTO login(String memberId, String pwd) {
 				
 		Connection conn = null;
 		MemberDTO dto = null;
@@ -21,7 +21,7 @@ public class MemberLoginService {
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao = new MemberDAOImpl(conn);
-			dto = dao.selectOne(memberID, pwd);
+			dto = dao.selectOne(memberId, pwd);
 			
 		} catch (NamingException e) {
 			e.printStackTrace();

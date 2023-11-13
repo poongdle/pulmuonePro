@@ -8,8 +8,7 @@
 	String memberNo = request.getParameter("memberNo");
 	String memberId = request.getParameter("memberId");
 	String name = request.getParameter("name");
-	
-	AuthInfo auth = new AuthInfo(memberNo, name, name);
+
 	
 // 	session.setAttribute("auth", id);
 

@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
 <!-- header -->
 <header class="main_header">
 	<div class="container">
@@ -24,7 +26,13 @@
 		</nav>
 		<div class="member-search-area">
 			<div class="head-util-area">
-				<a href="/member/login.do">로그인 버튼(임시)</a>
+				<u:isLogin>
+					<span><c:out value="${ auth.getName() }" /> 님, 건강한 습관 풀무원녹즙입니다.</span>   
+					<a href="/member/logout.do">로그아웃(임시)</a>
+				</u:isLogin>
+				<u:notLogin>
+					<a href="/member/login.do">로그인 버튼(임시)</a>				
+				</u:notLogin>
 				<a href="/mypage" data-require-login="true"> 
 					<i class="ico ico-myIcon"></i>
 					<span class="hide">로그인 페이지 / 마이 페이지로 가기</span>

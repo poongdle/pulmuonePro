@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import auth.AuthInfo;
 import mvc.command.CommandHandler;
 import servlets.member.dto.MemberDTO;
 import servlets.member.service.MemberLoginService;
@@ -26,22 +27,34 @@ public class MemberLogin implements CommandHandler{
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 			
-			String memberId = request.getParameter("memberId");
-			String pwd = request.getParameter("pwd");
+			String memberId = request.getParameter("memberId").trim();
+			String pwd = request.getParameter("pwd").trim();
+			
 			System.out.println(memberId + " " + pwd);
+			
 			MemberLoginService loginService = new MemberLoginService();
-			
 			MemberDTO dto = loginService.login(memberId, pwd);
-			
-			HttpSession session = request.getSession();
-			
 			
 			
 			if (dto != null) {
-				request.setAttribute("memberNo", dto.getMemberNo());
-				request.setAttribute("name", dto.getName());
+				HttpSession session = request.getSession(false);
 				
-				String location = "/WEB-INF/views/member/login_ok.jsp";
+				// 인증 처리를 객체
+				AuthInfo auth = new AuthInfo(dto.getMemberNo(), memberId, dto.getName());
+				session.setAttribute("auth", auth);
+				
+//				session.setAttribute("memberNo", dto.getMemberNo());
+//				session.setAttribute("memberId", memberId);
+//				session.setAttribute("name", dto.getName());
+				
+				String location = "/index.jsp";
+				String referer = (String) session.getAttribute("referer");
+
+				if (referer != null) {
+					location = referer;
+					session.removeAttribute("referer");
+				}
+				
 				response.sendRedirect(location);
 				
 			} else {

@@ -29,11 +29,12 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		String sql = "SELECT * " 
 				+ " FROM member "
-				+ " WHERE member_id = '?' AND pwd = '?' ";
+				+ " WHERE member_id = ? AND pwd = ? ";
 		
 		System.out.println(sql);
 		System.out.println(memberId);
 		System.out.println(pwd);
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
