@@ -8,7 +8,7 @@
 			<a href="/forum/faq/list.do">FAQ</a>
 		</li>
 		<li data-page="inquiry">
-			<a href="/forum/inquiry/list.do">1:1 문의</a>
+			<a href="/forum/inquiry/write.do">1:1 문의</a>
 		</li>
 		<li data-page="notice">
 			<a href="/forum/notice/list.do">공지사항</a>

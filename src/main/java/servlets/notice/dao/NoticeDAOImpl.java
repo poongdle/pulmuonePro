@@ -63,7 +63,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -180,7 +179,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 				+ ") ";
 		
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -193,7 +191,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 		}
 		
