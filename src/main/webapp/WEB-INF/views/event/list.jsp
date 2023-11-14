@@ -10,7 +10,7 @@
 		<main class="page event">
 			<div class="container">
 				<div class="location">
-					<a href="/">홈</a> <a href="/event/event">이벤트</a>
+					<a href="/">홈</a> <a href="/event/event/list.do">이벤트</a>
 				</div>
 				<div class="cont-event-area">
 					<%@ include file="/WEB-INF/views/layouts/event/title_tab_area.jsp"%>
