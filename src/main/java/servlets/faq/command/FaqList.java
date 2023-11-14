@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import mvc.command.CommandHandler;
 import servlets.faq.model.FaqDTO;
-import servlets.faq.model.PageDTO;
 import servlets.faq.service.FaqListService;
+import servlets.utils.PageDTO;
 
 
 public class FaqList implements CommandHandler {
@@ -30,7 +30,7 @@ public class FaqList implements CommandHandler {
 		int total = 0;
 		int numberOfPageBlock = 5;
 		
-		PageDTO paging = null;
+		servlets.utils.PageDTO paging = null;
 		
 		if( pcategory != null && !pcategory.equals("") ) {
 			category = Integer.parseInt(pcategory);
