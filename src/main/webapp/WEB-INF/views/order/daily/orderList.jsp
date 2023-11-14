@@ -25,7 +25,7 @@
         <button type="submit">매일배송 주문하기</button>
     </form>
 	<form action="/box/order/step1.do" method="GET">
-        <input type="hidden" name="productsNo" value="0073561">
+        <input type="hidden" name="productsNo" value="73561">
 		<input type="hidden" name="productsCnt" value="1">
         <button type="submit">택배배송 주문하기</button>
     </form>

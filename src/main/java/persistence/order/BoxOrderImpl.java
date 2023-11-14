@@ -10,7 +10,9 @@ import domain.order.box.BoxOrderDTO;
 import domain.order.box.BoxOrderProductDTO;
 import domain.order.box.BoxPayDTO;
 import domain.order.box.BoxShipDTO;
+import domain.order.box.OrderAddrBookDTO;
 import domain.order.box.OrderCouponDTO;
+import domain.order.box.OrderMemberInfoDTO;
 import domain.order.box.BoxOrderProductDTO;
 
 public interface BoxOrderImpl {
@@ -18,8 +20,8 @@ public interface BoxOrderImpl {
 	// 주문서 작성
 	// 1. 상품 정보 조회
 	ArrayList<BoxOrderProductDTO> selectProducts(Connection conn, String [] productsNo) throws SQLException;
-	// 2. 주소록 리스트 조회
-	// ArrayList<AddrBookDTO> selectAddrBook(Connection conn, int memberNo) throws SQLException;
+	// 2. 사용자 이름, 전화번호 조회
+	OrderMemberInfoDTO getNameAndTel(Connection conn, int memberNo) throws SQLException;
 	// 3. 선택한 상품 가격 조회
 	int getProductsPrice(Connection conn, String[] productsNo) throws SQLException;
 	// 4. 사용 가능한 쿠폰 보유 리스트 조회

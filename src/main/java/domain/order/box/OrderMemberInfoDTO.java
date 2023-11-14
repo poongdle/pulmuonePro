@@ -9,13 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrderCouponDTO {
+public class OrderMemberInfoDTO {
 	
-	private int couponNo;
-	private String couponName;
-	private double discount;
-	private int duplication;
-	private int minPrice;
-	private int maxDiscount;
+	private int memberNo;
+	private String name;
+	private String tel;
 	
 }

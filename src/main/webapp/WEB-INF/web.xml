@@ -44,9 +44,9 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>loginCheckFilter</filter-name>
-		<url-pattern>/daily/order/*</url-pattern>
-		<url-pattern>/box/order/*</url-pattern>
-		<url-pattern>/taste/order/*</url-pattern>
+		<url-pattern>/box/order/step1.do</url-pattern>
+		<url-pattern>/daily/order/step1.do</url-pattern>
+		<url-pattern>/taste/order/step1.do</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 

@@ -38,7 +38,7 @@
 
 											<a href="/product/daily/281" class="prd-cart">
 												<div class="thumb">
-													<img src="/file/download/product/20221108/f1dfce0b-663c-4486-a7a3-188f199ba502.jpg" alt="">
+													<img src="/resources/assets/images/f1dfce0b-663c-4486-a7a3-188f199ba502.jpg" alt="">
 												</div>
 												<div class="prd-info">
 													<b class="prd-title"> 위러브플러스 </b>

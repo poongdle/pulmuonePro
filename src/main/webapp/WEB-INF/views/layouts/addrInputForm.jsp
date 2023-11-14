@@ -14,18 +14,18 @@
 				<input type="checkbox" name="chk-same" id="chk-same" checked="checked">
 				<label for="chk-same">고객정보와 동일</label>
 			</div>
-			<button id="addressBtn" type="button" class="btn-round2">주소록</button>
+			<button id="addressBtn" type="button" class="btn-round2" data-toggle="modal" data-target="#addressModal">주소록</button>
 		</div>
 	
 	<script>
 		$("#chk-same").click(function() {
-			$("#drk_receiver").val("");
-			$("#drk_tel").val("");
+			$("#receiver").val("");
+			$("#tel").val("");
 			if ($(this).is(":checked")) {
-				$("#drk_receiver").val("test");
-				$("#drk_tel").val("test");
-			}
-		})
+				$("#receiver").val("${ miDto.name }");
+				$("#tel").val("${ miDto.tel }");
+			} // if
+		});
 	</script>
 	
 	<div class="form-input">
@@ -34,7 +34,7 @@
 				<label for="receiver">받으시는분</label>
 			</dt>
 			<dd>
-				<input type="text" id="drk_receiver" name="orderName" placeholder="이름을 입력하세요" value="이지현" maxlength="10">
+				<input type="text" id="receiver" name="orderName" placeholder="이름을 입력하세요" value="${ miDto.name }" maxlength="10">
 			</dd>
 		</dl>
 	</div>
@@ -45,7 +45,7 @@
 				<label for="phone">휴대폰번호</label>
 			</dt>
 			<dd>
-				<input type="tel" id="drk_tel" maxlength="13" placeholder="휴대폰번호를 입력하세요" value="01055234090">
+				<input type="tel" id="tel" maxlength="13" placeholder="휴대폰번호를 입력하세요" value="${ miDto.tel }">
 			</dd>
 		</dl>
 	</div>
@@ -56,7 +56,7 @@
 				<label for="zipcode">우편번호</label>
 			</dt>
 			<dd>
-				<input id="zipcode" name="zipCode" placeholder="주소찾기 버튼을 눌러주세요" value="" style="background: #fff" readonly>
+				<input id="zipcode" name="zipCode" placeholder="주소찾기 버튼을 눌러주세요" style="background: #fff" readonly>
 				<button type="button" id="searchPostcode" class="btn-square btn-black">주소찾기</button>
 			</dd>
 		</dl>

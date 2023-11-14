@@ -1,53 +1,40 @@
-package servlets.event.service;
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="domain.order.box.BoxOrderProductDTO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/WEB-INF/views/layouts/head.jsp"%>  
+<body>
+	<div class="wrapper"> 
+    	<%@ include file="/WEB-INF/views/layouts/header.jsp"%> 
+        <main class="page order">
+        	<div class="container">
 
-public class Test {
-
-   <%@page import="java.util.ArrayList"%>
-   <%@page import="java.util.Iterator"%>
-   <%@page import="domain.order.box.BoxOrderProductDTO"%>
-   <%@page import="java.util.List"%>
-   <%@ page language="java" contentType="text/html; charset=UTF-8"
-      pageEncoding="UTF-8"%>
-   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-   <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
-   <!-- 모달 -->
-   <!--
-   <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
-   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   -->
-   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-   <body>
-      <div class="wrapper">
-         <%@ include file="/WEB-INF/views/layouts/header.jsp"%>
-         <main class="page order">
-            <div class="container">
-
-               <div class="contents-area">
-                  <form id="orderForm">
-                     <input type="hidden" name="cardValidation" id="cardValidation" value="N">
-                     <input type="hidden" name="payMethod" value="CARD">
-                     <input type="hidden" name="payPrice" value="195000">
+				<div class="contents-area">
+                	<form id="orderForm">
+                    	<input type="hidden" name="cardValidation" id="cardValidation" value="N">
+                    	<input type="hidden" name="payMethod" value="CARD">
+                    	<input type="hidden" name="payPrice" value="195000">
                   
-                     <div class="location">
-                        <a href="/">홈</a> <a href="/">장바구니</a> <a href="/">주문서 작성</a>
-                     </div>
+                  		<div class="location">
+                        	<a href="/">홈</a> <a href="/">장바구니</a> <a href="/">주문서 작성</a>
+                     	</div>
                   
-                     <div class="cont-checkout-area">
-                        <div class="title-tab-area">
-                           <h2 class="cont-title">주문서 작성</h2>
+                     	<div class="cont-checkout-area">
+                        	<div class="title-tab-area">
+                           		<h2 class="cont-title">주문서 작성</h2>
                         </div>
                   
                         <div class="prd-cart-area" style="padding-bottom: 50px;">
                            <div class="prd-cart-list-area">
                               <div class="checkout-prd-list">
                                  <div class="checkout-title-area">
-                                 <%
-                                    String [] prod = request.getParameterValues("productsNo");
-                                    int prdCnt = prod.length;
-                                 %>
+	                                 <%
+	                                    String [] prod = request.getParameterValues("productsNo");
+	                                    int prdCnt = prod.length;
+	                                 %>
                                     <strong class="list-amount">주문상품 <em class="prd-count" style="padding: 0 16px; margin-left: 2px"><%= prdCnt %></em></strong>
                                     <button type="button" class="btn-down">
                                        <i class="ico ico-down"><span class="hide">주문서 닫기</span></i>
@@ -122,17 +109,17 @@ public class Test {
                                                       </script>
                                                    </c:when>
                                                    <c:otherwise>
-                                                      <option value="" selected>= 쿠폰 선택 =</option>
+                                                      <option value="" selected>쿠폰을 선택하세요.</option>
                                                       <c:forEach items="${ couponList }" var="coupon">
                                                          <c:choose>
                                                             <c:when test="${ coupon.discount > 1 }">
-                                                               <option value="${ coupon.couponNo }" data-discount="${coupon.discount}">
+                                                               <option value="${ coupon.couponNo }" data-duplicate="${ coupon.duplication }" data-max-discount="${ coupon.maxDiscount }" data-discount="${coupon.discount}" data-coupon-name="${ coupon.couponName }">
                                                                   ${coupon.couponName}&nbsp;&nbsp;/&nbsp;&nbsp;<fmt:formatNumber value="${coupon.discount}" type="number"></fmt:formatNumber>원 할인
                                                                </option>
                                                             </c:when>
                                                             <c:otherwise>
                                                                <fmt:formatNumber value="${ coupon.discount }" type="percent"/>
-                                                               <option value="${ coupon.couponNo }" data-discount="${coupon.discount * 100}">
+                                                               <option value="${ coupon.couponNo }" data-duplicate="${ coupon.duplication }" data-max-discount="${ coupon.maxDiscount }" data-discount="${coupon.discount * 100}" data-coupon-name="${ coupon.couponName }">
                                                                   ${coupon.couponName}&nbsp;&nbsp;/&nbsp;&nbsp;<fmt:formatNumber value="${coupon.discount}" type="percent"></fmt:formatNumber> 할인
                                                                </option>
                                                             </c:otherwise>
@@ -245,14 +232,12 @@ public class Test {
 
          </main>
 
-
 		<div class="modal" id="addressModal" tabindex="-1" aria-labelledby="addressModal" aria-modal="true" style="display: none;" role="dialog">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="emailPolicyLabel">주소록</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close"></button>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
 					</div>
 	
 					<div class="modal-body" style="max-height: 80vh; overflow-y: scroll">
@@ -277,8 +262,8 @@ public class Test {
 		<button id="top_move_pointer" class="top-nav">
 			<img src="/resources/assets/images/ui/left_short_arrow.png">
 			<p>TOP</p>
-		</button>
-         <%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
+		</button> 
+         <%@ include file="/WEB-INF/views/layouts/footer.jsp"%> 
       </div>
 
 	<script>
@@ -303,36 +288,33 @@ public class Test {
             $("b[data-price-view=payment]").text(npStr);
          })
     </script>
-      
-    <script>
-         $(function () {
-            $("#select-checkout-area").tabs();
-         })
-    </script>
 
 	<script>
          $("#coupon-selector").on("change", function() {
             let index = $(this).prop("selectedIndex");
-            if (index == 0) return;   // = 쿠폰 선택 = 선택 시
+            if (index == 0) return;   // 쿠폰을 선택하세요. 선택 시
             
             // 선택된 option 태그 -> 쿠폰 정보 가져오기
-            let options = $(this).find("option");
-            let opt = options.eq(index);
-            let idx = opt.text().indexOf("/");
-            let couponName = opt.text().substr(0, idx-2);   // 쿠폰 이름
-            let typeIdx = opt.text().search(/원|%/);
-            let discount = opt.text().substring(idx+2, typeIdx);   // 쿠폰 가격/할인율
-            let isWon = opt.text().indexOf("원")!=-1? true : false;   // 할인 타입 (원 == true)
+            let opts = $(this).find("option");
+            let opt = opts.eq(index);
+            let couponNo = opt.val();										// 쿠폰 번호
+            let couponName = opt.attr("data-coupon-name");					// 쿠폰 이름
+            let duplication = opt.attr("data-duplicate");					// 중복 사용 가능 여부
+            let maxDiscount = parseInt(opt.attr("data-max-discount"));		// 최대 할인 가능 가격
+            let discount = parseInt(opt.attr("data-discount"));   			// 쿠폰 가격/할인율
+            let isWon = opt.attr("data-discount") > 100 ? true : false;
+            let salePrice = parseInt($("b[data-price-view=sale]").text().replace(",", ""));     // 현재 상품의 할인 적용가
+            let discountVal = isWon ? discount : salePrice*(discount/100);  // 쿠폰 할인량
             
             // 선택한 쿠폰 -> li 추가
-            let str = '<li>'
-                     + '<input type="hidden" name="couponIdx" value="'+opt.val()+'"'
+            let str = '<li data-coupon-idx="'+couponNo+'" data-coupon-name="'+couponName+'" data-duplicate="'+duplication+'" data-max-discount="'+maxDiscount+'" data-discount="'+discount+'">'
+                     + '<input type="hidden" name="couponIdx" value="'+couponNo+'">'
                      + '<div>'
                         + '<em>'+couponName+'</em>'
-                        + '<button type="button" class="coupon-remove btn-pop-close"><i class="ico ico-close"></i></button>'
+                        + '<button type="button" class="coupon-remove btn-pop-close"><i class="ico-close ico");"></i></button>'
                      + '</div>';
-            if (isWon) str += '<div class="now-price">'+discount+'<span>원</span></div>'
-            else str += '<div class="now-price">'+discount+'<span>%</span></div>'
+            if (isWon) str += '<div class="now-price">'+discount.toLocaleString()+'<span>원</span></div>'
+            else str += '<div class="now-price">'+discount.toLocaleString()+'<span>%</span></div>'
             str += '</li>';
             $("#apply-coupon-list").append(str);
             
@@ -340,36 +322,18 @@ public class Test {
             opt.remove();
             
          	// 영수증 - 쿠폰 할인가 수정
-            discount = parseInt(discount.replace(",", ""));
             let viewCoupon = $("b[data-price-view=coupon]");
-            let currDiscount = parseInt(viewCoupon.text().replace(",", ""));   // 현재 영수증의 쿠폰값
-            let sp = parseInt($("b[data-price-view=sale]").text().replace(",", ""));         // 현재 상품의 할인 적용가
-			
             viewCoupon.addClass("minus");
-            let value = 0;
-            if (isWon) value = currDiscount-discount;         // 할인 타입이 원이라면
-            else value = currDiscount-(sp*(discount/100));      // 할인 타입이 %라면
+            
+            let currDiscount = parseInt(viewCoupon.text().replace(",", ""));   	// 현재 영수증의 쿠폰 할인 값
+            let couponsDiscount = currDiscount-discountVal;						// 선택한 쿠폰들의 총 할인 값
+            couponsDiscount = -salePrice > couponsDiscount ? -salePrice : couponsDiscount;		// 총 할인가가 현재 상품의 할인 적용가보다 작다면 할인 적용가로 고정
+            viewCoupon.text(couponsDiscount.toLocaleString());
+            
+            // 영수증 - 결제 가격 수정
+            $("b[data-price-view=payment]").text((salePrice+couponsDiscount).toLocaleString());
+			$("input[name='payPrice']").val(salePrice+couponsDiscount);
 			
-            // 총 할인 금액이 상품 가격을 초과하는 경우 : value > sp
-            // 상품 최대 할인 금액을 초과하는 경우 : selecte문에서 제한
-            /*
-            let couponOption = '<option value="' + opt.val() + '">' + opt.text() + '</option>';
-            $("#coupon-selector").append(couponOption);
-            
-            $("#apply-coupon-list li:last-child").remove();
-            
-            viewCoupon.text("-"+currDiscount.toLocaleString());
-            $("b[data-price-view=payment]").text((sp - currDiscount).toLocaleString());
-			*/
-			/*	
-			if (totalPrice < parseInt(opt.attr("data-limit"))) opt.hide().attr("data-coupon-visible", "N");
-			if ((originTotal - (originTotal - totalPrice)) != originTotal) $("[data-price-view='sale']").addClass("minus");
-			else $("[data-price-view='sale']").removeClass("minus");
-			*/
-			
-            viewCoupon.text(value.toLocaleString());
-            $("b[data-price-view=payment]").text((sp+value).toLocaleString());
-            
             // 쿠폰을 전부 다 선택했다면
             if ($(this).find("option").length == 1) {
                $(this).find("option").text("사용 가능한 쿠폰이 없습니다.");
@@ -377,14 +341,13 @@ public class Test {
             } // if
             
             // 중복 쿠폰 처리.....
-				
-			$("input[name='payPrice']").val(payPrice);
+			
          });
          
 		// if (couponPrice == 0) viewCoupon.removeClass("minus");
     </script>
 	<script>
-			var type = "box";
+			/* var type = "box";
 		  	var gap = type == 'daily' ? 4 : 1;
 		  	var dayOfWeekVal = ['A', 'B', 'C', 'D', 'E']
 				
@@ -404,85 +367,94 @@ public class Test {
 		    	$(this).parent().prev().click();
 		  	})
 				
-		  	console.log({nfsItem})
+		  	console.log({nfsItem}) */
 	</script>
-      
+	
 	<script>
+		var root = $('#addressModal .modal-body > .address');
 		function showAddress(pageNo) {
 			$('#addressModal').addClass("loading");
-			get({
-					url: '../addressbook.jsp',
-					param: $.param({ pageNo })
-				}
-				, function (response) {
-					const a = response.addrArr;
-				    search = a.search;
-				   	if (a.length > 0) {
-				    	var tpl = '<div class="item" style="margin: 0 ; border-radius: 0">
-									<div class="head">
-								      <div class="nickname-format xl">
-								        <label>기본</label>
-								        <h5>{addrName}</h5>
-								      </div>
-								      <ul class="info" style="margin-top:15px; padding-left:1px;">
-								        <li>
-								          <p>{name}</p>
-								        </li>
-								        <li>
-								          <p>{tel}</p>
-								        </li>
-								        <li>
-								          <p>({zipCode}) {addr} {addrDetail}</p>
-								        </li>
-								      </ul>
-								    </div>
-								    <div class="tail">
-								      <button type="button" class="adapt-address rounded-button">선택</button>
-								    </div>
-								  </div>';
-				        var root = $('#addressModal .modal-body > .address');
-				        
-				        $.each(a, function (i, v) {
-							for (var key of Object.keys(v)) {
-				            	var regex = new RegExp('\{' + key + '\}')
-				            	tpl = tpl.replace(regex, v[key]);
-				          	} // for
-							var el = $(tpl).data("item", v);
-					        if (v.defaultAddr != 'Y') {
-					        	el.find("label").remove();
-							} // if
-							root.append(el);
-						});
-				        var hasNext = r.data[0].totalCount > $('#addressModal .modal-body > .address > *').length;
-				        if (hasNext) {
-				        	root.next().show().click(function () {
-				            	showAddress(pageNo + 1);
+			$.ajax({
+					url: '/order/addressBook.do'
+					, dataType: "json"
+					, cache: false
+					, type:"GET"
+					, data: { pageNo: pageNo }
+					, success: function(response){
+						const a = response.addrArr;
+						if (a.length > 0) {
+							var tpl = null;
+					        $.each(a, function (i, addr) {
+						    	tpl = '<div class="item" style="margin: 0 ; border-radius: 0">'
+											+ '<div class="head">'
+												+ '<div class="nickname-format xl">'
+													+ '<label>기본</label>'
+													+ '<h5>'+ addr.addrName +'</h5>'
+										     	+ '</div>'
+										    	+ '<ul class="info" style="margin-top:15px; padding-left:1px;">'
+										       		+ '<li>'
+										        		+ '<p>'+addr.name+'</p>'
+										        	+ '</li>'
+										        	+ '<li>'
+										          		+ '<p>'+addr.tel+'</p>'
+										        	+ '</li>'
+										        	+ '<li>'
+										          		+ '<p>('+addr.zipCode+') '+addr.addr +" "+ addr.addrDetail+'</p>'
+										          		+ '<p style="display: none">'+addr.addr+'</p>'
+										          		+ '<p style="display: none">'+addr.addrDetail+'</p>'
+										          		+ '<p style="display: none">'+addr.memo+'</p>'
+										        	+ '</li>'
+										      	+ '</ul>'
+										    + '</div>'
+										    + '<div class="tail">'
+										    	+ '<button type="button" class="adapt-address rounded-button">선택</button>'
+										    + '</div>'
+										+ '</div>';
+								var el = $(tpl).data("item", addr);
+						        if (addr.defaultAddr != '1') {
+						        	el.find("label").remove();
+								} // if
+								root.append(el);
 							});
-				        } else {
-				        	root.next().hide();
-				        } // if
-						$('#addressModal').removeClass("loading")
-					} else if (pageNo == 0) {
-				    	alert('등록된 주소록이 없습니다.');
-						$('#addressModal').modal("hide");
-					} // if
-				} // function
-			) // get
+					        
+					        root.find(".adapt-address").on("click", function () {
+								$('#addressModal').modal('hide');
+								let pTags = $(this).parent().parent().find("p");
+					            $("#receiver").val(pTags.eq(0).text());      // 수령인
+					            $("#tel").val(pTags.eq(1).text());            // 전화번호
+					            $("#zipcode").val(pTags.eq(2).text().substr(1, 5));   // 우편번호
+					            $("#addrRoad").val(pTags.eq(3).text());
+					            $("#addrDetail").val(pTags.eq(4).text());
+					            $("#memo").val(pTags.eq(5).text());
+							});
+					        
+					        var hasNext = a[0].totalCount > $('#addressModal').find('.item').length;
+					        if (hasNext) {
+					        	root.next().show().click(function () {
+					            	showAddress(pageNo + 1);
+								});
+					        } else {
+					        	root.next().hide();
+					        } // if
+							$('#addressModal').removeClass("loading")
+						} else if (pageNo == 0) {
+					    	alert('등록된 주소록이 없습니다.');
+							$b('#addressModal').modal("hide");
+						} // if
+					} // success
+					, error : function () {
+						alert("error");
+					} // error
+			}) // ajax
+			
+			$('body').addClass("modal-open");
+			$('#addressModal').addClass("show");
 		} // showAddress
-        /*
-        $(".adapt-address").on("click", function() {
-            // 모달 창 닫기
-            $("#addressModal").dialog("close");
-            // value 수정
-            let pTags = $(this).parent().parent().find("p");
-            $("#drk_receiver").val(pTags.first().text());      // 수령인
-            $("#drk_tel").val(pTags.eq(1).text());            // 전화번호
-            $("#zipcode").val(pTags.eq(2).text().substr(1, 5));   // 우편번호
-            $("#addrRoad").val(pTags.eq(3).text());            // 도로명 주소
-            $("#addrDetail").val(pTags.eq(4).text());         // 상세주소
-            $("#memo").val(pTags.eq(5).text());               // 메모
-        });
-		*/
+		
+		$("#addressBtn").on("click", function() {
+			root.empty();
+			showAddress(0);
+		});
 	</script>
 
 	<script>
@@ -513,6 +485,4 @@ public class Test {
 	</script>
 
 </body>
-   </html>
-   
-}
+</html>

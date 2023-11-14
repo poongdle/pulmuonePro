@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.order.box.OrderCouponDTO;
+import domain.order.box.OrderMemberInfoDTO;
 import domain.order.box.BoxOrderProductDTO;
+import domain.order.box.OrderAddrBookDTO;
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import persistence.order.BoxOrderDAO;
@@ -60,4 +62,19 @@ public class BoxOrderService {
 		} // try
 	} // selectCoupon()
 	
+	public OrderMemberInfoDTO getNameAndTel(int memberNo) {
+		try {
+			conn = ConnectionProvider.getConnection();
+			BoxOrderDAO dao = BoxOrderDAO.getInstance();
+			OrderMemberInfoDTO dto = null;
+			dto = dao.getNameAndTel(conn, memberNo);
+			return dto;
+		} catch (Exception e) {
+			System.out.println("BoxOrderService.getNameAndTel() 에러");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(conn);
+		} // try
+	} // getNameAndTel()
 }

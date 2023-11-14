@@ -11,7 +11,9 @@ import domain.order.box.BoxOrderDTO;
 import domain.order.box.BoxOrderProductDTO;
 import domain.order.box.BoxPayDTO;
 import domain.order.box.BoxShipDTO;
+import domain.order.box.OrderAddrBookDTO;
 import domain.order.box.OrderCouponDTO;
+import domain.order.box.OrderMemberInfoDTO;
 import jdbc.JdbcUtil;
 
 public class BoxOrderDAO implements BoxOrderImpl {
@@ -25,8 +27,8 @@ public class BoxOrderDAO implements BoxOrderImpl {
 	
 	@Override
 	public ArrayList<BoxOrderProductDTO> selectProducts(Connection conn, String [] productsNo) throws SQLException {
-		String sql = " SELECT p.products_no, category_no, products_name, products_type, products_size, price, event_price, img_path, origin_name "
-				+ " FROM products p JOIN products_img i ON p.products_no = i.products_no "
+		String sql = " SELECT DISTINCT p.products_no, category_no, products_name, products_type, products_size, price, event_price, img_path, origin_name "
+				+ " FROM products p LEFT JOIN products_img i ON p.products_no = i.products_no "
 				+ " WHERE p.products_no IN( ";
 				for(int i = 0; i <= productsNo.length; i++) {
 					sql += productsNo[0]+", ";
@@ -64,13 +66,12 @@ public class BoxOrderDAO implements BoxOrderImpl {
 			JdbcUtil.close(pstmt);
 			JdbcUtil.close(rs);
 		} // try
-		
 		return list;
 	} // selectProducts
 
 	@Override
 	public int getProductsPrice(Connection conn, String[] productsNo) {
-		String sql = " SELECT SUM(price) "
+		String sql = " SELECT SUM(price) price"
 				+ " FROM products "
 				+ " WHERE products_no IN ( ";
 		for (int i = 0; i < productsNo.length; i++) {
@@ -103,9 +104,9 @@ public class BoxOrderDAO implements BoxOrderImpl {
 
 	@Override
 	public ArrayList<OrderCouponDTO> selectCoupon(Connection conn, int memberNo, int priductsPrice) throws SQLException {
-		String sql = " SELECT coupon_name, discount "
+		String sql = " SELECT h.coupon_no, coupon_name, discount, duplication, max_discount "
 				+ " FROM have_coupon h JOIN coupon c ON h.coupon_no = c.coupon_no "
-				+ " WHERE member_no = " + memberNo + " AND delivery_type = 1 AND used = 0 AND c.discount <= " + priductsPrice;
+				+ " WHERE member_no = " + memberNo + " AND delivery_type = 1 AND used = 0 AND NVL(c.discount, discount) <= " + priductsPrice;
 		
 		OrderCouponDTO dto = null;
 		ArrayList<OrderCouponDTO> list = null;
@@ -119,8 +120,11 @@ public class BoxOrderDAO implements BoxOrderImpl {
 				list = new ArrayList<>();
 				do {
 					dto = new OrderCouponDTO();
+					dto.setCouponNo(rs.getInt("coupon_no"));
 					dto.setCouponName(rs.getString("coupon_name"));
-					dto.setDiscount(rs.getInt("discount"));
+					dto.setDiscount(rs.getDouble("discount"));
+					dto.setDuplication(rs.getInt("duplication"));
+					dto.setMaxDiscount(rs.getInt("max_discount"));
 					list.add(dto);
 				} while (rs.next());
 			} // if
@@ -135,6 +139,37 @@ public class BoxOrderDAO implements BoxOrderImpl {
 		return list;
 	} // selectCoupon
 
+	@Override
+	public OrderMemberInfoDTO getNameAndTel(Connection conn, int memberNo) throws SQLException {
+		String sql = " SELECT name, tel "
+				+ " FROM member "
+				+ " WHERE member_no = " + memberNo;
+		
+		OrderMemberInfoDTO dto = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					dto = new OrderMemberInfoDTO();
+					dto.setName(rs.getString("name"));
+					dto.setTel(rs.getString("tel"));
+				} while (rs.next());
+			} // if
+		} catch (Exception e) {
+			System.out.println("BoxOrderDAO getNameAndTel() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);
+		} // try
+		
+		return dto;
+	} // getNameAndTel
+	
 	@Override
 	public int insertBoxOrder(Connection conn, BoxOrderDTO dto) throws SQLException {
 		// TODO Auto-generated method stub

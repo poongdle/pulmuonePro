@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.cj.Session;
-
 import domain.order.box.OrderCouponDTO;
+import domain.order.box.OrderMemberInfoDTO;
 import domain.order.box.BoxOrderProductDTO;
+import domain.order.box.OrderAddrBookDTO;
 import mvc.command.CommandHandler;
 import service.order.box.BoxOrderService;
 
@@ -26,12 +26,15 @@ public class BoxOrder implements CommandHandler {
 		BoxOrderService service = BoxOrderService.getInstanse();
 		
 		ArrayList<BoxOrderProductDTO> plist = service.selectProducts(productsNo);
-		// ArrayList<AddrBookDTO> alist = service.selectAddrBook(memberNo);
+		OrderMemberInfoDTO miDto = service.getNameAndTel(memberNo);
 		ArrayList<OrderCouponDTO> clist = service.selectCoupon(memberNo, productsNo);
 		request.setAttribute("productList", plist);
+		request.setAttribute("miDto", miDto);
 		if (clist != null) {
 			request.setAttribute("couponList", clist);
 		} // if
+		
+		 
 		
 		return "/WEB-INF/views/order/box/step1.jsp";
 	} // process()
