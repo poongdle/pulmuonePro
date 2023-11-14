@@ -101,7 +101,7 @@ public class EventDAO implements IEvent{
 	                + "              		et.img_no, et.system_name, et.origin_name, et.img_size, et.img_type, et.img_path "
 	                + "				   FROM event e LEFT JOIN event_thumbnail et ON e.event_no = et.event_no "
 	                + "				   WHERE event_end < SYSDATE "
-	                + "                ORDER BY e.event_no DESC "
+	                + "                ORDER BY e.event_end DESC, e.event_no DESC "
 	                + "        ) t"
 	                + ") "
 	                + "WHERE no BETWEEN ? AND ?";

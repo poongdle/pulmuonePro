@@ -13,7 +13,7 @@
 			style="padding-right: 4px; margin-bottom: 0px; height: 47px">진행중이벤트</a>
 		</li>
 		<li class="nav-item" role="presentation">
-			<a href="/event/event/end/list.do" class="nav-link <%= requestURI.contains("/event/end/list") ? "active" : "" %>"
+			<a href="/event/event/end/list.do" class="nav-link <%= requestURI.contains("/event/end/EndList") ? "active" : "" %>"
 			style="padding-right: 4px; margin-bottom: 0px; height: 47px">종료된이벤트</a>
 		</li>
 		<li class="nav-item" role="presentation">

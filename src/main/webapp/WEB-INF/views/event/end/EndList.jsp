@@ -25,7 +25,7 @@
 
 							<c:forEach var="event" items="${endEvent}">
 								<li>
-									<a href="/event/event/view/${event.event_no}" class="disabled" onclick="return false">
+									<a href="/event/event/view.do?event_no=${event.event_no}" class="disabled" onclick="return false">
 										<div class="img-area">
 										    <img src="${event.thumbnail.img_path}" alt="${event.event_name}">
 										</div>
