@@ -10,6 +10,7 @@ import servlets.faq.model.FaqDTO;
 import servlets.faq.model.PageDTO;
 import servlets.faq.service.FaqListService;
 
+
 public class FaqList implements CommandHandler {
 	
 	private FaqListService listService = new FaqListService();

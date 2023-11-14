@@ -189,7 +189,7 @@
 		$("#searchForm").submit(function(e){
 			$("#category").val("");
 		})
-		
+
 		$pageItem.each(function(i, el) {
 			let aparam = $(this).data("param");
 			$(this).attr("href", `/forum/faq/list.do?category=${ param.category }&pageNo=\${aparam}`)
