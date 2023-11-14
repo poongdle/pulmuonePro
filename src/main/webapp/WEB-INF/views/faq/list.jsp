@@ -1,4 +1,4 @@
-<%@page import="servlets.faq.model.PageDTO"%>
+<%@page import="servlets.utils.PageDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String category = request.getParameter("category");
@@ -9,7 +9,7 @@
 	<div class="wrapper">
 
 		<%@ include file="/WEB-INF/views/layouts/header.jsp" %>
-		<main class="page faq">
+		<main class="page faq forum">
 			<div class="container">
 				<div class="breadcrumb-style">
                     <div class="wrap">

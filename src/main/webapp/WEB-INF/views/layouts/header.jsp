@@ -48,7 +48,6 @@
 			</nav>
 		</div>
 		<div class="member-search-area">
-<<<<<<< HEAD
 			<div class="head-util-area">
 				<u:isLogin>
 					<p class="welcome">
@@ -68,26 +67,6 @@
 					<div class="counter hide" data-cart-size=""></div> <i class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
 				</a>
 			</div>
-=======
-
-			
-				<div class="head-util-area">
-					<a href="/mypage" data-require-login="true">
-						<i class="ico ico-myIcon"></i>
-						<span class="hide">로그인 페이지 / 마이 페이지로 가기</span>
-					</a>
-					<a href="/cart/daily">
-						<div class="counter hide" data-cart-size=""></div>
-						<i class="ico ico-cart1"></i>
-						<span class="hide">장바구니로 가기</span>
-					</a>
-				</div>
-			
-
-			
-
-
->>>>>>> branch 'develop' of https://github.com/dhl1031/pulmuonePro.git
 			<form class="search-area" action="/product/search">
 				<input type="text" id="" name="searchKeyword" value="" title="검색어 입력">
 				<button>
