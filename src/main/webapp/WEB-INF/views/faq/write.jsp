@@ -71,7 +71,6 @@
 								<div class="form-input editor">
 											
 											<textarea maxlength="500" data-max="500" id="content" name="answer" placeholder="내용을 입력하세요."></textarea>
-											<input type="hidden" id="contents" name="contents">
 						
 									<div class="count" id="word-count" ><span class="current-char">0</span> / <span class="maxtext">500</span></div>
 								</div>
@@ -133,7 +132,9 @@
        .catch( error => {
            console.error( error );
        } );
-			
+	
+	let isSubmit = false;
+	
 	// title valid check
 	$("#title").on("blur", function(){
 		if( $(this).val() == "" ) {
@@ -148,6 +149,7 @@
 		$(":input[name=cate]").val(val);
 		$(".faq_cate .dropdown-toggle").text($(this).text());
 	})
+	
 	
 	// valid check
 	$("#faqWriteBtn").on("click", function(e){
@@ -166,8 +168,37 @@
 			return false;
 		}
 		
-		$("#faqForm").submit();
-	})
+		ajaxWrite();
+	});
+	
+	function ajaxWrite () {
+		let params = "";
+		let cate = $("input[name=cate]").val();
+		let question = $("input[name=question]").val();
+		let answer = editor.getData();
+		params += `cate=\${ cate }&question=\${ question }&answer=\${ answer }`;
+		
+		$.ajax({
+			url: "/forum/faq/write.do",
+			dataType: "json",	
+			type: "POST",
+			data: params,
+			cache: false,
+			success: function(data, textStatus, jqXHR){
+				if( data.result == 1 ) {
+					$(".modal-body").text("FAQ 글이 등록 되었습니다.");	
+					$("#alertModal").modal();
+					
+					$("#alertModal").on("click", function(e){
+						location.href = data.url;
+					})
+				}
+			},
+			error: function(){
+				console.log("error!");
+			}
+		});
+	}
 	
 </script>
 

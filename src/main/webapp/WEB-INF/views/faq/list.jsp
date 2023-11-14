@@ -181,6 +181,7 @@
 			$(this).attr("href", `/forum/faq/list.do?category=${ param.category }&pageNo=\${aparam}`)
 		})
 		
+		// faq delete 
 		$(".faqDelete").on("click", function(e){
 			e.preventDefault();
 			let seq = $(this).data("seq");
@@ -194,8 +195,8 @@
 				cache: false,
 				success: function(data, textStatus, jqXHR){
 					if( data.result == 1 ) {
-						$("#alertModal").modal();
 						$(".modal-body").text("FAQ 글이 삭제 되었습니다.");	
+						$("#alertModal").modal();
 						
 						$("#alertModal").on("click", function(e){
 							location.href = data.url;
@@ -207,6 +208,8 @@
 				}
 			});
 		})
+		
+	
 	})
 </script>
 </body>

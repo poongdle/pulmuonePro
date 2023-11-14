@@ -1,12 +1,14 @@
 package servlets.faq.command;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mvc.command.CommandHandler;
+import net.sf.json.JSONObject;
 import servlets.faq.model.FaqDTO;
 import servlets.faq.service.FaqWriteService;
-import servlets.notice.model.NoticeDTO;
 
 public class FaqWrite implements CommandHandler {
 	
@@ -19,7 +21,8 @@ public class FaqWrite implements CommandHandler {
 			return "/WEB-INF/views/faq/write.jsp";
 		}else {
 
-			response.setContentType("text/html; charset=UTF-8");
+			//response.setContentType("text/html; charset=UTF-8");
+			response.setContentType("application/x-json; charset=UTF-8");
 			
 			int cate = Integer.parseInt( request.getParameter("cate") );
 			String question = request.getParameter("question");
@@ -42,14 +45,20 @@ public class FaqWrite implements CommandHandler {
 			String location = "";
 
 			if( insertRow == 1) {
-				location = "/forum/faq/list.do?status=success";
+				location = "/forum/faq/list.do?category=" + cate;
 			}else {
 				location = "/forum/faq/write.do?status=fail";
 			}
+			
+			// {}
+			JSONObject jsonData = new JSONObject();
+			jsonData.put("result", insertRow);
+			jsonData.put("url", location);
 
-			request.setAttribute("writed", insertRow);
+			PrintWriter out = response.getWriter();
+			
+			out.println(jsonData);
 
-			response.sendRedirect(location);
 			return null;
 		}
 	}

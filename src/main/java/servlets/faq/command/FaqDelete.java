@@ -24,7 +24,7 @@ public class FaqDelete implements CommandHandler {
 		if( pseq != null || pseq != "" ) {
 			seq = Integer.parseInt(pseq);
 		}
-		String location = "/forum/faq/list.do?seq=" +seq; 
+		String location = "/forum/faq/list.do?category="+category; 
 
 		System.out.println(seq);
 
