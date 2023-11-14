@@ -27,13 +27,16 @@
 		<div class="member-search-area">
 			<div class="head-util-area">
 				<u:isLogin>
-					<span><c:out value="${ auth.getName() }" /> 님, 건강한 습관 풀무원녹즙입니다.</span>   
-					<a href="/member/logout.do">로그아웃(임시)</a>
+					<p class="welcome">
+						<b style="margin: 0;"><c:out value="${ auth.getName() }" /> <a href="/member/logout.do" type="button" class="logout-btn">로그아웃</a></b>님, 건강한 습관 풀무원녹즙입니다.
+<%-- 						<b style="margin: 0;"><%= auth.getName() %> <a href="/member/logout.do" type="button" class="logout-btn">로그아웃</a></b>님, 건강한 습관 풀무원녹즙입니다. --%>
+					</p>
+<!-- 					<a href="/member/logout.do">로그아웃(임시)</a> -->
 				</u:isLogin>
 				<u:notLogin>
-					<a href="/member/login.do">로그인 버튼(임시)</a>				
+<!-- 					<a href="/member/login.do">로그인 버튼(임시)</a>				 -->
 				</u:notLogin>
-				<a href="/mypage" data-require-login="true"> 
+				<a href="/mypage.do" data-require-login="true"> 
 					<i class="ico ico-myIcon"></i>
 					<span class="hide">로그인 페이지 / 마이 페이지로 가기</span>
 				</a>
@@ -168,3 +171,19 @@
 		</div>
 	</div>
 </header>
+
+<script type="text/javascript">
+
+	$('.logout-btn').click(function (){
+	    if(confirm('로그아웃 하시겠습니까?')){
+	
+	    }
+	})
+	$(document).ready(function(){
+	    $('.welcome b').hover(function() {
+	        $('.logout-btn').stop().fadeIn('500');
+	    }, function(){
+	        $('.logout-btn').stop().fadeOut('500');
+	    });
+	});
+</script>

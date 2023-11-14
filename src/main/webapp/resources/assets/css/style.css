@@ -258,6 +258,19 @@ header.main_header #gnb > ul > li:focus > a {
   margin: 0;
 }
 
+.head-util-area .logout-btn:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -8px;
+    left: 0;
+    z-index: 1;
+    width: 11px;
+    height: 11px;
+    background: #fff url(/resources/assets/images/box-buddy02.png) no-repeat;
+    background-size: 11px;
+}
+
 #lnb-item {
   display: none;
   position: absolute;

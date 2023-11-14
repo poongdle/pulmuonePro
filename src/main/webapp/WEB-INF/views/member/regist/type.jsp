@@ -143,110 +143,33 @@
 	}
 </style>
 
+<style> /* 일반 아이디로 회원가입 */
 
-<style> /* 아이디 입력 칸 */
-
-	input[type="text" i] {
-	    writing-mode: horizontal-tb !important;
-	    padding-block: 1px;
-	    padding-inline: 2px;
-	}
-
-	input {
-/* 	    font-style: ; */
-/* 	    font-variant-ligatures: ; */
-/* 	    font-variant-caps: ; */
-/* 	    font-variant-numeric: ; */
-/* 	    font-variant-east-asian: ; */
-/* 	    font-variant-alternates: ; */
-/* 	    font-variant-position: ; */
-/* 	    font-weight: ; */
-/* 	    font-stretch: ; */
-/* 	    font-size: ; */
-/* 	    font-family: ; */
-/* 	    font-optical-sizing: ; */
-/* 	    font-kerning: ; */
-/* 	    font-feature-settings: ; */
-/* 	    font-variation-settings: ; */
-	    text-rendering: auto;
-	    color: fieldtext;
-	    letter-spacing: normal;
-	    word-spacing: normal;
-	    line-height: normal;
-	    text-transform: none;
-	    text-indent: 0px;
-	    text-shadow: none;
-	    display: inline-block;
-	    text-align: start;
-	    appearance: auto;
-	    -webkit-rtl-ordering: logical;
-	    cursor: text;
-	    background-color: field;
-	    margin: 0em;
-	    padding: 1px 0px;
-	    border-width: 2px;
-	    border-style: inset;
-	    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-	    border-image: initial;
-	    padding-block: 1px;
-	    padding-inline: 2px;
-	}
-		
-	button, input, optgroup, select, textarea {
-	    font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Helvetica Neue', Helvetica, sans-serif;
-	    -webkit-font-smoothing: antialiased !important;
-	    -webkit-backface-visibility: hidden;
-	    -moz-backface-visibility: hidden;
-	    -ms-backface-visibility: hidden;
-	    margin: 0;
-	    font-family: inherit;
-	    font-size: inherit;
-	    line-height: 1.4;
-	    
-	}
-	
-	.form-input input {
-	    overflow: hidden;
-	    outline: none;
-	    text-overflow: ellipsis;
-	    white-space: nowrap;
-	    display: flex;
-	    flex: 1;
-	    font-size: 16px;
-	    letter-spacing: -1.2px;
-	    color: #333;
-	    padding: 0 22px;
-	    height: 100%;
-	    font-weight: 400;
-	}
-	
-	.form-input dl {
-	    display: flex;
-	    flex: 1;
-	    align-items: stretch;
-	    transition-duration: .2s;
-	    border: 1px solid #e5e5e5;
-	    background-color: #fff;
-	    height: 60px;
-	}
-	
-	.form-input.none-dt dt {
-	    display: none;
-	}
-	
-	.form-input dt {
-	    min-width: 114px;
-	    padding-left: 22px;
-	    display: flex;
-	}
-	
-	.form-input dd {
-    display: flex;
-    flex: 1;
-    justify-content: space-between;
+.button-basic.prefix {
+    justify-content: flex-start;
+    padding: 0 20px;
     align-items: center;
 }
-	</style>
+
+.button-basic.prefix i {
+    width: 30px;
+    height: 30px;
+    margin-right: 16px;
+}
+
+.button-basic.join {
+    background: #fff;
+    color: #333;
+    border: 1px #e5e5e5 solid;
+}
+
+.button-basic.join i {
+    background: url(/resources/assets/images/ico_button_char.png) no-repeat;
+}
+
+</style>
+
+
 
 <style> /* 닫기 버튼 */
 
@@ -355,77 +278,8 @@
 	}
 </style>
 
-<style> /* 체크박스 */
-
-	.check-type {
-	    margin-top: 14px;
-	    position: relative;
-	    display: flex;
-	    align-items: center;
-	    height: 32px;
-	    margin-bottom: 20px;
-	}
-
-	.check-type input {
-	    display: none;
-	}
-	input[type=checkbox], input[type=radio] {
-	    box-sizing: border-box;
-	    padding: 0;
-	
-	}
-	
-	input[type="checkbox" i] {
-	    background-color: initial;
-	    cursor: default;
-	    appearance: auto;
-	    box-sizing: border-box;
-	    margin: 3px 3px 3px 4px;
-	    padding: initial;
-	    border: initial;
-	}
-	
-	.check-type span {
-	    font-size: 14px;
-	    padding-left: 49px;
-    }
-    
-    .check-type input+span:before {
-	    position: absolute;
-	    left: 0;
-	    top: 0;
-	    content: '';
-	    transition-duration: .2s;
-	    width: 32px;
-	    height: 32px;
-	    border-radius: 50%;
-	    background: #e5e5e5 url(/resources/assets/images/ico_check_solo_wt.png) no-repeat center center;
-	}
-    
-   
-	
-</style>
 
 
-<style> /* 로그인 버튼 하단 링크 3종*/
-
-	.addiction-button-group {
-	    margin-top: 20px;
-	    text-align: center;
-	}
-	
-	.addiction-button-group a {
-	    line-height: 1;
-	    font-size: 14px;
-	    color: #666;
-	    letter-spacing: -1px;
-	    font-weight: 300;
-	    padding: 0 20px;
-	    display: inline-block;
-	}
-
-
-</style>
 
 
 <style> /* 로그인과 회원가입용 footer */
@@ -518,77 +372,43 @@ img {
 		</div>
 <!-- 		<main class="page event"> -->
 <!-- 			<div class="container"> -->
-<!-- 				현재 위치 : /WEB-INF/views/member/login.jsp <br> -->
-				<br>
-				<div class="account-wrapper">
-					<div class="textrow-layout">
-			            <h2 class="title">
-			                사용중인 <b>소셜 아이디</b>로<br/>
-			                로그인합니다.
-			            </h2>
-			            <div class="content">
-			                <div class="button-set vertical">
-			                    <a href="https://kauth.kakao.com/oauth/authorize?client_id=4631f2522dc407a8035e73aaa5d1bd17&redirect_uri=https://greenjuice.pulmuone.com/sns/kko&response_type=code&scope=account_ci,phone_number,name,birthyear,birthday,gender,account_email&state=%7B%7D" class="button-basic prefix kakao">
-			                        <i class="ico"></i>
-			                        카카오 아이디로 로그인
-			                    </a>
-			                    <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=i7eb3o1oVsnPsxrI4jQ5&redirect_uri=https://greenjuice.pulmuone.com/sns/naver&state=1209129162018274959608217296717663309111&state=%7B%7D" class="button-basic prefix naver">
-			                        <i class="ico"></i>
-			                        네이버 아이디로 로그인
-			                    </a>
-			                </div>
-			            </div>
-			        </div>
-		        </div>
-				
-				<br>
-				<br>
-				<div class="account-wrapper">
-					<div class="textrow-layout">
-					    <h2 class="title">
-			                <b>일반회원</b>으로<br/>
-			                로그인합니다.
-			            </h2>
-			            <div class="content">
-							<form action="/member/login.do" method="post">
-								<div class="form-input none-dt">
-			                        <dl>
-			                            <dd>
-			                                <input type="text" id="loginId" name="memberId" placeholder="아이디" value="aaaaaaaa"/>
-			                            </dd>
-			                        </dl>
-			                    </div>
-			                    <div class="form-input none-dt">
-			                        <dl>
-			                            <dd>
-			                                <input type="password" id="loginPwd" name="pwd" placeholder="비밀번호" autocomplete="off" value="a1234567!"/>
-			                            </dd>
-			                        </dl>
-			                    </div>
-			
-								<div style="display: flex; flex-direction: row">
-									<label class="check-type">
-										<input type="checkbox"name="rememberUser" value="Y" /> <span id="auto-login">자동 로그인</span>
-									</label> 
-									<label class="check-type" style="margin-left: 25px">
-										<input type="checkbox" name="rememberId" id="rememberId" value="Y" /> <span>아이디 저장</span>
-									</label>
-								</div>
-								
-								<input type="submit" id="loginBtn" class="button-basic border" value="로그인">
-								
-							</form>
-						
-							<div class="addiction-button-group">
-			                    <a href="/member/regist/type.do">회원가입</a>
-			                    <a href="/member/find/id.do">아이디 찾기</a>
-			                    <a href="/member/find/password.do">비밀번호 찾기</a>
-			                </div>
-			        	</div>        
-                	</div>
-				</div>
+<!-- 				현재 위치 :  <br> -->
 <!-- 			</div> -->
 <!-- 		</main> -->
+		<div class="account-wrapper lg" style="width: 680px">
+        <div class="textrow-layout" style="padding-top:40px; margin-bottom: 21px">
+            <h2 class="title">
+                사용중인 <b>카카오 아이디</b>로<br>
+                회원가입합니다.
+            </h2>
+            <div class="content">
+                <div class="button-set vertical">
+                    <a class="button-basic prefix kakao" href="/member/regist/social.do?type=K" style="padding: 0 24px; font-size: 16px">
+                        <i class="ico" style="margin-right: 19px"></i>
+                        카카오 아이디로 회원가입
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="textrow-layout" style="padding-top: 79px">
+            <h2 class="title">
+                <b>네이버 또는 일반회원</b>으로<br>
+                회원가입합니다.
+            </h2>
+            <div class="content">
+                <div class="button-set vertical">
+                    <a href="/member/regist/social.do?type=N" class="button-basic prefix naver" style="font-size: 16px">
+                        <i class="ico" style="margin-right: 21px"></i>
+                        네이버 아이디로 회원가입
+                    </a>
+                    <a href="/member/regist/step1.do" class="button-basic prefix join" style="font-size: 16px">
+                        <i class="ico" style="margin-right: 21px"></i>
+                        일반 아이디로 회원가입
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 		<div class="separate-wrapper">
 		    <div class="account-wrapper lg">
 		        <h2 class="title">

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import auth.AuthInfo;
 import mvc.command.CommandHandler;
 import servlets.member.dto.MemberDTO;
-import servlets.member.service.MemberLoginService;
+import servlets.member.service.MemberService;
 
 public class MemberLogin implements CommandHandler{
 
@@ -32,8 +32,8 @@ public class MemberLogin implements CommandHandler{
 			
 			System.out.println(memberId + " " + pwd);
 			
-			MemberLoginService loginService = new MemberLoginService();
-			MemberDTO dto = loginService.login(memberId, pwd);
+			MemberService memberService = new MemberService();
+			MemberDTO dto = memberService.login(memberId, pwd);
 			
 			
 			if (dto != null) {

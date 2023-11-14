@@ -23,7 +23,23 @@ public class MemberDAOImpl implements MemberDAO {
 
 	private Connection conn = null;
 	
+//	int memberNo;
+//	String memberId;
+//	String pwd;
+//	String name;
+//	String tel;
+//	String email;
+//	Date birthdate;
+//	String invCode;
+//	int interestCode1;
+//	int interestCode2;
+//	int interestCode3;
+//	String naverToken;
+//	String kakaoToken;
+//	int adApproval;
+//	int marketingApproval;
 	
+	// 1. 로그인 용도
 	@Override
 	public MemberDTO selectOne(String memberId, String pwd) throws SQLException {
 		
@@ -31,9 +47,9 @@ public class MemberDAOImpl implements MemberDAO {
 				+ " FROM member "
 				+ " WHERE member_id = ? AND pwd = ? ";
 		
-		System.out.println(sql);
-		System.out.println(memberId);
-		System.out.println(pwd);
+//		System.out.println(sql);
+//		System.out.println(memberId);
+//		System.out.println(pwd);
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -42,20 +58,8 @@ public class MemberDAOImpl implements MemberDAO {
 		MemberDTO dto = null;
 
 		int memberNo;
-//		String memberId;
-//		String pwd;
 		String name;
-//		String tel;
-//		String email;
-//		Date birthdate;
-//		String invCode;
-//		int interestCode1;
-//		int interestCode2;
-//		int interestCode3;
-//		String naverToken;
-//		String kakaoToken;
-//		int adApproval;
-//		int marketingApproval;
+
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -97,6 +101,73 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public MemberDTO selectOne(String name, String tel, Date birthDate) throws SQLException {
+		
+		String sql = "SELECT * " 
+				+ " FROM member "
+				+ " WHERE name = ? AND tel = ?  AND birthdate = ? ";
+		
+		System.out.println(sql);
+		System.out.println(name);
+		System.out.println(tel);
+		System.out.println(birthDate);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		
+		MemberDTO dto = null;
+
+		String memberId;
+		Date regDate;
+
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, name);	
+			pstmt.setString(2, tel);
+			pstmt.setDate(3, birthDate);
+		
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+				do {
+					memberId = rs.getString("member_id");
+					regDate = rs.getDate("regDate");
+					
+					
+					dto = MemberDTO.builder().memberId(memberId).regDate(regDate)
+							.build();
+				} while (rs.next());
+				
+			} else {
+				System.out.println("MemberDAOImpl_selectOne : Invaild name / tel / birthDate");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		return dto;
+	}
+
+
+	
+	
+	
+	@Override
 	public int insert(MemberDTO dto) throws SQLException {
 		int rowCount = 0;
 
@@ -112,7 +183,7 @@ public class MemberDAOImpl implements MemberDAO {
 			pstmt.setString(3, dto.getName());
 			pstmt.setString(4, dto.getTel());
 			pstmt.setString(5, dto.getEmail());
-			pstmt.setDate(6, dto.getBirthdate());
+			pstmt.setDate(6, dto.getBirthDate());
 			pstmt.setString(7, dto.getInvCode());
 			pstmt.setInt(8, dto.getInterestCode1());
 			pstmt.setInt(9, dto.getInterestCode2());
@@ -121,6 +192,7 @@ public class MemberDAOImpl implements MemberDAO {
 			pstmt.setString(12, dto.getKakaoToken());
 			pstmt.setInt(13, dto.getAdApproval());
 			pstmt.setInt(14, dto.getMarketingApproval());
+			pstmt.setDate(15, dto.getRegDate());
 
 			rowCount = pstmt.executeUpdate();
 
@@ -140,5 +212,12 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+
+
+
+
+
 
 }

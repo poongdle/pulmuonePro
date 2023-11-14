@@ -20,7 +20,7 @@ public class MemberDTO {
 	private String name;
 	private String tel;
 	private String email;
-	private Date birthdate;
+	private Date birthDate;
 	private String invCode;
 	private int interestCode1;
 	private int interestCode2;
@@ -29,6 +29,7 @@ public class MemberDTO {
 	private String kakaoToken;
 	private int adApproval;
 	private int marketingApproval;
+	private Date regDate;
 	
 //	"MEMBER_NO" NUMBER, 
 //	"MEMBER_ID" VARCHAR2(15 BYTE), 
