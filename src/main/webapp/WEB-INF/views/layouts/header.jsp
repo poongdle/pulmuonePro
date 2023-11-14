@@ -61,9 +61,6 @@
 				</div>
 			
 
-			
-
-
 			<form class="search-area" action="/product/search">
 				<input type="text" id="" name="searchKeyword" value="" title="검색어 입력">
 				<button>
