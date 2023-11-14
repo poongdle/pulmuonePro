@@ -1,14 +1,25 @@
 $(function(){
-  
-    $(".btn-menu, .gnb-close").on("click", toggleMenu);
+    $(".dropdown-toggle").on("click", function(){
+        
+        $(this).next().toggleClass("show")
+    })
+
+    $("html").on("click", function(e){
+        if( !$(".dropdown").has(e.target).length ) {
+            $(".site-link .dropdown-menu").removeClass("show");
+        }
+    })
+
+    $(".btn-menu, .lnb-close").on("click", toggleMenu);
     function toggleMenu() {
-        if ($("#gnb-item").css("display") == "block") {
-          $("#gnb-item").slideUp();
+        if ($("#lnb-item").css("display") == "block") {
+          $("#lnb-item").slideUp();
         }
         else {
-          $("#gnb-item").slideDown();
+          $("#lnb-item").slideDown();
         }
     }
+
 
     $(document).on("click", "#pagable-list .card-header", function () {
         var card = $(this).parents(".card");
