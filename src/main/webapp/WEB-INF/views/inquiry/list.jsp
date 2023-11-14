@@ -20,44 +20,7 @@
             </div>
 	
 			<div class="page-wrap">
-				<div class="aside" id="mypage_lnb">
-	                      <h2 class="title">MY녹즙</h2>
-	                      <ul class="lnb-style">
-	                          <li class="indepth">
-	                              <a>매일배송 음용내역</a>
-	                              <ul class="sub-navigation">
-	                                  <li><a href="/mypage/drink/drink">음용내역</a></li>
-	                                  <li><a href="/mypage/drink/bill">영수증조회</a></li>
-	                              </ul>
-	                          </li>
-	                          <li>
-	                              <a href="/mypage/order/box">택배배송 주문내역</a>
-	                          </li>
-	                          <li>
-	                              <a href="/mypage/benefit/taste">시음선물내역</a>
-	                          </li>
-	                          <li>
-	                              <a href="/mypage/benefit/coupon">쿠폰</a>
-	                          </li>
-	                          <li class="indepth active">
-	                              <a>활동정보</a>
-	                              <ul class="sub-navigation">
-	                                  <li><a href="/mypage/action/interest">찜한상품</a></li>
-	                                  <li class="active"><a href="/mypage/action/counsel">1:1 문의</a></li>
-	                                  <li><a href="/mypage/action/review">리뷰</a></li>
-	                              </ul>
-	                          </li>
-	                          <li class="indepth">
-	                              <a>개인정보</a>
-	                              <ul class="sub-navigation">
-	                                  <li><a href="/mypage/personal/address">주소록</a></li>
-	                                  <li><a href="/mypage/personal/info">개인정보 변경</a></li>
-	                                  <li><a href="/mypage/drink/paymethod">결제수단 관리</a></li>
-	                                  <li><a href="/mypage/personal/refund">환불계좌 관리</a></li>
-	                              </ul>
-	                          </li>
-	                      </ul>
-	                  </div>
+				<%@ include file="/WEB-INF/views/layouts/mypage/aside.jsp" %>
 	
 				<div class="page-content">
 					
@@ -139,7 +102,7 @@
 			                                             <td class="t-left">
 			                                                 <b>${item.inquiry_cate }</b>
 			                                             </td>
-			                                             <td class="t-left"><a href="/mypage/inquiry/view.do?seq=${item.inquiry_no }">${item.title }</a></td>
+			                                             <td class="t-left"><a href="/mypage/inquiry/view.do?seq=${item.inquiry_no }&category=${ item.inquiry_cate}">${item.title }</a></td>
 			                                             <td class="number"><fmt:formatDate value="${item.regdate }" pattern="yyyy.MM.dd"/> </td>
 			                                             <td>
 			                                                 <span class="status">${item.status == 0 ? '답변대기' : '답변완료'  }</span>

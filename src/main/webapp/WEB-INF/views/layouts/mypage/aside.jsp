@@ -23,7 +23,7 @@
             <a>활동정보</a>
             <ul class="sub-navigation">
                 <li><a href="/mypage/action/interest">찜한상품</a></li>
-                <li class="active"><a href="/mypage/action/counsel">1:1 문의</a></li>
+                <li class="active"><a href="/mypage/inquiry/list.do">1:1 문의</a></li>
                 <li><a href="/mypage/action/review">리뷰</a></li>
             </ul>
         </li>
