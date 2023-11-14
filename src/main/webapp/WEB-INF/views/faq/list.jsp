@@ -26,12 +26,15 @@
 
 					<div class="page-content">
 						<form id="searchForm">
-							<input type="hidden" id="category" name="category" value="<%=category%>">
+							<input type="hidden" id="category" name="category" value="<%=category == null ? "" : category%>">
 							<div class="border-wrapper">
 								<h2 class="container-title">
 									FAQ
 								</h2>
 							</div>
+							<div class="list-head" style="margin-bottom: 0; text-align: right;">
+	                        	<div><a href="/forum/faq/write.do">FAQ등록</a></div>
+	                        </div>
 							<div class="coupon-srch" style="border-bottom:0; padding-bottom:0;">
 								<div class="form-input none-dt">
 									<dl>
@@ -113,6 +116,7 @@
 																			style="font-family: Arial; color: rgb(119, 119, 119);"><span
 																			style="font-size: 13.3333px;">${ item.answer }</span></span>&nbsp;
 																	</p>
+																	<button type="button" class="faqDelete" data-seq="${item.q_no }" style="margin-top: 10px; border: 1px solid #ccc;  padding: 0 20px; border-radius: 10px 0; float: right;">삭제</button>
 																</div>
 															</div>
 														</div>
@@ -156,7 +160,9 @@
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
  
  	</div>
-	
+
+<%@ include file="/WEB-INF/views/ui/modal.jsp" %>
+
 <script>
 	$(function(){
 		$("#searchKeyword").focus();
@@ -168,18 +174,39 @@
 		$(".faq .tab-area ul li a").removeClass("active");
 		$(".faq .tab-area ul li").eq(<%=category%>).find("a").addClass("active");
 		
-		
-		$("#searchForm").submit(function(e){
-			$("#category").val("");
-		})
-		
 		let $pageItem = $(".faq .pagenavi-area .pagination .page-item a");
 		
 		$pageItem.each(function(i, el) {
 			let aparam = $(this).data("param");
 			$(this).attr("href", `/forum/faq/list.do?category=${ param.category }&pageNo=\${aparam}`)
 		})
-	
+		
+		$(".faqDelete").on("click", function(e){
+			e.preventDefault();
+			let seq = $(this).data("seq");
+			let params = `seq=\${seq}&category=${ param.category }`
+			 
+			$.ajax({
+				url: "/forum/faq/delete.do",
+				dataType: "json",	
+				type: "POST",
+				data: params,
+				cache: false,
+				success: function(data, textStatus, jqXHR){
+					if( data.result == 1 ) {
+						$("#alertModal").modal();
+						$(".modal-body").text("FAQ 글이 삭제 되었습니다.");	
+						
+						$("#alertModal").on("click", function(e){
+							location.href = data.url;
+						})
+					}
+				},
+				error: function(){
+					console.log("error!");
+				}
+			});
+		})
 	})
 </script>
 </body>
