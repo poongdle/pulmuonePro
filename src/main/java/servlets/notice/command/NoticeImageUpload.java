@@ -35,6 +35,8 @@ public class NoticeImageUpload implements CommandHandler{
 	  	
 	  	File file = multiRequest.getFile("upload");
 	  	String realPath = request.getServletContext().getRealPath("/upload/notice");
+	  	
+	
 	  	if( file != null ) {
 	  		String fileSystemName = multiRequest.getFilesystemName("upload");
 	  		String originName = multiRequest.getOriginalFileName("upload");
@@ -47,7 +49,23 @@ public class NoticeImageUpload implements CommandHandler{
 	  		System.out.println(img_size);
 	  		System.out.println(img_type);
 	  		
+	  		PrintWriter out = response.getWriter();
+
 			
+	  		JSONObject outData = new JSONObject();
+	  		outData.put("uploaded", true);
+	  		outData.put("url", "/upload/notice/" + fileSystemName);
+	  		
+	  	  	System.out.println(">>>>>>>");
+		  	System.out.println(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + realPath + "/" + originName);
+		  	System.out.println(">>>>>>>");
+	  		response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+
+			out.print(outData);
+
+	  		
+	  		//out.println(outData); //response
 	  	}
 	  	
 	  	////*
@@ -70,7 +88,7 @@ public class NoticeImageUpload implements CommandHandler{
 	  	System.out.println("-------");
 	  	System.out.println( file );
 		System.out.println("upload..");
-		return realPath;
+		return null;
 		
 		
 		
