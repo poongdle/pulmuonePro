@@ -61,7 +61,7 @@
 			<!-- 코드를 붙일 페이지들의 url 패턴 -->
 			<url-pattern>/index.jsp</url-pattern>
 			<url-pattern>/WEB-INF/views/mypage/*</url-pattern>
-			
+
 			<include-prelude>/WEB-INF/inc/session_auth.jspf</include-prelude>
 
 		</jsp-property-group>
@@ -79,6 +79,5 @@
 		<url-pattern>/mypage.do</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
-
 
 </web-app>

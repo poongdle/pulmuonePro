@@ -38,7 +38,7 @@
 						<div class="btn-area-right" style="margin-top: 20px;">
 							<button onclick="noticeModify()" class="btn-default btn-board-button btn-gray" style="color: #666;">수정</button>
 							<button onclick="noticeDelete()" class="btn-default btn-board-button btn-gray" style="color: #666;">삭제</button>
-							<button onclick="javascript:history.back()" class="btn-default btn-board-button btn-white">목록으로</button>
+							<button onclick="location.href='/forum/notice/list.do'" class="btn-default btn-board-button btn-white">목록으로</button>
 						</div>
 					</div>
 				</div>
@@ -48,11 +48,28 @@
 	<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
 	
 </div>
+
+<%@ include file="/WEB-INF/views/ui/modal.jsp" %>
+
 <script>
+	function noticeModify() {
+		location.href = `/forum/notice/edit.do?seq=${ param.seq }`;		
+	}
 	
 	function noticeDelete()  {
 		location.href = `/forum/notice/delete.do?seq=${ param.seq }`;
 	}
+	
+	$(function(){
+		
+		if( `${param.edit}` == "success" ) {
+			$(".modal-body").text("공지사항 게시글이 수정되었습니다.");	
+			$("#alertModal").modal();
+		}
+	})
+	
+	
+	
 	
 </script>
 

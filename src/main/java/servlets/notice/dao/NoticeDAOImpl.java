@@ -126,7 +126,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 			JdbcUtil.close(pstmt);
 		}
 		
-		
 		return totalPages;
 	}
 
@@ -214,10 +213,40 @@ public class NoticeDAOImpl implements NoticeDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			JdbcUtil.close(conn);
 			JdbcUtil.close(pstmt);
 		}
 		
 		return deleteRow;
+	}
+
+	@Override
+	public int edit(Connection conn, NoticeDTO dto) throws SQLException {
+		String sql = " UPDATE notice "
+				+ " SET title = ?, content = ? "
+				+ " WHERE notice_no = ? ";
+		
+		PreparedStatement pstmt = null;
+		int editCount = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setInt(3, dto.getNotice_no());
+			
+			editCount = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return editCount;
 	}
 
 }
