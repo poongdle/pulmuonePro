@@ -104,7 +104,7 @@ input::-webkit-calendar-picker-indicator{
 .form-input dl.date dd { justify-content: flex-start; height:100%; }
 .form-input dl.date::after,
 .form-input dl.date-complex .date-picker-single::after,
-.form-input input[type="date"]::after { cursor: pointer; position: absolute; right:20px; top:50%; margin-top:0; transform:translateY(-50%); width:22px; height:22px; content:''; background:url('/resources/assets/images/ico_calendar.png') no-repeat; }
+.form-input input[type="date"]::after { cursor: pointer; position: absolute; right:20px; top:50%; margin-top:0; transform:translateY(-50%); width:22px; height:22px; content:''; background:url('/resources/images/common/ico_calendar.png') no-repeat; }
 .form-input dl.date input { font-family: Roboto; font-weight: 400; font-size:16px; }
 .form-input input[type='password'] { letter-spacing: 0px; }
 .form-input input[type='password']::placeholder { letter-spacing: -1.2px; }
@@ -144,7 +144,7 @@ input::-webkit-calendar-picker-indicator{
 .form-input.select .dropdown { height:100%; flex:1; }
 .form-input.select .dropdown a.dropdown-toggle { display: flex; align-items: center; height:58px; padding:0 15px; }
 .form-input.select .dropdown button.dropdown-toggle { display: flex;width: 100%; align-items: center; height:58px; padding:0 15px; }
-.form-input.select .dropdown-toggle::after { margin:0; content:''; background:url('/resources/assets/images/arrow_lnb.png') no-repeat center center; border-radius: 50%; background-size:12px; width:32px; height:32px; border:1px #e5e5e5 solid; position: absolute; right:20px; top:50%; transform:translateY(-50%) rotate(180deg); }
+.form-input.select .dropdown-toggle::after { margin:0; content:''; background:url('/resources/images/common/arrow_lnb.png') no-repeat center center; border-radius: 50%; background-size:12px; width:32px; height:32px; border:1px #e5e5e5 solid; position: absolute; right:20px; top:50%; transform:translateY(-50%) rotate(180deg); }
 .form-input.select .select-value { padding-right:20px; font-size:14px; }
 
 
@@ -189,7 +189,7 @@ input::-webkit-calendar-picker-indicator{
 .checkbox input[type=checkbox] + label, .radio input[type=radio] + label {position: relative; height: 20px; padding-left: 30px; font-size: 14px; font-weight: 400; line-height: 1.07; letter-spacing: -1.05px; color: #333;}
 
 /* 체크박스 기본 */
-.checkbox input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -3px; left: 0; width: 20px; height: 20px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ico_check01.png") no-repeat center; background-size: 12px;}
+.checkbox input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -3px; left: 0; width: 20px; height: 20px; border-radius: 50%; background: #e5e5e5 url("/resources/images/ui/ico_check01.png") no-repeat center; background-size: 12px;}
 .checkbox input[type=checkbox]:checked + label:before {background-color: #7acc12; background-size: 12px;}
 
 /* 체크박스 동의 */
@@ -200,18 +200,18 @@ input::-webkit-calendar-picker-indicator{
 
 /* 체크박스 장바구니 (빅 사이즈) */
 .chk-type3 input[type=checkbox] + label, .radio-type2 input[type=radio] + label {padding-left: 56px; font-size: 16px; letter-spacing: -2.1px; height: auto; font-weight: 400;}
-.chk-type3 input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -6px; left: 2px; width: 34px; height: 34px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ico_check01.png") no-repeat center; background-size: 14px;}
+.chk-type3 input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -6px; left: 2px; width: 34px; height: 34px; border-radius: 50%; background: #e5e5e5 url("/resources/images/ui/ico_check01.png") no-repeat center; background-size: 14px;}
 .chk-type3 input[type=checkbox]:checked + label:before {background-size: 14px;}
 
 /* 체크박스 장바구니 (중간 사이즈) */
 .chk-type4 input[type=checkbox] + label {padding-left: 35px; font-size: 13px; letter-spacing: -0.98px; height: auto;}
-.chk-type4 input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -5px; left: 0; width: 26px; height: 26px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/resources/images/ui/ico_check01.png") no-repeat center; background-size: 8px;}
+.chk-type4 input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -5px; left: 0; width: 26px; height: 26px; border-radius: 50%; background: #e5e5e5 url("/resources/images/ui/ico_check01.png") no-repeat center; background-size: 8px;}
 .chk-type4 input[type=checkbox]:checked + label:before {background-size: 8px;}
 
 /* 체크박스 추가 */
 .check-type { margin-top:14px; position: relative; display: flex; align-items: center; height:32px; margin-bottom:20px; }
 .check-type input { display: none; }
-.check-type input+span:before {position: absolute; left:0; top:0; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ico_check_solo_wt.png") no-repeat center center; }
+.check-type input+span:before {position: absolute; left:0; top:0; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/resources/images/contents/ico_check_solo_wt.png") no-repeat center center; }
 .check-type span { font-size:14px; padding-left:49px; }
 .check-type input:checked+span:before { background-color: #7acc12; transition-duration: .2s; }
 .check-type em { display: block; color:#999; letter-spacing: -1.05px; font-size:13px; line-height:22px; }
@@ -237,7 +237,7 @@ input::-webkit-calendar-picker-indicator{
 .textarea button {height: 100px; width: 128px; height: 100px; background-color: #333; font-size: 16px; font-weight: 500; letter-spacing: -1.2px; color: #fff;}
 
 /* 셀렉트 */
-.form-select {display: flex; flex: 1; padding: 0 22px; margin: 0 22px 0 0; height: 58px; font-size: 16px; font-weight: 400; letter-spacing: -0.8px; color: #999; appearance:none; background:url('/resources/assets/images/ico-down02.png') no-repeat right center; background-size: 33px;}
+.form-select {display: flex; flex: 1; padding: 0 22px; margin: 0 22px 0 0; height: 58px; font-size: 16px; font-weight: 400; letter-spacing: -0.8px; color: #999; appearance:none; background:url('/resources/images/ui/ico-down02.png') no-repeat right center; background-size: 33px;}
 
 /* 공통으로 쓰이는 단순요소 */
 .warning-description { color:#dd3f3f; font-size:14px; line-height: 1; letter-spacing: -1.05px; font-weight:400; margin-top:10px; }
@@ -314,21 +314,21 @@ input::-webkit-calendar-picker-indicator{
 .basic-big-button.prefix i { width:30px; height:30px; margin-right:20px; }
 
 .button-basic.bottles { position: relative; }
-.button-basic.bottle i { background: url("/resources/assets/images/ico_button_bottle.png") no-repeat; }
-.button-basic.bottles i { background: url("/resources/assets/images/ico_button_bottle.png") no-repeat; }
+.button-basic.bottle i { background: url("/resources/images/common/ico_button_bottle.png") no-repeat; }
+.button-basic.bottles i { background: url("/resources/images/common/ico_button_bottle.png") no-repeat; }
 .button-basic.bottles i + i { position: absolute; left: 30px; }
 .button-basic.kakao,
 .basic-big-button.kakao { background: #fee500; color:#181600; border-color:#fee500; }
 .button-basic.kakao i,
-.basic-big-button.kakao i { background: url("/resources/assets/images/ico_button_kakao.png") no-repeat; }
+.basic-big-button.kakao i { background: url("/resources/images/common/ico_button_kakao.png") no-repeat; }
 .button-basic.naver,
 .basic-big-button.naver { background: #fff; color:#333; border:1px #e5e5e5 solid; }
 .button-basic.naver i,
-.basic-big-button.naver i { background: url("/resources/assets/images/ico_button_naver.png") no-repeat; }
+.basic-big-button.naver i { background: url("/resources/images/common/ico_button_naver.png") no-repeat; }
 .button-basic.join { background: #fff; color:#333; border:1px #e5e5e5 solid; }
-.button-basic.join i { background: url("/resources/assets/images/ico_button_char.png") no-repeat; }
+.button-basic.join i { background: url("/resources/images/common/ico_button_char.png") no-repeat; }
 .button-basic.link { background: #fff; color:#333; border:1px #e5e5e5 solid; }
-.button-basic.link i { background: url("/resources/assets/images/ico_button_link.png") no-repeat; }
+.button-basic.link i { background: url("/resources/images/common/ico_button_link.png") no-repeat; }
 
 /* 라운드 버튼 공통 */
 .btn-round {display: flex; justify-content: center; align-items: center; width: 42px; height: 42px; border-radius: 50%; background-color: #7acc12;}
@@ -420,7 +420,7 @@ input::-webkit-calendar-picker-indicator{
 .ico-menu {width: 18px; height: 16px; }
 .ico-myIcon {width: 22px; height: 22px; background-image: url("/resources/images/common/ico_member02.png");}
 .ico-cart1 {width: 23px; height: 22px; background-image: url("/resources/images/common/ico_cart01.png");}
-
+.ico-srh1 {width: 20px; height: 20px; background-image: url("/resources/images/ui/ico-srh01.png");}
 .ico-wishlist {width: 26px; height: 24px; background-image: url("/resources/images/ui/ico_wish_off04.png");}
 .btn-wishList.active .ico-wishlist {width: 26px; height: 24px; background-image: url("/resources/images/ui/ico_wish_on.png");}
 .ico-prd-delete {width: 22px; height: 22px; background-image: url("/resources/images/ui/ico-close02.png");}

@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>풀무원 녹즙</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/images/common/pul_favicon.png">
+
+<script src="/resources/assets/js/design.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 </head>
