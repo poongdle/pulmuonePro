@@ -141,4 +141,87 @@ public class InquiryDAOImpl implements InquiryDAO{
 		return 0;
 	}
 
+	@Override
+	public InquiryDTO view(Connection conn, String user_id, String category, int seq) throws SQLException {
+		String sql = " SELECT * "
+				+ " FROM inquiry "
+				+ " WHERE member_id = ? "
+				+ " AND inquiry_cate = ? "
+				+ " AND inquiry_no = ? ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		InquiryDTO vo = null;
+		
+		int inquiry_no;     
+		String member_id;   
+		String inquiry_cate;
+		String email;       
+		String title;       
+		String content;     
+		Date regdate;       
+		String status;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, category);
+			pstmt.setInt(3, seq);
+			rs = pstmt.executeQuery();
+			
+			if( rs.next() ) {
+				inquiry_no = rs.getInt("inquiry_no");
+				member_id = rs.getString("member_id");
+				inquiry_cate = rs.getString("inquiry_cate");
+				email = rs.getString("email");
+				title = rs.getString("title");
+				content = rs.getString("content");
+				regdate = rs.getDate("regdate");
+				status = rs.getString("status");
+				
+				vo = new InquiryDTO(inquiry_no, member_id, inquiry_cate, email, title, content, regdate, status);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+			JdbcUtil.close(pstmt);
+		}
+		return vo;
+	}
+
+	@Override
+	public int delete(Connection conn, String user_id, String category, int seq) throws SQLException {
+		String sql = " DELETE FROM inquiry "
+				+ " WHERE member_id = ? "
+				+ " AND inquiry_cate = ? "
+				+ " AND inquiry_no = ? ";
+		
+		PreparedStatement pstmt = null;
+		int deleteRow = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, category);
+			pstmt.setInt(3, seq);
+			
+			deleteRow = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return deleteRow;
+	}
+
 }

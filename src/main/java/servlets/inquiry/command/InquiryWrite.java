@@ -40,7 +40,6 @@ public class InquiryWrite implements CommandHandler{
 			
 		}
 		
-		
 		return null;
 	}
 	

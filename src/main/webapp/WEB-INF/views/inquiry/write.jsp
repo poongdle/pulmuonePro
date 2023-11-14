@@ -14,7 +14,7 @@
                                    <li><a href="/">홈</a></li>
                                    <li><a href="">MY녹즙</a></li>
                                    <li><a href="">활동정보</a></li>
-                                   <li><a class="active">1:1 문의</a></li>
+                                   <li><a href="" class="active">1:1 문의</a></li>
                                </ul>
                        </div>
                </div>

@@ -204,7 +204,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 				+ " WHERE notice_no = ? ";
 		
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -215,7 +214,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 		}
 		

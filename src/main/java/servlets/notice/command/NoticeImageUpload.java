@@ -19,8 +19,6 @@ public class NoticeImageUpload implements CommandHandler{
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		
-		
 		String saveDirectory = request.getRealPath("/upload/notice/");
 		
 		File f = new File(saveDirectory);
