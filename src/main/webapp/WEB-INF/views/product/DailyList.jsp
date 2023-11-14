@@ -30,7 +30,6 @@
 <body>
 <script type="text/javascript">
 var category = "${param.category}";
-var pbtn = "${param.tags}";
 $(document).on("click", ".tag-btn", function () {	
 	var idxs = [];		
 	$(".tag-btn.active").each(function (i, el) {
@@ -43,7 +42,7 @@ $(document).on("click", ".tag-btn", function () {
 	} else {
 		idxs.push(nowIdx);
 	}	
-	location.replace(location.pathname + "?category=" + category + "&tags=" + encodeURIComponent(idxs.join(",")));		
+	location.replace(location.pathname + "?category=" + category + "&tags=" + encodeURIComponent(idxs.join(",")));	
 // 	location.replace(location.pathname + "?category=" + category + "&tags=" + idxs.join(","));
 });
 
@@ -55,6 +54,7 @@ $(document).on("click", ".tag-btn", function () {
 			items : 4,
 			nav : true,
 		});		
+		var pbtn = "${param.tags}";
 		var ppbtn = pbtn.split(",");			
 			for(var i=0; i<8; i++){
 				for(var j=0; j<8; j++){
@@ -127,7 +127,9 @@ $(document).on("click", ".tag-btn", function () {
 													<a href="/product/daily/view.do?tag=${dto.products_tag }&eventIdx="
 														title="제품 상세페이지로 가기">
 														<div class="badges">
+														<c:if test="${dto.products_no eq 0071654 or dto.products_no eq 0073019 or dto.products_no eq 0070680}">
 															<span class="badge">BEST</span>
+														</c:if>
 														</div>
 														<div class="thumb">
 															<img src="/file/download/product/${dto.system_name }"
@@ -195,67 +197,31 @@ $(document).on("click", ".tag-btn", function () {
 								</div>
 								<div class="tab-content" id="tab-content-depth2">
 									<div class="prd-list-head">
-										<p class="count">
+										<p class="count">										
+																				
 										<c:choose>
-										<c:when test="${fn:length(searchlist)>0 }">
+<%-- 										<c:when test="${fn:length(searchlist)>0 }"> --%>
+										<c:when test="${param.tags ne null and param.tags > '0' }">
 											총 <em>${fn:length(searchlist) }</em>건의 상품이 있습니다.
 										</c:when>
 										<c:otherwise>
 											총 <em>${fn:length(list) }</em>건의 상품이 있습니다.
-										</c:otherwise>
+										</c:otherwise>										
 										</c:choose>
 										</p>
 									</div>
 									<div class="prd-list wrap" data-list-object="append" id="product-items">
-									<c:choose>
-									<c:when test="${fn:length(searchlist)>0 }">
 										<c:forEach var="dto" items="${searchlist }">
-											<div class="prd-area">
-												<a href="/product/daily/${dto.products_tag }?eventIdx="
-													title="제품 상세페이지로 가기">
-													<div class="badges">
-														<span class="badge">BEST</span>
-													</div>
-													<div class="thumb">
-														<img src="/file/download/product/${dto.system_name }"
-															alt="제품명">
-													</div>
-													<div class="prd-info">
-														<div class="prd-title-wrapper">
-															<b class="prd-title"> ${dto.products_name } </b>
-														</div>
-														<div class="price-info" style="margin-bottom: 5px;">
-															<b class="now-price"><fmt:formatNumber
-																	value="${dto.price }" pattern="#,###" /> <span>
-																	원</span> </b>
-														</div>
-														<span class="volume">(${dto.products_size })</span>
-													</div>
-												</a>
-												<div class="btn-area btn-area-center">
-													<button type="button" data-wish-id="${dto.products_tag }"
-														data-wish-type="daily"
-														class="btn-round btn-white wishlistBtn ">
-														<i class="ico ico-prd-wish"></i> <span class="hide">제품
-															찜하기</span>
-													</button>
-													<button type="button" data-cart-id="${dto.products_no }"
-														data-cart-type="daily" data-cart-event=""
-														class="btn-round addCartBtn">
-														<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-															담기</span>
-													</button>
-												</div>
-											</div>
-										</c:forEach>
-										</c:when>
-										<c:otherwise>
-										<c:forEach var="dto" items="${list }">
-											<div class="prd-area">
+											<div class="prd-area">											
 												<a href="/product/daily/view.do?tag=${dto.products_tag }&eventIdx="
 													title="제품 상세페이지로 가기">
 													<div class="badges">
+													<c:if test="${dto.products_no eq 0071654 or dto.products_no eq 0073019 or dto.products_no eq 0070680 or dto.products_no eq 0072348 }">
 														<span class="badge">BEST</span>
+													</c:if>
+													<c:if test="${dto.products_no eq 0074095 or dto.products_no eq 0074008 or dto.products_no eq 0074033 or dto.products_no eq 0073579 }">
+														<span class="badge badge-new">NEW</span>
+													</c:if>
 													</div>
 													<div class="thumb">
 														<img src="/file/download/product/${dto.system_name }"
@@ -263,7 +229,7 @@ $(document).on("click", ".tag-btn", function () {
 													</div>
 													<div class="prd-info">
 														<div class="prd-title-wrapper">
-															<b class="prd-title"> ${dto.products_name } </b>
+															<b class="prd-title"> ${dto.products_name }</b>
 														</div>
 														<div class="price-info" style="margin-bottom: 5px;">
 															<b class="now-price"><fmt:formatNumber
@@ -289,65 +255,25 @@ $(document).on("click", ".tag-btn", function () {
 												</div>
 											</div>
 										</c:forEach>
-										</c:otherwise>
-									</c:choose>
 									</div>
 									<div class="button-set mb60" data-list-more="#product-items" data-param="1">									
-									<c:if test="${fn:length(searchlist)>12 } or ${fn:length(list)>12 }">
-										<button type="button" class="basic-big-button">더보기</button>										
-									</c:if>																		
+<%-- 									<c:if test="${fn:length(searchlist)>12 or fn:length(list)>12 }"> --%>
+									<c:choose>
+									<c:when test="${fn:length(searchlist)>12 }">									
+										<button type="button" class="basic-big-button">더보기</button>																					
+									</c:when>
+									<c:when test="${fn:length(searchlist)<12  }">										
+									</c:when>
+									<c:when test="${fn:length(searchlist)<13 and fn:length(list)>12  }">
+										<button type="button" class="basic-big-button">더보기</button>
+									</c:when>
+									</c:choose>																												
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</form>
-				<!--  <script>
-  $(function(){
-
-    axios.get('/user_summary/default').then(function (response) {
-
-      const {info, customerVo} = response.data.RESULT_MSG;
-
-		const ec = ( !info.overEnd) && (info.complex||info.hasHp) && customerVo.phiCustomerVo.intfacId == '0' && customerVo.phiCustomerVo.dlvyCustYn==='Y'
-        if(ec&&customerVo){
-          $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
-          $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
-        }else {
-          $('#quickChangeDrink').attr('href', `/mypage?with=01`)
-          $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
-        }
-        console.log(window.innerWidth)
-        if(window.innerWidth>1450){
-          $('#mini-side-nav').show();
-        }
-    }).catch(function (error) {
-      if(window.innerWidth>1450) {
-        $('#mini-side-nav').show()
-      }
-	});
-    window.addEventListener('resize', function(){
-	  if(window.innerWidth>1450){
-		$('#mini-side-nav').show();
-	  }else {
-		$('#mini-side-nav').hide();
-	  }
-	})
-
-  })
-</script> -->
-				<!-- <div style="display: none" id="mini-side-nav">
-							<a href="/mypage/drink/drink"><img
-								src="/resources/assets/images/quick1.png" alt=""></a> <a
-								id="quickChangeDrink" href="/mypage/drink/drink"><img
-								src="/resources/assets/images/quick2.png" alt=""></a> <a
-								id="quickChangeSchedule" href="/mypage/drink/drink"><img
-								src="/resources/assets/images/quick3.png" alt=""></a> <a
-								href="/mypage/drink/bill"><img
-								src="/resources/assets/images/quick4.png" alt=""></a> <a
-								href="#"><img src="/resources/assets/images/quickTop.png"
-								alt=""></a>
-						</div> -->
+				</form>		
 			</div>
 		</main>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>

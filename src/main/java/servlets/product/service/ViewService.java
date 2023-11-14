@@ -22,35 +22,35 @@ public class ViewService {
 		}
 		return instance;
 	}
-//	public ProductsDTO view(int tag){
-//		//
-//		Connection con = null;
-//		try {
-//			con = ConnectionProvider.getConnection();
-//			ProductsDAO dao = ProductsDAO.getInstance();
-//			ProductsDTO dto = null;														
-//			try {
-//				dto = dao.view(con,tag);
-//			} catch (Exception e) {
-//				System.out.println("VIEW VIEW VIEW VIEW VIEW ERROR");
-//				e.printStackTrace();
-//			}					
-//			return dto;
-//		} catch (NamingException | SQLException e) { 
-//			throw new RuntimeException(e);
-//		} finally {
-//			JdbcUtil.close(con);
-//		}
-//	}
-	public List<ProductsDTO> view(int tag){
+	public ProductsDTO view(int tag){
 		//
 		Connection con = null;
 		try {
 			con = ConnectionProvider.getConnection();
 			ProductsDAO dao = ProductsDAO.getInstance();
-			List<ProductsDTO> list = null;				
+			ProductsDTO dto = null;														
 			try {
-				list = dao.view(con,tag);
+				dto = dao.view(con,tag);
+			} catch (Exception e) {
+				System.out.println("VIEW VIEW VIEW VIEW VIEW ERROR");
+				e.printStackTrace();
+			}					
+			return dto;
+		} catch (NamingException | SQLException e) { 
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(con);
+		}
+	}
+	public List<ProductsDTO> viewlist(int tag){
+		//
+		Connection con = null;
+		try {
+			con = ConnectionProvider.getConnection();
+			ProductsDAO dao = ProductsDAO.getInstance();
+			List<ProductsDTO> list = null;							
+			try {
+				list = dao.viewlist(con,tag);
 			} catch (Exception e) {				
 				e.printStackTrace();
 			}		

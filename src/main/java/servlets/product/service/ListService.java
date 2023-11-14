@@ -31,9 +31,11 @@ public class ListService {
 			List<ProductsDTO> list = null;			
 			int count = path.indexOf("daily");			
 			if(count!=-1) {			
-			list = dao.selectdaily(con,num);		
+				path = "daily";
+			list = dao.select(con,path,num);		
 			}else {
-			list = dao.selectbox(con);
+				path = "box";
+			list = dao.select(con,path,num);
 			}
 			return list;
 		} catch (NamingException | SQLException e) { 
@@ -52,9 +54,11 @@ public class ListService {
 			List<ProductsDTO> bestlist = null;			
 			int count = path.indexOf("daily");			
 			if(count!=-1) {			
-				bestlist =	dao.selectdailybest(con);		
+				path = "daily";
+				bestlist =	dao.selectbest(con,path);		
 			}else {
-				bestlist =	dao.selectboxbest(con);
+				path = "box";
+				bestlist =	dao.selectbest(con,path);
 			}
 			return bestlist;
 		} catch (NamingException | SQLException e) { 
@@ -64,14 +68,20 @@ public class ListService {
 			JdbcUtil.close(con);
 		}
 	}
-	public List<ProductsDTO> search(String tags){
+	public List<ProductsDTO> search(String path, String tags){
 		//
 		Connection con = null;
 		try {
 			con = ConnectionProvider.getConnection();
 			ProductsDAO dao = ProductsDAO.getInstance();
-			List<ProductsDTO> searchlist = null;												
-			searchlist =	dao.search(con,tags);
+			List<ProductsDTO> searchlist = null;		
+			int count = path.indexOf("daily");	
+			if(count != -1) {
+				path = "daily";
+			}else {
+				path = "box";
+			}
+			searchlist =	dao.search(con,path,tags);
 			return searchlist;
 		} catch (NamingException | SQLException e) { 
 			//e.printStackTrace();  syso("ListService.select() 에러 : ")
@@ -79,5 +89,5 @@ public class ListService {
 		} finally {
 			JdbcUtil.close(con);
 		}
-	}   
+	}  
 }

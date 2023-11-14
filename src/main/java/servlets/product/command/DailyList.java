@@ -17,20 +17,25 @@ public class DailyList implements CommandHandler{
 		System.out.println(">DailyList.process ");
 		int num = 1;
 		String path = request.getRequestURI();						 
-		String [] tags = request.getParameterValues("tags");
-		String tag = null;
-		if (tags != null) {
-			tag = String.join(", ",tags);
-		}			
+//		String [] tags = request.getParameterValues("tags");		
+//		String tag = null;		
+//		if (tags != null) {
+//			tag = String.join(", ",tags);
+//		}			
 //		System.out.println(path);
+//		System.out.println(tag);
+		String tag = request.getParameter("tags");
+//		System.out.println(tag);
 		ListService listService = ListService.getInstance();
 	    List<ProductsDTO> list = listService.select(path,num);
 	    List<ProductsDTO> bestlist = listService.bestselect(path);	    
-	    List<ProductsDTO> searchlist = listService.search(tag);	    
+	    List<ProductsDTO> searchlist = listService.search(path,tag);	
+
 		//1.  포워딩 전 데이터 저장
 		request.setAttribute("list", list);
 		request.setAttribute("bestlist", bestlist);	
 		request.setAttribute("searchlist", searchlist);
+
 
 		return "/WEB-INF/views/product/DailyList.jsp";
 		
