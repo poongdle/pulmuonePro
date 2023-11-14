@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
 <!-- header -->
 <header id="header">
 	<div class="container">
@@ -48,27 +46,6 @@
 			</nav>
 		</div>
 		<div class="member-search-area">
-<<<<<<< HEAD
-			<div class="head-util-area">
-				<u:isLogin>
-					<p class="welcome">
-						<b style="margin: 0;"><c:out value="${ auth.getName() }" /> <a href="/member/logout.do" type="button" class="logout-btn">로그아웃</a></b>님, 건강한 습관 풀무원녹즙입니다.
-<%-- 						<b style="margin: 0;"><%= auth.getName() %> <a href="/member/logout.do" type="button" class="logout-btn">로그아웃</a></b>님, 건강한 습관 풀무원녹즙입니다. --%>
-					</p>
-<!-- 					<a href="/member/logout.do">로그아웃(임시)</a> -->
-				</u:isLogin>
-				<u:notLogin>
-<!-- 					<a href="/member/login.do">로그인 버튼(임시)</a>				 -->
-				</u:notLogin>
-				<a href="/mypage.do" data-require-login="true"> 
-					<i class="ico ico-myIcon"></i>
-					<span class="hide">로그인 페이지 / 마이 페이지로 가기</span>
-				</a>
-				 <a href="/cart/daily">
-					<div class="counter hide" data-cart-size=""></div> <i class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
-				</a>
-			</div>
-=======
 
 			
 				<div class="head-util-area">
@@ -87,7 +64,6 @@
 			
 
 
->>>>>>> branch 'develop' of https://github.com/dhl1031/pulmuonePro.git
 			<form class="search-area" action="/product/search">
 				<input type="text" id="" name="searchKeyword" value="" title="검색어 입력">
 				<button>
@@ -259,19 +235,3 @@
 		</div>
 	</div>
 </header>
-
-<script type="text/javascript">
-
-	$('.logout-btn').click(function (){
-	    if(confirm('로그아웃 하시겠습니까?')){
-	
-	    }
-	})
-	$(document).ready(function(){
-	    $('.welcome b').hover(function() {
-	        $('.logout-btn').stop().fadeIn('500');
-	    }, function(){
-	        $('.logout-btn').stop().fadeOut('500');
-	    });
-	});
-</script>

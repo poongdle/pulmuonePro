@@ -10,7 +10,6 @@ import servlets.faq.model.FaqDTO;
 import servlets.faq.service.FaqListService;
 import servlets.utils.PageDTO;
 
-
 public class FaqList implements CommandHandler {
 	
 	private FaqListService listService = new FaqListService();
@@ -30,7 +29,7 @@ public class FaqList implements CommandHandler {
 		int total = 0;
 		int numberOfPageBlock = 5;
 		
-		servlets.utils.PageDTO paging = null;
+		PageDTO paging = null;
 		
 		if( pcategory != null && !pcategory.equals("") ) {
 			category = Integer.parseInt(pcategory);
