@@ -47,6 +47,7 @@ public class MemberLogin implements CommandHandler{
 //				session.setAttribute("memberId", memberId);
 //				session.setAttribute("name", dto.getName());
 				
+				// 로그인 필터 거치기 전 경로가 있으면, 그 경로로 리다이렉트
 				String location = "/index.jsp";
 				String referer = (String) session.getAttribute("referer");
 

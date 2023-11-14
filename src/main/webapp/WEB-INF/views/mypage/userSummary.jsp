@@ -210,7 +210,7 @@ ol ol, ol ul, ul ol, ul ul {
 			
 					<div class="container">
 						<h2 class="container-title light">
-							<b>신종혁</b>님 안녕하세요
+							<b>${ auth.getName() }</b>님 안녕하세요
 						</h2>
 						<ul class="stat-wrapper">
 									<li>

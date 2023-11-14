@@ -17,8 +17,7 @@
 <script src="/resources/assets/js/build/ckeditor.js"></script>
 <script src="/resources/assets/js/build/ko.js"></script>
 
-<<<<<<< HEAD
+
 </head>
-=======
-</head>
->>>>>>> branch 'develop' of https://github.com/dhl1031/pulmuonePro.git
+
+
