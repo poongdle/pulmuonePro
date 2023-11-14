@@ -22,6 +22,8 @@ public interface NoticeDAO {
 	// 글쓰기 
 	int write(Connection conn, NoticeDTO dto) throws SQLException;
 
+	// 글 수정 
+	int edit (Connection conn, NoticeDTO dto) throws SQLException;
 	
 	// 삭제 
 	int delete(Connection conn, int seq) throws SQLException;
