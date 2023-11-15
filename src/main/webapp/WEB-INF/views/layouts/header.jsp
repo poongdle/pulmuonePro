@@ -39,7 +39,7 @@
 						<a href="/taste/taste">시음선물</a>
 					</li>
 					<li>
-						<a href="/event/event">이벤트</a>
+						<a href="/event/event/list.do">이벤트</a>
 					</li>
 					<li>
 						<a href="/forum/faq/list.do">고객기쁨센터</a>
