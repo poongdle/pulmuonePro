@@ -44,10 +44,10 @@
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 		<main class="kids">
 
-			<div id="container-wrapper" class="container-wrapper">
+<div id="container-wrapper" class="container-wrapper">
 				<!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
 
-				<script type="text/javascript">
+<script type="text/javascript">
   var singleYn = 'N' == 'Y';
   $(function () {
 
