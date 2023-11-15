@@ -8,57 +8,66 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter("/LoginCheckFilter")
+import auth.AuthInfo;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+
 public class LoginCheckFilter implements Filter {
 
-    public LoginCheckFilter() {
-    }
-
+	
+	@Override
 	public void destroy() {
+
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest hr = (HttpServletRequest)request;
-		System.out.println("> LoginCheckFilter.doFilter()... : " + hr.getRequestURI() );
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		System.out.println("> LoginCheckFilter.doFilter()...");
 		
-		// auth 세션 객체에 인증, 권한 정보 저장
+		// 세션 auth 인증 + 권한 저장
 		
-		// HttpSession 객체 생성
+		// servletRequest에는 getSession()이 없음
+		// HttpServletRequest로 다운캐스팅
 		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse res = (HttpServletResponse) response;
-		
-		String auth = null;
-		boolean isLogon = false;
+		HttpServletResponse res =  (HttpServletResponse) response;
 		
 		HttpSession session = req.getSession(false);
 		
-		// 로그인 여부에 따른 처리
-		if (session != null && (auth = (String) session.getAttribute("auth")) != null) {
-			// 로그인 했다면
-			isLogon = true;
-		} // if
+		AuthInfo auth = null;
+		auth = (AuthInfo) session.getAttribute("auth");
 		
-		if (isLogon) {			// 로그인 했다면
+		boolean isLogin = false; // 인증 시, true
+		
+		if ( session != null && auth != null) {
+
+			// 인증 처리 완료 상태
+			isLogin = true;
+		}
+		
+		// 권한 있으면 chain, 없으면 로그인할 수 있는 페이지로
+		if (isLogin) {		
 			chain.doFilter(request, response);
-		} else {				// 로그인 안 했다면
-			// 1) 요청했던 경로를 세션에 저장
+		} else {
+			// referer - 이전 경로를 가지고 있는 속성
 			String referer = req.getRequestURI();
 			session.setAttribute("referer", referer);
 			
-			// 2) 로그인 페이지로 보내기
-			/*
-			String location = "/member/login.jsp";
+			String location = "/member/login.do";
 			res.sendRedirect(location);
-			 */
-		} // if
-	} // doFilter()
+		}
+		
+	}
 
-	public void init(FilterConfig fConfig) throws ServletException {
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
