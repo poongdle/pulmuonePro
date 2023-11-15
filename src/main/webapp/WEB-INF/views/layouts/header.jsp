@@ -86,31 +86,31 @@
 					<ul>
 						
 						<li>
-							<a href="/product/daily" title="해당 페이지로 가기">전체</a>
+							<a href="/product/daily/dailylist.do" title="해당 페이지로 가기">전체</a>
 						</li>
 						
 						<li>
-							<a href="/product/daily?category=GOOD_001" title="해당 페이지로 가기">녹즙</a>
+							<a href="/product/daily/dailylist.do?category=1" title="해당 페이지로 가기">녹즙</a>
 						</li>
 						
 						<li>
-							<a href="/product/daily?category=GOOD_004" title="해당 페이지로 가기">엑스투</a>
+							<a href="/product/daily/dailylist.do?category=4" title="해당 페이지로 가기">엑스투</a>
 						</li>
 						
 						<li>
-							<a href="/product/daily?category=GOOD_031" title="해당 페이지로 가기">유산균</a>
+							<a href="/product/daily/dailylist.do?category=31" title="해당 페이지로 가기">유산균</a>
 						</li>
 						
 						<li>
-							<a href="/product/daily?category=GOOD_060" title="해당 페이지로 가기">유제품</a>
+							<a href="/product/daily/dailylist.do?category=60" title="해당 페이지로 가기">유제품</a>
 						</li>
 						
 						<li>
-							<a href="/product/daily?category=GOOD_062" title="해당 페이지로 가기">건강즙</a>
+							<a href="/product/daily/dailylist.do?category=62" title="해당 페이지로 가기">건강즙</a>
 						</li>
 						
 						<li>
-							<a href="/product/daily?category=GOOD_064" title="해당 페이지로 가기">영양&amp;간식</a>
+							<a href="/product/daily/dailylist.do?category=64" title="해당 페이지로 가기">영양&amp;간식</a>
 						</li>
 						
 					</ul>
@@ -121,31 +121,31 @@
 					<ul>
 						
 						<li>
-							<a href="/product/box" title="해당 페이지로 가기">전체</a>
+							<a href="/product/box/boxlist.do" title="해당 페이지로 가기">전체</a>
 						</li>
 						
 						<li>
-							<a href="/product/box?category=GOOD_038" title="해당 페이지로 가기">녹즙</a>
+							<a href="/product/box/boxlist.do?category=38" title="해당 페이지로 가기">녹즙</a>
 						</li>
 						
 						<li>
-							<a href="/product/box?category=GOOD_015" title="해당 페이지로 가기">스무디</a>
+							<a href="/product/box/boxlist.do?category=15" title="해당 페이지로 가기">스무디</a>
 						</li>
 						
 						<li>
-							<a href="/product/box?category=GOOD_008" title="해당 페이지로 가기">클렌즈랩</a>
+							<a href="/product/box/boxlist.do?category=8" title="해당 페이지로 가기">클렌즈랩</a>
 						</li>
 						
 						<li>
-							<a href="/product/box?category=GOOD_005" title="해당 페이지로 가기">건강즙</a>
+							<a href="/product/box/boxlist.do?category=5" title="해당 페이지로 가기">건강즙</a>
 						</li>
 						
 						<li>
-							<a href="/product/box?category=GOOD_056" title="해당 페이지로 가기">키즈</a>
+							<a href="/product/box/boxlist.do?category=56" title="해당 페이지로 가기">키즈</a>
 						</li>
 						
 						<li>
-							<a href="/product/box?category=GOOD_063" title="해당 페이지로 가기">영양&amp;간식</a>
+							<a href="/product/box/boxlist.do?category=63" title="해당 페이지로 가기">영양&amp;간식</a>
 						</li>
 						
 					</ul>

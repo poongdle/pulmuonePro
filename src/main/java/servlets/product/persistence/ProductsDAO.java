@@ -19,14 +19,17 @@ public class ProductsDAO implements IProducts {
 		return instance;
 	}
 	@Override
-	public List<ProductsDTO> select(Connection con,String path) throws SQLException {
+	public List<ProductsDTO> select(Connection con,String path, String cal) throws SQLException {
 		String sql =
 				" select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
 						+ ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name "	              
 						+ " from products a join products_img b on a.products_no = b.products_no "
 						+ " where delivery_type = ? "
-						+ " and origin_name not like 'View%' "
-						+ " order by img_no ";
+						+ " and origin_name not like 'View%' ";
+						if(cal!=null && cal != "") {
+							  sql += String.format(" and category_no = (%s) ", cal);
+						}
+						sql += " order by img_no ";
 		ArrayList<ProductsDTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;	        
@@ -70,12 +73,15 @@ public class ProductsDAO implements IProducts {
 		return list;
 	}	
 	@Override
-	public List<ProductsDTO> selectbest(Connection con, String path) throws SQLException {
+	public List<ProductsDTO> selectbest(Connection con, String path, String cal) throws SQLException {
 		String sql =
 				" select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
 						+ ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name "	              
 						+ " from products a join products_img b on a.products_no = b.products_no "
 						+ " where delivery_type = ? ";
+		if(cal!=null && cal != "") {
+			  sql += String.format(" and category_no = (%s) ", cal);
+		}
 		switch (path) {
 		case "daily":
 			//				sql += " and a.products_no in (0073080,0070680,0073405,0071928,0073019,0071654,0070776,0073344,0072840,0073184,0073271,0073325,0073327,0073274,0070800,0070445,0073156,0073155,0071664,0072652) and origin_name not like 'View%' ";
@@ -128,13 +134,16 @@ public class ProductsDAO implements IProducts {
 		return dailylist;
 	}		
 	@Override
-	public List<ProductsDTO> searchcount(Connection con,String path, String tags) throws SQLException {
+	public List<ProductsDTO> searchcount(Connection con,String path, String tags, String cal) throws SQLException {
 		String sql =
 	              "  select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
 	              + ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name "	              
 	              + " from products a join products_img b on a.products_no = b.products_no "
 	              + " where delivery_type = ? "
 	              + " and origin_name not like 'View%' ";	  
+		if(cal!=null && cal != "") {
+			sql += String.format(" and category_no = (%s) ", cal);
+		}
 	    if(tags!=null && tags != "") {			  	  
 	          sql += String.format(" and( tag_no1 in (%s) ", tags);
 	          sql += String.format(" or tag_no2 in (%s) ", tags);
@@ -148,10 +157,10 @@ public class ProductsDAO implements IProducts {
 	        try {
 	           pstmt = con.prepareStatement(sql);
 	           pstmt.setString(1, path);		           
-//	           System.out.println("searchcount");
+	           System.out.println("searchcount");
 //	           System.out.println(path);
 //	           System.out.println(tags);
-//	           System.out.println(sql);
+	           System.out.println(sql);
 	           rs = pstmt.executeQuery();	  
 	           if ( rs.next() ) {	        	
 	              list = new ArrayList<ProductsDTO>();
@@ -189,7 +198,7 @@ public class ProductsDAO implements IProducts {
 	        return list;
 	}
 	@Override
-	public List<ProductsDTO> search(Connection con,String path, String tags, String num) throws SQLException {
+	public List<ProductsDTO> search(Connection con,String path, String tags, String num, String cal) throws SQLException {
 //		System.out.println(num);
 		int begin = Integer.parseInt(num);
 		if(begin==2) {
@@ -210,6 +219,9 @@ public class ProductsDAO implements IProducts {
 				+ "	               from products a join products_img b on a.products_no = b.products_no "
 				+ "	               where delivery_type = ? "
 				+ "	               and origin_name not like 'View%' ";
+				if(cal!=null && cal != "") {
+					  sql += String.format(" and category_no = (%s) ", cal);
+				}
 				if(tags!=null && tags != "") {			  	  
 			          sql += String.format(" and( tag_no1 in (%s) ", tags);
 			          sql += String.format(" or tag_no2 in (%s) ", tags);
@@ -230,8 +242,8 @@ public class ProductsDAO implements IProducts {
 	           pstmt.setInt(2, begin);
 	           pstmt.setInt(3, end);
 	           System.out.println("search");
-	           System.out.println(begin);
-	           System.out.println(end);
+//	           System.out.println(begin);
+//	           System.out.println(end);
 	           System.out.println(sql);
 	           rs = pstmt.executeQuery();	  
 	           if ( rs.next() ) {	        	

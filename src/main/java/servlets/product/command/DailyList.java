@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import mvc.command.CommandHandler;
 import servlets.product.domain.ProductsDTO;
 import servlets.product.service.ListService;
-import servlets.utils.CountDTO;
 
 public class DailyList implements CommandHandler{
 
@@ -22,20 +21,15 @@ public class DailyList implements CommandHandler{
 			num = String.join(", ",numarr);
 		}
 		String path = request.getRequestURI();						 
-//		String [] tags = request.getParameterValues("tags");		
-//		String tag = null;		
-//		if (tags != null) {
-//			tag = String.join(", ",tags);
-//		}			
-//		System.out.println(path);
-//		System.out.println(tag);
+
 		String tag = request.getParameter("tags");
-//		System.out.println(tag);
+		String cal = request.getParameter("category");
+
 		ListService listService = ListService.getInstance();
-	    List<ProductsDTO> list = listService.select(path);	    
-	    List<ProductsDTO> bestlist = listService.bestselect(path);	    
-	    List<ProductsDTO> searchlist = listService.search(path,tag,num);	
-	    List<ProductsDTO> searchcountlist = listService.searchcount(path,tag);
+	    List<ProductsDTO> list = listService.select(path,cal);	    
+	    List<ProductsDTO> bestlist = listService.bestselect(path,cal);	    
+	    List<ProductsDTO> searchlist = listService.search(path,tag,num,cal);	
+	    List<ProductsDTO> searchcountlist = listService.searchcount(path,tag,cal);
 	    
 		//1.  포워딩 전 데이터 저장
 		request.setAttribute("list", list);
