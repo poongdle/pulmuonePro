@@ -1,12 +1,10 @@
 package servlets.notice.command;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.oreilly.servlet.MultipartRequest;
-
+import auth.AuthInfo;
 import mvc.command.CommandHandler;
 import servlets.notice.model.NoticeDTO;
 import servlets.notice.service.NoticeWriteService;
@@ -18,6 +16,14 @@ public class NoticeWrite implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if( request.getMethod().equalsIgnoreCase("GET") ) {
+			AuthInfo auth = null;
+			HttpSession session = request.getSession();
+			auth = (AuthInfo) session.getAttribute("auth");
+			
+			if( !auth.getName().equals("admin")  ) {
+				response.sendRedirect("/forum/notice/list.do");
+				return null;
+			}
 			
 			return "/WEB-INF/views/notice/write.jsp";
 		}else {
