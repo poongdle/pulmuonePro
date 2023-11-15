@@ -38932,8 +38932,6 @@ a.btn.dropdown-toggle.qty::after {
   width: 65px;
   height: 47px;
   background: url("../images/common/h_logo.png") no-repeat 0 0;
-<<<<<<< HEAD
-=======
   background: url("/resources/assets/images/common/ico_sprite_pc.png") no-repeat -10px -10px;
   vertical-align: top;
 }
@@ -40209,7 +40207,6 @@ a.btn.dropdown-toggle.qty::after {
   width: 65px;
   height: 47px;
   background: url("/resources/assets/images/common/h_logo.png") no-repeat 0 0;
->>>>>>> 5bf822f5e758bb663323212bd682ef0596360f3b
 }
 
 .v1_content_body .header-wrapper .header-wrap .gnb-wrap {
@@ -42310,9 +42307,7 @@ a.btn.dropdown-toggle.qty::after {
   height: 14px;
   margin-top: -7px;
   background: url("../images/common/ico_sprite_pc.png") no-repeat -251px -50px;
-<<<<<<< HEAD
-=======
-  background: url(/resources/assets/images/common/h_search.jpg) 0 0 no-repeat;
+background: url(/resources/assets/images/common/h_search.jpg) 0 0 no-repeat;
 }
 
 .v1_content_body .header-wrapper .search-wrap .search-img-box .inner .search-desc {
@@ -44226,7 +44221,7 @@ a.btn.dropdown-toggle.qty::after {
   height: 14px;
   margin-top: -7px;
   background: url("/resources/assets/images/common/ico_sprite_pc.png") no-repeat -251px -50px;
->>>>>>> 5bf822f5e758bb663323212bd682ef0596360f3b
+
 }
 
 .v1_content_body .bestprd-wrapper .fr {
@@ -46094,8 +46089,6 @@ a.btn.dropdown-toggle.qty::after {
   height: 32px;
   padding: 6px 0;
   background: url("../images/common/bg_graph_age.png") repeat-x 0 50%;
-<<<<<<< HEAD
-=======
   background: #f8f8f8 url("/resources/assets/images/contents/bg_delivery_result_line.gif") repeat-x 0 0;
 }
 
@@ -47574,7 +47567,6 @@ a.btn.dropdown-toggle.qty::after {
   height: 32px;
   padding: 6px 0;
   background: url("/resources/assets/images/common/bg_graph_age.png") repeat-x 0 50%;
->>>>>>> 5bf822f5e758bb663323212bd682ef0596360f3b
   z-index: 1;
 }
 
@@ -54642,8 +54634,6 @@ a.btn.dropdown-toggle.qty::after {
 
 .question-part .filled-radio-group .item:nth-child(6) input + p:after {
   background: url("../images/contents/curation_icon06_on.png") no-repeat;
-<<<<<<< HEAD
-=======
   background: url(/resources/assets/images/contents/bg_tasting_banner.jpg) 0 0 no-repeat;
   text-align: center;
 }
@@ -60548,7 +60538,7 @@ a.btn.dropdown-toggle.qty::after {
 
 .question-part .filled-radio-group .item:nth-child(6) input + p:after {
   background: url("/resources/assets/images/contents/curation_icon06_on.png") no-repeat;
->>>>>>> 5bf822f5e758bb663323212bd682ef0596360f3b
+
 }
 
 /*****/
@@ -60752,8 +60742,7 @@ a.btn.dropdown-toggle.qty::after {
 /*.input-type.select:hover,*/
 /*.input-type.select:focus { border-color:#333; transition-duration: .2s; }*/
 /*.input-type.select:before { content:''; background:url('../images/common/arrow_lnb.png') no-repeat center center; border-radius: 50%; background-size:12px; width:32px; height:32px; border:1px #e5e5e5 solid; position: absolute; right:20px; top:50%; transform:translateY(-50%) rotate(180deg); }*/
-<<<<<<< HEAD
-=======
+
 /*.input-type.period .input-button:after { position: absolute; right:20px; top:50%; transform:translateY(-50%); width:22px; height:22px; content:''; background:url('/resources/assets/images/common/ico_calendar.png') no-repeat; }*/
 /*.input-type.l200 input { padding-left:200px; }*/
 /*.input-type.select.l200 select { padding-left:200px; }*/
@@ -60764,7 +60753,7 @@ a.btn.dropdown-toggle.qty::after {
 /*.input-type.select:hover,*/
 /*.input-type.select:focus { border-color:#333; transition-duration: .2s; }*/
 /*.input-type.select:before { content:''; background:url('/resources/assets/images/common/arrow_lnb.png') no-repeat center center; border-radius: 50%; background-size:12px; width:32px; height:32px; border:1px #e5e5e5 solid; position: absolute; right:20px; top:50%; transform:translateY(-50%) rotate(180deg); }*/
->>>>>>> 5bf822f5e758bb663323212bd682ef0596360f3b
+
 /*.input-type.select.button:before { right:120px; }*/
 /*.input-type.select select { width:100%; height:58px; font-size:16px; padding-left:140px; flex:1; }*/
 /*.input-type.select.button select { max-width:480px; height:58px; font-size:16px; padding-left:20px; flex:1; }*/
@@ -60792,6 +60781,7 @@ a.btn.dropdown-toggle.qty::after {
 /*.input-type.counter .button { background: #fff; color:#666; border:1px #e5e5e5 solid; border-left:0; }*/
 /*.input-type.radio { height:60px; border:1px #e5e5e5 solid; background: #fff; display: flex; align-items: center; }*/
 /*.input-type.radio .radio-area { padding-left:120px; }*/
+
 .input-desc {
   display: block;
   margin-top: 14px;
@@ -61262,8 +61252,6 @@ a.btn.dropdown-toggle.qty::after {
 
 .result-select-group label.single input:checked + div:after {
   background: url("../images/contents/ico_bottle_solo_on.png");
-<<<<<<< HEAD
-=======
   width: 34px;
   height: 34px;
   border: 2px #e5e5e5 solid;
@@ -61311,7 +61299,6 @@ a.btn.dropdown-toggle.qty::after {
 
 .result-select-group label.single input:checked + div:after {
   background: url("/resources/assets/images/contents/ico_bottle_solo_on.png");
->>>>>>> 5bf822f5e758bb663323212bd682ef0596360f3b
 }
 
 .alert-area {
@@ -61471,8 +61458,6 @@ a.btn.dropdown-toggle.qty::after {
   width: 94px;
   height: 67px;
   background: url("../images/contents/account_logo.png") no-repeat;
-<<<<<<< HEAD
-=======
   background: url("/resources/assets/images/common/button_layer_close.png") no-repeat;
 }
 
@@ -61497,7 +61482,6 @@ a.btn.dropdown-toggle.qty::after {
   width: 94px;
   height: 67px;
   background: url("/resources/assets/images/contents/account_logo.png") no-repeat;
->>>>>>> 5bf822f5e758bb663323212bd682ef0596360f3b
 }
 
 .account-wrapper .title {
@@ -66685,8 +66669,6 @@ table .t-left {
 
 .option-selector .radio-item .item .check-list input[type=checkbox]:checked + span:before {
   background: url("../images/ui/ico_check01.png") no-repeat center center;
-<<<<<<< HEAD
-=======
   background: #fff url("/resources/assets/images/ui/ico_check03_big.png") no-repeat center center;
 }
 
@@ -71634,7 +71616,6 @@ table .t-left {
 
 .option-selector .radio-item .item .check-list input[type=checkbox]:checked + span:before {
   background: url("/resources/assets/images/ui/ico_check01.png") no-repeat center center;
->>>>>>> 5bf822f5e758bb663323212bd682ef0596360f3b
   background-size: 14px;
 }
 

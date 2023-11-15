@@ -223,7 +223,6 @@ img {
     <a href="${dto.products_tag }" class="button-basic primary">상세보기</a>
     </c:forEach>
   </div>
-<div class="modal-backdrop show"></div>
 </div>
 </div>
 </div>

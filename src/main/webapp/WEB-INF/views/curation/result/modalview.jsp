@@ -24,7 +24,7 @@
 										</div>
 									</div>
 									<div class="button-set">
-										<a href="/product/daily/${dto.products_tag }" class="button-basic primary">상세보기</a>
+										<a href="/product/daily/view.do?tag=${dto.products_tag}&eventIdx=" class="button-basic primary">상세보기</a>
 									</div>
 								</div>
 							</c:forEach>

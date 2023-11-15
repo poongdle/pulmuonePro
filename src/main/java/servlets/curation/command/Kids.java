@@ -20,11 +20,11 @@ public class Kids implements CommandHandler{
 			System.out.println(num);
 //			System.out.println(num);
 			List<KidsDTO> list = kid.selectList();
-			List<KidsDTO> list2 = kid.select(24);
-			
+//			List<KidsDTO> list2 = kid.select(24);
+//			
 			
 			request.setAttribute("list", list);
-			request.setAttribute("list2", list2);
+//			request.setAttribute("list2", list2);
 		
 			return "/WEB-INF/views/curation/result/kids.jsp";
 	}

@@ -111,17 +111,6 @@ img {
 
   })
   
-    $(document).ready(function () {
-    $("[data-item-index]").each(function () {
-      var subData = $(this).data();
-      var ix = subData.itemIndex + 1;
-      data["item_0" + ix + "_img"] = subData.itemImage;
-      data["item_0" + ix + "_path"] = subData.itemLink;
-      data["item_0" + ix + "_title"] = subData.itemTitle;
-      data["item_0" + ix + "_desc"] = String(subData.itemDesc).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
-
-      console.log("!!!", subData);
-    });
 </script>
 <script>
   var nowArgs = undefined;
