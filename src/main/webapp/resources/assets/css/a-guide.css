@@ -815,6 +815,12 @@ input::-webkit-calendar-picker-indicator{
 
 .location a:not(:first-child):after {content: ""; display: block; position: absolute; top: 50%; transform: translateY(-50%); left: 0; width: 6px; height: 10px; background: url('/resources/assets/images/ui/ui_arr_right06.png') no-repeat; background-size: 5px;}
 
+/* 콘텐츠 서브 링크 */
+.location {display: flex; flex: 1; justify-content: flex-end; margin-bottom: 28px;}
+.location a {display: block; position: relative; padding: 0 15px; font-size: 14px; letter-spacing: -1.05px; color: #666;}
+.location a:last-child {padding-right: 0; font-weight: 700;}
+.location a:not(:first-child):after {content: ""; display: block; position: absolute; top: 50%; transform: translateY(-50%); left: 0; width: 6px; height: 10px; background: url('/resources/images/ui/ui_arr_right06.png') no-repeat; background-size: 5px;}
+
 
 
 

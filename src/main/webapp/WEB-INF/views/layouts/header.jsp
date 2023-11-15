@@ -1,32 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
 <!-- header -->
 <header id="header">
-	<div class="container">
-		<div class="logo-gnb-area">
-			<!-- logo -->
-			<h1 class="brand">
-				<a href="/" title="메인으로 가기">
-					<img src="/resources/assets/images/common/main_logo.png" alt="풀무원녹즙">
-				</a>
-			</h1>
-			<!-- // logo -->
+   <div class="container">
+      <div class="logo-gnb-area">
+         <!-- logo -->
+         <h1 class="brand">
+            <a href="/" title="메인으로 가기">
+               <img src="/resources/assets/images/common/main_logo.png" alt="풀무원녹즙">
+            </a>
+         </h1>
+         <!-- // logo -->
 
-			<!-- gnb -->
-			<nav id="gnb">
-				<ul>
-					<li>
-						<button type="button" class="btn-menu">
-							<i class="ico ico-menu">
-								<span></span>
-								<span></span>
-								<span></span>
-							</i>
-							<span>메뉴보기</span>
-						</button>
-					</li>
-					<li>
+         <!-- gnb -->
+         <nav id="gnb">
+            <ul>
+               <li>
+                  <button type="button" class="btn-menu">
+                    <i class="ico ico-menu">
+                        <span></span>
+                        <span></span>
+                    	<span></span>
+                    </i>
+                    <span>메뉴보기</span>
+                 	</button>
+               </li>
+               		<li>
 						<a href="/product/daily/dailylist.do">매일배송</a>
 					</li>
 					<li>
@@ -44,14 +44,10 @@
 					<li>
 						<a href="/forum/faq/list.do">고객기쁨센터</a>
 					</li>
-					<li>
-						<a href="/order/list.do">주문(임시)</a>
-					</li>		
 				</ul>
 			</nav>
 		</div>
 		<div class="member-search-area">
-
 			<div class="head-util-area">
 				<u:isLogin>
 					<p class="welcome">
@@ -71,15 +67,15 @@
 					<div class="counter hide" data-cart-size=""></div> <i class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
 				</a>
 			</div>
-			<form class="search-area" action="/product/search">
-				<input type="text" id="" name="searchKeyword" value="" title="검색어 입력">
-				<button>
-					<i class="ico ico-srh1"></i>
-					<span class="hide">검색하기</span>
-				</button>
-			</form>
-		</div>
-	</div>
+         <form class="search-area" action="/product/search">
+            <input type="text" id="" name="searchKeyword" value="" title="검색어 입력">
+            <button>
+               <i class="ico ico-srh1"></i>
+               <span class="hide">검색하기</span>
+            </button>
+         </form>
+      </div>
+   </div>
 
 	<div class="gnb-menu" id="gnb-item" style="display: none;">
 		<div class="container">
@@ -234,13 +230,13 @@
 						<i class="ico ico-arr-right5"></i>
 					</a>
 				</div>
-				</div>			
 			</div>
 			<button type="button" class="gnb-close" onclick="javascript:toggleMenu()">
 				<i class="ico ico-close"></i>
 				<span class="hide">메뉴닫기</span>
 			</button>
 		</div>
+	</div>
 </header>
 <script type="text/javascript">
 	$('.logout-btn').click(function (){

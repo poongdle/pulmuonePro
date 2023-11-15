@@ -430,12 +430,12 @@
 				console.log("realDiscount : " + realDiscount);
 				let gap = realDiscount + dispDiscount;							// 실제 할인가와 영수증에 찍힌 쿠폰 할인가의 차이
 				console.log("gap : " + gap);
-				dispDiscount += gap;											// 영수증에 찍힐 쿠폰 할인가
+				dispDiscount -= gap;											// 영수증에 찍힐 쿠폰 할인가
 				console.log("dispDiscount : " + dispDiscount);
 				
 				// 결제 금액
 				realPayPrice += discountVal;									// 진짜 결제 금액
-				dispPayPrice += gap;
+				dispPayPrice -= gap;
 			} // if
 			
 			viewCoupon.attr("data-value", realDiscount);
