@@ -135,7 +135,8 @@ public class MemberDAOImpl implements MemberDAO {
 
 				do {
 					memberId = rs.getString("member_id");
-					regDate = rs.getDate("regDate");
+					System.out.println(rs.getDate("reg_date"));
+					regDate = rs.getDate("reg_date");
 					
 					
 					dto = MemberDTO.builder().memberId(memberId).regDate(regDate)

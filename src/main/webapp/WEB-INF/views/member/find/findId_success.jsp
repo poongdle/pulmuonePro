@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -40,7 +42,7 @@
 	    margin: 40px auto 20px;
 	    width: 94px;
 	    height: 67px;    
-	    background: url("/resources/assets/images/main_logo.png") no-repeat;
+	    background: url("/resources/assets/images/common/main_logo.png") no-repeat;
 
 	}
 </style>
@@ -155,11 +157,7 @@
 </style>
 
 
-<style>
-
-.type-guide-area {
-    padding: 60px 90px 60px;
-}
+<style>  /* 안내 영역 */
 
 .caution-unit {
     text-align: center;
@@ -275,16 +273,26 @@
 						<h4>아이디를 분실하셨나요?</h4>
 						<p class="small">아이디를 찾기 위한 본인인증을 진행해 주세요.</p>
 					</div>
-					<div class="button-set">
+					<div class="button-set" style="margin-bottom: 0px">
 						<!-- <button type="button" id="findIdAuth" class="button-basic primary btn-certify btn-pos w-100" style="height: 69px">본인인증하기</button> -->
 						
 						<form action="/member/find/id-success.do" method="post" class="w-100">
-						
-							<button type="button" id="findIdAuth" class="button-basic primary btn-certify btn-pos w-100" style="height: 69px">본인인증하기</button>
+							<button type="button" id="findIdAuth" class="button-basic primary btn-certify btn-pos w-100" style="height: 69px; background-color: #e5e5e5; height: 69px">본인인증하기</button>
 						</form>
 					</div>
 				</div>
-		
+				
+				<div class="type-guide-area" style="padding-top: 55px">
+					<div class="caution-unit">
+						<h4 style="margin-top: 0px">회원님의 아이디는 <b><%= request.getAttribute("memberId") %></b>입니다.</h4>
+						<p class="small" style="margin-top: 20px"><%=  request.getAttribute("regDate") %> 가입</p>
+					</div>
+					<div class="button-set">
+						<a type="button" href="/member/find/password.do" class="button-basic border btn-certify btn-pos" style="height: 69px">비밀번호찾기</a>
+<!-- 						<a type="button" href="/member/login.do?redirectUrl=/" class="button-basic primary btn-certify btn-pos" style="height: 69px">로그인</a> -->
+						<a type="button" href="/member/login.do" class="button-basic primary btn-certify btn-pos" style="height: 69px">로그인</a>
+					</div>
+				</div>
 				
 		
 				
@@ -295,8 +303,6 @@
 
 <script type="text/javascript">
 	$("#findIdAuth").on("click", function() {
-
-		$(this).parent().submit();
 		
 // 		//window.open("[팝업을 띄울 파일명 path]", "[별칭]", "[팝업 옵션]")
 // 		var url  = "https://nice.checkplus.co.kr/CheckPlusSafeModel/service.cb?m=authMobileMain";

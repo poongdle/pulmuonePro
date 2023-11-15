@@ -68,6 +68,7 @@ public class MemberService {
 	private Date getBirthDate(String rrnBirthDate, String rrnGenderCode) {
 		Date birthDate = null;
 
+		System.out.println(rrnBirthDate + "-"+ rrnGenderCode);
 //		String[] birthIn1800s = {"9","0"};
 		String[] birthIn1900s = {"1","2","5","6"};
 		String[] birthIn2000s = {"3","4","7","8"};
@@ -75,18 +76,17 @@ public class MemberService {
 		String birthYear;
 		
 		if (Arrays.asList(birthIn1900s).contains(rrnGenderCode)) {
-			birthYear = "19" + rrnBirthDate.substring(0, 1); 
+			birthYear = "19" + rrnBirthDate.substring(0, 2); 
 		} else if (Arrays.asList(birthIn2000s).contains(rrnGenderCode)) {
-			birthYear = "20" + rrnBirthDate.substring(0, 1);
+			birthYear = "20" + rrnBirthDate.substring(0, 2);
 		} else {
-			birthYear = "18" + rrnBirthDate.substring(0, 1);			
+			birthYear = "18" + rrnBirthDate.substring(0, 2);			
 		}		
 		
-		String birthMonth = rrnBirthDate.substring(2, 3); 
-		String birthDay = rrnBirthDate.substring(4, 5);
-		
-		
-		birthDate = Date.valueOf(String.format("\s-\s-\s", birthYear, birthMonth, birthDay));
+		String birthMonth = rrnBirthDate.substring(2, 4); 
+		String birthDay = rrnBirthDate.substring(4, 6);
+
+		birthDate = Date.valueOf(String.format("%s-%s-%s", birthYear, birthMonth, birthDay));
 		
 		return birthDate;
 	}

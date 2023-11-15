@@ -42,11 +42,7 @@ public class MemberLogin implements CommandHandler{
 				// 인증 처리를 객체
 				AuthInfo auth = new AuthInfo(dto.getMemberNo(), memberId, dto.getName());
 				session.setAttribute("auth", auth);
-				
-//				session.setAttribute("memberNo", dto.getMemberNo());
-//				session.setAttribute("memberId", memberId);
-//				session.setAttribute("name", dto.getName());
-				
+
 				// 로그인 필터 거치기 전 경로가 있으면, 그 경로로 리다이렉트
 				String location = "/index.jsp";
 				String referer = (String) session.getAttribute("referer");

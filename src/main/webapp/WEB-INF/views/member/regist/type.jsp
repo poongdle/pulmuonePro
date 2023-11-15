@@ -208,7 +208,7 @@
 	    margin: 40px auto 20px;
 	    width: 94px;
 	    height: 67px;    
-	    background: url("/resources/assets/images/main_logo.png") no-repeat;
+	    background: url("/resources/assets/images/common/main_logo.png") no-repeat;
 
 	}
 </style>

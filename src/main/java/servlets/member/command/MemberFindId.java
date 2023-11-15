@@ -1,8 +1,8 @@
 package servlets.member.command;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,9 +17,15 @@ public class MemberFindId implements CommandHandler {
 		System.out.println("MemberFindId.java : 아이디 찾기");
 		
 		String method = request.getMethod();
-		String location = null;
+		String requestUri = request.getRequestURI();
+		
+		String idSuccessUri = "/member/find/id-success.do";
 		
 		if (method.equals("GET")) {
+			
+			if (requestUri.equals(idSuccessUri)) {
+				return idSuccessUri;
+			}
 			
 			return "/WEB-INF/views/member/find/findId.jsp";
 			
@@ -27,20 +33,13 @@ public class MemberFindId implements CommandHandler {
 			
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
-			
-			
-//			String tel ;
-//			String name;
-//			String birthDate;
-//			String regDate;
-			
+
 			String tel = "010-2374-1546";
 			String name = "사공보경";
 			String rrnBirthDate = "930205";
 			String rrnGenderCode = "2";
 					
 
-			
 			MemberService memberService = new MemberService();
 			MemberDTO dto = memberService.findId(name, tel, rrnBirthDate, rrnGenderCode);
 			
@@ -51,14 +50,13 @@ public class MemberFindId implements CommandHandler {
 			SimpleDateFormat sdf = new SimpleDateFormat(datePattern);
 			String regDate = sdf.format(dto.getRegDate());
 			
-			System.out.println(regDate);
-			
 			request.setAttribute("memberId", memberId);
 			request.setAttribute("regDate", regDate);
 			
-
-			location = "/WEB-INF/views/member/find/findId_success.jsp";
-			response.sendRedirect(location);
+			String path = "/WEB-INF/views/member/find/findId_success.jsp";
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+			dispatcher.forward(request, response);
 			
 			return null;
 		}
