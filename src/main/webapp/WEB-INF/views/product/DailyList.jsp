@@ -75,7 +75,9 @@
 			$("#head-items").owlCarousel({
 				items : 4,
 				nav : true,
-			});
+			});			
+		});
+		$(document).ready(function() {
 			var pbtn = "${param.tags}";
 			var ppbtn = pbtn.split(",");
 			for (var i = 0; i < 8; i++) {
@@ -85,8 +87,6 @@
 					}
 				}
 			}
-		});
-		$(document).ready(function() {
 			$(".ico-prd-wish").click(function() {
 				$("body").addClass('modal-open');
 				$("#alertModal").addClass('show');
@@ -180,13 +180,13 @@
 														</div>
 													</a>
 													<div class="btn-area btn-area-center">
-														<button type="button" data-wish-id="281"
+														<button type="button" data-wish-id="${dto.products_tag }"
 															data-wish-type="daily"
 															class="btn-round btn-white wishlistBtn ">
 															<i class="ico ico-prd-wish"></i> <span class="hide">제품
 																찜하기</span>
 														</button>
-														<button type="button" data-cart-id="0071654"
+														<button type="button" data-cart-id="${dto.products_no }"
 															data-cart-type="daily" data-cart-event=""
 															class="btn-round addCartBtn">
 															<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에

@@ -109,7 +109,7 @@
 						<div class="number">
 							<p data-carousel="current">1</p>
 							<span></span>
-							<p data-carousel="max">5</p>
+							<p data-carousel="max">6</p>
 						</div>
 						<button class="arrow right" data-carousel="next">
 							<span></span> <span></span>
