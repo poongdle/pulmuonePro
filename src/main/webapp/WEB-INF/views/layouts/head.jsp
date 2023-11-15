@@ -18,7 +18,7 @@
 <script src="/resources/assets/js/build/ko.js"></script>
 
 
-<!-- <!-- 부트스트랩 JavaScript 및 jQuery --> -->
+<!-- 부트스트랩 JavaScript 및 jQuery -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script>
 var $b = $.noConflict(true);
