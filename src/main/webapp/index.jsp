@@ -6,9 +6,11 @@
 	<div class="wrapper">
 
 		<%@ include file="/WEB-INF/views/layouts/header.jsp" %>
-		<main class="page event">
+		<main class="page">
 			<div class="container">
-				페이지 코딩 container class 에 full 클래스 붙히면 width 100%
+
+				페이지 코딩 container class 에 full 클래스 붙히면 width 100%				
+
 			</div>
 		</main>
 		
@@ -16,4 +18,5 @@
  
  	</div>
 </body>
+
 </html>

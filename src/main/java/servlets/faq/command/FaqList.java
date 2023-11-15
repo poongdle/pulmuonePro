@@ -1,5 +1,6 @@
 package servlets.faq.command;
 
+
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +42,13 @@ public class FaqList implements CommandHandler {
 		// 검색
 		String searchKeyword = request.getParameter("searchKeyword");
 		if( searchKeyword == null ) searchKeyword = "";
+		
+		
+		if( pcategory == "" && searchKeyword == "" ) {
+			response.sendRedirect( "/forum/faq/list.do" );
+			return null;
+		}
+		
 		
 		ArrayList<FaqDTO> faqList =  listService.getFaqList(pageNo, category, numberPerPage, searchKeyword);
 		totalPages = listService.getFaqTotalPage(numberPerPage, category, searchKeyword);

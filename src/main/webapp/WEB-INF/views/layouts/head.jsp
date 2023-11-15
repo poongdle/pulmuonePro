@@ -18,14 +18,13 @@
 <script src="/resources/assets/js/build/ckeditor.js"></script>
 <script src="/resources/assets/js/build/ko.js"></script>
 
-<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
-<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
-<link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
-<link rel="stylesheet" href="/resources/assets/css/contents2.css">
-<link rel="stylesheet" href="/resources/assets/css/curation.css">
-<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css">
-<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
-<link rel="stylesheet" href="/resources/assets/css/notosanskr.css">
+<!-- 부트스트랩 JavaScript 및 jQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script>
+ 	var $b = $.noConflict(true);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
 

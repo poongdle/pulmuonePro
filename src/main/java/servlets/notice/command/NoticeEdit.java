@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mvc.command.CommandHandler;
+
 import servlets.notice.model.NoticeDTO;
 import servlets.notice.service.NoticeEditService;
 import servlets.notice.service.NoticeViewService;
@@ -67,5 +68,5 @@ public class NoticeEdit implements CommandHandler {
 			return null;
 			
 		}
-	}
+}
 }

@@ -19,55 +19,70 @@ import lombok.NoArgsConstructor;
 
 public class LoginCheckFilter implements Filter {
 
-	
-	@Override
-	public void destroy() {
+   
+   @Override
+   public void destroy() {
 
-	}
+   }
 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		System.out.println("> LoginCheckFilter.doFilter()...");
-		
-		// 세션 auth 인증 + 권한 저장
-		
-		// servletRequest에는 getSession()이 없음
-		// HttpServletRequest로 다운캐스팅
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse res =  (HttpServletResponse) response;
-		
-		HttpSession session = req.getSession(false);
-		
-		AuthInfo auth = null;
-		auth = (AuthInfo) session.getAttribute("auth");
-		
-		boolean isLogin = false; // 인증 시, true
-		
-		if ( session != null && auth != null) {
+   @Override
+   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+         throws IOException, ServletException {
+      System.out.println("> LoginCheckFilter.doFilter()...");
+      
+      // 세션 auth 인증 + 권한 저장
+      
+      // servletRequest에는 getSession()이 없음
+      // HttpServletRequest로 다운캐스팅
+      HttpServletRequest req = (HttpServletRequest) request;
+      HttpServletResponse res =  (HttpServletResponse) response;
+      
+      HttpSession session = req.getSession(false);
+      
+      AuthInfo auth = null;
+      
+      try {
+         auth = (AuthInfo) session.getAttribute("auth");         
+      } catch (Exception e) {
+         System.out.println("LoginCheckFilter.java : auth 객체가 AuthInfo Class가 아닙니다.");
+         
+         e.printStackTrace();
+      }
+      
+            
+      boolean isLogin = false; // 인증 시, true
+      
+      if ( session != null && auth != null) {
 
-			// 인증 처리 완료 상태
-			isLogin = true;
-		}
-		
-		// 권한 있으면 chain, 없으면 로그인할 수 있는 페이지로
-		if (isLogin) {		
-			chain.doFilter(request, response);
-		} else {
-			// referer - 이전 경로를 가지고 있는 속성
-			String referer = req.getRequestURI();
-			session.setAttribute("referer", referer);
-			
-			String location = "/member/login.do";
-			res.sendRedirect(location);
-		}
-		
-	}
+         // 인증 처리 완료 상태
+         isLogin = true;
+      }
+      
+      // 권한 있으면 chain, 없으면 로그인할 수 있는 페이지로
+      if (isLogin) {      
+         chain.doFilter(request, response);
+      } else {
+         
+         // referer - 이전 경로를 가지고 있는 속성
+         String referer = req.getRequestURI();
+         String queryString = req.getQueryString();
+         
+         if (!queryString.equals("")) {
+            referer += "?" + queryString;
+         }
+         session.setAttribute("referer", referer);
 
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
-		
-	}
+         System.out.println("> LoginCheckFilter.java : session != null && auth != null (인증 정보 없음) ");
+         String location = "/member/login.do";
+         res.sendRedirect(location);
+      }
+      
+   }
+
+   @Override
+   public void init(FilterConfig filterConfig) throws ServletException {
+      // TODO Auto-generated method stub
+      
+   }
 
 }
