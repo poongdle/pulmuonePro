@@ -39,7 +39,7 @@ public class MemberDAOImpl implements MemberDAO {
 //	int adApproval;
 //	int marketingApproval;
 	
-	// 1. 로그인 용도
+	// 1-1. 로그인 용도
 	@Override
 	public MemberDTO selectOne(String memberId, String pwd) throws SQLException {
 		
@@ -100,6 +100,7 @@ public class MemberDAOImpl implements MemberDAO {
 		return dto;
 	}
 
+	// 1-2. NICE 인증 대체용
 	@Override
 	public MemberDTO selectOne(String name, String tel, Date birthDate) throws SQLException {
 		
@@ -135,7 +136,6 @@ public class MemberDAOImpl implements MemberDAO {
 
 				do {
 					memberId = rs.getString("member_id");
-					System.out.println(rs.getDate("reg_date"));
 					regDate = rs.getDate("reg_date");
 					
 					
@@ -164,7 +164,57 @@ public class MemberDAOImpl implements MemberDAO {
 		return dto;
 	}
 
+	// 1-3. 아이디 존재 여부 체크용
+	@Override
+	public MemberDTO selectOne(String memberId) throws SQLException {
+	
+		String sql = "SELECT * " 
+				+ " FROM member "
+				+ " WHERE member_id = ? ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
+		MemberDTO dto = null;
+		int memberNo;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, memberId);	
+		
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+				do {
+					memberNo = rs.getInt("member_no");
+										
+					dto = MemberDTO.builder().memberNo(memberNo)
+							.build();
+
+				} while (rs.next());
+				
+			} else {
+				System.out.println("MemberDAOImpl_selectOne : Invaild memberId");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		return dto;
+	}
 	
 	
 	
