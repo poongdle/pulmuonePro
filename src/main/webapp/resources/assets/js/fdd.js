@@ -369,6 +369,7 @@ function addLike(type, itemCode, options) {
     return false;
   })
 
+
 let timer;
   window.alert = function (message, callback, okBtnText) {
     $("#alertModalLabel").html("");
@@ -385,7 +386,6 @@ let timer;
 
       });
     }
-
       $("#alertModal").on("hide.bs.modal", function () {
         $('#alertModal .modal-footer').removeClass('disabled')
         $('#alertModal .modal-footer').prop('disabled',false);
@@ -486,7 +486,9 @@ let timer;
     if (id) {
       $("#productPreviewModal .modal-content").html("");
       $("#productPreviewModal").addClass("loading").modal('show');
+
       $("#productPreviewModal .modal-content").load("/product/preview/modalview.do?num=" + id, function () {
+
         $("#productPreviewModal").removeClass("loading");
       });
     }
@@ -560,6 +562,7 @@ let timer;
       var items = result.find(selector + " > *");
 
       var pagination = result.find("[data-pagination]");
+
       if (pagination.length > 0) {
         // 페이지네이션일때
         that.parents("[data-pagination]").html(pagination.get(0).innerHTML);
@@ -567,12 +570,20 @@ let timer;
       else {
         // 더보기 일때
         var moreNext = result.find("[data-list-more]");
-        if (!moreNext.length) {
+		if (items.length!=12) {          
+          that.remove();
+        } else {          
+			that.attr("data-param", Number(nextPage)+1);
+        }
+//        if (!moreNext.length) {
+		if (nextPage==4) {
           // 다음페이지가 빈거라면
           that.remove();
         } else {
           // 다음페이지 파라미터 가져다 붙이기
-          that.attr("data-param", moreNext.attr("data-param"));
+//          that.attr("data-param", moreNext.attr("data-param"));
+			that.attr("data-param", Number(nextPage)+1);
+
         }
       }
 
