@@ -19,7 +19,7 @@ public class ProductsDAO implements IProducts {
 		return instance;
 	}
 	@Override
-	public List<ProductsDTO> select(Connection con,String path, int num) throws SQLException {
+	public List<ProductsDTO> select(Connection con,String path) throws SQLException {
 		String sql =
 				" select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
 						+ ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name "	              
@@ -27,18 +27,6 @@ public class ProductsDAO implements IProducts {
 						+ " where delivery_type = ? "
 						+ " and origin_name not like 'View%' "
 						+ " order by img_no ";
-
-		//	      	switch (num) {
-		//			case 2: //제목
-		//				sql += "and ROWNUM <=24 ";
-		//				break;
-		//			case 3: //제목
-		//				sql += "and ROWNUM <=36 ";
-		//				break;
-		//			case 4: //제목
-		//				sql += "and ROWNUM <=48 ";
-		//				break;
-		//	      	}
 		ArrayList<ProductsDTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;	        
@@ -138,90 +126,221 @@ public class ProductsDAO implements IProducts {
 		} // finally
 
 		return dailylist;
-	}	
-		@Override
-		public List<ProductsDTO> search(Connection con,String path, String tags) throws SQLException {
-	//		String sql =
-	//	              " with count as ( select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
-	//	              + ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name "	              
-	//	              + " from products a join products_img b on a.products_no = b.products_no "
-	//	              + " where delivery_type = ? "
-	//	              + " and origin_name not like 'View%' ";
-			String sql =
-		              "  select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
-		              + ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name "	              
-		              + " from products a join products_img b on a.products_no = b.products_no "
-		              + " where delivery_type = ? "
-		              + " and origin_name not like 'View%' ";	  
-		    if(tags!=null && tags != "") {			  	  
-		          sql += String.format(" and tag_no1 in (%s) ", tags);
-		          sql += String.format(" or tag_no2 in (%s) ", tags);
-		          sql += String.format(" or tag_no3 in (%s) ", tags);
-		          sql += String.format(" or tag_no4 in (%s) ", tags);
-		          sql += String.format(" or tag_no5 in (%s)  ", tags);
-			}				  	     
-	//		      sql += " select * from count ";
-			switch (1) {
-			case 1:
-				sql += "and ROWNUM <=12 ";
-				break;
-			case 2: //제목
-				sql += "and ROWNUM <=24 ";
-				break;
-			case 3: //제목
-				sql += "and ROWNUM <=36 ";
-				break;
-			case 4: //제목
-				sql += "and ROWNUM <=48 ";
-				break;
-			}
-		        ArrayList<ProductsDTO> list = null;
-		        PreparedStatement pstmt = null;
-		        ResultSet rs = null;       	       	        
-		        try {
-		           pstmt = con.prepareStatement(sql);
-		           pstmt.setString(1, path);	           
-		           System.out.println("search");
-		           System.out.println(path);
-		           System.out.println(tags);
-		           System.out.println(sql);
-		           rs = pstmt.executeQuery();	  
-	//	           System.out.println(rs.next());
-		           if ( rs.next() ) {	        	
-		              list = new ArrayList<ProductsDTO>();
-		              ProductsDTO dto = null;
-		              do {
-		                 dto =  new ProductsDTO();
-		                 	dto.setProducts_no(rs.getString("products_no"));
-		                 	dto.setCategory_no(rs.getString("category_no"));
-		                 	dto.setProducts_name(rs.getString("products_name"));
-		                 	dto.setProducts_sub_name(rs.getString("products_sub_name"));
-		                 	dto.setProducts_type(rs.getString("products_type"));
-		                 	dto.setContent(rs.getString("content"));
-		                 	dto.setPrice(rs.getInt("price"));
-		                 	dto.setEvent_price(rs.getInt("event_price"));
-		                 	dto.setProducts_size(rs.getString("products_size"));	                 	
-		                 	dto.setDelivery_type(rs.getString("delivery_type"));	                 	
-		                 	dto.setTag_no1(rs.getInt("tag_no1"));
-		                 	dto.setTag_no2(rs.getInt("tag_no2"));
-		                 	dto.setTag_no3(rs.getInt("tag_no3"));
-		                 	dto.setTag_no4(rs.getInt("tag_no4"));
-		                 	dto.setTag_no5(rs.getInt("tag_no5"));
-		                 	dto.setProducts_tag(rs.getShort("products_tag"));
-		                 	dto.setReg_date(rs.getDate("reg_date"));
-		                 	dto.setSystem_name(rs.getString("system_name"));	  
-	//	                 	System.out.println(dto);
-		                 list.add(dto);
-	//	                 System.out.println(list);
-		              } while ( rs.next() );
-		           } // 
-		        } finally {
-		           JdbcUtil.close(pstmt);
-		           JdbcUtil.close(rs);         
-		        } // finally
-	
-		        return list;
+	}		
+	@Override
+	public List<ProductsDTO> searchcount(Connection con,String path, String tags) throws SQLException {
+		String sql =
+	              "  select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
+	              + ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name "	              
+	              + " from products a join products_img b on a.products_no = b.products_no "
+	              + " where delivery_type = ? "
+	              + " and origin_name not like 'View%' ";	  
+	    if(tags!=null && tags != "") {			  	  
+	          sql += String.format(" and( tag_no1 in (%s) ", tags);
+	          sql += String.format(" or tag_no2 in (%s) ", tags);
+	          sql += String.format(" or tag_no3 in (%s) ", tags);
+	          sql += String.format(" or tag_no4 in (%s) ", tags);
+	          sql += String.format(" or tag_no5 in (%s) ) ", tags);
+		}				  	     
+	        ArrayList<ProductsDTO> list = null;
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;       	       	        		        
+	        try {
+	           pstmt = con.prepareStatement(sql);
+	           pstmt.setString(1, path);		           
+//	           System.out.println("searchcount");
+//	           System.out.println(path);
+//	           System.out.println(tags);
+//	           System.out.println(sql);
+	           rs = pstmt.executeQuery();	  
+	           if ( rs.next() ) {	        	
+	              list = new ArrayList<ProductsDTO>();
+	              ProductsDTO dto = null;
+	              do {
+	                 dto =  new ProductsDTO();
+	                 	dto.setProducts_no(rs.getString("products_no"));
+	                 	dto.setCategory_no(rs.getString("category_no"));
+	                 	dto.setProducts_name(rs.getString("products_name"));
+	                 	dto.setProducts_sub_name(rs.getString("products_sub_name"));
+	                 	dto.setProducts_type(rs.getString("products_type"));
+	                 	dto.setContent(rs.getString("content"));
+	                 	dto.setPrice(rs.getInt("price"));
+	                 	dto.setEvent_price(rs.getInt("event_price"));
+	                 	dto.setProducts_size(rs.getString("products_size"));	                 	
+	                 	dto.setDelivery_type(rs.getString("delivery_type"));	                 	
+	                 	dto.setTag_no1(rs.getInt("tag_no1"));
+	                 	dto.setTag_no2(rs.getInt("tag_no2"));
+	                 	dto.setTag_no3(rs.getInt("tag_no3"));
+	                 	dto.setTag_no4(rs.getInt("tag_no4"));
+	                 	dto.setTag_no5(rs.getInt("tag_no5"));
+	                 	dto.setProducts_tag(rs.getShort("products_tag"));
+	                 	dto.setReg_date(rs.getDate("reg_date"));
+	                 	dto.setSystem_name(rs.getString("system_name"));	  
+//	                 	System.out.println(dto);
+	                 list.add(dto);
+//	                 System.out.println(list);
+	              } while ( rs.next() );
+	           } // 
+	        } finally {
+	           JdbcUtil.close(pstmt);
+	           JdbcUtil.close(rs);         
+	        } // finally
+
+	        return list;
+	}
+	@Override
+	public List<ProductsDTO> search(Connection con,String path, String tags, String num) throws SQLException {
+//		System.out.println(num);
+		int begin = Integer.parseInt(num);
+		if(begin==2) {
+			begin = 13;
+		}else if(begin==3) {
+			begin = 25;
+		}else if(begin==4) {
+			begin = 37;
 		}
+		int end = begin+11;
+		String sql = " SELECT products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price "
+				+ " , products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name "
+				+ "FROM ( "
+				+ "        SELECT ROWNUM no, t.* "
+				+ "        FROM (  "
+				+ "                select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price "
+				+ "	              ,products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name "
+				+ "	               from products a join products_img b on a.products_no = b.products_no "
+				+ "	               where delivery_type = ? "
+				+ "	               and origin_name not like 'View%' ";
+				if(tags!=null && tags != "") {			  	  
+			          sql += String.format(" and( tag_no1 in (%s) ", tags);
+			          sql += String.format(" or tag_no2 in (%s) ", tags);
+			          sql += String.format(" or tag_no3 in (%s) ", tags);
+			          sql += String.format(" or tag_no4 in (%s) ", tags);
+			          sql += String.format(" or tag_no5 in (%s) ) ", tags);
+				}				
+				sql+= "        ) t "
+				+ ")  b "
+				+ "WHERE b.no BETWEEN ? AND ? ";	 	 
+	    					    
+	        ArrayList<ProductsDTO> list = null;
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;       	       	        		        
+	        try {
+	           pstmt = con.prepareStatement(sql);
+	           pstmt.setString(1, path);		           
+	           pstmt.setInt(2, begin);
+	           pstmt.setInt(3, end);
+	           System.out.println("search");
+	           System.out.println(begin);
+	           System.out.println(end);
+	           System.out.println(sql);
+	           rs = pstmt.executeQuery();	  
+	           if ( rs.next() ) {	        	
+	              list = new ArrayList<ProductsDTO>();
+	              ProductsDTO dto = null;
+	              do {
+	                 dto =  new ProductsDTO();
+	                 	dto.setProducts_no(rs.getString("products_no"));
+	                 	dto.setCategory_no(rs.getString("category_no"));
+	                 	dto.setProducts_name(rs.getString("products_name"));
+	                 	dto.setProducts_sub_name(rs.getString("products_sub_name"));
+	                 	dto.setProducts_type(rs.getString("products_type"));
+	                 	dto.setContent(rs.getString("content"));
+	                 	dto.setPrice(rs.getInt("price"));
+	                 	dto.setEvent_price(rs.getInt("event_price"));
+	                 	dto.setProducts_size(rs.getString("products_size"));	                 	
+	                 	dto.setDelivery_type(rs.getString("delivery_type"));	                 	
+	                 	dto.setTag_no1(rs.getInt("tag_no1"));
+	                 	dto.setTag_no2(rs.getInt("tag_no2"));
+	                 	dto.setTag_no3(rs.getInt("tag_no3"));
+	                 	dto.setTag_no4(rs.getInt("tag_no4"));
+	                 	dto.setTag_no5(rs.getInt("tag_no5"));
+	                 	dto.setProducts_tag(rs.getShort("products_tag"));
+	                 	dto.setReg_date(rs.getDate("reg_date"));
+	                 	dto.setSystem_name(rs.getString("system_name"));	  
+	                 list.add(dto);
+	              } while ( rs.next() );
+	           } // 
+	        } finally {
+	           JdbcUtil.close(pstmt);
+	           JdbcUtil.close(rs);         
+	        } // finally
+	        return list;
+	}
+//		@Override
+//		public List<ProductsDTO> search(Connection con,String path, String tags, String num) throws SQLException {
+//			String sql =
+//		              "  select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
+//		              + ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name "	              
+//		              + " from products a join products_img b on a.products_no = b.products_no "
+//		              + " where delivery_type = ? "
+//		              + " and origin_name not like 'View%' ";	  
+//		    if(tags!=null && tags != "") {			  	  
+//		          sql += String.format(" and( tag_no1 in (%s) ", tags);
+//		          sql += String.format(" or tag_no2 in (%s) ", tags);
+//		          sql += String.format(" or tag_no3 in (%s) ", tags);
+//		          sql += String.format(" or tag_no4 in (%s) ", tags);
+//		          sql += String.format(" or tag_no5 in (%s) ) ", tags);
+//			}					    
+//			switch (num) {
+//			case "1":
+//				sql += "and ROWNUM <=12 ";
+//				break;
+//			case "2": //제목
+//				sql += "and ROWNUM <=24 ";
+//				break;
+//			case "3": //제목
+//				sql += "and ROWNUM <=36 ";
+//				break;
+//			case "4": //제목
+//				sql += "and ROWNUM <=48 ";
+//				break;
+//			}
+//		        ArrayList<ProductsDTO> list = null;
+//		        PreparedStatement pstmt = null;
+//		        ResultSet rs = null;       	       	        		        
+//		        try {
+//		           pstmt = con.prepareStatement(sql);
+//		           pstmt.setString(1, path);		           
+//		           System.out.println("search");
+////		           System.out.println(path);
+////		           System.out.println(tags);
+//		           System.out.println(sql);
+//		           rs = pstmt.executeQuery();	  
+//		           if ( rs.next() ) {	        	
+//		              list = new ArrayList<ProductsDTO>();
+//		              ProductsDTO dto = null;
+//		              do {
+//		                 dto =  new ProductsDTO();
+//		                 	dto.setProducts_no(rs.getString("products_no"));
+//		                 	dto.setCategory_no(rs.getString("category_no"));
+//		                 	dto.setProducts_name(rs.getString("products_name"));
+//		                 	dto.setProducts_sub_name(rs.getString("products_sub_name"));
+//		                 	dto.setProducts_type(rs.getString("products_type"));
+//		                 	dto.setContent(rs.getString("content"));
+//		                 	dto.setPrice(rs.getInt("price"));
+//		                 	dto.setEvent_price(rs.getInt("event_price"));
+//		                 	dto.setProducts_size(rs.getString("products_size"));	                 	
+//		                 	dto.setDelivery_type(rs.getString("delivery_type"));	                 	
+//		                 	dto.setTag_no1(rs.getInt("tag_no1"));
+//		                 	dto.setTag_no2(rs.getInt("tag_no2"));
+//		                 	dto.setTag_no3(rs.getInt("tag_no3"));
+//		                 	dto.setTag_no4(rs.getInt("tag_no4"));
+//		                 	dto.setTag_no5(rs.getInt("tag_no5"));
+//		                 	dto.setProducts_tag(rs.getShort("products_tag"));
+//		                 	dto.setReg_date(rs.getDate("reg_date"));
+//		                 	dto.setSystem_name(rs.getString("system_name"));	  
+//	//	                 	System.out.println(dto);
+//		                 list.add(dto);
+//	//	                 System.out.println(list);
+//		              } while ( rs.next() );
+//		           } // 
+//		        } finally {
+//		           JdbcUtil.close(pstmt);
+//		           JdbcUtil.close(rs);         
+//		        } // finally
+//	
+//		        return list;
+//		}
 //		@Override
 //		public ProductsDTO view(Connection con, int tag) throws Exception {
 //			String sql = "select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price, products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name,origin_name "
