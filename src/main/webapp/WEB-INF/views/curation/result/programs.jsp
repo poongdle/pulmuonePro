@@ -43,7 +43,7 @@ img {
 <body>
 <div class="wrapper">
 <%@ include file="/WEB-INF/views/layouts/header.jsp" %>
-<main class="program_sel">
+<main class="programs">
 <div id="container-wrapper" class="container-wrapper"> <!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
 
 <script type="text/javascript">
@@ -83,7 +83,7 @@ img {
     $('#orderBtn').click(function () {
       if (!window.is_signed) {
         alert('로그인이 필요한 서비스입니다.', function () {
-          location.href = '/member/login?redirectUrl=' + encodeURIComponent(location.href);
+          location.href = '/member/login.do';
         });
         return;
       }
@@ -190,6 +190,7 @@ img {
 </div>   
 </div>
 </div>
+
 <div class="modal show" id="productPreviewModal" tabindex="-1" style="display: none; padding-right: 17px;" aria-modal="true" role="dialog">
 	<div class="modal-dialog modal-dialog-centered" style="width:430px;">
 		<div class="modal-content modal-product">
@@ -227,6 +228,36 @@ img {
 </div>
 </div>
 	</div>
+	
+	<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" style="display: none;" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="confirmModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">제품이 담겼습니다. 담은 제품을 확인하시겠습니까?</div>
+			<div class="modal-footer">
+				<button type="button" class="cancel" data-dismiss="modal">취소</button>
+				<button type="button" class="confirm">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: none;" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="alertModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">로그인이 필요한 서비스입니다.</div>
+			<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
+		</div>
+	</div>
+</div>
 </div>
 </div>
 

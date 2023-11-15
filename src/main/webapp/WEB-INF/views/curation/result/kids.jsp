@@ -48,100 +48,104 @@
 				<!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
 
 <script type="text/javascript">
-  var singleYn = 'N' == 'Y';
-  $(function () {
 
-    sessionStorage.removeItem('req1');
-    sessionStorage.removeItem('req2');
-    sessionStorage.removeItem('req3');
+var singleYn = 'N' == 'Y';
+$(function () {
 
-    function getItems(lbl) {
-      var items = {};
-      $("input[name='itemCode']").each(function (i, item) {
-        var el = $(item);
-        if (el.is(":checked") || el.is("[type='hidden']")) {
-          var itemCode = el.val();
-          if (singleYn) {
-            items[itemCode] = [1, 1, 1, 1, 1];
-          } else {
-            var d = items[itemCode] || [0, 0, 0, 0, 0];
-            d[i] += 1;
-            items[itemCode] = d;
-          }
+  sessionStorage.removeItem('req1');
+  sessionStorage.removeItem('req2');
+  sessionStorage.removeItem('req3');
+
+  function getItems(lbl) {
+    var items = {};
+    $("input[name='itemCode']").each(function (i, item) {
+      var el = $(item);
+      if (el.is(":checked") || el.is("[type='hidden']")) {
+        var itemCode = el.val();
+        if (singleYn) {
+          items[itemCode] = [1, 1, 1, 1, 1];
+        } else {
+          var d = items[itemCode] || [0, 0, 0, 0, 0];
+          d[i] += 1;
+          items[itemCode] = d;
         }
-      })
-
-      var orderItems = [];
-      for (var key of Object.keys(items)) {
-        orderItems.push({
-          itemCode: key,
-          [lbl]: items[key]
-        });
       }
-      return orderItems;
+    })
+
+    var orderItems = [];
+    for (var key of Object.keys(items)) {
+      orderItems.push({
+        itemCode: key,
+        [lbl]: items[key]
+      });
+    }
+    return orderItems;
+  }
+
+  $('#orderBtn').click(function () {
+    if (!window.is_signed) {
+      alert('로그인이 필요한 서비스입니다.', function () {
+        location.href = '/member/login.do';
+      });
+      return;
     }
 
-    $('#orderBtn').click(function () {
-      if (!window.is_signed) {
-        alert('로그인이 필요한 서비스입니다.', function () {
-          location.href = '/member/login?redirectUrl=' + encodeURIComponent(location.href);
-        });
-        return;
-      }
+    var orderItems = getItems('dayQty');
+    if (orderItems.length === 0) {
+      alert("상품을 선택해주세요.");
+      return;
+    }
 
-      var orderItems = getItems('dayQty');
-      if (orderItems.length === 0) {
-        alert("상품을 선택해주세요.");
-        return;
-      }
+    window.orderProcess({ item: orderItems });
+  });
 
-      window.orderProcess({ item: orderItems });
-    });
+  $("#cartBtn").click(function () {
+    var orderItems = getItems('qty');
+    if (orderItems.length === 0) {
+      alert("상품을 선택해주세요.");
+      return;
+    }
+    addCarts("daily", orderItems);
+  });
 
-    $("#cartBtn").click(function () {
-      var orderItems = getItems('qty');
-      if (orderItems.length === 0) {
-        alert("상품을 선택해주세요.");
-        return;
-      }
-      addCarts("daily", orderItems);
-    });
+})
 
-  })
 </script>
-				<script>
-  var singleYn = "N" == 'Y';
-  var title = "키즈";
-  var data = {
-    mobilehost: "https://mgreenjuice.pulmuone.com/",
-    webhost: "https://greenjuice.pulmuone.com/",
-    title,
-    result_path: location.pathname + location.search
+
+<script>
+
+var singleYn = "N" == 'Y';
+var title = "키즈";
+var data = {
+  mobilehost: "https://mgreenjuice.pulmuone.com/",
+  webhost: "https://greenjuice.pulmuone.com/",
+  title,
+  result_path: location.pathname + location.search
+};
+$(document).ready(function () {
+  $("[data-item-index]").each(function () {
+    var subData = $(this).data();
+    var ix = subData.itemIndex + 1;
+    data["item_0" + ix + "_img"] = subData.itemImage;
+    data["item_0" + ix + "_path"] = subData.itemLink;
+    data["item_0" + ix + "_title"] = subData.itemTitle;
+    data["item_0" + ix + "_desc"] = String(subData.itemDesc).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+
+    console.log("!!!", subData);
+  });
+
+  window.kakaoShareData = {
+    key: singleYn ? 85888 : 85887,
+    data
   };
-  $(document).ready(function () {
-    $("[data-item-index]").each(function () {
-      var subData = $(this).data();
-      var ix = subData.itemIndex + 1;
-      data["item_0" + ix + "_img"] = subData.itemImage;
-      data["item_0" + ix + "_path"] = subData.itemLink;
-      data["item_0" + ix + "_title"] = subData.itemTitle;
-      data["item_0" + ix + "_desc"] = String(subData.itemDesc).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+})
 
-//       console.log("!!!", subData);
-    });
-
-    window.kakaoShareData = {
-      key: singleYn ? 85888 : 85887,
-      data
-    };
-  })
-
-  function sendKakao() {
-    Kakao.Share.sendCustom({
-      templateId: window.kakaoShareData.key,
-      templateArgs: window.kakaoShareData.data,
-    });
-  }
+function sendKakao() {
+  Kakao.Share.sendCustom({
+    templateId: window.kakaoShareData.key,
+    templateArgs: window.kakaoShareData.data,
+  });
+}
 </script>
 
 				<div class="breadcrumb-style">
@@ -244,9 +248,56 @@
 					</div>
 				</div>
 
+
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="alertModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
 			</div>
+			<div class="modal-body">
+			</div>
+			<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" style="display: none;" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="confirmModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">제품이 담겼습니다. 담은 제품을 확인하시겠습니까?</div>
+			<div class="modal-footer">
+				<button type="button" class="cancel" data-dismiss="modal">취소</button>
+				<button type="button" class="confirm">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: none;" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="alertModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">로그인이 필요한 서비스입니다.</div>
+			<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
+		</div>
+	</div>
+</div>
+
+</div>
 	</div>
 	<script>
+
 
   $(function(){
 

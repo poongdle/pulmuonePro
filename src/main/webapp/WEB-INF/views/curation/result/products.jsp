@@ -86,7 +86,7 @@ img {
     $('#orderBtn').click(function () {
       if (!window.is_signed) {
         alert('로그인이 필요한 서비스입니다.', function () {
-          location.href = '/member/login?redirectUrl=' + encodeURIComponent(location.href);
+          location.href = '/member/login.do';
         });
         return;
       }
@@ -112,136 +112,6 @@ img {
   })
   
 </script>
-<script>
-  var nowArgs = undefined;
-  window.orderProcess = function (args) {
-    if (!window.is_signed) {
-      alertWithRedirect("로그인 후 이용가능합니다.", "/member/login?redirectUrl=" + location.href)
-      return;
-    }
-    nowArgs = args;
-
-    var codes = [];
-    for (var item of args.item) {
-      if (!item.itemCode) continue;
-      codes.push(item.itemCode);
-    }
-
-    $("#orderModal ul").html("");
-    $("#orderModal").addClass("loading").modal("show");
-
-    axios.post(`/product_available`, { ids: codes }).then(function (r) {
-      var o = r.data.RESULT_MSG;
-      if (o.fails.length) {
-        var itemCodes = o.fails.map(v => v.itemCode);
-        var args2 = {
-          item: args.item.filter(v => !itemCodes.includes(v.itemCode))
-        };
-        nowArgs = args2;
-        $("#orderModal").modal("hide").removeClass("loading");
-        showNotAvailModal(o.fails, function () {
-          $("#orderModal ul").html("");
-          $("#orderModal").addClass("loading").modal("show");
-
-          if (o.fails.length == codes.length) {
-            $("#orderModal").removeClass("loading").modal("hide");
-            return;
-          }
-
-          get({url: '/order/daily/check/option'}, function (r) {
-            if (typeof r.RESULT_MSG == 'object' && r.RESULT_MSG.length > 0) {
-              let customerList = r.RESULT_MSG
-              if (customerList.length > 5) {
-                customerList = customerList.slice(0, 5)
-              }
-
-              var latno = 0;
-              $.each(customerList, function (i, data) {
-                var tpl = $("#orderPosLi").text();
-                var nickname = data.nickname;
-                if (!nickname) {
-                  if (latno == 0) {
-                    latno = customerList.filter(v => !!v.nickname).length
-                  }
-                  nickname = "음용 " + latno;
-                  latno++;
-                }
-                tpl = tpl.replace(/\{nickname\}/g, nickname);
-                tpl = tpl.replace(/\{custnumber\}/g, data.custnumber);
-                tpl = tpl.replace(/\{prtnId\}/g, data.phiCustomerVo.prtnId);
-                $("#orderModal ul").append(tpl);
-              })
-              $('#orderModal input[name=custnum]:first').click()
-              $("#orderModal").removeClass("loading")
-            } else {
-              location.href = "/order/daily/step1?item=" + encodeURIComponent(JSON.stringify(args2));
-            }
-          });
-        });
-      }
-      else {
-        get({url: '/order/daily/check/option'}, function (r) {
-          if (typeof r.RESULT_MSG == 'object' && r.RESULT_MSG.length > 0) {
-            let customerList = r.RESULT_MSG
-            if (customerList.length > 5) {
-              customerList = customerList.slice(0, 5)
-            }
-
-            var latno = 0;
-            $.each(customerList, function (i, data) {
-              var tpl = $("#orderPosLi").text();
-              var nickname = data.nickname;
-              if (!nickname) {
-                if (latno == 0) {
-                  latno = customerList.filter(v => !!v.nickname).length
-                }
-                nickname = "음용 " + latno;
-                latno++;
-              }
-              tpl = tpl.replace(/\{nickname\}/g, nickname);
-              tpl = tpl.replace(/\{custnumber\}/g, data.custnumber);
-              tpl = tpl.replace(/\{prtnId\}/g, data.phiCustomerVo.prtnId);
-              $("#orderModal ul").append(tpl);
-            })
-            $('#orderModal input[name=custnum]:first').click()
-            $("#orderModal").removeClass("loading")
-          } else {
-            location.href = "/order/daily/step1?item=" + encodeURIComponent(JSON.stringify(args));
-          }
-        });
-      }
-    });
-
-  }
-
-  $(document).on("click", "#orderModal button", function (e) {
-    var type = $(this).attr("data-type");
-    var p = encodeURIComponent(JSON.stringify(nowArgs));;
-    if (type === "new") {
-      location.href = "/order/daily/step1?item=" + p
-    } else if (type === "continue") {
-      var c = $("input[name='custnum']:checked");
-      var custNumber = c.val();
-      var prtnId = c.attr("data-prtn-id");
-      location.href = "/mypage/drink/drink/change/" + custNumber + "/" + prtnId + "?item=" + p;
-    }
-  })
-</script>
-<textarea id="orderPosLi" style="display: none">
-    <li>
-        <label class="item-wrapper">
-            <input name="custnum" type="radio" value="{custnumber}" data-prtn-id="{prtnId}" />
-            <div class="item">
-                <div class="contents">
-                    <p class="name">
-                        {nickname} <span style="margin-left: 0;">{custnumber}</span>
-                    </p>
-                </div>
-            </div>
-        </label>
-    </li>
-</textarea>
-
 
 <div class="breadcrumb-style">
     <div class="container">
@@ -352,11 +222,40 @@ img {
     <a href="${dto.products_tag }" class="button-basic primary">상세보기</a>
     </c:forEach>
   </div>
-<div class="modal-backdrop show"></div>
 </div>
 </div>
 </div>
 	</div>
+	
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" style="display: none;" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="confirmModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">제품이 담겼습니다. 담은 제품을 확인하시겠습니까?</div>
+			<div class="modal-footer">
+				<button type="button" class="cancel" data-dismiss="modal">취소</button>
+				<button type="button" class="confirm">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: none;" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="alertModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">로그인이 필요한 서비스입니다.</div>
+			<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
+		</div>
+	</div>
+</div>
 </div>
 
 <script>
