@@ -123,7 +123,7 @@
 			},
        	},
 		ckfinder: {
-			uploadUrl : "/forum/notice/upload.do",
+			uploadUrl : "/forum/faq/upload.do",
 			withCredentials: true
 		}	
 		}).then(edt => {

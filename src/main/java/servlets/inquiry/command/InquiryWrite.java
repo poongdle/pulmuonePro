@@ -21,6 +21,7 @@ public class InquiryWrite implements CommandHandler{
 			return "/WEB-INF/views/inquiry/write.jsp";
 		}else {
 			System.out.println("InquiryWriteService.process..");
+			response.setContentType("text/html; charset=UTF-8");
 			String inquiry_cate = request.getParameter("cate1");
 			String email = request.getParameter("emailAddHost");
 			String title = request.getParameter("title");
