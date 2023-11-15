@@ -228,7 +228,7 @@
                },
        	},
            ckfinder: {
-                   uploadUrl : "/upload/images",
+                   uploadUrl : "/forum/inquiry/upload.do",
                    withCredentials: true
                }	
            })

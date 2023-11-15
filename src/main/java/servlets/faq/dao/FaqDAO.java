@@ -19,4 +19,10 @@ public interface FaqDAO {
 	
 	// faq 유형의 페이지수
 	int getTotalPages(Connection conn, int numberPerPage, int category, String searchKeyword) throws SQLException;
+	
+	// faq 글쓰기 
+	int write(Connection conn, FaqDTO dto) throws SQLException;
+	
+	// 삭제 
+	int delete(Connection conn, int seq, int category) throws SQLException;
 }

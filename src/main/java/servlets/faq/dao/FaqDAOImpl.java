@@ -10,7 +10,6 @@ import jdbc.JdbcUtil;
 import servlets.faq.model.FaqDTO;
 
 public class FaqDAOImpl implements FaqDAO {
-	
 
 
 	@Override
@@ -203,6 +202,59 @@ public class FaqDAOImpl implements FaqDAO {
 		}
 		return 0;
 	}
+
+	@Override
+	public int write(Connection conn, FaqDTO dto) throws SQLException {
+		int insertRow = 0;
+		String sql = " INSERT INTO faq (q_no, faq_no, question, answer) "
+				+ "	VALUES ( "
+				+ "    seq_faq.NEXTVAL, ?, ?, ? "
+				+ ") ";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getFaq_no());
+			pstmt.setString(2, dto.getQuestion());
+			pstmt.setString(3, dto.getAnswer());
+			insertRow = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
+		return insertRow;
+	}
 	
+	@Override
+	public int delete(Connection conn, int seq, int category) throws SQLException {
+		int deleteRow = 0;
+		String sql = " DELETE FROM faq "
+				+ " WHERE faq_no = ? "
+				+ " AND q_no = ? ";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, category);
+			pstmt.setInt(2, seq);
+			deleteRow = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
+		return deleteRow;
+	}
 	
 }

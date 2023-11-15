@@ -1,4 +1,4 @@
-package servlets.notice.command;
+package servlets.faq.command;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -14,12 +14,12 @@ import mvc.command.CommandHandler;
 import net.sf.json.JSONObject;
 import servlets.notice.model.NoticeImageDTO;
 
-public class NoticeImageUpload implements CommandHandler{
+public class FaqImageUpload implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String saveDirectory = request.getRealPath("/upload/notice/");
+		String saveDirectory = request.getRealPath("/upload/faq/");
 		
 		File f = new File(saveDirectory);
 	  	if( !f.exists() ) {
@@ -34,7 +34,7 @@ public class NoticeImageUpload implements CommandHandler{
 	  			);
 	  	
 	  	File file = multiRequest.getFile("upload");
-	  	String realPath = request.getServletContext().getRealPath("/upload/notice");
+	  	String realPath = request.getServletContext().getRealPath("/upload/faq");
 	  	
 	
 	  	if( file != null ) {
@@ -53,7 +53,7 @@ public class NoticeImageUpload implements CommandHandler{
 			
 	  		JSONObject outData = new JSONObject();
 	  		outData.put("uploaded", true);
-	  		outData.put("url", "/upload/notice/" + fileSystemName);
+	  		outData.put("url", "/upload/faq/" + fileSystemName);
 	  		
 	  	  	System.out.println(">>>>>>>");
 		  	System.out.println(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + realPath + "/" + originName);
