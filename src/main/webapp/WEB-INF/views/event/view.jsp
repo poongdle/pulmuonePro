@@ -56,6 +56,9 @@
 								</div>
 								
 							</div>
+							
+							
+							
 						</div>
 						<div class="btn-area-right">
 							<a href="/event/event/list.do" class="btn-default btn-white">목록으로</a>
