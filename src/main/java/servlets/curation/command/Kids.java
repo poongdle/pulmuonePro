@@ -15,7 +15,10 @@ public class Kids implements CommandHandler{
 				
 			System.out.println("> Kids start..");
 			KidService kid = KidService.getInstance();
-//			int num = Integer.parseInt( request.getParameter("img_no") );
+//			int num = Integer.parseInt( request.getParameter("data-product-preview") );
+			String num = request.getParameter("num");
+			System.out.println(num);
+//			System.out.println(num);
 			List<KidsDTO> list = kid.selectList();
 			List<KidsDTO> list2 = kid.select(24);
 			

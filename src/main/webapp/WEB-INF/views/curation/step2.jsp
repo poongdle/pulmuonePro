@@ -411,11 +411,11 @@ $("#nextPage").click(function() {
 </script>
 
 <div style="display: none" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/resources/images/ui/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/images/ui/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/images/ui/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/resources/images/ui/quick4.png" alt=""></a>
-	<a href="#"><img src="/resources/images/ui/quickTop.png" alt=""></a>
+	<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/assets//images/ui/quickTop.png" alt=""></a>
 </div>
 
 <!-- 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 -->

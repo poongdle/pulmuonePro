@@ -76,11 +76,11 @@ public class DAOImpl implements CurationDAO{
 	}
 	@Override
 	public List<KidsDTO> select(Connection con,  int num) throws SQLException {
-		String sql = "select  pi.img_no,  p.products_name, products_tag, system_name, price, "
+		String sql = "select  img_no,  products_name, products_tag, system_name, price, "
 				+ " products_size, products_sub_name "
 				+ "from  products_img pi join products p on p.products_no = pi.products_no "
-				+ "where pi.img_no in ( ?, ? ) "
-				+ "order by pi.img_no desc"; 
+				+ "where img_no in ( ? ) "
+				+ "order by img_no desc"; 
 		
 		ArrayList<KidsDTO> list = null;
 		PreparedStatement pstmt = null;
@@ -90,7 +90,8 @@ public class DAOImpl implements CurationDAO{
 			pstmt = con.prepareStatement(sql);
 			System.out.println(sql);
 			pstmt.setInt(1, num);
-			pstmt.setInt(2, num);
+//			System.out.println(num);
+//			System.out.println(num2);
 			rs = pstmt.executeQuery();
 			if ( rs.next() ) {
 				list = new ArrayList<KidsDTO>() ;

@@ -310,11 +310,11 @@ let timer;
   })
 </script>
 <div style="display: none" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/resources/images/ui/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/images/ui/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/images/ui/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/resources/images/ui/quick4.png" alt=""></a>
-	<a href="#"><img src="/resources/images/ui/quickTop.png" alt=""></a>
+	<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/assets//images/ui/quickTop.png" alt=""></a>
 </div>
 </div>
 

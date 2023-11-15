@@ -284,11 +284,11 @@ img {
          <p>${list[0].program_name }</p>
           <c:forEach var="dto" items="${list}" >
             <div class="product-radio-group">
-                <label data-item-index="${dto.program_no }"  data-item-link="product/daily/278"  data-item-image="/resources/assets/images/${dto.system_name }"
+                <label data-item-index="${dto.program_no }"  data-item-link="product/daily/278"  data-item-image="/file/download/product/${dto.system_name }"
                   data-item-title="${dto.products_name }" data-item-desc="2100">
 	                <input value="${dto.products_no }" name="itemCode" type="checkbox"/>
 	                <div class="check-display"></div>
-	                 <div class="thumb" data-product-preview="278"><img src="/resources/assets/images/${dto.system_name }"  alt=""></div>
+	                 <div class="thumb" data-product-preview="278"><img src="/file/download/product/${dto.system_name }"  alt=""></div>
 	                 <p data-product-preview="278">
 	                 ${dto.products_name }</p>
                </label>
@@ -302,9 +302,7 @@ img {
              <button id="orderBtn" class="button-basic primary">주문하기</button>
        </div>
 </div>
-        
-
-        <div class="result-text">
+       <div class="result-text">
             ${list[0].program_content }
         </div>
         <div class="alert-area">
@@ -336,28 +334,13 @@ img {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
   </button>
   <div class="thumb-normal">
     
       
-        <img src="/file/download//product/20221108/ba5f3929-c8f2-42bf-a7bd-723b54dd684a.jpg">
+        <img src="/file/download//product/ba5f3929-c8f2-42bf-a7bd-723b54dd684a.jpg">
       
       
       
@@ -430,11 +413,11 @@ img {
   })
 </script>
 <div style="display: none" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/resources/images/ui/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/images/ui/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/images/ui/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/resources/images/ui/quick4.png" alt=""></a>
-	<a href="#"><img src="/resources/images/ui/quickTop.png" alt=""></a>
+	<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/assets//images/ui/quickTop.png" alt=""></a>
 </div>
 </main>
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>

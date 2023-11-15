@@ -21,7 +21,7 @@
 	integrity="sha384-DRe+1gYJauFEenXeWS8TmYdBmDUqnR5Rcw7ax4KTqOxXWd4NAMP2VPU5H69U7yP9"
 	crossorigin="anonymous"></script>
 <script src="/resources/assets/js/clipboard.min.js"></script>
-<!-- 	<script src="/resources/assets/js/fdd.js"></script> -->
+	<script src="/resources/assets/js/fdd.js"></script>
 <script src="/resources/assets/js/request.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
 
@@ -36,7 +36,7 @@
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css" />
 <script src="/resources/assets/js/daterangepicker.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
-<link rel="shortcut icon" type="image/x-icon" href="/resources/images/common/pul_favicon.png">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/common/pul_favicon.png">
 
 </head>
 <body>
@@ -171,10 +171,10 @@
 											data-item-title="${dto.products_name }" data-item-desc="2000">
 											<input value="${dto.products_no }" name="itemCode"
 											type="hidden"> <a class="item"
-											data-product-preview="${dto.products_tag }"
-											href="javascript:openModal('modal');" id="prevModal"> <label>${dto.dayweek }</label>
+											data-product-preview="${dto.img_no }"> 
+											<label>${dto.dayweek }</label>
 												<div class="thumb">
-													<img src="/resources/assets/images/${dto.system_name }">
+													<img src="/file/download/product/${dto.system_name }">
 												</div>
 												<div class="text-wrapper">
 													<span>${dto.products_name }</span>
@@ -215,11 +215,10 @@
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close"></button>
 								<div class="thumb-normal">
-
 									<c:forEach var="dto" items="${list2 }">
-										<img src="/resources/assets/images/prev/${dto.system_name }">
+										<img src="/file/download/product/${dto.system_name }">
 									</c:forEach>
-								</div>
+																	</div>
 							</div>
 
 							<c:forEach var="dto" items="${list2}">
@@ -247,21 +246,7 @@
 
 			</div>
 	</div>
-	<div class="modal-backdrop show"></div>
-
 	<script>
-function openModal(modal){
-	  document.get
-	  $("#modal").fadeIn(300);
-	  $("."+modal).fadeIn(300);
-	}
-
-$("#productPreviewModal, .modal").on('click',function(){
-	  $("#productPreviewModal").fadeOut(300);
-	  $(".modal-footer").fadeOut(300);
-	});
-
-
 
   $(function(){
 
@@ -296,17 +281,13 @@ $("#productPreviewModal, .modal").on('click',function(){
 
   })
 </script>
-	<div style="display: none" id="mini-side-nav">
-		<a href="/mypage/drink/drink"><img
-			src="/resources/images/ui/quick1.png" alt=""></a> <a
-			id="quickChangeDrink" href="/mypage/drink/drink"><img
-			src="/resources/images/ui/quick2.png" alt=""></a> <a
-			id="quickChangeSchedule" href="/mypage/drink/drink"><img
-			src="/resources/images/ui/quick3.png" alt=""></a> <a
-			href="/mypage/drink/bill"><img
-			src="/resources/images/ui/quick4.png" alt=""></a> <a href="#"><img
-			src="/resources/images/ui/quickTop.png" alt=""></a>
-	</div>
+<div style="display: none" id="mini-side-nav">
+	<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/assets//images/ui/quickTop.png" alt=""></a>
+</div>
 	</main>
 	<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
 	</div>

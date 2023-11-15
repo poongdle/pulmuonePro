@@ -143,9 +143,9 @@ img {
                       <li data-item-index="${dto.program_no }" data-item-link="product/daily/${dto.products_tag }" data-item-image="/resources/assets/images/${dto.system_name }" 
                             data-item-title="${dto.products_name }" data-item-desc="2000">
                           <input value="${dto.products_no }" name="itemCode" type="hidden">
-                             <a class="item" data-product-preview="${dto.products_tag }">
+                             <a class="item" data-product-preview="${dto.img_no }">
                                   <label>${dto.dayweek }</label>
-                                  <div class="thumb"><img src="/resources/assets/images/${dto.system_name }" alt=""></div>
+                                  <div class="thumb"><img src="/file/download/product/${dto.system_name }" alt=""></div>
                                   <div class="text-wrapper">  <span>${dto.products_name }</span>
                                    </div>
                               </a>
@@ -200,7 +200,7 @@ img {
   <div class="thumb-normal">
     
   <c:forEach var="dto" items="${list }">
-        <img src="/resources/assets/images/${dto.system_name }">
+        <img src="/file/download/product/${dto.system_name }">
 </c:forEach>
   </div>
 </div>
@@ -267,11 +267,11 @@ img {
   })
 </script>
 <div style="display: none" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/resources/images/ui/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/images/ui/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/images/ui/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/resources/images/ui/quick4.png" alt=""></a>
-	<a href="#"><img src="/resources/images/ui/quickTop.png" alt=""></a>
+	<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/assets//images/ui/quickTop.png" alt=""></a>
 </div>
 </main>
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>

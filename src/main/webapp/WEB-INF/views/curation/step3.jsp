@@ -141,10 +141,10 @@
 				const req2 = JSON.parse(sessionStorage.getItem('req2'))
 				const req3 = JSON.parse(sessionStorage.getItem('req3'))
 
-					if (singleYn=='N') {
-						location.href='/customer/product/result/programs.do' +  '?singleYn=' + singleYn ;
+					if (singleYn=='Y') {
+						location.href='/customer/product/result/products.do' +  '?singleYn=' + singleYn ;
 					}	else { 
-						location.href="/customer/product/result/products.do" + '?singleYn=' + singleYn ;
+						location.href="/customer/product/result/programs.do" + '?singleYn=' + singleYn ;
 					}
 
 				const data = {...req1, ...req2, ...req3}
@@ -486,11 +486,11 @@ let timer;
   })
 </script>
 <div style="display: none" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/resources/images/ui/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/images/ui/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/images/ui/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/resources/images/ui/quick4.png" alt=""></a>
-	<a href="#"><img src="/resources/images/ui/quickTop.png" alt=""></a>
+	<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/assets//images/ui/quickTop.png" alt=""></a>
 </div>
 </main>
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
