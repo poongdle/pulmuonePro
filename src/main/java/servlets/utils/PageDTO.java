@@ -33,5 +33,4 @@ public class PageDTO {
 		if( end != totalPages ) next = true;
 	}
 	
-	
 }

@@ -22,7 +22,7 @@ public class ListService {
 		}
 		return instance;
 	}
-	public List<ProductsDTO> select(String path, int num){
+	public List<ProductsDTO> select(String path){
 		//
 		Connection con = null;
 		try {
@@ -32,10 +32,10 @@ public class ListService {
 			int count = path.indexOf("daily");			
 			if(count!=-1) {			
 				path = "daily";
-			list = dao.select(con,path,num);		
+			list = dao.select(con,path);		
 			}else {
 				path = "box";
-			list = dao.select(con,path,num);
+			list = dao.select(con,path);
 			}
 			return list;
 		} catch (NamingException | SQLException e) { 
@@ -68,20 +68,20 @@ public class ListService {
 			JdbcUtil.close(con);
 		}
 	}
-	public List<ProductsDTO> search(String path, String tags){
+	public List<ProductsDTO> search(String path, String tags, String num){
 		//
 		Connection con = null;
 		try {
 			con = ConnectionProvider.getConnection();
 			ProductsDAO dao = ProductsDAO.getInstance();
-			List<ProductsDTO> searchlist = null;		
+			List<ProductsDTO> searchlist = null;					
 			int count = path.indexOf("daily");	
 			if(count != -1) {
 				path = "daily";
 			}else {
 				path = "box";
 			}
-			searchlist =	dao.search(con,path,tags);
+			searchlist =	dao.search(con,path,tags,num);			
 			return searchlist;
 		} catch (NamingException | SQLException e) { 
 			//e.printStackTrace();  syso("ListService.select() 에러 : ")
@@ -90,4 +90,27 @@ public class ListService {
 			JdbcUtil.close(con);
 		}
 	}  
+	public List<ProductsDTO> searchcount(String path, String tags){
+		//
+		Connection con = null;
+		try {
+			con = ConnectionProvider.getConnection();
+			ProductsDAO dao = ProductsDAO.getInstance();
+			List<ProductsDTO> searchcountlist = null;					
+			int count = path.indexOf("daily");	
+			if(count != -1) {
+				path = "daily";
+			}else {
+				path = "box";
+			}
+			searchcountlist =	dao.searchcount(con,path,tags);			
+			return searchcountlist;
+		} catch (NamingException | SQLException e) { 
+			//e.printStackTrace();  syso("ListService.select() 에러 : ")
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(con);
+		}
+	}
+
 }

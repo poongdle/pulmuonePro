@@ -14,7 +14,6 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="/resources/assets/css/style.css">
 <script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
 <script src="/resources/assets/js/design.js"></script>
@@ -31,6 +30,7 @@
 <script src="/resources/assets/js/owl.carousel.min.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/proview.css">
 <link rel="stylesheet" href="/resources/assets/css/list.css">
+<link rel="stylesheet" href="/resources/assets/css/style.css">
 </head>
 <body>
 	<script>

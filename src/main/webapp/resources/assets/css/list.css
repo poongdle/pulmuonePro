@@ -262,17 +262,17 @@ time, mark, audio, video {
   display: none;
 }
 
-.owl-carousel .owl-nav button.owl-next {
-  right: -28px;
-  background: url('/resources/assets/images/arrow_best.png') no-repeat;
-  background-size: contain;
-  transform: rotateZ(180deg) translateY(2px);
-}
-.owl-carousel .owl-nav button.owl-prev {
-  left: -28px;
-  background: url('/resources/assets/images/arrow_best.png') no-repeat;
-  background-size: contain;
-}
+/* .owl-carousel .owl-nav button.owl-next { */
+/*   right: -28px; */
+/*   background: url('/resources/assets/images/arrow_best.png') no-repeat; */
+/*   background-size: contain; */
+/*   transform: rotateZ(180deg) translateY(2px); */
+/* } */
+/* .owl-carousel .owl-nav button.owl-prev { */
+/*   left: -28px; */
+/*   background: url('/resources/assets/images/arrow_best.png') no-repeat; */
+/*   background-size: contain; */
+/* } */
 /**********************************************************************************
 ** icon
 ***********************************************************************************/
@@ -445,7 +445,7 @@ time, mark, audio, video {
 .best-section .part-title { margin-bottom: 22px }
 
 .tag-place { display: flex; flex-wrap: wrap; border-bottom:1px #e5e5e5 solid; padding:0px 0px 15px; align-items: center; justify-content: center; }
-.tag-place .item { height:50px; margin-bottom:15px; transition-duration: .2s; padding-right:20px; padding-left:40px; border:1px #e5e5e5 solid; border-radius: 25px; display: flex; align-items: center; font-size:16px; color:#333; background:#fff url("/resources/assets/images/ico_tag.png") 20px center no-repeat;  }
+/* .tag-place .item { height:50px; margin-bottom:15px; transition-duration: .2s; padding-right:20px; padding-left:40px; border:1px #e5e5e5 solid; border-radius: 25px; display: flex; align-items: center; font-size:16px; color:#333; background:#fff url("/resources/assets/images/ico_tag.png") 20px center no-repeat;  } */
 .tag-place .item+.item { margin-left:20px; }
 .tag-place .item.active,
 .tag-place .item:hover,

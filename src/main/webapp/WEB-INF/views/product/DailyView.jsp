@@ -14,7 +14,6 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="/resources/assets/css/style.css">
 <script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
 <script src="/resources/assets/js/design.js"></script>
@@ -31,6 +30,7 @@
 <script src="/resources/assets/js/owl.carousel.min.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/proview.css">
 <link rel="stylesheet" href="/resources/assets/css/list.css">
+<link rel="stylesheet" href="/resources/assets/css/style.css">
 </head>
 <body>
 	<script>
@@ -560,7 +560,7 @@
 														<span>월</span>
 														<div class="thumb">
 															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
+																src="/file/download/product/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
 																alt="">
 
 														</div>
@@ -573,7 +573,7 @@
 														<span>화</span>
 														<div class="thumb">
 															<img
-																src="/file/download/product/20210923/83dc1b40-d2da-4fba-9853-0bef12bc65f7.jpg"
+																src="/file/download/product/83dc1b40-d2da-4fba-9853-0bef12bc65f7.jpg"
 																alt="">
 
 														</div>
@@ -586,7 +586,7 @@
 														<span>수</span>
 														<div class="thumb">
 															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
+																src="/file/download/product/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
 																alt="">
 
 														</div>
@@ -599,7 +599,7 @@
 														<span>목</span>
 														<div class="thumb">
 															<img
-																src="/file/download/product/20210923/83dc1b40-d2da-4fba-9853-0bef12bc65f7.jpg"
+																src="/file/download/product/83dc1b40-d2da-4fba-9853-0bef12bc65f7.jpg"
 																alt="">
 
 														</div>
@@ -612,7 +612,7 @@
 														<span>금</span>
 														<div class="thumb">
 															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
+																src="/file/download/product/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
 																alt="">
 
 														</div>
@@ -633,7 +633,7 @@
 														<span>월</span>
 														<div class="thumb">
 															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
+																src="/file/download/product/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
 																alt="">
 														</div>
 														<div class="txt">
@@ -645,7 +645,7 @@
 														<span>화</span>
 														<div class="thumb">
 															<img
-																src="/file/download/product/20210923/a5e4ffc9-e98f-49a2-9371-2f2b9952dd9c.jpg"
+																src="/file/download/product/a5e4ffc9-e98f-49a2-9371-2f2b9952dd9c.jpg"
 																alt="">
 														</div>
 														<div class="txt">
@@ -657,7 +657,7 @@
 														<span>수</span>
 														<div class="thumb">
 															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
+																src="/file/download/product/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
 																alt="">
 
 														</div>
@@ -670,7 +670,7 @@
 														<span>목</span>
 														<div class="thumb">
 															<img
-																src="/file/download/product/20210923/a5e4ffc9-e98f-49a2-9371-2f2b9952dd9c.jpg"
+																src="/file/download/product/a5e4ffc9-e98f-49a2-9371-2f2b9952dd9c.jpg"
 																alt="">
 
 														</div>
@@ -684,7 +684,7 @@
 														<div class="thumb">
 
 															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
+																src="/file/download/product/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
 																alt="">
 														</div>
 														<div class="txt">

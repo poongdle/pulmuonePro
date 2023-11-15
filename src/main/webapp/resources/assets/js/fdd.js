@@ -534,7 +534,7 @@ function addLike(type, itemCode, options) {
     var path = location.origin + location.pathname;
     var qs = location.search.substring(1).split("&");
     path += "?pageNo=" + nextPage;
-
+console.log(path);
     $.each(qs, function (i, str) {
       if (str == "") return;
       if (str.indexOf("pageNo=") != 0) {
@@ -558,6 +558,7 @@ function addLike(type, itemCode, options) {
       var items = result.find(selector + " > *");
 
       var pagination = result.find("[data-pagination]");
+
       if (pagination.length > 0) {
         // 페이지네이션일때
         that.parents("[data-pagination]").html(pagination.get(0).innerHTML);
@@ -565,12 +566,19 @@ function addLike(type, itemCode, options) {
       else {
         // 더보기 일때
         var moreNext = result.find("[data-list-more]");
-        if (!moreNext.length) {
+		if (items.length!=12) {          
+          that.remove();
+        } else {          
+			that.attr("data-param", Number(nextPage)+1);
+        }
+//        if (!moreNext.length) {
+		if (nextPage==4) {
           // 다음페이지가 빈거라면
           that.remove();
         } else {
           // 다음페이지 파라미터 가져다 붙이기
-          that.attr("data-param", moreNext.attr("data-param"));
+//          that.attr("data-param", moreNext.attr("data-param"));
+			that.attr("data-param", Number(nextPage)+1);
         }
       }
 
