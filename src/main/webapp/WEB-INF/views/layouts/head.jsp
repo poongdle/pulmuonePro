@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 
 <!-- 주문 관련 css -->
-<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
 <link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
 <link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
 <link rel="stylesheet" href="/resources/assets/css/contents2.css">
@@ -22,8 +21,20 @@
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
 <link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css">
+<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
+
+<!-- 부트스트랩 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="/resources/assets/js/design.js"></script>
+
+<!-- 부트스트랩 JavaScript 및 jQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script>
+	var $b = $.noConflict(true);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>

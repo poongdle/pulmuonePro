@@ -23,7 +23,8 @@ public class LoginCheckFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("> LoginCheckFilter.doFilter()...");
+		HttpServletRequest hr = (HttpServletRequest)request;
+		System.out.println("> LoginCheckFilter.doFilter()... : " + hr.getRequestURI() );
 		
 		// auth 세션 객체에 인증, 권한 정보 저장
 		
@@ -32,7 +33,7 @@ public class LoginCheckFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		
 		String auth = null;
-		boolean isLogon = true;		// 일단 true로 해놓음
+		boolean isLogon = false;
 		
 		HttpSession session = req.getSession(false);
 		

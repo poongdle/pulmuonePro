@@ -109,21 +109,23 @@
                                                       </script>
                                                    </c:when>
                                                    <c:otherwise>
-                                                      <option value="" selected>쿠폰을 선택하세요.</option>
+                                                      <option value="0" selected>쿠폰을 선택하세요.</option>
+                                                      <c:set var="i" value="1" />
                                                       <c:forEach items="${ couponList }" var="coupon">
                                                          <c:choose>
                                                             <c:when test="${ coupon.discount > 1 }">
-                                                               <option value="${ coupon.couponNo }" data-duplicate="${ coupon.duplication }" data-max-discount="${ coupon.maxDiscount }" data-discount="${coupon.discount}" data-coupon-name="${ coupon.couponName }">
-                                                                  ${coupon.couponName}&nbsp;&nbsp;/&nbsp;&nbsp;<fmt:formatNumber value="${coupon.discount}" type="number"></fmt:formatNumber>원 할인
+                                                               <option value="${ i }" data-coupon-no="${ coupon.couponNo }" data-duplicate="${ coupon.duplication }" data-max-discount="${ coupon.maxDiscount }" data-discount="${coupon.discount}" data-coupon-name="${ coupon.couponName }">
+                                                                  ${ coupon.couponName }&nbsp;&nbsp;/&nbsp;&nbsp;<fmt:formatNumber value="${ coupon.discount }" type="number"></fmt:formatNumber>원 할인
                                                                </option>
                                                             </c:when>
                                                             <c:otherwise>
                                                                <fmt:formatNumber value="${ coupon.discount }" type="percent"/>
-                                                               <option value="${ coupon.couponNo }" data-duplicate="${ coupon.duplication }" data-max-discount="${ coupon.maxDiscount }" data-discount="${coupon.discount * 100}" data-coupon-name="${ coupon.couponName }">
-                                                                  ${coupon.couponName}&nbsp;&nbsp;/&nbsp;&nbsp;<fmt:formatNumber value="${coupon.discount}" type="percent"></fmt:formatNumber> 할인
+                                                               <option value="${ i }" data-coupon-no="${ coupon.couponNo }" data-duplicate="${ coupon.duplication }" data-max-discount="${ coupon.maxDiscount }" data-discount="${coupon.discount * 100}" data-coupon-name="${ coupon.couponName }">
+                                                                  ${ coupon.couponName }&nbsp;&nbsp;/&nbsp;&nbsp;<fmt:formatNumber value="${ coupon.discount }" type="percent"></fmt:formatNumber> 할인
                                                                </option>
                                                             </c:otherwise>
                                                          </c:choose>
+                                                         <c:set var="i" value="${i + 1}" />
                                                       </c:forEach>
                                                    </c:otherwise>
                                                 </c:choose>
@@ -171,7 +173,7 @@
                               <dl>
                                  <dt>
                                     <span>상품 판매가 </span> <b>
-                                       <div class="now-price">
+                                       <div class="now-price" id="prd-origin-price" value="">
                                           <b data-price-view="origin"></b> <span>원</span>
                                        </div>
                                     </b>
@@ -179,7 +181,7 @@
                                  <dd>
             
                                     <span>상품 할인 판매가</span> <b>
-                                       <div class="now-price">
+                                       <div class="now-price" id="prd-sale-price" value="">
                                           <b data-price-view="sale" class="minus"></b><span>원</span>
                                        </div>
                                     </b>
@@ -188,7 +190,7 @@
                                  <dd>
                                     <span>쿠폰 할인 금액</span>
                                     <b>
-                                       <div class="now-price minus">
+                                       <div class="now-price minus" id="coupon-discount" value="0">
                                           <b data-price-view="coupon">0</b><span>원</span>
                                        </div>
                                     </b>
@@ -196,7 +198,7 @@
                                  <dd>
                                     <span>배송비</span>
                                     <b>
-                                       <div class="now-price">
+                                       <div class="now-price" id="ship-fee" value="0">
                                           <b data-price-view="delivery">0</b><span>원</span>
                                        </div>
                                     </b>
@@ -205,7 +207,7 @@
                                  <dd class="checkout-sum">
                                     <span>최종 결제금액</span>
                                     <b>
-                                       <div class="now-price">
+                                       <div class="now-price" id="final-pay-amount" value="">
                                           <b data-price-view="payment"></b><span>원</span>
                                        </div>
                                     </b>
@@ -267,84 +269,152 @@
       </div>
 
 	<script>
-         // 영수증
+         // 영수증 초기값 설정
+         let originPrice = 0;
+         let salePrice = 0;
          $(function () {
             let bpEm = $("em.before-price");
             let npB = $("b.now-price");
-            let bp = 0;
-            let np = 0;
+            
             // 모든 상품 가격 합산
             for (var i = 0; i < bpEm.length; i++) {
-               bp += parseInt(bpEm.children("em").text().replaceAll(",", ""));
-               np += parseInt(npB.children("b").text().replaceAll(",", ""));
+            	originPrice += parseInt(bpEm.children("em").text().replaceAll(",", ""));
+            	salePrice += parseInt(npB.children("b").text().replaceAll(",", ""));
             } // for
             
-            let bpStr = bp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            let npStr = np.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            let bpStr = originPrice.toLocaleString();
+            let npStr = salePrice.toLocaleString();
             
             // 출력
             $("b[data-price-view=origin]").text(bpStr);
+            $("#prd-origin-price").val(originPrice);
             $("b[data-price-view=sale]").text(npStr);
+            $("prd-sale-price").val(salePrice);
             $("b[data-price-view=payment]").text(npStr);
+            $("final-pay-amount").val(salePrice);
+            $("input[name='payPrice']").val(salePrice);
          })
     </script>
 
 	<script>
-         $("#coupon-selector").on("change", function() {
-            let index = $(this).prop("selectedIndex");
-            if (index == 0) return;   // 쿠폰을 선택하세요. 선택 시
+		// 모든 쿠폰 객체를 저장할 배열 선언
+		let allCoupons = [];
+		
+		// 쿠폰 정보를 가져와서 객체로 만들어서 배열에 추가하는 함수
+		function addCoupon(element, salePrice) {
+			let discount = $(element).attr("data-discount");
+			let isWon = discount > 100 ? true : false;
+			let discountVal = isWon ? discount : salePrice*(discount/100);
+			let couponObject = {
+			    couponNo: $(element).attr("data-coupon-no")
+			    , couponName: $(element).attr("data-coupon-name")
+			    , duplication: $(element).attr("data-duplicate")
+			    , maxDiscount: $(element).attr("data-max-discount")
+			    , discount: discount
+				, isWon: isWon
+				, discountVal: discountVal
+			};
+		    allCoupons.push(couponObject);
+		} // addCoupon()
+		
+		// 쿠폰 정보 저장
+		$(function () {
+			let opts = $(this).find("option");
+			opts.each(function(i, element) {
+				addCoupon(element, salePrice);
+			});
+		})
+		
+		// 쿠폰 선택 시
+		$("#coupon-selector").on("change", function() {
+			// 1. 쿠폰을 선택하세요. 선택 시
+			let index = $(this).find("option:selected").val();
+            if (index == 0) return;
             
-            // 선택된 option 태그 -> 쿠폰 정보 가져오기
-            let opts = $(this).find("option");
-            let opt = opts.eq(index);
-            let couponNo = opt.val();										// 쿠폰 번호
-            let couponName = opt.attr("data-coupon-name");					// 쿠폰 이름
-            let duplication = opt.attr("data-duplicate");					// 중복 사용 가능 여부
-            let maxDiscount = parseInt(opt.attr("data-max-discount"));		// 최대 할인 가능 가격
-            let discount = parseInt(opt.attr("data-discount"));   			// 쿠폰 가격/할인율
-            let isWon = opt.attr("data-discount") > 100 ? true : false;
-            let salePrice = parseInt($("b[data-price-view=sale]").text().replace(",", ""));     // 현재 상품의 할인 적용가
-            let discountVal = isWon ? discount : salePrice*(discount/100);  // 쿠폰 할인량
+         	// 2. 선택한 쿠폰 정보 가져오기
+         	let couponNo = allCoupons[index].couponNo;
+         	let couponName = allCoupons[index].couponName;
+         	let duplication = allCoupons[index].duplication;
+         	let maxDiscount = parseInt(allCoupons[index].maxDiscount).toFixed(0);
+         	let discount = parseInt(allCoupons[index].discount).toFixed(0);
+         	let isWon = allCoupons[index].isWon;
+         	let discountVal = isWon ? discount : salePrice*(discount/100);
+         	
+         	// 3. 중복 쿠폰 처리
+            // 쿠폰 한 개 이상 선택 시 중복 사용 불가능한 쿠폰 지우기
+			let opts = $(this).find("option");
+			if ($("#apply-coupon-list li").length >= 0) opts.filter("[data-duplicate='1']").remove();
             
-            // 선택한 쿠폰 -> li 추가
+			// 중복 사용 불가능한 쿠폰 선택 시 다른 쿠폰들 지우기
+			if (duplication == 1) {
+				opts.text("사용 가능한 쿠폰이 없습니다.");
+			    opts.not(":first").remove();
+			    $(this).prop("disabled", true);
+			} // if
+            
+         	// 4. 선택한 쿠폰 -> li 추가
             let str = '<li data-coupon-idx="'+couponNo+'" data-coupon-name="'+couponName+'" data-duplicate="'+duplication+'" data-max-discount="'+maxDiscount+'" data-discount="'+discount+'">'
                      + '<input type="hidden" name="couponIdx" value="'+couponNo+'">'
                      + '<div>'
                         + '<em>'+couponName+'</em>'
-                        + '<button type="button" class="coupon-remove btn-pop-close"><i class="ico-close ico");"></i></button>'
+                        + '<button type="button" class="coupon-remove btn-pop-close"><i class="ico-close ico"></i></button>'
                      + '</div>';
             if (isWon) str += '<div class="now-price">'+discount.toLocaleString()+'<span>원</span></div>'
             else str += '<div class="now-price">'+discount.toLocaleString()+'<span>%</span></div>'
             str += '</li>';
             $("#apply-coupon-list").append(str);
             
-            // 선택한 쿠폰 -> option 제거
+        	// 5. 선택한 쿠폰 -> option 제거
+            let opt = $(this).find("option[value='"+index+"']");
             opt.remove();
             
-         	// 영수증 - 쿠폰 할인가 수정
-            let viewCoupon = $("b[data-price-view=coupon]");
-            viewCoupon.addClass("minus");
+         	// 6. 영수증 - 쿠폰 할인가 수정
+            editReceipt(true, discountVal, salePrice);
             
-            let currDiscount = parseInt(viewCoupon.text().replace(",", ""));   	// 현재 영수증의 쿠폰 할인 값
-            let couponsDiscount = currDiscount-discountVal;						// 선택한 쿠폰들의 총 할인 값
-            couponsDiscount = -salePrice > couponsDiscount ? -salePrice : couponsDiscount;		// 총 할인가가 현재 상품의 할인 적용가보다 작다면 할인 적용가로 고정
-            viewCoupon.text(couponsDiscount.toLocaleString());
-            
-            // 영수증 - 결제 가격 수정
-            $("b[data-price-view=payment]").text((salePrice+couponsDiscount).toLocaleString());
-			$("input[name='payPrice']").val(salePrice+couponsDiscount);
-			
-            // 쿠폰을 전부 다 선택했다면
-            if ($(this).find("option").length == 1) {
-               $(this).find("option").text("사용 가능한 쿠폰이 없습니다.");
-               $("#coupon-selector").prop("disabled", true);
+			// 8. 쿠폰을 전부 다 선택했다면
+			if (opts.length == 1) {
+            	opts.text("사용 가능한 쿠폰이 없습니다.");
+               	$(this).prop("disabled", true);
             } // if
-            
-            // 중복 쿠폰 처리.....
+		})
+		
+		function editReceipt(option, discountVal, salePrice, ) {
+			// 영수증 객체 가져오기
+			let viewCoupon = $("#coupon-discount");
+			let viewCouponText = $("b[data-price-view=coupon]");
+			let viewPay = $("#final-pay-amount");
+			let viewPayText = $("b[data-price-view=payment]");
 			
-         });
-         
-		// if (couponPrice == 0) viewCoupon.removeClass("minus");
+			let currDiscount = viewCoupon.val();   	// 현재 총 쿠폰 할인 값
+			let couponsDiscount;
+			let paymentPrice;
+
+			if (option == true) {
+				viewCouponText.addClass("minus");
+	            couponsDiscount = currDiscount-discountVal;			// 현재 총 쿠폰 할인 값 - 선택한 쿠폰 할인 값
+	            let isOver = -salePrice > couponsDiscount;			// 쿠폰 할인가가 상품가보다 큰지
+	            couponsDiscountStr = (isOver ? -salePrice : couponsDiscount).toLocaleString();	// 쿠폰 할인가가 상품가보다 크다면 상품 할인가로 변경		
+	            viewCoupon.val(couponsDiscount);
+				viewCouponText.text(couponsDiscountStr);
+				
+				paymentPrice = isOver ? 0 : salePrice+couponsDiscount;	// 쿠폰 할인가가 상품가보다 크다면 0원으로 변경
+				viewPay.val(paymentPrice);
+	            viewPayText.text(paymentPrice.toLocaleString());
+				$("input[name='payPrice']").val(salePrice+couponsDiscount);
+			} else {
+				viewCoupon.removeClass("minus");
+				couponDiscount = currDiscount+discountVal;
+				
+			}
+		}
+	</script>
+	<script>
+        $(document).on("click", "button.coupon-remove", function() {
+            let li = $(this).parent().parent().parent();
+            li.remove();
+		});
+
+		
     </script>
 	<script>
 			/* var type = "box";
