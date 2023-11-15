@@ -22,8 +22,9 @@ public class BoxOrder implements CommandHandler {
 		
 		String productsNo [] = request.getParameterValues("productsNo");
 		HttpSession session = request.getSession(false);
-		AuthInfo ai = ((AuthInfo)session.getAttribute("auth"));
-		int memberNo = ai.getMemberNo();
+
+		AuthInfo member = (AuthInfo) session.getAttribute("auth");
+		int memberNo = member.getMemberNo();
 		
 		BoxOrderService service = BoxOrderService.getInstanse();
 		

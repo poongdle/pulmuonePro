@@ -44,6 +44,9 @@
 					<li>
 						<a href="/forum/faq/list.do">고객기쁨센터</a>
 					</li>
+					<li>
+						<a href="/order/list.do">주문(임시)</a>
+					</li>		
 				</ul>
 			</nav>
 		</div>
@@ -230,6 +233,7 @@
 					<a href="/taste/taste" title="해당 페이지로 가기" class="fc-green">친구 또는 나에게 녹즙 시음을 선물해 보세요
 						<i class="ico ico-arr-right5"></i>
 					</a>
+				</div>
 				</div>			
 			</div>
 			<button type="button" class="gnb-close" onclick="javascript:toggleMenu()">
@@ -237,7 +241,6 @@
 				<span class="hide">메뉴닫기</span>
 			</button>
 		</div>
-	</div>
 </header>
 <script type="text/javascript">
 	$('.logout-btn').click(function (){

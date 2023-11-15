@@ -11,7 +11,29 @@
     	<%@ include file="/WEB-INF/views/layouts/header.jsp"%> 
         <main class="page order">
         	<div class="container">
-
+<textarea id="address_tpl" style="display: none">    &lt;div class="item" style="margin: 0 ; border-radius: 0"&gt;
+        &lt;div class="head"&gt;
+            &lt;div class="nickname-format xl"&gt;
+                &lt;label&gt;기본&lt;/label&gt;
+                &lt;h5&gt;{nickname}&lt;/h5&gt;
+            &lt;/div&gt;
+            &lt;ul class="info" style="margin-top:15px; padding-left:1px;"&gt;
+                &lt;li&gt;
+                    &lt;p&gt;{name}&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;p&gt;{phoneNumber}&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;p&gt;({post}) {addr1} {addr2}&lt;/p&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;div class="tail"&gt;
+            &lt;button type="button" class="adapt-address rounded-button"&gt;선택&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</textarea>
 				<div class="contents-area">
                 	<form id="orderForm">
                     	<input type="hidden" name="cardValidation" id="cardValidation" value="N">
@@ -173,16 +195,16 @@
                               <dl>
                                  <dt>
                                     <span>상품 판매가 </span> <b>
-                                       <div class="now-price" id="prd-origin-price" value="">
-                                          <b data-price-view="origin"></b> <span>원</span>
+                                       <div class="now-price" id="prd-origin-price">
+                                          <b data-price-view="origin" data-value=""></b> <span>원</span>
                                        </div>
                                     </b>
                                  </dt>
                                  <dd>
             
                                     <span>상품 할인 판매가</span> <b>
-                                       <div class="now-price" id="prd-sale-price" value="">
-                                          <b data-price-view="sale" class="minus"></b><span>원</span>
+                                       <div class="now-price" id="prd-sale-price">
+                                          <b data-price-view="sale" class="minus" data-value=""></b><span>원</span>
                                        </div>
                                     </b>
                                  </dd>
@@ -190,16 +212,16 @@
                                  <dd>
                                     <span>쿠폰 할인 금액</span>
                                     <b>
-                                       <div class="now-price minus" id="coupon-discount" value="0">
-                                          <b data-price-view="coupon">0</b><span>원</span>
+                                       <div class="now-price minus" id="coupon-discount">
+                                          <b data-price-view="coupon" data-value="0">0</b><span>원</span>
                                        </div>
                                     </b>
                                  </dd>
                                  <dd>
                                     <span>배송비</span>
                                     <b>
-                                       <div class="now-price" id="ship-fee" value="0">
-                                          <b data-price-view="delivery">0</b><span>원</span>
+                                       <div class="now-price" id="ship-fee">
+                                          <b data-price-view="delivery" data-value="0">0</b><span>원</span>
                                        </div>
                                     </b>
                                  </dd>
@@ -207,8 +229,8 @@
                                  <dd class="checkout-sum">
                                     <span>최종 결제금액</span>
                                     <b>
-                                       <div class="now-price" id="final-pay-amount" value="">
-                                          <b data-price-view="payment"></b><span>원</span>
+                                       <div class="now-price" id="final-pay-amount">
+                                          <b data-price-view="payment" data-value=""></b><span>원</span>
                                        </div>
                                     </b>
                                  </dd>
@@ -286,12 +308,12 @@
             let npStr = salePrice.toLocaleString();
             
             // 출력
-            $("b[data-price-view=origin]").text(bpStr);
-            $("#prd-origin-price").val(originPrice);
-            $("b[data-price-view=sale]").text(npStr);
-            $("prd-sale-price").val(salePrice);
-            $("b[data-price-view=payment]").text(npStr);
-            $("final-pay-amount").val(salePrice);
+            $("b[data-price-view=origin]").text(bpStr)
+            $("b[data-price-view=origin]").attr("data-value", originPrice);
+            $("b[data-price-view=sale]").text(npStr)
+            $("b[data-price-view=sale]").attr("data-value", salePrice);
+            $("b[data-price-view=payment]").text(npStr)
+            $("b[data-price-view=payment]").attr("data-value", salePrice);
             $("input[name='payPrice']").val(salePrice);
          })
     </script>
@@ -353,7 +375,7 @@
 			} // if
             
          	// 4. 선택한 쿠폰 -> li 추가
-            let str = '<li data-coupon-idx="'+couponNo+'" data-coupon-name="'+couponName+'" data-duplicate="'+duplication+'" data-max-discount="'+maxDiscount+'" data-discount="'+discount+'">'
+            let str = '<li data-coupon-inx="'+index+'" data-coupon-no="'+couponNo+'" data-coupon-name="'+couponName+'" data-duplicate="'+duplication+'" data-max-discount="'+maxDiscount+'" data-discount="'+discount+'" data-discount-val="'+discountVal+'">'
                      + '<input type="hidden" name="couponIdx" value="'+couponNo+'">'
                      + '<div>'
                         + '<em>'+couponName+'</em>'
@@ -378,40 +400,68 @@
             } // if
 		})
 		
-		function editReceipt(option, discountVal, salePrice, ) {
+		function editReceipt(option, discountVal, salePrice) {
 			// 영수증 객체 가져오기
-			let viewCoupon = $("#coupon-discount");
-			let viewCouponText = $("b[data-price-view=coupon]");
-			let viewPay = $("#final-pay-amount");
-			let viewPayText = $("b[data-price-view=payment]");
+			let viewCoupon = $("b[data-price-view=coupon]");
+			let viewPay = $("b[data-price-view=payment]");
 			
-			let currDiscount = viewCoupon.val();   	// 현재 총 쿠폰 할인 값
-			let couponsDiscount;
-			let paymentPrice;
-
-			if (option == true) {
-				viewCouponText.addClass("minus");
-	            couponsDiscount = currDiscount-discountVal;			// 현재 총 쿠폰 할인 값 - 선택한 쿠폰 할인 값
-	            let isOver = -salePrice > couponsDiscount;			// 쿠폰 할인가가 상품가보다 큰지
-	            couponsDiscountStr = (isOver ? -salePrice : couponsDiscount).toLocaleString();	// 쿠폰 할인가가 상품가보다 크다면 상품 할인가로 변경		
-	            viewCoupon.val(couponsDiscount);
-				viewCouponText.text(couponsDiscountStr);
+			// 현재 영수증 정보 불러오기
+			let realDiscount = parseInt(viewCoupon.attr("data-value"));   		// 진짜 쿠폰 할인가
+			let dispDiscount = parseInt(viewCoupon.text().replace(",", ""));	// 영수증에 찍힌 쿠폰 할인가
+			let realPayPrice = parseInt(viewPay.attr("data-value"));			// 진짜 결제 금액
+			let dispPayPrice = parseInt(viewPay.text().replace(",", ""));		// 영수증에 찍힌 결제 금액
+			
+			if (option == true) {	// 쿠폰 추가 시
+				viewCoupon.addClass("minus");
 				
-				paymentPrice = isOver ? 0 : salePrice+couponsDiscount;	// 쿠폰 할인가가 상품가보다 크다면 0원으로 변경
-				viewPay.val(paymentPrice);
-	            viewPayText.text(paymentPrice.toLocaleString());
-				$("input[name='payPrice']").val(salePrice+couponsDiscount);
-			} else {
+				// 쿠폰 할인가
+				realDiscount -= discountVal;											// 진짜 쿠폰 할인가
+	            let isOver = -salePrice > realDiscount;									// 상품가 > 쿠폰 할인가 ?
+	            dispDiscount = (isOver ? -salePrice : realDiscount).toLocaleString();	// 영수증에 찍힐 쿠폰 할인가	
+				
+				// 결제 금액
+				realPayPrice -= discountVal;											// 진짜 결제 금액
+				dispPayPrice = isOver ? 0 : salePrice+realDiscount;						// 영수증에 찍힐 결제 금액
+			} else {				// 쿠폰 삭제 시
 				viewCoupon.removeClass("minus");
-				couponDiscount = currDiscount+discountVal;
 				
-			}
+				// 쿠폰 할인가
+				realDiscount += discountVal;									// 진짜 쿠폰 할인가
+				console.log("realDiscount : " + realDiscount);
+				let gap = realDiscount + dispDiscount;							// 실제 할인가와 영수증에 찍힌 쿠폰 할인가의 차이
+				console.log("gap : " + gap);
+				dispDiscount += gap;											// 영수증에 찍힐 쿠폰 할인가
+				console.log("dispDiscount : " + dispDiscount);
+				
+				// 결제 금액
+				realPayPrice += discountVal;									// 진짜 결제 금액
+				dispPayPrice += gap;
+			} // if
+			
+			viewCoupon.attr("data-value", realDiscount);
+			viewCoupon.text(dispDiscount.toLocaleString());
+			viewPay.attr("data-value", realPayPrice);
+            viewPay.text(dispPayPrice.toLocaleString());
+            $("input[name='payPrice']").val(dispPayPrice);
 		}
 	</script>
 	<script>
         $(document).on("click", "button.coupon-remove", function() {
-            let li = $(this).parent().parent().parent();
+            // 1. li 태그 지우기
+        	let li = $(this).parent().parent();
             li.remove();
+            
+         	// 2. 선택한 쿠폰 정보 가져오기
+            index = parseInt(li.attr("data-coupon-inx"));
+         	let couponNo = allCoupons[index].couponNo;
+         	let couponName = allCoupons[index].couponName;
+         	let duplication = allCoupons[index].duplication;
+         	let maxDiscount = parseInt(allCoupons[index].maxDiscount).toFixed(0);
+         	let discount = parseInt(allCoupons[index].discount).toFixed(0);
+         	let isWon = allCoupons[index].isWon;
+         	let discountVal = isWon ? discount : salePrice*(discount/100);
+         	
+            editReceipt(false, discountVal, salePrice);
 		});
 
 		
@@ -486,6 +536,8 @@
 								} // if
 								root.append(el);
 							});
+					        
+					        $('#addressModal').modal('show');
 					        
 					        root.find(".adapt-address").on("click", function () {
 								$('#addressModal').modal('hide');
