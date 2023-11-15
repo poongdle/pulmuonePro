@@ -44,6 +44,9 @@
 					<li>
 						<a href="/forum/faq/list.do">고객기쁨센터</a>
 					</li>
+					<li>
+						<a href="/order/list.do">주문(임시)</a>
+					</li>		
 				</ul>
 			</nav>
 		</div>
@@ -230,12 +233,6 @@
 						<i class="ico ico-arr-right5"></i>
 					</a>
 				</div>
-				<div>
-					<b>주문(임시)</b>
-					<a href="/order/list.do" title="해당 페이지로 가기" class="fc-green">주문(임시)
-						<i class="ico ico-arr-right5"></i>
-					</a>					
-				</div>				
 			</div>
 			<button type="button" class="gnb-close" onclick="javascript:toggleMenu()">
 				<i class="ico ico-close"></i>
