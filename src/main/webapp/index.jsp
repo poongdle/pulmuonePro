@@ -8,7 +8,9 @@
 		<%@ include file="/WEB-INF/views/layouts/header.jsp" %>
 		<main class="page event">
 			<div class="container">
-				페이지 코딩 container class 에 full 클래스 붙히면 width 100%
+				페이지 코딩 container class 에 full 클래스 붙히면 width 100% <br>
+				<br>
+				<u:notLogin><a href="/member/login.do">로그인 버튼(임시)</a></u:notLogin>
 			</div>
 		</main>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>

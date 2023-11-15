@@ -52,13 +52,9 @@
 				<u:isLogin>
 					<p class="welcome">
 						<b style="margin: 0;"><c:out value="${ auth.getName() }" /> <a href="/member/logout.do" type="button" class="logout-btn">로그아웃</a></b>님, 건강한 습관 풀무원녹즙입니다.
-<%-- 						<b style="margin: 0;"><%= auth.getName() %> <a href="/member/logout.do" type="button" class="logout-btn">로그아웃</a></b>님, 건강한 습관 풀무원녹즙입니다. --%>
+<%-- 						<b style="margin: 0;"> <a href="/member/logout.do" type="button" class="logout-btn">로그아웃</a></b>님, 건강한 습관 풀무원녹즙입니다. --%>
 					</p>
-<!-- 					<a href="/member/logout.do">로그아웃(임시)</a> -->
 				</u:isLogin>
-				<u:notLogin>
-<!-- 					<a href="/member/login.do">로그인 버튼(임시)</a>				 -->
-				</u:notLogin>
 				<a href="/mypage.do" data-require-login="true"> 
 					<i class="ico ico-myIcon"></i>
 					<span class="hide">로그인 페이지 / 마이 페이지로 가기</span>
