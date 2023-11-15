@@ -12,3 +12,4 @@
          maxIdle="10"
          maxWaitMillis="-1"/>
 </Context>
+<!-- url="jdbc:oracle:thin:@192.168.10.166:1521:xe" -->
