@@ -7,7 +7,7 @@
 									<c:forEach var="dto" items="${list2 }">
 										<img src="/file/download/product/${dto.system_name }">
 									</c:forEach>
-																	</div>
+								</div>
 							</div>
 
 							<c:forEach var="dto" items="${list2}">
@@ -24,8 +24,7 @@
 										</div>
 									</div>
 									<div class="button-set">
-										<a href="/product/daily/${dto.products_tag }"
-											class="button-basic primary">상세보기</a>
+										<a href="/product/daily/${dto.products_tag }" class="button-basic primary">상세보기</a>
 									</div>
 								</div>
 							</c:forEach>

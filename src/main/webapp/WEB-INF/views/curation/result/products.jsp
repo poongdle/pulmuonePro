@@ -7,31 +7,31 @@
 <meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
 <meta name="viewport"     content="width=device-width,initial-scale=1.0">
 <script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
-	<script src="/resources/assets/js/jquery.form.min.js"></script>
+<script src="/resources/assets/js/jquery.form.min.js"></script>
 
 
-	<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
-	<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
+<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
-	<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" integrity="sha384-DRe+1gYJauFEenXeWS8TmYdBmDUqnR5Rcw7ax4KTqOxXWd4NAMP2VPU5H69U7yP9" crossorigin="anonymous"></script>
-	<script src="/resources/assets/js/clipboard.min.js"></script>
-	<script src="/resources/assets/js/fdd.js"></script>
-	<script src="/resources/assets/js/request.js"></script>
-	<link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" integrity="sha384-DRe+1gYJauFEenXeWS8TmYdBmDUqnR5Rcw7ax4KTqOxXWd4NAMP2VPU5H69U7yP9" crossorigin="anonymous"></script>
+<script src="/resources/assets/js/clipboard.min.js"></script>
+<script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/request.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
 
-	<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css"/>
-	<link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css"/>
-	<script src="/resources/assets/js/owl.carousel.min.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css"/>
+<link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css"/>
+<script src="/resources/assets/js/owl.carousel.min.js"></script>
 
-	<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
-	<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
-	<link rel="stylesheet" href="/resources/assets/css/contents2.css">
+<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
+<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
+<link rel="stylesheet" href="/resources/assets/css/contents2.css">
 
-	<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
-	<script src="/resources/assets/js/daterangepicker.js"></script>
-	<link rel="stylesheet" href="/resources/assets/css/style.css">
+<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
+<script src="/resources/assets/js/daterangepicker.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/style.css">
 <link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 
 <style type="text/css">
@@ -309,7 +309,7 @@ img {
         <div class="alert-area">
                 <h4>생활습관 바꾸기</h4>
                 <ul>
-                    <li data-type="bmi">${list[1].lifestyle_change01 }</li>
+                    <li data-type="bmi">${list[0].lifestyle_change01 }</li>
                      <li>대표적인 건강 위험 요인인 흡연! 자신과 사랑하는 사람들을 위해 금연을 시작합니다.</li>
                    </ul>
             </div>
