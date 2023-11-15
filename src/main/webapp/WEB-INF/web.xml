@@ -13,7 +13,6 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
-
 	<!-- p 415 커넥션풀을 사용하기 위해서 설정한 코딩. -->
 	<resource-ref>
 		<description>Oracle Datasource example</description>

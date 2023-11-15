@@ -160,6 +160,7 @@ var movePage = function (pageNo) {
     }
     document.getElementById('searchForm').action = '';
     document.getElementById('searchForm').method = 'get';
+
     document.getElementById('searchForm').submit();
 }
 
@@ -374,6 +375,7 @@ const newPost = function (option, callback, failCallback,cCallback) {
     option.data["__duplicate__"] = MD5(duplicateValue) + "UUID";
 
     $.ajax({
+
         url: option.url,
         param: $.param({'__duplicate__': MD5(duplicateValue) + "UUID"}),
         data: JSON.stringify(option.data),
@@ -383,7 +385,7 @@ const newPost = function (option, callback, failCallback,cCallback) {
         beforeSend:()=> $('#loading').modal('show'),
         success:
             function (response) {
-			
+
                 $('#loading').modal('hide')
 
                 try {
@@ -407,9 +409,9 @@ const newPost = function (option, callback, failCallback,cCallback) {
                     callback(response);
 
                     $("#popupDialogContent").load(response.POPUP_URL, function () {
-					console.log(POPUP_URL);
+
                         $(".ui-dialog-title").text(response.POPUP_NAME)					
-					console.log(POPUP_NAME);
+
                         $('.popup').dialog('open');
                     });
                 } else if (response.RESULT_ST == "FAIL") {
@@ -418,7 +420,7 @@ const newPost = function (option, callback, failCallback,cCallback) {
 
 
             },
-		
+
         fail: failCallback,
         complete: cCallback
     });
