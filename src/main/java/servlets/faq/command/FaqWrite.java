@@ -22,7 +22,7 @@ public class FaqWrite implements CommandHandler {
 			AuthInfo auth = null;
 			HttpSession session = request.getSession();
 			auth = (AuthInfo) session.getAttribute("auth");
-			if( auth.getName() != "admin"  ) {
+			if( !auth.getName().equals("admin") ) {
 				response.sendRedirect("/forum/faq/list.do");
 				return null;
 			}
