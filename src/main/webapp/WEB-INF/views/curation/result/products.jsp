@@ -284,7 +284,7 @@ img {
          <p>${list[0].program_name }</p>
           <c:forEach var="dto" items="${list}" >
             <div class="product-radio-group">
-                <label data-item-index="${dto.program_no }"  data-item-link="product/daily/${dto.products_tag }"  data-item-image="/file/download/product/${dto.img_no}"
+                <label data-item-index="0"  data-item-link="/"  data-item-image="/file/download/product/${dto.img_no}"
                   data-item-title="${dto.products_name }" data-item-desc="2100">
 	                <input value="${dto.products_no }" name="itemCode" type="checkbox"/>
 	                <div class="check-display"></div>
