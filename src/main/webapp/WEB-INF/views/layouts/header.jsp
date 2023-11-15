@@ -27,10 +27,10 @@
 						</button>
 					</li>
 					<li>
-						<a href="/product/daily">매일배송</a>
+						<a href="/product/daily/dailylist.do">매일배송</a>
 					</li>
 					<li>
-						<a href="/product/box">택배배송</a>
+						<a href="/product/box/boxlist.do">택배배송</a>
 					</li>
 					<li>
 						<a href="/customer/product">맞춤큐레이션</a>
@@ -48,6 +48,7 @@
 			</nav>
 		</div>
 		<div class="member-search-area">
+
 			<div class="head-util-area">
 				<u:isLogin>
 					<p class="welcome">
