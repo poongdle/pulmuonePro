@@ -230,7 +230,7 @@
 					<a href="/taste/taste" title="해당 페이지로 가기" class="fc-green">친구 또는 나에게 녹즙 시음을 선물해 보세요
 						<i class="ico ico-arr-right5"></i>
 					</a>
-				</div>
+				</div>			
 			</div>
 			<button type="button" class="gnb-close" onclick="javascript:toggleMenu()">
 				<i class="ico ico-close"></i>

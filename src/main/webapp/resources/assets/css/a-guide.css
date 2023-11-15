@@ -104,7 +104,9 @@ input::-webkit-calendar-picker-indicator{
 .form-input dl.date dd { justify-content: flex-start; height:100%; }
 .form-input dl.date::after,
 .form-input dl.date-complex .date-picker-single::after,
-.form-input input[type="date"]::after { cursor: pointer; position: absolute; right:20px; top:50%; margin-top:0; transform:translateY(-50%); width:22px; height:22px; content:''; background:url('/resources/images/common/ico_calendar.png') no-repeat; }
+
+.form-input input[type="date"]::after { cursor: pointer; position: absolute; right:20px; top:50%; margin-top:0; transform:translateY(-50%); width:22px; height:22px; content:''; background:url('/resources/assets/images/common/ico_calendar.png') no-repeat; }
+
 .form-input dl.date input { font-family: Roboto; font-weight: 400; font-size:16px; }
 .form-input input[type='password'] { letter-spacing: 0px; }
 .form-input input[type='password']::placeholder { letter-spacing: -1.2px; }
@@ -144,7 +146,9 @@ input::-webkit-calendar-picker-indicator{
 .form-input.select .dropdown { height:100%; flex:1; }
 .form-input.select .dropdown a.dropdown-toggle { display: flex; align-items: center; height:58px; padding:0 15px; }
 .form-input.select .dropdown button.dropdown-toggle { display: flex;width: 100%; align-items: center; height:58px; padding:0 15px; }
-.form-input.select .dropdown-toggle::after { margin:0; content:''; background:url('/resources/images/common/arrow_lnb.png') no-repeat center center; border-radius: 50%; background-size:12px; width:32px; height:32px; border:1px #e5e5e5 solid; position: absolute; right:20px; top:50%; transform:translateY(-50%) rotate(180deg); }
+
+.form-input.select .dropdown-toggle::after { margin:0; content:''; background:url('/resources/assets/images/common/arrow_lnb.png') no-repeat center center; border-radius: 50%; background-size:12px; width:32px; height:32px; border:1px #e5e5e5 solid; position: absolute; right:20px; top:50%; transform:translateY(-50%) rotate(180deg); }
+
 .form-input.select .select-value { padding-right:20px; font-size:14px; }
 
 
@@ -157,7 +161,9 @@ input::-webkit-calendar-picker-indicator{
 .form-input.period .dropdown { height:100%; flex:1; }
 .form-input.period .dropdown a.dropdown-toggle { display: flex; align-items: center; height:58px; padding:0 15px; font-family: Roboto, 'Noto Sans KR'; }
 .form-input.period .dropdown a.dropdown-toggle.bolder { font-weight:500; letter-spacing: -0.8px; font-size:16px; color:#333; }
-.form-input.period .dropdown-toggle::after { position: absolute; right:20px; top:50%; margin-top:0; transform:translateY(-50%); width:22px; height:22px; content:''; background:url('/resources/images/common/ico_calendar.png') no-repeat; }
+
+.form-input.period .dropdown-toggle::after { position: absolute; right:20px; top:50%; margin-top:0; transform:translateY(-50%); width:22px; height:22px; content:''; background:url('/resources/assets/images/common/ico_calendar.png') no-repeat; }
+
 .form-input.period .gap { margin-left:7px; margin-right:5px; font-size:16px; font-family: Roboto; letter-spacing: -1.2px; line-height: 1; color:#333; }
 
 .form-input.textarea dl { position: relative; height:auto; align-items: flex-start; }
@@ -189,29 +195,33 @@ input::-webkit-calendar-picker-indicator{
 .checkbox input[type=checkbox] + label, .radio input[type=radio] + label {position: relative; height: 20px; padding-left: 30px; font-size: 14px; font-weight: 400; line-height: 1.07; letter-spacing: -1.05px; color: #333;}
 
 /* 체크박스 기본 */
-.checkbox input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -3px; left: 0; width: 20px; height: 20px; border-radius: 50%; background: #e5e5e5 url("/resources/images/ui/ico_check01.png") no-repeat center; background-size: 12px;}
+.checkbox input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -3px; left: 0; width: 20px; height: 20px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ui/ico_check01.png") no-repeat center; background-size: 12px;}
+
 .checkbox input[type=checkbox]:checked + label:before {background-color: #7acc12; background-size: 12px;}
 
 /* 체크박스 동의 */
 .chk-type2 input[type=checkbox] + label {padding-left: 54px;}
 .chk-type2 input[type=checkbox] + label {font-size: 13px; letter-spacing: -0.98px; color: #333;}
 .chk-type2 input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: 2px; left: 0; width: 12px; height: 8px; background: none;}
-.chk-type2 input[type=checkbox]:checked + label:before {background: url("/resources/images/ui/ico_check03.png") no-repeat center; background-size: 12px;}
+
+.chk-type2 input[type=checkbox]:checked + label:before {background: url("/resources/assets/images/ui/ico_check03.png") no-repeat center; background-size: 12px;}
 
 /* 체크박스 장바구니 (빅 사이즈) */
 .chk-type3 input[type=checkbox] + label, .radio-type2 input[type=radio] + label {padding-left: 56px; font-size: 16px; letter-spacing: -2.1px; height: auto; font-weight: 400;}
-.chk-type3 input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -6px; left: 2px; width: 34px; height: 34px; border-radius: 50%; background: #e5e5e5 url("/resources/images/ui/ico_check01.png") no-repeat center; background-size: 14px;}
+.chk-type3 input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -6px; left: 2px; width: 34px; height: 34px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ui/ico_check01.png") no-repeat center; background-size: 14px;}
 .chk-type3 input[type=checkbox]:checked + label:before {background-size: 14px;}
 
 /* 체크박스 장바구니 (중간 사이즈) */
 .chk-type4 input[type=checkbox] + label {padding-left: 35px; font-size: 13px; letter-spacing: -0.98px; height: auto;}
-.chk-type4 input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -5px; left: 0; width: 26px; height: 26px; border-radius: 50%; background: #e5e5e5 url("/resources/images/ui/ico_check01.png") no-repeat center; background-size: 8px;}
+.chk-type4 input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: -5px; left: 0; width: 26px; height: 26px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/ui/ico_check01.png") no-repeat center; background-size: 8px;}
 .chk-type4 input[type=checkbox]:checked + label:before {background-size: 8px;}
 
 /* 체크박스 추가 */
 .check-type { margin-top:14px; position: relative; display: flex; align-items: center; height:32px; margin-bottom:20px; }
 .check-type input { display: none; }
-.check-type input+span:before {position: absolute; left:0; top:0; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/resources/images/contents/ico_check_solo_wt.png") no-repeat center center; }
+
+.check-type input+span:before {position: absolute; left:0; top:0; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/contents/ico_check_solo_wt.png") no-repeat center center; }
+
 .check-type span { font-size:14px; padding-left:49px; }
 .check-type input:checked+span:before { background-color: #7acc12; transition-duration: .2s; }
 .check-type em { display: block; color:#999; letter-spacing: -1.05px; font-size:13px; line-height:22px; }
@@ -237,7 +247,8 @@ input::-webkit-calendar-picker-indicator{
 .textarea button {height: 100px; width: 128px; height: 100px; background-color: #333; font-size: 16px; font-weight: 500; letter-spacing: -1.2px; color: #fff;}
 
 /* 셀렉트 */
-.form-select {display: flex; flex: 1; padding: 0 22px; margin: 0 22px 0 0; height: 58px; font-size: 16px; font-weight: 400; letter-spacing: -0.8px; color: #999; appearance:none; background:url('/resources/images/ui/ico-down02.png') no-repeat right center; background-size: 33px;}
+.form-select {display: flex; flex: 1; padding: 0 22px; margin: 0 22px 0 0; height: 58px; font-size: 16px; font-weight: 400; letter-spacing: -0.8px; color: #999; appearance:none; background:url('/resources/assets/images/ui/ico-down02.png') no-repeat right center; background-size: 33px;}
+
 
 /* 공통으로 쓰이는 단순요소 */
 .warning-description { color:#dd3f3f; font-size:14px; line-height: 1; letter-spacing: -1.05px; font-weight:400; margin-top:10px; }
@@ -314,21 +325,24 @@ input::-webkit-calendar-picker-indicator{
 .basic-big-button.prefix i { width:30px; height:30px; margin-right:20px; }
 
 .button-basic.bottles { position: relative; }
-.button-basic.bottle i { background: url("/resources/images/common/ico_button_bottle.png") no-repeat; }
-.button-basic.bottles i { background: url("/resources/images/common/ico_button_bottle.png") no-repeat; }
+.button-basic.bottle i { background: url("/resources/assets/images/common/ico_button_bottle.png") no-repeat; }
+.button-basic.bottles i { background: url("/resources/assets/images/common/ico_button_bottle.png") no-repeat; }
+
 .button-basic.bottles i + i { position: absolute; left: 30px; }
 .button-basic.kakao,
 .basic-big-button.kakao { background: #fee500; color:#181600; border-color:#fee500; }
 .button-basic.kakao i,
-.basic-big-button.kakao i { background: url("/resources/images/common/ico_button_kakao.png") no-repeat; }
+
+.basic-big-button.kakao i { background: url("/resources/assets/images/common/ico_button_kakao.png") no-repeat; }
 .button-basic.naver,
 .basic-big-button.naver { background: #fff; color:#333; border:1px #e5e5e5 solid; }
 .button-basic.naver i,
-.basic-big-button.naver i { background: url("/resources/images/common/ico_button_naver.png") no-repeat; }
+.basic-big-button.naver i { background: url("/resources/assets/images/common/ico_button_naver.png") no-repeat; }
 .button-basic.join { background: #fff; color:#333; border:1px #e5e5e5 solid; }
-.button-basic.join i { background: url("/resources/images/common/ico_button_char.png") no-repeat; }
+.button-basic.join i { background: url("/resources/assets/images/common/ico_button_char.png") no-repeat; }
 .button-basic.link { background: #fff; color:#333; border:1px #e5e5e5 solid; }
-.button-basic.link i { background: url("/resources/images/common/ico_button_link.png") no-repeat; }
+.button-basic.link i { background: url("/resources/assets/images/common/ico_button_link.png") no-repeat; }
+
 
 /* 라운드 버튼 공통 */
 .btn-round {display: flex; justify-content: center; align-items: center; width: 42px; height: 42px; border-radius: 50%; background-color: #7acc12;}
@@ -404,30 +418,29 @@ input::-webkit-calendar-picker-indicator{
 .ico {background-image: none; background-size: 100%; background-position: center; background-repeat: no-repeat; vertical-align: middle; background-color: transparent;}
 
 /* 아이콘 스타일 */
-.ico-prd-wish {width: 20px; height: 18px; background-image: url("/resources/images/ui/ico_wish_off02.png");}
-.wishlistBtn.active .ico-prd-wish {background-image: url("/resources/images/ui/ico_wish_on.png");}
-.ico-prd-cart {width: 42px; height: 42px; background-image: url("/resources/images/common/ico_cart02.png");}
-.ico-modal-close {width: 17px; height: 17px; background-image: url("/resources/images/ui/ico-close01.png");}
-.ico-close {width: 14px; height: 14px; background-image: url("/resources/images/ui/ico-close01.png");}
-.ico-more {width: 15px; height: 15px; background-image: url("/resources/images/ui/ui_plus01.png");}
-.ico-go-back {width: 19px; height: 15px; background-image: url("/resources/images/ui/ui_arr_left03.png");}
-.ico-share {width: 22px; height: 22px; background-image: url("/resources/images/ui/ico-share01.png");}
-.ico-share-wt {width: 22px; height: 22px; background-image: url("/resources/images/ui/ico-share02.png");}
-.ico-cacao {width: 21px; height: 20px; background-image: url("/resources/images/common/ico_cacao01.png");}
-.ico-naver {width: 17px; height: 16px; background-image: url("/resources/images/common/ico_naver02.png");}
-.ico-arr-right6 {width: 8px; height: 12px; background-image: url("/resources/images/ui/ui_arr_right06.png"); margin-left: 12px; vertical-align: baseline;}
-.ico-arr-right5 {width: 8px; height: 12px; background-image: url("/resources/images/ui/ui_arr_right05.png"); margin-left: 12px; vertical-align: baseline;}
+.ico-prd-wish {width: 20px; height: 18px; background-image: url("/resources/assets/images/ui/ico_wish_off02.png");}
+.wishlistBtn.active .ico-prd-wish {background-image: url("/resources/assets/images/ui/ico_wish_on.png");}
+.ico-prd-cart {width: 42px; height: 42px; background-image: url("/resources/assets/images/common/ico_cart02.png");}
+.ico-modal-close {width: 17px; height: 17px; background-image: url("/resources/assets/images/ui/ico-close01.png");}
+.ico-close {width: 14px; height: 14px; background-image: url("/resources/assets/images/ui/ico-close01.png");}
+.ico-more {width: 15px; height: 15px; background-image: url("/resources/assets/images/ui/ui_plus01.png");}
+.ico-go-back {width: 19px; height: 15px; background-image: url("/resources/assets/images/ui/ui_arr_left03.png");}
+.ico-share {width: 22px; height: 22px; background-image: url("/resources/assets/images/ui/ico-share01.png");}
+.ico-share-wt {width: 22px; height: 22px; background-image: url("/resources/assets/images/ui/ico-share02.png");}
+.ico-cacao {width: 21px; height: 20px; background-image: url("/resources/assets/images/common/ico_cacao01.png");}
+.ico-naver {width: 17px; height: 16px; background-image: url("/resources/assets/images/common/ico_naver02.png");}
+.ico-arr-right6 {width: 8px; height: 12px; background-image: url("/resources/assets/images/ui/ui_arr_right06.png"); margin-left: 12px; vertical-align: baseline;}
+.ico-arr-right5 {width: 8px; height: 12px; background-image: url("/resources/assets/images/ui/ui_arr_right05.png"); margin-left: 12px; vertical-align: baseline;}
 .ico-menu {width: 18px; height: 16px; }
-.ico-myIcon {width: 22px; height: 22px; background-image: url("/resources/images/common/ico_member02.png");}
-.ico-cart1 {width: 23px; height: 22px; background-image: url("/resources/images/common/ico_cart01.png");}
-.ico-srh1 {width: 20px; height: 20px; background-image: url("/resources/images/ui/ico-srh01.png");}
-.ico-wishlist {width: 26px; height: 24px; background-image: url("/resources/images/ui/ico_wish_off04.png");}
-.btn-wishList.active .ico-wishlist {width: 26px; height: 24px; background-image: url("/resources/images/ui/ico_wish_on.png");}
-.ico-prd-delete {width: 22px; height: 22px; background-image: url("/resources/images/ui/ico-close02.png");}
-.ico-down {width: 16px; height: 8px; background-image: url("/resources/images/ui/ico-down01.png");}
-.ico-calendar {width: 22px; height: 22px; background-image: url("/resources/images/ui/ico-cacalendar01.png");}
-.ico-question {width: 20px; height: 20px; background-image: url("/resources/images/ui/ico-question01.png");}
-
+.ico-myIcon {width: 22px; height: 22px; background-image: url("/resources/assets/images/common/ico_member02.png");}
+.ico-cart1 {width: 23px; height: 22px; background-image: url("/resources/assets/images/common/ico_cart01.png");}
+.ico-srh1 {width: 20px; height: 20px; background-image: url("/resources/assets/images/ui/ico-srh01.png");}
+.ico-wishlist {width: 26px; height: 24px; background-image: url("/resources/assets/images/ui/ico_wish_off04.png");}
+.btn-wishList.active .ico-wishlist {width: 26px; height: 24px; background-image: url("/resources/assets/images/ui/ico_wish_on.png");}
+.ico-prd-delete {width: 22px; height: 22px; background-image: url("/resources/assets/images/ui/ico-close02.png");}
+.ico-down {width: 16px; height: 8px; background-image: url("/resources/assets/images/ui/ico-down01.png");}
+.ico-calendar {width: 22px; height: 22px; background-image: url("/resources/assets/images/ui/ico-cacalendar01.png");}
+.ico-question {width: 20px; height: 20px; background-image: url("/resources/assets/images/ui/ico-question01.png");}
 /**********************************************************************************
 ** text
 ***********************************************************************************/
@@ -677,18 +690,19 @@ input::-webkit-calendar-picker-indicator{
 .best-section .part-title { margin-bottom: 22px }
 
 .tag-place { display: flex; flex-wrap: wrap; border-bottom:1px #e5e5e5 solid; padding:0px 0px 15px; align-items: center; justify-content: center; }
-.tag-place .item { height:50px; margin-bottom:15px; transition-duration: .2s; padding-right:20px; padding-left:40px; border:1px #e5e5e5 solid; border-radius: 25px; display: flex; align-items: center; font-size:16px; color:#333; background:#fff url("/resources/images/common/ico_tag.png") 20px center no-repeat;  }
+
+.tag-place .item { height:50px; margin-bottom:15px; transition-duration: .2s; padding-right:20px; padding-left:40px; border:1px #e5e5e5 solid; border-radius: 25px; display: flex; align-items: center; font-size:16px; color:#333; background:#fff url("/resources/assets/images/common/ico_tag.png") 20px center no-repeat;  }
 .tag-place .item+.item { margin-left:20px; }
 .tag-place .item.active,
 .tag-place .item:hover,
-.tag-place .item:focus { border-color:#7acc12; transition-duration: .2s; color:#fff; background:#7acc12 url("/resources/images/common/ico_tag_wt.png") 20px center no-repeat; }
+.tag-place .item:focus { border-color:#7acc12; transition-duration: .2s; color:#fff; background:#7acc12 url("/resources/assets/images/common/ico_tag_wt.png") 20px center no-repeat; }
 
 .tag-place.sm { margin-top:20px; }
-.tag-place.sm .item { height:38px; padding-left:32px; padding-right:18px; font-size:14px; background:#fff url("/resources/images/common/ico_tag.png") 15px center no-repeat; background-size:10px; }
+.tag-place.sm .item { height:38px; padding-left:32px; padding-right:18px; font-size:14px; background:#fff url("/resources/assets/images/common/ico_tag.png") 15px center no-repeat; background-size:10px; }
 .tag-place.sm .item+.item { margin-left:8px; }
 .tag-place.sm .item.active,
 .tag-place.sm .item:hover,
-.tag-place.sm .item:focus { border-color:#7acc12; transition-duration: .2s; color:#fff; background:#7acc12 url("/resources/images/common/ico_tag_wt.png") 15px center no-repeat; background-size:10px; }
+.tag-place.sm .item:focus { border-color:#7acc12; transition-duration: .2s; color:#fff; background:#7acc12 url("/resources/assets/images/common/ico_tag_wt.png") 15px center no-repeat; background-size:10px; }
 
 
 .prd-list-head  { display:flex; justify-content:space-between; align-items: center; margin:27px 0 36px;}
@@ -798,7 +812,9 @@ input::-webkit-calendar-picker-indicator{
 .location {display: flex; flex: 1; justify-content: flex-end; margin-bottom: 28px;}
 .location a {display: block; position: relative; padding: 0 15px; font-size: 14px; letter-spacing: -1.05px; color: #666;}
 .location a:last-child {padding-right: 0; font-weight: 700;}
-.location a:not(:first-child):after {content: ""; display: block; position: absolute; top: 50%; transform: translateY(-50%); left: 0; width: 6px; height: 10px; background: url('/resources/images/ui/ui_arr_right06.png') no-repeat; background-size: 5px;}
+
+.location a:not(:first-child):after {content: ""; display: block; position: absolute; top: 50%; transform: translateY(-50%); left: 0; width: 6px; height: 10px; background: url('/resources/assets/images/ui/ui_arr_right06.png') no-repeat; background-size: 5px;}
+
 
 
 
