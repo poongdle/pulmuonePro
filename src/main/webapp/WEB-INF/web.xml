@@ -13,7 +13,6 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
-
 	<!-- p 415 커넥션풀을 사용하기 위해서 설정한 코딩. -->
 	<resource-ref>
 		<description>Oracle Datasource example</description>
@@ -97,6 +96,11 @@
 		<filter-name>loginCheckFilter</filter-name>
 		<url-pattern>/member/logout.do</url-pattern>
 		<url-pattern>/mypage.do</url-pattern>
+		<url-pattern>/mypage/*</url-pattern>
+		<url-pattern>/forum/faq/write.do</url-pattern>
+		<url-pattern>/forum/notice/write.do</url-pattern>
+		<url-pattern>/forum/inquiry/write.do</url-pattern>
+		
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 

@@ -17,7 +17,6 @@
 <script src="/resources/assets/js/build/ckeditor.js"></script>
 <script src="/resources/assets/js/build/ko.js"></script>
 
-
 </head>
 
 

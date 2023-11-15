@@ -29,7 +29,11 @@
 					<div class="list-area" style="padding-top: 14px;">
 						<div class="list-head flex" style="margin-bottom: 28px">
                         	<em class="count">총 <span>${ totalRows }</span>건</em>
-                        	<div><a href="/forum/notice/write.do">글쓰기</a></div>
+                        	<u:isLogin>
+                        		<c:if test="${ auth.getName() == 'admin'}">
+                        			<div><a href="/forum/notice/write.do">글쓰기</a></div>
+                        		</c:if>  
+                        	</u:isLogin>
                         </div>
 									
 						<table class="tbl-col event-winner-list">
