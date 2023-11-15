@@ -231,7 +231,7 @@
 					</a>
 				</div>
 			</div>
-			<button type="button" class="gnb-close" onclick="javascript:toggleMenu()">
+			<button type="button" class="gnb-close" >
 				<i class="ico ico-close"></i>
 				<span class="hide">메뉴닫기</span>
 			</button>
