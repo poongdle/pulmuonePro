@@ -9,7 +9,7 @@ import mvc.command.CommandHandler;
 import servlets.curation.domain.KidsDTO;
 import servlets.curation.service.KidService;
 
-public class Test implements CommandHandler{
+public class ModalView implements CommandHandler{
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 				
@@ -24,6 +24,6 @@ public class Test implements CommandHandler{
 //			request.setAttribute("list", list);
 			request.setAttribute("list2", list2);
 		
-			return "/WEB-INF/views/curation/result/test.jsp";
+			return "/WEB-INF/views/curation/result/modalview.jsp";
 	}
 }

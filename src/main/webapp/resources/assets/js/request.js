@@ -358,7 +358,7 @@ var postAjaxForm = function (formId, url, callback, failCallback) {
 };
 
 const newPost = function (option, callback, failCallback,cCallback) {
-	console.log("시작");
+
     if (option.duplicate == undefined) {
         // false : 중복 방지해야 함.
         // true : 중복 허용 해야 함.

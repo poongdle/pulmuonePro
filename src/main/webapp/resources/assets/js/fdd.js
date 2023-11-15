@@ -486,7 +486,7 @@ let timer;
     if (id) {
       $("#productPreviewModal .modal-content").html("");
       $("#productPreviewModal").addClass("loading").modal('show');
-      $("#productPreviewModal .modal-content").load("/product/preview/test.do?num=" + id, function () {
+      $("#productPreviewModal .modal-content").load("/product/preview/modalview.do?num=" + id, function () {
         $("#productPreviewModal").removeClass("loading");
       });
     }
