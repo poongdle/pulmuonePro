@@ -38,6 +38,7 @@
 						<div class="btn-area-right" style="margin-top: 20px;">
 							<button onclick="noticeModify()" class="btn-default btn-board-button btn-gray" style="color: #666;">수정</button>
 							<button onclick="noticeDelete()" class="btn-default btn-board-button btn-gray" style="color: #666;">삭제</button>
+
 							<button onclick="location.href='/forum/notice/list.do'" class="btn-default btn-board-button btn-white">목록으로</button>
 						</div>
 					</div>
@@ -67,7 +68,10 @@
 			$("#alertModal").modal();
 		}
 	})
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 5bf822f5e758bb663323212bd682ef0596360f3b
 </script>
 
 </body>

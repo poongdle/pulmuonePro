@@ -247,6 +247,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 		}
 		
 		return editCount;
+		
 	}
-
 }

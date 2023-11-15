@@ -13,7 +13,6 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
-
 	<!-- p 415 커넥션풀을 사용하기 위해서 설정한 코딩. -->
 	<resource-ref>
 		<description>Oracle Datasource example</description>
@@ -56,6 +55,28 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
+	<jsp-config>
+		<jsp-property-group>
+			<!-- 코드를 붙일 페이지들의 url 패턴 -->
+			<url-pattern>/index.jsp</url-pattern>
+			<url-pattern>/WEB-INF/views/mypage/*</url-pattern>
 
+			<include-prelude>/WEB-INF/inc/session_auth.jspf</include-prelude>
+
+		</jsp-property-group>
+	</jsp-config>
+
+
+	<filter>
+		<description>로그인 세션 확인 필터 : 로그인 필요 화면 url 기입</description>
+		<filter-name>loginCheckFilter</filter-name>
+		<filter-class>filter.LoginCheckFilter</filter-class>	
+	</filter>
+	<filter-mapping>
+		<filter-name>loginCheckFilter</filter-name>
+		<url-pattern>/member/logout.do</url-pattern>
+		<url-pattern>/mypage.do</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
 
 </web-app>
