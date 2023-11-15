@@ -39,7 +39,7 @@
 						<a href="/taste/taste">시음선물</a>
 					</li>
 					<li>
-						<a href="/event/event">이벤트</a>
+						<a href="/event/event/list.do">이벤트</a>
 					</li>
 					<li>
 						<a href="/forum/faq/list.do">고객기쁨센터</a>
@@ -47,22 +47,6 @@
 				</ul>
 			</nav>
 		</div>
-<<<<<<< HEAD
-		<nav id="gnb">
-			<ul>
-				<li><button class="btn-menu">
-						<i class="ico ico-menu"></i><span>메뉴보기</span>
-					</button></li>
-				<li><a href=""><span>매일배송</span></a></li>
-				<li><a href=""><span>택배배송</span></a></li>
-				<li><a href=""><span>맞춤큐레이션</span></a></li>
-				<li><a href=""><span>시음선물</span></a></li>
-				<li><a href="/event/event/list.do"><span>이벤트</span></a></li>
-				<li><a href="/forum/faq/list.do"><span>고객기쁨센터</span></a></li>
-			</ul>
-		</nav>
-=======
->>>>>>> branch 'develop' of https://github.com/dhl1031/pulmuonePro.git
 		<div class="member-search-area">
 			<div class="head-util-area">
 				<u:isLogin>
