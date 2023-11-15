@@ -27,17 +27,10 @@
 						</button>
 					</li>
 					<li>
-<<<<<<< HEAD
-						<a href="/product/daily">매일배송</a>
-					</li>
-					<li>
-						<a href="/product/box">택배배송</a>
-=======
 						<a href="/product/daily/dailylist.do">매일배송</a>
 					</li>
 					<li>
 						<a href="/product/box/boxlist.do">택배배송</a>
->>>>>>> branch 'dev/pro' of https://github.com/min9seok/pulmuonePro.git
 					</li>
 					<li>
 						<a href="/customer/product">맞춤큐레이션</a>
@@ -55,7 +48,7 @@
 			</nav>
 		</div>
 		<div class="member-search-area">
-<<<<<<< HEAD
+
 			<div class="head-util-area">
 				<u:isLogin>
 					<p class="welcome">
@@ -75,26 +68,6 @@
 					<div class="counter hide" data-cart-size=""></div> <i class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
 				</a>
 			</div>
-=======
-
-			
-				<div class="head-util-area">
-					<a href="/mypage" data-require-login="true">
-						<i class="ico ico-myIcon"></i>
-						<span class="hide">로그인 페이지 / 마이 페이지로 가기</span>
-					</a>
-					<a href="/cart/daily">
-						<div class="counter hide" data-cart-size=""></div>
-						<i class="ico ico-cart1"></i>
-						<span class="hide">장바구니로 가기</span>
-					</a>
-				</div>
-			
-
-			
-
-
->>>>>>> branch 'dev/pro' of https://github.com/min9seok/pulmuonePro.git
 			<form class="search-area" action="/product/search">
 				<input type="text" id="" name="searchKeyword" value="" title="검색어 입력">
 				<button>
