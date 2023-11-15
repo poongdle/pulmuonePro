@@ -36,7 +36,7 @@
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css" />
 <script src="/resources/assets/js/daterangepicker.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
-<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/common/pul_favicon.png">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 
 </head>
 <body>
@@ -171,7 +171,7 @@
 											data-item-title="${dto.products_name }" data-item-desc="2000">
 											<input value="${dto.products_no }" name="itemCode"
 											type="hidden"> <a class="item"
-											data-product-preview="${dto.img_no }"> 
+											data-product-preview="${dto.img_no}"> 
 											<label>${dto.dayweek }</label>
 												<div class="thumb">
 													<img src="/file/download/product/${dto.system_name }">

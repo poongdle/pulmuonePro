@@ -32,7 +32,7 @@
 	<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
 	<script src="/resources/assets/js/daterangepicker.js"></script>
 	<link rel="stylesheet" href="/resources/assets/css/style.css">
-	<link rel="shortcut icon" type="image/x-icon" href="/resources/images/common/pul_favicon.png">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 
 <style type="text/css">
 img {
@@ -284,7 +284,7 @@ img {
          <p>${list[0].program_name }</p>
           <c:forEach var="dto" items="${list}" >
             <div class="product-radio-group">
-                <label data-item-index="${dto.program_no }"  data-item-link="product/daily/278"  data-item-image="/file/download/product/${dto.system_name }"
+                <label data-item-index="${dto.program_no }"  data-item-link="product/daily/${dto.products_tag }"  data-item-image="/file/download/product/${dto.img_no}"
                   data-item-title="${dto.products_name }" data-item-desc="2100">
 	                <input value="${dto.products_no }" name="itemCode" type="checkbox"/>
 	                <div class="check-display"></div>
@@ -314,7 +314,7 @@ img {
             </div>
             <div class="button-set">
       <button class="button-basic border bottles prefix"
-                            onclick="location.href='/customer/product/result/programs.do?singleYn=Y'">
+                            onclick="location.href='/customer/product/result/programs.do?singleYn=N'">
                         <i class="ico"></i>
                         <i class="ico"></i>
                         내게 맞는 프로그램 추천
@@ -328,54 +328,45 @@ img {
         
 
     </div>
-    <div class="modal" id="productPreviewModal" tabindex="-1" style="display: none;" aria-hidden="true">
+    
+    <div class="modal show" id="productPreviewModal" tabindex="-1" style="display: none; padding-right: 17px;" aria-modal="true" role="dialog">
 	<div class="modal-dialog modal-dialog-centered" style="width:430px;">
 		<div class="modal-content modal-product">
-
-
 
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
   </button>
   <div class="thumb-normal">
     
-      
-        <img src="/file/download//product/ba5f3929-c8f2-42bf-a7bd-723b54dd684a.jpg">
-      
-      
-      
-      
-      
-    
+  <c:forEach var="dto" items="${list }">
+        <img src="/file/download/product/${dto.system_name }">
+</c:forEach>
   </div>
 </div>
 <div class="modal-body">
   <div class="info-area">
-    <h2>슈퍼키즈하이</h2>
-    <p>우리 아이 튼튼하게 해주는 하루 채소 섭취</p>
+  <c:forEach var="dto" items="${list }">
+    <h2>${dto.products_name }</h2>
+    <p>${dto.products_sub_name }</p>
     <div class="product-addiction" style="border-bottom: none">
       <div class="price-item">
-
-        
-          
-          
-            <p>
-              2,000<span>원</span></p>
-          
-        
-
-        <span>(130ml)</span>
+      
+       <p>${dto.price }<span>원</span></p>
+       <span>(${dto.products_size })</span>
       </div>
     </div>
+    </c:forEach>
   </div>
   <div class="button-set">
-    <a href="/product/daily/430" class="button-basic primary">상세보기</a>
+    <c:forEach var="dto" items="${list }">
+    <a href="${dto.products_tag }" class="button-basic primary">상세보기</a>
+    </c:forEach>
   </div>
+<div class="modal-backdrop show"></div>
 </div>
-
+</div>
 </div>
 	</div>
-</div>
 </div>
 
 <script>

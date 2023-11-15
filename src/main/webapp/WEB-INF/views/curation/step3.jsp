@@ -33,7 +33,7 @@
 	<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
 	<script src="/resources/assets/js/daterangepicker.js"></script>
 	<link rel="stylesheet" href="/resources/assets/css/style.css">
-	<link rel="shortcut icon" type="image/x-icon" href="/resources/images/common/pul_favicon.png">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 <style>
 	.question-section > div {
 		display: none;
@@ -427,30 +427,30 @@
 
 <script>
 
-let timer;
-  window.alert = function (message, callback, okBtnText) {
-    $("#alertModalLabel").html("");
-    $("#alertModal .modal-body").html(message);
-    $("#alertModal").modal('show');
-    if (okBtnText) {
-      $("#alertModal").find('.modal-footer').text(okBtnText);
-    }
-    if (callback && typeof callback == 'function') {
-      $("#alertModal .modal-footer").on("click", function () {
-        $("#alertModal").find('.modal-footer').text('확인');
-        callback();
-        $("#alertModal .modal-footer").off("click")
+// let timer;
+//   window.alert = function (message, callback, okBtnText) {
+//     $("#alertModalLabel").html("");
+//     $("#alertModal .modal-body").html(message);
+//     $("#alertModal").modal('show');
+//     if (okBtnText) {
+//       $("#alertModal").find('.modal-footer').text(okBtnText);
+//     }
+//     if (callback && typeof callback == 'function') {
+//       $("#alertModal .modal-footer").on("click", function () {
+//         $("#alertModal").find('.modal-footer').text('확인');
+//         callback();
+//         $("#alertModal .modal-footer").off("click")
 
-      });
-    }
-      $("#alertModal").on("hide.bs.modal", function () {
-        $('#alertModal .modal-footer').removeClass('disabled')
-        $('#alertModal .modal-footer').prop('disabled',false);
-        $("#alertModal .modal-footer").off("click")
-        $("#alertModal").find('.modal-footer').text('확인');
-        clearTimeout(timer)
-      });
-  }
+//       });
+//     }
+//       $("#alertModal").on("hide.bs.modal", function () {
+//         $('#alertModal .modal-footer').removeClass('disabled')
+//         $('#alertModal .modal-footer').prop('disabled',false);
+//         $("#alertModal .modal-footer").off("click")
+//         $("#alertModal").find('.modal-footer').text('확인');
+//         clearTimeout(timer)
+//       });
+//   }
   
   $(function(){
 

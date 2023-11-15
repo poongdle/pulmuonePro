@@ -33,7 +33,7 @@
 	<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
 	<script src="/resources/assets/js/daterangepicker.js"></script>
 	<link rel="stylesheet" href="/resources/assets/css/style.css">
-	<link rel="shortcut icon" type="image/x-icon" href="/resources/images/common/pul_favicon.png">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 </head>
 <body>
 <div class="wrapper">
