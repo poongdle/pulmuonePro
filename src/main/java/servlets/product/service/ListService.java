@@ -22,7 +22,7 @@ public class ListService {
 		}
 		return instance;
 	}
-	public List<ProductsDTO> select(String path){
+	public List<ProductsDTO> select(String path, String cal){
 		//
 		Connection con = null;
 		try {
@@ -32,10 +32,10 @@ public class ListService {
 			int count = path.indexOf("daily");			
 			if(count!=-1) {			
 				path = "daily";
-			list = dao.select(con,path);		
+			list = dao.select(con,path,cal);		
 			}else {
 				path = "box";
-			list = dao.select(con,path);
+			list = dao.select(con,path,cal);
 			}
 			return list;
 		} catch (NamingException | SQLException e) { 
@@ -45,7 +45,7 @@ public class ListService {
 			JdbcUtil.close(con);
 		}
 	}   
-	public List<ProductsDTO> bestselect(String path){
+	public List<ProductsDTO> bestselect(String path, String cal){
 		//
 		Connection con = null;
 		try {
@@ -55,10 +55,10 @@ public class ListService {
 			int count = path.indexOf("daily");			
 			if(count!=-1) {			
 				path = "daily";
-				bestlist =	dao.selectbest(con,path);		
+				bestlist =	dao.selectbest(con,path,cal);		
 			}else {
 				path = "box";
-				bestlist =	dao.selectbest(con,path);
+				bestlist =	dao.selectbest(con,path,cal);
 			}
 			return bestlist;
 		} catch (NamingException | SQLException e) { 
@@ -68,7 +68,7 @@ public class ListService {
 			JdbcUtil.close(con);
 		}
 	}
-	public List<ProductsDTO> search(String path, String tags, String num){
+	public List<ProductsDTO> search(String path, String tags, String num, String cal){
 		//
 		Connection con = null;
 		try {
@@ -81,7 +81,7 @@ public class ListService {
 			}else {
 				path = "box";
 			}
-			searchlist =	dao.search(con,path,tags,num);			
+			searchlist =	dao.search(con,path,tags,num,cal);			
 			return searchlist;
 		} catch (NamingException | SQLException e) { 
 			//e.printStackTrace();  syso("ListService.select() 에러 : ")
@@ -90,7 +90,7 @@ public class ListService {
 			JdbcUtil.close(con);
 		}
 	}  
-	public List<ProductsDTO> searchcount(String path, String tags){
+	public List<ProductsDTO> searchcount(String path, String tags, String cal){
 		//
 		Connection con = null;
 		try {
@@ -103,7 +103,7 @@ public class ListService {
 			}else {
 				path = "box";
 			}
-			searchcountlist =	dao.searchcount(con,path,tags);			
+			searchcountlist =	dao.searchcount(con,path,tags,cal);			
 			return searchcountlist;
 		} catch (NamingException | SQLException e) { 
 			//e.printStackTrace();  syso("ListService.select() 에러 : ")

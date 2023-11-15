@@ -36,7 +36,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-
 	<!-- controller -->
 	<servlet>
 		<servlet-name>ControllerUsingURI</servlet-name>
@@ -80,7 +79,9 @@
 		<url-pattern>/forum/faq/write.do</url-pattern>
 		<url-pattern>/forum/notice/write.do</url-pattern>
 		<url-pattern>/forum/inquiry/write.do</url-pattern>
-		
+		<url-pattern>/box/order/step1.do</url-pattern>
+		<url-pattern>/daily/order/step1.do</url-pattern>
+		<url-pattern>/taste/order/step1.do</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 
