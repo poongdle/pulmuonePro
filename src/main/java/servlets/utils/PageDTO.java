@@ -1,4 +1,4 @@
-package servlets.faq.model;
+package servlets.utils;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

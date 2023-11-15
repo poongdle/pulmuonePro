@@ -1,4 +1,4 @@
-<%@page import="servlets.faq.model.PageDTO"%>
+<%@page import="servlets.utils.PageDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String category = request.getParameter("category");
@@ -9,36 +9,20 @@
 	<div class="wrapper">
 
 		<%@ include file="/WEB-INF/views/layouts/header.jsp" %>
-		<main class="page faq">
+		<main class="page faq forum">
 			<div class="container">
 				<div class="breadcrumb-style">
                     <div class="wrap">
                         <ul>
                             <li><a href="/">홈</a></li>
-                            <li><a href="/forum/faq?category=top10">고객기쁨센터</a></li>
+                            <li><a href="/forum/faq/list.do?">고객기쁨센터</a></li>
                             <li><a class="active">FAQ</a></li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="page-wrap">
-					<div class="aside">
-						<h2 class="title">고객기쁨센터</h2>
-						<ul class="lnb-style">
-							<li class="active">
-								<a href="/forum/faq/list.do">FAQ</a>
-							</li>
-							<li>
-								<a href="/forum/action/counsel/write">1:1 문의</a>
-							</li>
-							<li>
-								<a href="/forum/notice">공지사항</a>
-							</li>
-							<li>
-								<a href="/search/branch">배송가능지역 검색</a>
-							</li>
-						</ul>
-					</div>
+					<%@ include file="/WEB-INF/views/layouts/forum/aside.jsp" %>
 
 					<div class="page-content">
 						<form id="searchForm">
@@ -109,7 +93,7 @@
 											<c:choose>
 												<c:when test="${ list.size() eq null }">
 													<div class="empty-area" style="padding: 160px 0">
-														<img src="/resources/assets/images/ico-alert.png" alt="empty">
+														<img src="/resources/assets/images/ui/ico-alert.png" alt="empty">
 														<b>검색결과가 없습니다.</b>
 													</div>
 												</c:when>
@@ -184,11 +168,12 @@
 		$(".faq .tab-area ul li a").removeClass("active");
 		$(".faq .tab-area ul li").eq(<%=category%>).find("a").addClass("active");
 		
-		let $pageItem = $(".faq .pagenavi-area .pagination .page-item a");
 		
 		$("#searchForm").submit(function(e){
 			$("#category").val("");
 		})
+		
+		let $pageItem = $(".faq .pagenavi-area .pagination .page-item a");
 		
 		$pageItem.each(function(i, el) {
 			let aparam = $(this).data("param");
