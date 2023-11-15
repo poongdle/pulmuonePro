@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import auth.AuthInfo;
 import domain.order.box.OrderCouponDTO;
 import domain.order.box.OrderMemberInfoDTO;
 import domain.order.box.BoxOrderProductDTO;
@@ -21,7 +22,8 @@ public class BoxOrder implements CommandHandler {
 		
 		String productsNo [] = request.getParameterValues("productsNo");
 		HttpSession session = request.getSession(false);
-		int memberNo = Integer.parseInt((String) session.getAttribute("auth"));
+		AuthInfo member = (AuthInfo) session.getAttribute("auth");
+		int memberNo = member.getMemberNo();
 		
 		BoxOrderService service = BoxOrderService.getInstanse();
 		

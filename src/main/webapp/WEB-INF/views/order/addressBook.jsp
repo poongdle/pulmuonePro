@@ -1,3 +1,4 @@
+<%@page import="auth.AuthInfo"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="net.sf.json.JSONArray"%>
@@ -9,12 +10,15 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="javax.servlet.http.HttpSession"%>
 <%
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	int memberNo = Integer.parseInt((String) session.getAttribute("auth"));
+	HttpSession hs = request.getSession(false);
+	AuthInfo member = (AuthInfo) hs.getAttribute("auth");
+	int memberNo = member.getMemberNo();
 	
 	String sql = " SELECT addr_name, name, tel, dest, zip_code, addr, addr_detail, memo, default_addr, COUNT(member_no) OVER() total_count "
 			+ " FROM addr_book " + " WHERE member_no = " + memberNo;

@@ -4,6 +4,7 @@ package servlets.order.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import auth.AuthInfo;
 import mvc.command.CommandHandler;
 
 public class AddressBook implements CommandHandler {
