@@ -44,9 +44,6 @@
 					<li>
 						<a href="/forum/faq/list.do">고객기쁨센터</a>
 					</li>
-					<li>
-						<a href="/order/list.do">주문(임시)</a>
-					</li>		
 				</ul>
 			</nav>
 		</div>
