@@ -4,7 +4,9 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import auth.AuthInfo;
 import mvc.command.CommandHandler;
 import net.sf.json.JSONObject;
 import servlets.faq.model.FaqDTO;
@@ -17,7 +19,13 @@ public class FaqWrite implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if( request.getMethod().equalsIgnoreCase("GET") ) {
-
+			AuthInfo auth = null;
+			HttpSession session = request.getSession();
+			auth = (AuthInfo) session.getAttribute("auth");
+			if( auth.getName() != "admin"  ) {
+				response.sendRedirect("/forum/faq/list.do");
+				return null;
+			}
 			return "/WEB-INF/views/faq/write.jsp";
 		}else {
 

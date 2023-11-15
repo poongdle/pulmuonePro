@@ -33,7 +33,11 @@
 								</h2>
 							</div>
 							<div class="list-head" style="margin-bottom: 0; text-align: right;">
-	                        	<div><a href="/forum/faq/write.do">FAQ등록</a></div>
+								<u:isLogin>
+	                        		<c:if test="${ auth.getName() == 'admin'}">
+	                        			<div><a href="/forum/faq/write.do">FAQ등록</a></div>
+	                        		</c:if>  
+	                        	</u:isLogin>
 	                        </div>
 							<div class="coupon-srch" style="border-bottom:0; padding-bottom:0;">
 								<div class="form-input none-dt">

@@ -76,6 +76,11 @@
 		<filter-name>loginCheckFilter</filter-name>
 		<url-pattern>/member/logout.do</url-pattern>
 		<url-pattern>/mypage.do</url-pattern>
+		<url-pattern>/mypage/*</url-pattern>
+		<url-pattern>/forum/faq/write.do</url-pattern>
+		<url-pattern>/forum/notice/write.do</url-pattern>
+		<url-pattern>/forum/inquiry/write.do</url-pattern>
+		
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 
