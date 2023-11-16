@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BoxOrderProductDTO {
 	
-	private int productsNo;
+	private String productsNo;
 	private int categoryNo;
 	private String productsName;
+	private String productsCnt;
 	private String productsType;
 	private String productsSize;
 	private int price;

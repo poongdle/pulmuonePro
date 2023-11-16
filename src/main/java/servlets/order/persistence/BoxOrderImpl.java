@@ -1,10 +1,9 @@
-package servlets.persistence.order;
+package servlets.order.persistence;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List;
 
 import servlets.order.domain.BoxOrderDTO;
 import servlets.order.domain.BoxOrderProductDTO;
@@ -26,11 +25,19 @@ public interface BoxOrderImpl {
 	// 4. 사용 가능한 쿠폰 보유 리스트 조회
 	ArrayList<OrderCouponDTO> selectCoupon(Connection conn, int memberNo, int priductsPrice) throws SQLException;
 	
-	// 2. 주문, 주문 상품 정보, 배송지 정보 추가
-	int insertBoxOrder(Connection conn, BoxOrderDTO dto) throws SQLException;
-	int insertBoxOrderedProducts(Connection conn, BoxOrderProductDTO dto) throws SQLException;
+	// 5. 주문, 주문 상품 정보, 배송지 정보 추가
+	int insertBoxOrder(Connection conn, int memberNo, int boxOrderStatus) throws SQLException;
+	int insertBoxOrderedProducts(Connection conn, int boxOrderNo, String productsNo, int productsCnt) throws SQLException;
 	int insertBoxShip(Connection conn, BoxShipDTO dto) throws SQLException;
 	
+	// 6. 주소록 추가
+	int insertAddrBook(Connection conn, OrderAddrBookDTO dto) throws SQLException;
+	
+	// 결제 후
+	// 7. 결제 정보 추가
+	int insertPay(Connection conn, BoxPayDTO dto) throws SQLException;
+	// 8. 쿠폰 사용 처리
+	int updateHaveCoupon(Connection conn, int boxPayNo, int memberNo, int couponNo) throws SQLException;
 	
 	// 조회
 	// 2. 주문내역 조회
@@ -44,8 +51,6 @@ public interface BoxOrderImpl {
 	int update(Connection conn, int boxOrderNo) throws SQLException;
 	
 	
-	// 결제 후
-	// 5. 결제 정보 추가
-	int insertPay(Connection conn, BoxPayDTO dto) throws SQLException;
+	
 	// delete X
 }

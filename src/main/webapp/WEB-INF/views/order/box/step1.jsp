@@ -6,10 +6,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>  
-
-<!-- 결제 API -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
 <body>
 	<div class="wrapper"> 
     	<%@ include file="/WEB-INF/views/layouts/header.jsp"%> 
@@ -43,8 +39,12 @@
 			
 				<div class="contents-area">
                 	<form id="orderForm">
-                    	<input type="hidden" name="payMethod" value="Card">
+                    	<input type="hidden" name="price" value="">
+                    	<input type="hidden" name="salePrice" value="">
+                    	<input type="hidden" name="discountPrice" value="">
+                    	<input type="hidden" name="shppingPrice" value="0">
                     	<input type="hidden" name="payPrice" value="">
+                    	<input type="hidden" name="payMethod" value="0">
                   
                   		<div class="location">
                         	<a href="/">홈</a> <a href="/">장바구니</a> <a href="/">주문서 작성</a>
@@ -71,44 +71,45 @@
 
                                  <ul style="padding: 0px 20px;" class="prd-cart-list cart-box-list box-list-type2" id="order_targets">
                                     
-                                    <c:forEach items="${ productList }" var="prd">
-                                       <li class="order-item" data-itemcode="${ prd.productsNo }" data-origin-price="${ prd.price }" data-price="${ prd.eventPrice }" style="padding: 20px 0 18px;">
-                                          <div class="prd-cart-info-area">
-                                             <div class="flex-l">
-                                                <a class="thumb">
-                                                   <img src="${ prd.imgPath }/${ prd.originName }" alt="${ prd.productsName }">
-                                                </a>
-                                                <div class="prd-info-select-amount">
-                                                   <a href="/product/box/728?eventIdx=" class="prd-info">
-                                                      <em>${ prd.productsType }</em> <b class="prd-title">${ prd.productsName }</b>
-                                                      <span class="volume">(${ prd.productsSize })</span>
-                                                   </a>
-                                                   <input type="hidden" data-count="0" value="${ param.productsCnt }">
-                                                   <div class="prd-select-amount">
-                                                      <em>${ param.productsCnt }</em>개
-                                                   </div>
-                                                </div>
-                                             </div>
-            
-                                             <div class="prd-cart-btn-price">
-                                                <div></div>
-                                                <div class="price-info">
-                                                   <em class="before-price">
-                                                      <em data-print-price="${ prd.price * param.productsCnt }">
-                                                         <fmt:formatNumber value="${ prd.price * param.productsCnt }" type="number"></fmt:formatNumber>
-                                                      </em>
-                                                      <span>원</span>
-                                                   </em>
-                                                   <b class="now-price">
-                                                      <b data-print-price="${ prd.eventPrice * param.productsCnt }">
-                                                         <fmt:formatNumber value="${ prd.eventPrice * param.productsCnt }" type="number"></fmt:formatNumber>
-                                                      </b>
-                                                      <span>원</span>
-                                                   </b>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </li>
+									<c:forEach items="${ productList }" var="prd">
+	                                	<li class="order-item" data-itemcode="${ prd.productsNo }" data-origin-price="${ prd.price }" data-price="${ prd.eventPrice }" style="padding: 20px 0 18px;">
+	                                		<input type="hidden" value="${ prd.productsNo }" name="productsNo">
+	                                    	<div class="prd-cart-info-area">
+	                                        	<div class="flex-l">
+	                                            	<a class="thumb">
+	                                                   <img src="${ prd.imgPath }/${ prd.originName }" alt="${ prd.productsName }">
+	                                                </a>
+	                                                <div class="prd-info-select-amount">
+	                                                   <a href="/product/box/728?eventIdx=" class="prd-info">
+	                                                      <em>${ prd.productsType }</em> <b class="prd-title">${ prd.productsName }</b>
+	                                                      <span class="volume">(${ prd.productsSize })</span>
+	                                                   </a>
+	                                                   <input type="hidden" data-count="0" value="${ param.productsCnt }" name="productsCnt">
+	                                                   <div class="prd-select-amount">
+	                                                      <em>${ param.productsCnt }</em>개
+	                                                   </div>
+	                                                </div>
+	                                             </div>
+	            
+	                                             <div class="prd-cart-btn-price">
+	                                                <div></div>
+	                                                <div class="price-info">
+	                                                   <em class="before-price">
+	                                                      <em data-print-price="${ prd.price * param.productsCnt }">
+	                                                         <fmt:formatNumber value="${ prd.price * param.productsCnt }" type="number"></fmt:formatNumber>
+	                                                      </em>
+	                                                      <span>원</span>
+	                                                   </em>
+	                                                   <b class="now-price">
+	                                                      <b data-print-price="${ prd.eventPrice * param.productsCnt }">
+	                                                         <fmt:formatNumber value="${ prd.eventPrice * param.productsCnt }" type="number"></fmt:formatNumber>
+	                                                      </b>
+	                                                      <span>원</span>
+	                                                   </b>
+	                                            	</div>
+	                                        	</div>
+	                                    	</div>
+										</li>
                                     </c:forEach>
                                     
                                  </ul>
@@ -173,17 +174,17 @@
                                  <div class="select-checkout-area">
                                     <ul class="nav nav-tabs nav-justified" id="myTab-area" role="tablist">
                                        <li class="nav-item" role="presentation">
-                                          <a href="#checkout-type1" class="nav-link active" id="checkout-type-tab1" data-target="#checkout-type1" data-value="Card" data-toggle="tab" role="tab" aria-controls="checkout-type1" aria-selected="true">
+                                          <a href="#checkout-type1" class="nav-link active" id="checkout-type-tab1" data-target="#checkout-type1" data-value="0" data-toggle="tab" role="tab" aria-controls="checkout-type1" aria-selected="true">
                                              <span>카드결제</span>
                                           </a>
                                        </li>
                                        <li class="nav-item" role="presentation">
-                                          <a href="#checkout-type2" class="nav-link" data-value="DirectBank" id="checkout-type-tab2" data-target="#checkout-type2" data-toggle="tab" role="tab" aria-controls="checkout-type2" aria-selected="false">
+                                          <a href="#checkout-type2" class="nav-link" data-value="1" id="checkout-type-tab2" data-target="#checkout-type2" data-toggle="tab" role="tab" aria-controls="checkout-type2" aria-selected="false">
                                              <span>실시간 계좌이체</span>
                                           </a>
                                        </li>
                                        <li class="nav-item" role="presentation">
-                                          <a href="#checkout-type3" class="nav-link" data-value="VBank" id="checkout-type-tab3" data-target="#checkout-type3" data-toggle="tab" role="tab" aria-controls="checkout-type3" aria-selected="false">
+                                          <a href="#checkout-type3" class="nav-link" data-value="2" id="checkout-type-tab3" data-target="#checkout-type3" data-toggle="tab" role="tab" aria-controls="checkout-type3" aria-selected="false">
                                              <span>가상계좌</span>
                                           </a>
                                        </li>
@@ -196,7 +197,7 @@
                                  </div>
                               </div>
                            </div>
-
+                           
                            <div class="prd-checkout-area creat-checkout2">
                               <dl>
                                  <dt>
@@ -310,7 +311,7 @@
 		</button> 
          <%@ include file="/WEB-INF/views/layouts/footer.jsp"%> 
       </div>
-    
+      
     <script>
     	$(".nav-link").on("click", function() {
     		$("input[name=payMethod]").val($(this).attr("data-value"));
@@ -338,6 +339,10 @@
             $("b[data-price-view=origin]").text(bpStr)
             $("b[data-price-view=sale]").text(npStr)
             $("b[data-price-view=payment]").text(npStr)
+            $("input[name='price']").val(originPrice);
+            $("input[name='salePrice']").val(salePrice);
+            $("input[name='discountPrice']").val(0);
+            $("input[name='shppingPrice']").val(0);
             $("input[name='payPrice']").val(salePrice);
          })
     </script>
@@ -405,8 +410,10 @@
 			
 			viewCoupon.text(dispDiscount.toLocaleString());
             viewPay.text(dispPayPrice.toLocaleString());
+            
+            $("input[name='discountPrice']").val(dispDiscount);
             $("input[name='payPrice']").val(dispPayPrice);
-		}
+		} // editReceipt
 	</script>
 	
 	<script>
@@ -659,6 +666,7 @@
 				method:"post"
 				, action:"/inicis/callback.do"
 			}).submit();
+			
 		});
 		
 		function showModal() {
@@ -675,6 +683,5 @@
 	</script>
 
 
-	</script>
 </body>
 </html>

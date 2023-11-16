@@ -1,4 +1,4 @@
-package servlets.persistence.order;
+package servlets.order.persistence;
 
 import java.sql.Connection;
 import java.sql.Date;

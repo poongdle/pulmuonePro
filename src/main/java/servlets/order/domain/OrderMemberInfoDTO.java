@@ -14,5 +14,6 @@ public class OrderMemberInfoDTO {
 	private int memberNo;
 	private String name;
 	private String tel;
+	private String email;
 	
 }

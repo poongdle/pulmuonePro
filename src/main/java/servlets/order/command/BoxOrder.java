@@ -12,7 +12,7 @@ import servlets.order.domain.BoxOrderProductDTO;
 import servlets.order.domain.OrderAddrBookDTO;
 import servlets.order.domain.OrderCouponDTO;
 import servlets.order.domain.OrderMemberInfoDTO;
-import servlets.service.order.box.BoxOrderService;
+import servlets.order.service.BoxOrderService;
 
 public class BoxOrder implements CommandHandler {
 
@@ -22,7 +22,7 @@ public class BoxOrder implements CommandHandler {
 		
 		String productsNo [] = request.getParameterValues("productsNo");
 		HttpSession session = request.getSession(false);
-
+		
 		AuthInfo member = (AuthInfo) session.getAttribute("auth");
 		int memberNo = member.getMemberNo();
 		
@@ -36,8 +36,6 @@ public class BoxOrder implements CommandHandler {
 		if (clist != null) {
 			request.setAttribute("couponList", clist);
 		} // if
-		
-		 
 		
 		return "/WEB-INF/views/order/box/step1.jsp";
 	} // process()
