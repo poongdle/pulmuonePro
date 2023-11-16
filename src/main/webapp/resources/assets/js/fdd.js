@@ -353,10 +353,11 @@ function addLike(type, itemCode, options) {
     }
   })
 
-//  $(document).on("click", "[data-require-login]", function (e) {
-//    if (!window.is_signed) {
-//      e.preventDefault();
-//      location.href = "/member/login?redirectUrl=" + $(this).attr("href")
+
+//  $(DOCUMENT).ON("CLICK", "[DATA-REQUIRE-LOGIN]", FUNCTION (E) {
+//    IF (!WINDOW.IS_SIGNED) {
+//      E.PREVENTDEFAULT();
+//      LOCATION.HREF = "/MEMBER/LOGIN?REDIRECTURL=" + $(THIS).ATTR("HREF")
 //    }
 //  })
 

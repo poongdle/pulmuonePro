@@ -112,5 +112,20 @@ public class ListService {
 			JdbcUtil.close(con);
 		}
 	}
-
+	public List<ProductsDTO> mainbestselect(){
+		//
+		Connection con = null;
+		try {
+			con = ConnectionProvider.getConnection();
+			ProductsDAO dao = ProductsDAO.getInstance();
+			List<ProductsDTO> mainbestlist = null;															
+				mainbestlist =	dao.selectmainbest(con);					
+			return mainbestlist;
+		} catch (NamingException | SQLException e) { 
+			//e.printStackTrace();  syso("ListService.select() 에러 : ")
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(con);
+		}
+	}
 }
