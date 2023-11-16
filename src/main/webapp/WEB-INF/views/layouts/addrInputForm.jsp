@@ -125,7 +125,7 @@
 	</div>
 	
 		<div class="checkbox chk-type3" style="margin-top: 28px">
-			<input type="checkbox" id="saveAddrChk" name="saveAddrChk" value="Y">
+			<input type="checkbox" id="saveAddrChk" name="saveAddrChk">	<!--  value="Y" -->
 			<label for="saveAddrChk">주소록에 저장</label>
 		</div>
 	</div>

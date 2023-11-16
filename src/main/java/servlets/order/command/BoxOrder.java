@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import auth.AuthInfo;
-import domain.order.box.OrderCouponDTO;
-import domain.order.box.OrderMemberInfoDTO;
-import domain.order.box.BoxOrderProductDTO;
-import domain.order.box.OrderAddrBookDTO;
 import mvc.command.CommandHandler;
-import service.order.box.BoxOrderService;
+import servlets.domain.order.box.BoxOrderProductDTO;
+import servlets.domain.order.box.OrderAddrBookDTO;
+import servlets.domain.order.box.OrderCouponDTO;
+import servlets.domain.order.box.OrderMemberInfoDTO;
+import servlets.service.order.box.BoxOrderService;
 
 public class BoxOrder implements CommandHandler {
 
