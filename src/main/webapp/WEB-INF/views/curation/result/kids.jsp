@@ -83,13 +83,13 @@ $(function () {
   }
 
   $('#orderBtn').click(function () {
-    if (!window.is_signed) {
-      alert('로그인이 필요한 서비스입니다.', function () {
-        location.href = '/member/login.do';
-      });
-      return;
-    }
-
+      if (!window.is_signed) {
+        alert('로그인이 필요한 서비스입니다.', function () {
+          location.href = '/member/login.do?redirectUrl=' + encodeURIComponent(location.href);
+        });
+        return;
+      }
+      
     var orderItems = getItems('dayQty');
     if (orderItems.length === 0) {
       alert("상품을 선택해주세요.");
