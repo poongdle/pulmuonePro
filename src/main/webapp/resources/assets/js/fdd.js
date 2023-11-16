@@ -353,14 +353,6 @@ function addLike(type, itemCode, options) {
     }
   })
 
-
-//  $(DOCUMENT).ON("CLICK", "[DATA-REQUIRE-LOGIN]", FUNCTION (E) {
-//    IF (!WINDOW.IS_SIGNED) {
-//      E.PREVENTDEFAULT();
-//      LOCATION.HREF = "/MEMBER/LOGIN?REDIRECTURL=" + $(THIS).ATTR("HREF")
-//    }
-//  })
-
   $(document).on("click", "#ftc_link", function (e) {
     var h = $(this).attr("href");
     var p = window.open(h, 'ftc_link', 'width=750,height=700');
@@ -453,15 +445,16 @@ let timer;
 
     if (!window.is_signed) {
       alert("로그인 후 찜한상품으로 담을 수 있습니다.", function () {
-        location.href = "/member/login?redirectUrl=" + encodeURIComponent(location.href);
+        location.href = "/member/login.do?redirectUrl=" + encodeURIComponent(location.href);
       });
       return false;
     }
-
-    axios.post('/product/' + type + '/interest/' + id).then(function ({data}) {
-      if (!data.ok) {
-        return;
-      }
+      
+    axios.post('/product/' + type + '/interest.do?tag=' + id).then(function ({data}) {
+	
+//      if (!data.ok) {
+//        return;
+//      }	
       console.log(that, that.hasClass("active"))
       if (!that.hasClass("active")) {
         $("[data-wish-type][data-wish-id='" + id + "']").addClass('active');

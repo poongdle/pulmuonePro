@@ -30,6 +30,17 @@
 <script src="/resources/assets/js/design.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/list.css">
 <link rel="stylesheet" href="/resources/assets/css/style.css">
+<script type="text/javascript">
+<c:choose>
+<c:when test="${ auth.getName() eq null }">
+window.is_signed = false;
+</c:when>
+<c:otherwise>
+window.is_signed = true;
+window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderCode":"XQNGV"};
+</c:otherwise>
+</c:choose>
+</script>
 <script>
 	window.dataLayer = window.dataLayer || [];
 
