@@ -2,7 +2,9 @@ package servlets.inquiry.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import auth.AuthInfo;
 import mvc.command.CommandHandler;
 import servlets.inquiry.model.InquiryDTO;
 import servlets.inquiry.service.InquiryViewService;
@@ -17,7 +19,10 @@ public class InquiryView implements CommandHandler {
 		String pseq = request.getParameter("seq");
 		String category = null;
 		int seq = 0;
-		String user_id = "aaaaaaaa";
+		
+		HttpSession session = request.getSession(false);
+		AuthInfo auth = (AuthInfo) session.getAttribute("auth");
+		String user_id = auth.getMemberId();
 		
 		InquiryDTO vo = null;
 		
