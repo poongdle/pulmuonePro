@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import servlets.faq.model.FaqDTO;
 import servlets.product.domain.ProductsDTO;
 
 public interface IProducts {
@@ -27,4 +28,6 @@ public interface IProducts {
 	   // Main 화면 상품 목록
 	   List<ProductsDTO> selectmainbest(Connection con) throws SQLException;
 	   
+	   // 찜한 상품 목록 추가
+	   int wishadd(Connection con, int tag) throws SQLException;
 }

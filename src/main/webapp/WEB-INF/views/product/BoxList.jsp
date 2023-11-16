@@ -30,6 +30,10 @@
 <script src="/resources/assets/js/design.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/list.css">
 <link rel="stylesheet" href="/resources/assets/css/style.css">
+<script>            
+      window.is_signed = true;
+      window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderCode":"XQNGV"};                 
+	</script>
 <script>
 	window.dataLayer = window.dataLayer || [];
 

@@ -427,4 +427,42 @@ public class ProductsDAO implements IProducts {
 
 		return list;
 	}
+	@Override
+	public int wishadd(Connection con, int tag) throws SQLException {
+		PreparedStatement pstmt = null;		
+		ResultSet rs = null;
+		String sql = " select * from products_wish WHERE products_tag = ?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1,tag);
+		System.out.println(tag);
+		System.out.println(sql);
+		rs = pstmt.executeQuery();		
+		int insertRow = 0;
+		if( rs.next() ) {
+			sql = " DELETE products_wish where products_tag = ? ";
+		}else {			
+			sql = " INSERT INTO products_wish "
+					+ "select products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price "
+					+ " , products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, event_tag, event_tag2 "
+					+ " from products "
+					+ " WHERE products_tag = ? ";
+		}		
+		try {
+			pstmt = con.prepareStatement(sql);	
+			pstmt.setInt(1,tag);
+			System.out.println("wishadd");
+			System.out.println(tag);
+			System.out.println(sql);
+			insertRow = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
+		return insertRow;
+	}
 }

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ include file="/WEB-INF/views/layouts/head.jsp" %>
+<script src="/resources/assets/js/owl.carousel.min.js"></script>
+<script src="/resources/assets/js/clipboard.min.js"></script>
+<script src="/resources/assets/js/fdd.js"></script>
 <body>
 	<script type="text/javascript">
 	$(document).ready(function () {
@@ -24,5 +26,4 @@
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
  	</div>
 </body>
-
 </html>
