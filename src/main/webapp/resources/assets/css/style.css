@@ -11966,7 +11966,7 @@ a.btn.dropdown-toggle.qty::after {
   margin: 0 auto 10px;
   display: block;
   border-radius: 50%;
-  background: #e5e5e5 url("../images/common/ico_caution.png") no-repeat center center;
+  background: #e5e5e5 url("/resources/assets/images/common/ico_caution.png") no-repeat center center;
 }
 
 .caution-unit h3 {
