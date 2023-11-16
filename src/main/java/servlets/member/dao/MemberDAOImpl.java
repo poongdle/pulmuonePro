@@ -177,6 +177,8 @@ public class MemberDAOImpl implements MemberDAO {
 
 		MemberDTO dto = null;
 		int memberNo;
+		String tel;
+		String email;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -189,8 +191,10 @@ public class MemberDAOImpl implements MemberDAO {
 
 				do {
 					memberNo = rs.getInt("member_no");
+					tel = rs.getString("tel");
+					email = rs.getString("email");
 										
-					dto = MemberDTO.builder().memberNo(memberNo)
+					dto = MemberDTO.builder().memberNo(memberNo).tel(tel).email(email)
 							.build();
 
 				} while (rs.next());

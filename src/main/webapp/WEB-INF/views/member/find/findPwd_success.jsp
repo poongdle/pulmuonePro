@@ -64,20 +64,20 @@
 									<div class="ico">
 										<i></i>
 									</div>
-									<input type="radio" name="target" value="01023442891" data-gtm-form-interact-field-id="0">
+									<input type="radio" name="target" value="${ tel }" data-gtm-form-interact-field-id="0">
 									<p>
 										<b>휴대폰</b>
-										010-****-2891
+										${ maskedTel }
 									</p>
 								</label>
 								<label class="mail item" style="padding: 10px 0">
 									<div class="ico">
 										<i></i>
 									</div>
-									<input type="radio" name="target" value="show2891@naver.com" data-gtm-form-interact-field-id="1">
+									<input type="radio" name="target" value="${ email }" data-gtm-form-interact-field-id="1">
 									<p>
 										<b>이메일</b>
-										show2891@test.com
+										${ email }
 									</p>
 								</label>
 							</div>

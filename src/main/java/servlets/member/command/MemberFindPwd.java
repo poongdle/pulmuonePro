@@ -39,11 +39,14 @@ public class MemberFindPwd implements CommandHandler {
 			
 			MemberService memberService = new MemberService();
 			MemberDTO dto = memberService.isExistingId(memberId);
-//			
-//			request.setAttribute("memberId", memberId);
-//			request.setAttribute("tel", tel);
-//			request.setAttribute("email", email);
+
+			String[] telArr = dto.getTel().split("-");
+			String markedTel = String.format("%s-%s-%s", telArr[0], "*".repeat(telArr[1].length()) ,telArr[2]);
 			
+			request.setAttribute("tel", dto.getTel());
+			request.setAttribute("email", dto.getEmail());
+			request.setAttribute("maskedTel", markedTel); // 중간 번호가 가려진 전화번호
+
 			String path = "/WEB-INF/views/member/find/findPwd_success.jsp";
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(path);

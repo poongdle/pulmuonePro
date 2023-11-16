@@ -23,8 +23,8 @@ public class MemberIdCheck implements CommandHandler {
 		MemberDTO dto = null;
 		dto = memberService.isExistingId(memberId);
 		
-		String jsonResult = String.format("{ \"memberNo\":%d }"
-											, (dto != null ? dto.getMemberNo() : 0));
+		String jsonResult = String.format("{ \"memberNo\":%s }"
+											, (dto != null ? dto.getMemberNo() : "0"));
 		
 //		JSONObject jsonResult = new JSONObject();
 //		jsonResult.put("memberNo" , dto.getMemberNo());

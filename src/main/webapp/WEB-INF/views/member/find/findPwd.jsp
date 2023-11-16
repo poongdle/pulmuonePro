@@ -59,21 +59,21 @@
 			</div>
 			<div class="type-guide-area" style="padding-top: 56px">
 				<h5>일반회원</h5>
-				<div class="form-input" style="margin-bottom: -2px">
-					<dl>
-						<dt><label>아이디</label></dt>
-						<dd>
-							<input type="text" id="memberId">
-						</dd>
-					</dl>
-					<p id="memberIdError" style="padding-left: 136px"></p>
-				</div>
-				<div class="button-set" style="margin:20px 0 0">
+				<form action="/member/find/password-success.do" method="post" class="w-100">
+					<div class="form-input" style="margin-bottom: -2px">
+						<dl>
+							<dt><label>아이디</label></dt>
+							<dd>
+								<input type="text" name="memberId" id="memberId">
+							</dd>
+						</dl>
+						<p id="memberIdError" style="padding-left: 136px"></p>
+					</div>
+					<div class="button-set" style="margin:20px 0 0">
 <!-- 					<button class="button-basic primary w-100" id="findPwdAuth" style="height: 69px">본인인증</button> -->
-					<form action="/member/find/password-success.do" method="post" class="w-100">
 						<button class="button-basic primary w-100" id="findPwdAuth" style="height: 69px">본인인증(임시)</button>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
 			<div class="type-guide-area" style="padding-top: 56px">
 				<h5>SNS 간편회원</h5>
@@ -82,14 +82,14 @@
 						<div class="ico">
 							<i></i>
 						</div>
-						<input type="radio" name="moveTo" value="/member/find/password-social?s=K">
+						<input type="radio" name="moveTo" value="/member/find/password-social.do?s=K">
 						<p>카카오</p>
 					</label>
 					<label class="naver item">
 						<div class="ico">
 							<i></i>
 						</div>
-						<input type="radio" name="moveTo" value="/member/find/password-social?s=N">
+						<input type="radio" name="moveTo" value="/member/find/password-social.do?s=N">
 						<p>네이버</p>
 
 					</label>
@@ -133,49 +133,41 @@
 		});
 		// 비밀번호찾기 본인인증
 		$("#findPwdAuth").click(function(e) {
+			e.preventDefault();
 			if ($.trim($("#memberId").val()) == "" ){
-				e.preventDefault();
+
 				$(".form-input").addClass("error");
 				$("#memberIdError").text("아이디를 입력해 주세요.")
 				return;
-			}
-			e.preventDefault();
-			// 기존 회원 확인
-		    var params = null;
-		    params = "memberId="+$("#memberId").val();   
-			$.ajax({
-			 url:"/member/idCheck.ajax" , 
-			 dataType:"json",
-			 type:"POST",
-			 data: params,
-			 cache:false ,
-			 success: function ( data,  textStatus, jqXHR ){
-				 alert(data);
-				 if( data.memberNo == 0 ) {
-					console.log("해당 아이디 없음");
-					$(".form-input").addClass("error");
-					$("#memberIdError").text("입력하신 정보를 확인 후 다시 입력해 주세요.")
-				 } else {  // 1
-					 console.log(data.memberNo);
-					 $(this).parent().submit();		
-				 }
+			} else {
+
+				// 기존 회원 확인
+			    var params = null;
+			    params = "memberId="+$("#memberId").val();   
+				$.ajax({
+					url:"/member/idCheck.ajax" , 
+					dataType:"json",
+					type:"POST",
+					data: params,
+					cache:false ,
+					success: function ( data,  textStatus, jqXHR ){
+						if( data.memberNo == "0" ) {
+							console.log("해당 아이디 없음");
+							$(".form-input").addClass("error");
+							$("#memberIdError").text("입력하신 정보를 확인 후 다시 입력해 주세요.")
+						} else {  
+							console.log(data.memberNo);
+		 					$(".form-input").parent().submit();		
+						}
+					 
+					},
+					error:function (){
+					 alert("에러~~~ ");
+					}
 				 
-			 },
-			 error:function (){
-				 alert("에러~~~ ");
-			 }
-			 
-			});
-			
-			
-// 			// 기존회원 확인
-// 			post({url : '/member/find/get-member-proc' ,param : {"memberId" : $("#memberId").val()}}, function(response) {
-// 				if (response.RESULT_MSG){
-// 					fnPwdPopup();
-// 				}else{
-// 					showErrorForm("memberIdError", "입력하신 정보를 확인 후 다시 입력해 주세요.");
-// 				}
-// 			});
+				});
+			}
+
 		});
 
 		var type = "password";
