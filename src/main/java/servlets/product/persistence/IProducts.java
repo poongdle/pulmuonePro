@@ -27,4 +27,6 @@ public interface IProducts {
 	   // Main 화면 상품 목록
 	   List<ProductsDTO> selectmainbest(Connection con) throws SQLException;
 	   
+	   // 찜한 상품 목록 추가
+	   
 }
