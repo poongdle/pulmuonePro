@@ -14,6 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 <script src="/resources/assets/js/design.js"></script>
+
 <script src="/resources/assets/js/build/ckeditor.js"></script>
 <script src="/resources/assets/js/build/ko.js"></script>
 

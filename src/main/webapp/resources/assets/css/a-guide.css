@@ -107,6 +107,7 @@ input::-webkit-calendar-picker-indicator{
 
 .form-input input[type="date"]::after { cursor: pointer; position: absolute; right:20px; top:50%; margin-top:0; transform:translateY(-50%); width:22px; height:22px; content:''; background:url('/resources/assets/images/common/ico_calendar.png') no-repeat; }
 
+
 .form-input dl.date input { font-family: Roboto; font-weight: 400; font-size:16px; }
 .form-input input[type='password'] { letter-spacing: 0px; }
 .form-input input[type='password']::placeholder { letter-spacing: -1.2px; }
@@ -203,7 +204,6 @@ input::-webkit-calendar-picker-indicator{
 .chk-type2 input[type=checkbox] + label {padding-left: 54px;}
 .chk-type2 input[type=checkbox] + label {font-size: 13px; letter-spacing: -0.98px; color: #333;}
 .chk-type2 input[type=checkbox] + label:before {content: ''; display: block; position: absolute; top: 2px; left: 0; width: 12px; height: 8px; background: none;}
-
 .chk-type2 input[type=checkbox]:checked + label:before {background: url("/resources/assets/images/ui/ico_check03.png") no-repeat center; background-size: 12px;}
 
 /* 체크박스 장바구니 (빅 사이즈) */
@@ -221,6 +221,7 @@ input::-webkit-calendar-picker-indicator{
 .check-type input { display: none; }
 
 .check-type input+span:before {position: absolute; left:0; top:0; content:''; transition-duration: .2s; width:32px; height:32px; border-radius: 50%; background: #e5e5e5 url("/resources/assets/images/contents/ico_check_solo_wt.png") no-repeat center center; }
+
 
 .check-type span { font-size:14px; padding-left:49px; }
 .check-type input:checked+span:before { background-color: #7acc12; transition-duration: .2s; }
@@ -248,7 +249,6 @@ input::-webkit-calendar-picker-indicator{
 
 /* 셀렉트 */
 .form-select {display: flex; flex: 1; padding: 0 22px; margin: 0 22px 0 0; height: 58px; font-size: 16px; font-weight: 400; letter-spacing: -0.8px; color: #999; appearance:none; background:url('/resources/assets/images/ui/ico-down02.png') no-repeat right center; background-size: 33px;}
-
 
 /* 공통으로 쓰이는 단순요소 */
 .warning-description { color:#dd3f3f; font-size:14px; line-height: 1; letter-spacing: -1.05px; font-weight:400; margin-top:10px; }
@@ -328,11 +328,11 @@ input::-webkit-calendar-picker-indicator{
 .button-basic.bottle i { background: url("/resources/assets/images/common/ico_button_bottle.png") no-repeat; }
 .button-basic.bottles i { background: url("/resources/assets/images/common/ico_button_bottle.png") no-repeat; }
 
+
 .button-basic.bottles i + i { position: absolute; left: 30px; }
 .button-basic.kakao,
 .basic-big-button.kakao { background: #fee500; color:#181600; border-color:#fee500; }
 .button-basic.kakao i,
-
 .basic-big-button.kakao i { background: url("/resources/assets/images/common/ico_button_kakao.png") no-repeat; }
 .button-basic.naver,
 .basic-big-button.naver { background: #fff; color:#333; border:1px #e5e5e5 solid; }
@@ -690,7 +690,6 @@ input::-webkit-calendar-picker-indicator{
 .best-section .part-title { margin-bottom: 22px }
 
 .tag-place { display: flex; flex-wrap: wrap; border-bottom:1px #e5e5e5 solid; padding:0px 0px 15px; align-items: center; justify-content: center; }
-
 .tag-place .item { height:50px; margin-bottom:15px; transition-duration: .2s; padding-right:20px; padding-left:40px; border:1px #e5e5e5 solid; border-radius: 25px; display: flex; align-items: center; font-size:16px; color:#333; background:#fff url("/resources/assets/images/common/ico_tag.png") 20px center no-repeat;  }
 .tag-place .item+.item { margin-left:20px; }
 .tag-place .item.active,
@@ -703,6 +702,7 @@ input::-webkit-calendar-picker-indicator{
 .tag-place.sm .item.active,
 .tag-place.sm .item:hover,
 .tag-place.sm .item:focus { border-color:#7acc12; transition-duration: .2s; color:#fff; background:#7acc12 url("/resources/assets/images/common/ico_tag_wt.png") 15px center no-repeat; background-size:10px; }
+
 
 
 .prd-list-head  { display:flex; justify-content:space-between; align-items: center; margin:27px 0 36px;}
@@ -812,16 +812,7 @@ input::-webkit-calendar-picker-indicator{
 .location {display: flex; flex: 1; justify-content: flex-end; margin-bottom: 28px;}
 .location a {display: block; position: relative; padding: 0 15px; font-size: 14px; letter-spacing: -1.05px; color: #666;}
 .location a:last-child {padding-right: 0; font-weight: 700;}
-
 .location a:not(:first-child):after {content: ""; display: block; position: absolute; top: 50%; transform: translateY(-50%); left: 0; width: 6px; height: 10px; background: url('/resources/assets/images/ui/ui_arr_right06.png') no-repeat; background-size: 5px;}
-
-/* 콘텐츠 서브 링크 */
-.location {display: flex; flex: 1; justify-content: flex-end; margin-bottom: 28px;}
-.location a {display: block; position: relative; padding: 0 15px; font-size: 14px; letter-spacing: -1.05px; color: #666;}
-.location a:last-child {padding-right: 0; font-weight: 700;}
-.location a:not(:first-child):after {content: ""; display: block; position: absolute; top: 50%; transform: translateY(-50%); left: 0; width: 6px; height: 10px; background: url('/resources/images/ui/ui_arr_right06.png') no-repeat; background-size: 5px;}
-
-
 
 
 #alertModal,
