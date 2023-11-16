@@ -25,8 +25,8 @@ public class FcSearch implements CommandHandler {
 		String addr = "?address=" + roadAddress;
 		String key = "&AIzaSyA1ODmDLLL3ODsivD3lhSHNEgi7f4BYKbo";
 
-		Float[] coords = findGeoPoint(roadAddress);
-		System.out.println(coords);
+		//Float[] coords = findGeoPoint(roadAddress);
+		//System.out.println(coords);
 		//System.out.println(roadAddress + ": " + coords[0] + ", " + coords[1]);
 
 		

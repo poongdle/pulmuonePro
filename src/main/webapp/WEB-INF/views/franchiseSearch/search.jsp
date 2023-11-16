@@ -137,7 +137,7 @@
 					<!--E:cbody-->
 				</div>
 				</div>
-				
+			
 			</div>
 		</main>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
@@ -190,16 +190,22 @@ function searchPostcode() {
 			
 			// 가정배송 / 사무실 배송 결과 영역
 			$('#loading').modal('show');
+			
 		
+			let query = data.roadAddress;
+			
 			$.ajax({
-				url:"/address.json" , 
+				url:"https://dapi.kakao.com/v2/local/search/address" , 
 				dataType:"json",
-				type:"POST",
-				data: null,
+				type:"GET",
+				data: {query },
 				cache:false ,
+				headers: { Authorization: "KakaoAK 4e3d4720c5bff7fed4972483c92f49fd" },
 				success: function ( data,  textStatus, jqXHR ){
-				 	console.log(data.lat);
-				 	console.log(data.lng);
+					let lat = data.documents[0].y; // 위도 
+					let lng = data.documents[0].x; // 경도 
+				 	console.log(lat);
+				 	console.log(lng); 
 				},
 				error:function (){
 				 alert("에러~~~ ");
@@ -260,7 +266,10 @@ function searchPostcode() {
 }
 </script>
 
+<script>
 
+
+</script>
 
 </body>
 </html>
