@@ -17,9 +17,7 @@
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
-	integrity="sha384-DRe+1gYJauFEenXeWS8TmYdBmDUqnR5Rcw7ax4KTqOxXWd4NAMP2VPU5H69U7yP9"
-	crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" integrity="sha384-DRe+1gYJauFEenXeWS8TmYdBmDUqnR5Rcw7ax4KTqOxXWd4NAMP2VPU5H69U7yP9" crossorigin="anonymous"></script> -->
 <script src="/resources/assets/js/clipboard.min.js"></script>
 	<script src="/resources/assets/js/fdd.js"></script>
 <script src="/resources/assets/js/request.js"></script>

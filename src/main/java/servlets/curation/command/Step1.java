@@ -15,10 +15,9 @@ public class Step1 implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			System.out.println("> Step1 start");
+		System.out.println("> Step1 start");
 
-				
-			
+
 		return "/WEB-INF/views/curation/step1.jsp";
 	}
 
