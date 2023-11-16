@@ -56,6 +56,13 @@ public class LoginCheckFilter implements Filter {
       } else {
          // referer - 이전 경로를 가지고 있는 속성
          String referer = req.getRequestURI();
+
+         String queryString = req.getQueryString();
+         
+         if (queryString != null) {
+            referer += "?" + queryString;
+         }
+
          session.setAttribute("referer", referer);
          
          String location = "/member/login.do";
