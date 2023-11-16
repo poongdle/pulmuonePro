@@ -3,211 +3,22 @@
 
 <%@ include file="/WEB-INF/views/layouts/head.jsp" %>
 
-<style> /* 사이드바 + 메인 */
 
 
-
-.aside-layout {
-    display: flex;
-}
-
-.aside {
-    min-width: 240px;
-    margin-right: 40px;
-    flex: 0;
-    padding-top: 28px;
-}
-
-.aside-layout .container {
-    flex: 1;
-    width: auto;
-    min-width: 920px;
-    margin-top: 10px;
-}
-
-.aside .title {
-    font-size: 32px;
-    line-height: 1;
-    letter-spacing: -2.4px;
-    color: #333;
-    font-weight: 500;
-    margin-bottom: 20px;
-}
-
-.aside .lnb-style {
-    border-top: 1px #e5e5e5 solid;
-}
-ol, ul {
-    list-style: none;
-}
-
-.aside .lnb-style li {
-    border-bottom: 1px #e5e5e5 solid;
-}
-
-.aside .lnb-style a {
-    cursor: pointer;
-    height: 60px;
-    display: block;
-    align-items: center;
-    display: flex;
-    font-size: 16px;
-    color: #333;
-    line-height: 24px;
-    letter-spacing: -1.2px;
-    font-weight: 400;
-    position: relative;
-}
-a:not([href]):not([class]) {
-    color: inherit;
-    text-decoration: none;
-}
-
-.aside .lnb-style .sub-navigation {
-    border-top: 1px #e5e5e5 solid;
-    display: none;
-}
-
-ol ol, ol ul, ul ol, ul ul {
-    margin-bottom: 0;
-}
-
-
-.aside .lnb-style .active a {
-    font-weight: 500;
-    color: #7acc12;
-}
-
-.aside .lnb-style .sub-navigation a {
-    height: 50px;
-    font-size: 14px;
-    color: #666;
-    font-weight: 300;
-    letter-spacing: -1.05px;
-}
-
-.aside .lnb-style .sub-navigation li:last-child {
-    border-width: 0;
-}
-
-
-
-.aside .lnb-style .sub-navigation {
-    border-top: 1px #e5e5e5 solid;
-    display: none;
-}
-
-.aside .lnb-style .active .sub-navigation {
-    display: block;
-}
-
-
-.aside .lnb-style .indepth>a:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    width: 15px;
-    height: 8px;
-    background: url(/resources/assets/images/arrow_lnb.png) no-repeat;
-    transform: translateY(-50%) rotate(180deg);
-    transition-duration: .2s;
-    opacity: .5;
-}
-
-.aside .lnb-style .indepth.active>a:before {
-    transform: translateY(-50%) rotate(0deg);
-    transition-duration: .2s;
-    opacity: 1;
-}
-
-
-
-/* a:not([href]):not([class]):hover { */
-/*     color: inherit; */
-/*     text-decoration: none; */
-/* } */
-
-
-</style>
 <body>
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/views/layouts/header.jsp" %>
-		
-		<div class="container aside-layout main" style="padding-bottom:100px; ">
-				
-			<div class="aside" id="mypage_lnb">
-			    <h2 class="title">MY녹즙</h2>
-			    <ul class="lnb-style">
-			        <li class="indepth">
-			        	<a>매일배송 음용내역</a>
-			            <ul class="sub-navigation">
-			                <li><a href="/mypage/drink/drink.do">음용내역</a></li>
-			                <li><a href="/mypage/drink/bill.do">영수증조회</a></li>
-			            </ul>
-			        </li>
-			        <li>
-			            <a href="/mypage/order/box.do">택배배송 주문내역</a>
-			        </li>
-			        <li>
-			            <a href="/mypage/benefit/taste.do">시음선물내역</a>
-			        </li>
-			        <li>
-			            <a href="/mypage/benefit/coupon.do">쿠폰</a>
-			        </li>
-			        <li class="indepth">
-			            <a>활동정보</a>
-			            <ul class="sub-navigation">
-			                <li><a href="/mypage/action/interest.do">찜한상품</a></li>
-			                <li><a href="/mypage/action/counsel.do">1:1 문의</a></li>
-			                <li><a href="/mypage/action/review.do">리뷰</a></li>
-			            </ul>
-			        </li>
-			        <li class="indepth">
-			            <a>개인정보</a>
-			            <ul class="sub-navigation">
-			                <li><a href="/mypage/personal/address.do">주소록</a></li>
-			                <li><a href="/mypage/personal/info.do">개인정보 변경</a></li>
-			                <li><a href="/mypage/drink/paymethod.do">결제수단 관리</a></li>
-			                <li><a href="/mypage/personal/refund.do">환불계좌 관리</a></li>
-			            </ul>
-			        </li>
-			    </ul>
+		<div class="breadcrumb-style">
+			<div class="container">
+				<ul>
+					<li><a href="/">홈</a></li>
+					<li><a class="active">MY녹즙</a></li>
+				</ul>
 			</div>
-			<script>
-			  $(document).on("click", "#mypage_lnb .indepth>a", function (e) {
-			    var parent = $(this).parents("li");
-			    if (parent.hasClass("active")) {
-			      parent.removeClass("active");
-			    } else {
-			      parent.addClass("active");
-			    }
-			    e.preventDefault();
-			    return false;
-			  });
-			  $(document).ready(function () {
-			    var item = undefined;
-			    $("#mypage_lnb .sub-navigation a").each(function (ix, elem) {
-			      var el = $(elem);
-			      if (location.pathname.startsWith(el.attr("href")) && !item) {
-			        item = el;
-			      }
-			    })
-			    if (!item) {
-			      $("#mypage_lnb .lnb-style>li>a").each(function (ix, elem) {
-			        var el = $(elem);
-			        if (el.attr("href") && location.pathname.startsWith(el.attr("href")) && !item) {
-			          item = el;
-			        }
-			      })
-			    }
-			    if (item) {
-			      item.parents("li").addClass("active");
-			      item.parents(".indepth").addClass("active");
-			    }
-			  })
-			</script>
-			
+		</div>
+		<div class="container aside-layout main" style="padding-bottom:100px; ">
+		<%@ include file="/WEB-INF/views/layouts/mypage/aside.jsp" %>
+				
 					<div class="container">
 						<h2 class="container-title light">
 							<b>${ auth.getName() }</b>님 안녕하세요
@@ -333,7 +144,7 @@ ol ol, ol ul, ul ol, ul ul {
 										<li class="">
 											<div class="item">
 												<div class="thumb">
-													<img src="/resources/images/common/ico_delivery_process_img01.png">
+													<img src="/resources/assets/images/common/ico_delivery_process_img01.png">
 												</div>
 												<p>0</p>
 												<span>결제완료</span>
@@ -342,7 +153,7 @@ ol ol, ol ul, ul ol, ul ul {
 										<li class="">
 											<div class="item">
 												<div class="thumb">
-													<img src="/resources/images/common/ico_delivery_process_img02.png">
+													<img src="/resources/assets/images/common/ico_delivery_process_img02.png">
 												</div>
 												<p>0</p>
 												<span>배송준비중</span>
@@ -351,7 +162,7 @@ ol ol, ol ul, ul ol, ul ul {
 										<li class="">
 											<div class="item">
 												<div class="thumb">
-													<img src="/resources/images/common/ico_delivery_process_img03.png">
+													<img src="/resources/assets/images/common/ico_delivery_process_img03.png">
 												</div>
 												<p>0</p>
 												<span>배송중</span>
@@ -360,7 +171,7 @@ ol ol, ol ul, ul ol, ul ul {
 										<li class="active">
 											<div class="item">
 												<div class="thumb">
-													<img src="/resources/images/common/ico_delivery_process_img04.png">
+													<img src="/resources/assets/images/common/ico_delivery_process_img04.png">
 												</div>
 												<p>1</p>
 												<span>배송완료</span>
@@ -416,15 +227,8 @@ ol ol, ol ul, ul ol, ul ul {
 					
 			</div> <!-- container aside-layout main -->
 
-
-<!-- 		<main class="page event"> -->
-<!-- 			<div class="container"> -->
-<!-- 				/WEB-INF/views/mypage/userSummary.jsp -->
-			
-<!-- 			</div> -->
-<!-- 		</main> -->
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
 
- 	</div>
+ 	</div> <!-- wrapper -->
 </body>
 </html>
