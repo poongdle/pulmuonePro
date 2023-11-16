@@ -1,12 +1,10 @@
 package servlets.event.command;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import jdbc.connection.ConnectionProvider;
 import mvc.command.CommandHandler;
@@ -15,37 +13,39 @@ import servlets.event.persistence.EventCommentDAO;
 
 public class EventComment implements CommandHandler{
 
-    private EventCommentDAO commentDAO = new EventCommentDAO();
+	private EventCommentDAO commentDAO = new EventCommentDAO();
+	
+	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String method = request.getMethod(); // GET, POST
 
-    @Override
-    public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String method = request.getMethod();
+        if (method.equals("GET")) {
 
-        Connection conn = ConnectionProvider.getConnection();
-        
-        if (method.equalsIgnoreCase("GET")) {
-        	
+            return "/WEB-INF/views/event/commentList.jsp";
+        } else { // POST
+
             int event_no = Integer.parseInt(request.getParameter("event_no"));
-            List<EventCommentDTO> comments = commentDAO.selectList(conn, event_no);
-            request.setAttribute("comments", comments);
-            return "/WEB-INF/views/layouts/event/comment_area.jsp"; // 댓글 목록을 보여주는 페이지로 이동
-            
-        } else if (method.equalsIgnoreCase("POST")) {
-        	
-            HttpSession session = request.getSession();
-            int member_no = Integer.parseInt(session.getAttribute("member_no").toString()); // 세션에서 회원 번호 가져오기
-            int event_no = Integer.parseInt(request.getParameter("event_no"));
+            int member_no = Integer.parseInt(request.getParameter("member_no")); // Assuming the member_no is provided in the request
             String content = request.getParameter("content");
-            EventCommentDTO comment = new EventCommentDTO();
-            comment.setEvent_no(event_no);
-            comment.setMember_no(member_no);
-            comment.setWrite_date(new Date(System.currentTimeMillis()));
-            comment.setContent(content);
-            commentDAO.insert(conn, comment); // Connection 객체 전달
-            return "/WEB-INF/views/layouts/event/comment_area.jsp"; // 댓글 목록을 보여주는 페이지로 이동
-            
-        } else {
-            return null;
-        }
+
+            EventCommentDTO newComment = EventCommentDTO.builder()
+                    .event_no(event_no)
+                    .member_no(member_no)
+                    .content(content)
+                    .build();
+
+            try (Connection conn = ConnectionProvider.getConnection()) {
+                int result = commentDAO.insert(conn, newComment);
+
+                if (result == 1) { // If the comment was successfully added
+                    // Redirect to the comment list page
+                    response.sendRedirect("/event/event/view.do?event_no=" + event_no);
+                    return null;
+                } else {
+                    // If there was an error
+                    request.setAttribute("error", "댓글 추가에 실패했습니다.");
+                    return "/WEB-INF/views/error.jsp";
+                }
+            }
+        } // if
     }
 }

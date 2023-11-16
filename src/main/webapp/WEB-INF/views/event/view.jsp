@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
@@ -17,8 +16,7 @@
 					<%@ include file="/WEB-INF/views/layouts/event/title_tab_area.jsp"%>
 
 
-					<div class="tab-pane fade show active" id="profile" role="tabpanel"
-						aria-labelledby="profile-t">
+					<div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-t">
 						<!--S:이벤트 상세-->
 						<h3 class="hide">이벤트 상세</h3>
 						<!--E:이벤트 상세-->
@@ -36,9 +34,7 @@
 								    <i class="ico ico-share"></i> <span class="offscreen">공유하기</span>
 								</button>
 							</div>
-							<div class="board-cont event-board"
-								style="position: relative; min-height: 100px;">
-								
+							<div class="board-cont event-board" style="position: relative; min-height: 100px;">
 								<div id="content-editor-area" style="line-height:0;">
 								    <c:forEach var="image" items="${eventView.images}">
 								        <c:choose>
@@ -56,9 +52,11 @@
 								</div>
 								
 							</div>
-							
-							
-							
+
+							<c:if test="${eventView.event.event_cmt == 1}">
+							    <%@ include file="/WEB-INF/views/layouts/event/comment_area.jsp"%>
+							</c:if>
+
 						</div>
 						<div class="btn-area-right">
 							<a href="/event/event/list.do" class="btn-default btn-white">목록으로</a>
