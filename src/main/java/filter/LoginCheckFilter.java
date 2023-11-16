@@ -40,16 +40,8 @@ public class LoginCheckFilter implements Filter {
       HttpSession session = req.getSession(false);
       
       AuthInfo auth = null;
+      auth = (AuthInfo) session.getAttribute("auth");
       
-      try {
-         auth = (AuthInfo) session.getAttribute("auth");         
-      } catch (Exception e) {
-         System.out.println("LoginCheckFilter.java : auth 객체가 AuthInfo Class가 아닙니다.");
-         
-         e.printStackTrace();
-      }
-      
-            
       boolean isLogin = false; // 인증 시, true
       
       if ( session != null && auth != null) {
@@ -62,17 +54,10 @@ public class LoginCheckFilter implements Filter {
       if (isLogin) {      
          chain.doFilter(request, response);
       } else {
-         
          // referer - 이전 경로를 가지고 있는 속성
          String referer = req.getRequestURI();
-         String queryString = req.getQueryString();
-         
-         if (!queryString.equals("")) {
-            referer += "?" + queryString;
-         }
          session.setAttribute("referer", referer);
-
-         System.out.println("> LoginCheckFilter.java : session != null && auth != null (인증 정보 없음) ");
+         
          String location = "/member/login.do";
          res.sendRedirect(location);
       }
