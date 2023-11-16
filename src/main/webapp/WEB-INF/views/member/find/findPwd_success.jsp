@@ -58,6 +58,7 @@
 							</p>
 						</div>
 						<div class="type-guide-area" style="padding-top: 56px">
+							<input type="hidden" name="id" value="${ memberId }">
 							<h5 style="margin-bottom: 27px">비밀번호 발급수단 선택</h5>
 							<div class="sns-selector-group">
 								<label class="phone item">
@@ -82,8 +83,9 @@
 								</label>
 							</div>
 							<div class="button-set" style="margin-top: 28px">
-								<form action="/member/find/password-success.do" method="post" class="w-100">
-									<button class="button-basic primary w-100" style="height: 69px">임시비밀번호 받기</button>
+								<form action="/member/find/changePassword.do" method="post" class="w-100">
+<!-- 									<button class="button-basic primary w-100" style="height: 69px">임시비밀번호 받기</button> -->
+									<button class="button-basic primary w-100" style="height: 69px">비밀번호 변경</button>
 								</form>
 							</div>
 						</div>
