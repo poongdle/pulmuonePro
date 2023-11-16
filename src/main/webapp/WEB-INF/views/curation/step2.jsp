@@ -375,31 +375,46 @@ $("#nextPage").click(function() {
 	location.href="/customer/product/step3.do";
 })
 
+var windowRef = null;
+function openWindowPop(url, name){
+  var image = document.getElementById('guideImage');
+  var w = image.width;
+  var h = image.height;
+  var options = `width=${w},height=${h}, status=no, menubar=no, toolbar=no, resizable=no`;
+	if(windowRef===null|| windowRef.closed){
 
-  $(function(){
+  windowRef = window.open('', name, options);
+  windowRef.document.write(`<img src="${url}" width="${w}" maxWidth=100vw />`);
+  windowRef.document.body.style.margin=0;
+	}else {
+  windowRef.focus();
+	}
 
-    axios.get('/user_summary/default').then(function (response) {
+}
+$(function(){
 
-      const {info, customerVo} = response.data.RESULT_MSG;
+  axios.get('/mypage.do').then(function (response) {
+
+    const {info, customerVo} = response.data.RESULT_MSG;
 
 		const ec = ( !info.overEnd) && (info.complex||info.hasHp) && customerVo.phiCustomerVo.intfacId == '0' && customerVo.phiCustomerVo.dlvyCustYn==='Y'
-        if(ec&&customerVo){
-          $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
-          $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
-        }else {
-          $('#quickChangeDrink').attr('href', `/mypage?with=01`)
-          $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
-        }
-        console.log(window.innerWidth)
-        if(window.innerWidth>1450){
-          $('#mini-side-nav').show();
-        }
-    }).catch(function (error) {
-      if(window.innerWidth>1450) {
-        $('#mini-side-nav').show()
+      if(ec&&customerVo){
+        $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
+        $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
+      }else {
+        $('#quickChangeDrink').attr('href', `/mypage?with=01`)
+        $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
       }
+      console.log(window.innerWidth)
+      if(window.innerWidth>1450){
+        $('#mini-side-nav').show();
+      }
+  }).catch(function (error) {
+    if(window.innerWidth>1450) {
+      $('#mini-side-nav').show()
+    }
 	});
-    window.addEventListener('resize', function(){
+  window.addEventListener('resize', function(){
 	  if(window.innerWidth>1450){
 		$('#mini-side-nav').show();
 	  }else {
@@ -407,7 +422,7 @@ $("#nextPage").click(function() {
 	  }
 	})
 
-  })
+})
 </script>
 
 <div style="display: none" id="mini-side-nav">
@@ -417,6 +432,7 @@ $("#nextPage").click(function() {
 	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
 	<a href="#"><img src="/resources/assets//images/ui/quickTop.png" alt=""></a>
 </div>
+
 
 <!-- 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 -->
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script>

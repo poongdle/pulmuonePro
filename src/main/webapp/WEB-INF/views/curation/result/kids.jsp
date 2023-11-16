@@ -19,7 +19,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" integrity="sha384-DRe+1gYJauFEenXeWS8TmYdBmDUqnR5Rcw7ax4KTqOxXWd4NAMP2VPU5H69U7yP9" crossorigin="anonymous"></script> -->
 <script src="/resources/assets/js/clipboard.min.js"></script>
-	<script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/fdd.js"></script>
 <script src="/resources/assets/js/request.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
 
@@ -34,7 +34,8 @@
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css" />
 <script src="/resources/assets/js/daterangepicker.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
-<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
+<link rel="shortcut icon" type="image/x-icon"
+	href="/resources/assets/images/pul_favicon.png">
 <script type="text/javascript">
 <c:choose>
 <c:when test="${ auth.getName() eq null }">
@@ -52,10 +53,10 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 		<main class="kids">
 
-<div id="container-wrapper" class="container-wrapper">
+			<div id="container-wrapper" class="container-wrapper">
 				<!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
 
-<script type="text/javascript">
+				<script type="text/javascript">
 
 var singleYn = 'N' == 'Y';
 $(function () {
@@ -156,6 +157,7 @@ function sendKakao() {
 }
 
 </script>
+
 <script type="text/javascript">
 var location.href = '/customer/product/result/kids.do';
 var nowArgs = undefined;
@@ -298,8 +300,7 @@ $(document).on("click", "#orderModal button", function (e) {
 											data-item-title="${dto.products_name }" data-item-desc="2000">
 											<input value="${dto.products_no }" name="itemCode"
 											type="hidden"> <a class="item"
-											data-product-preview="${dto.img_no}"> 
-											<label>${dto.dayweek }</label>
+											data-product-preview="${dto.img_no}"> <label>${dto.dayweek }</label>
 												<div class="thumb">
 													<img src="/file/download/product/${dto.system_name }">
 												</div>
@@ -312,9 +313,11 @@ $(document).on("click", "#orderModal button", function (e) {
 								</ul>
 							</div>
 							<div class="button-set sm" style="margin: 20px 0px">
-								<button id="cartBtn" class="button-basic black" onclick="location.href='/daily/order/step1.do'">장바구니</button>
-								<button id="orderBtn" class="button-basic primary" onclick="location.href='/daily/order/step1.do'">주문하기</button>
-								
+								<button id="cartBtn" class="button-basic black"
+									onclick="location.href='/daily/order/step1.do'">장바구니</button>
+								<button id="orderBtn" class="button-basic primary"
+									onclick="location.href='/daily/order/step1.do'">주문하기</button>
+
 							</div>
 						</div>
 
@@ -372,68 +375,88 @@ $(document).on("click", "#orderModal button", function (e) {
 					</div>
 				</div>
 
-	<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" style="display: none;" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="confirmModalLabel"></h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				</button>
-			</div>
-			<div class="modal-body">제품이 담겼습니다. 담은 제품을 확인하시겠습니까?</div>
-			<div class="modal-footer">
-				<button type="button" class="cancel" data-dismiss="modal">취소</button>
-				<button type="button" class="confirm">확인</button>
-			</div>
-		</div>
-	</div>
-</div>
+				<div class="modal fade" id="confirmModal" tabindex="-1"
+					aria-labelledby="confirmModalLabel" style="display: none;"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="confirmModalLabel"></h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">제품이 담겼습니다. 담은 제품을 확인하시겠습니까?</div>
+							<div class="modal-footer">
+								<button type="button" class="cancel" data-dismiss="modal">취소</button>
+								<button type="button" class="confirm">확인</button>
+							</div>
+						</div>
+					</div>
+				</div>
 
-<!-- 로그인모달 -->
-<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: none;" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="alertModalLabel"></h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				</button>
+				<!-- 로그인모달 -->
+				<div class="modal fade" id="alertModal" tabindex="-1"
+					aria-labelledby="alertModalLabel" style="display: none;"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="alertModalLabel"></h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">로그인이 필요한 서비스입니다.</div>
+							<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
+						</div>
+					</div>
+				</div>
+
+
 			</div>
-			<div class="modal-body">로그인이 필요한 서비스입니다.</div>
-			<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
-		</div>
 	</div>
-</div>
 
-
-</div>
-	</div>
 	<script>
 
+var windowRef = null;
+function openWindowPop(url, name){
+  var image = document.getElementById('guideImage');
+  var w = image.width;
+  var h = image.height;
+  var options = `width=${w},height=${h}, status=no, menubar=no, toolbar=no, resizable=no`;
+	if(windowRef===null|| windowRef.closed){
 
-  $(function(){
+  windowRef = window.open('', name, options);
+  windowRef.document.write(`<img src="${url}" width="${w}" maxWidth=100vw />`);
+  windowRef.document.body.style.margin=0;
+	}else {
+  windowRef.focus();
+	}
 
-    axios.get('/user_summary/default').then(function (response) {
+}
+$(function(){
 
-      const {info, customerVo} = response.data.RESULT_MSG;
+  axios.get('/mypage.do').then(function (response) {
+
+    const {info, customerVo} = response.data.RESULT_MSG;
 
 		const ec = ( !info.overEnd) && (info.complex||info.hasHp) && customerVo.phiCustomerVo.intfacId == '0' && customerVo.phiCustomerVo.dlvyCustYn==='Y'
-        if(ec&&customerVo){
-          $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
-          $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
-        }else {
-          $('#quickChangeDrink').attr('href', `/mypage?with=01`)
-          $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
-        }
-        console.log(window.innerWidth)
-        if(window.innerWidth>1450){
-          $('#mini-side-nav').show();
-        }
-    }).catch(function (error) {
-      if(window.innerWidth>1450) {
-        $('#mini-side-nav').show()
+      if(ec&&customerVo){
+        $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
+        $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
+      }else {
+        $('#quickChangeDrink').attr('href', `/mypage?with=01`)
+        $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
       }
+      console.log(window.innerWidth)
+      if(window.innerWidth>1450){
+        $('#mini-side-nav').show();
+      }
+  }).catch(function (error) {
+    if(window.innerWidth>1450) {
+      $('#mini-side-nav').show()
+    }
 	});
-    window.addEventListener('resize', function(){
+  window.addEventListener('resize', function(){
 	  if(window.innerWidth>1450){
 		$('#mini-side-nav').show();
 	  }else {
@@ -441,15 +464,16 @@ $(document).on("click", "#orderModal button", function (e) {
 	  }
 	})
 
-  })
+})
 </script>
-<div style="display: none" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
-	<a href="#"><img src="/resources/assets//images/ui/quickTop.png" alt=""></a>
-</div>
+	<div style="display: none" id="mini-side-nav">
+		<a href="/mypage/drink/drink"><img	src="/resources/assets/images/ui/quick1.png" alt=""></a>
+	 	<a id="quickChangeDrink" href="/mypage/drink/drink"><img	src="/resources/assets/images/ui/quick2.png" alt=""></a>
+	 	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick3.png" alt=""></a>
+	 	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
+	 	<a href="#"><img src="/resources/assets//images/ui/quickTop.png" alt=""></a>
+	</div>
+
 	</main>
 	<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
 	</div>

@@ -8,7 +8,7 @@
 <meta name="viewport"     content="width=device-width,initial-scale=1.0">
 <script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
-
+<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
 <script src="/resources/assets/js/daterangepicker.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
-<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
+
 
 <style type="text/css">
 img {
@@ -281,7 +281,7 @@ $(document).on("click", "#orderModal button", function (e) {
 </div>
 
        <div class="button-set sm" style="margin: 20px 0px">
-             <button id="cartBtn" class="button-basic black">장바구니</button>
+             <button id="cartBtn" class="button-basic black" onclick="location.href='/daily/order/step1.do'">장바구니</button>
              <button id="orderBtn" class="button-basic primary">주문하기</button>
        </div>
 </div>
@@ -384,34 +384,48 @@ $(document).on("click", "#orderModal button", function (e) {
 
 
 </div>
-
 <script>
 
+var windowRef = null;
+function openWindowPop(url, name){
+  var image = document.getElementById('guideImage');
+  var w = image.width;
+  var h = image.height;
+  var options = `width=${w},height=${h}, status=no, menubar=no, toolbar=no, resizable=no`;
+	if(windowRef===null|| windowRef.closed){
 
-  $(function(){
+  windowRef = window.open('', name, options);
+  windowRef.document.write(`<img src="${url}" width="${w}" maxWidth=100vw />`);
+  windowRef.document.body.style.margin=0;
+	}else {
+  windowRef.focus();
+	}
 
-    axios.get('/user_summary/default').then(function (response) {
+}
+$(function(){
 
-      const {info, customerVo} = response.data.RESULT_MSG;
+  axios.get('/mypage.do').then(function (response) {
+
+    const {info, customerVo} = response.data.RESULT_MSG;
 
 		const ec = ( !info.overEnd) && (info.complex||info.hasHp) && customerVo.phiCustomerVo.intfacId == '0' && customerVo.phiCustomerVo.dlvyCustYn==='Y'
-        if(ec&&customerVo){
-          $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
-          $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
-        }else {
-          $('#quickChangeDrink').attr('href', `/mypage?with=01`)
-          $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
-        }
-        console.log(window.innerWidth)
-        if(window.innerWidth>1450){
-          $('#mini-side-nav').show();
-        }
-    }).catch(function (error) {
-      if(window.innerWidth>1450) {
-        $('#mini-side-nav').show()
+      if(ec&&customerVo){
+        $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
+        $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
+      }else {
+        $('#quickChangeDrink').attr('href', `/mypage?with=01`)
+        $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
       }
+      console.log(window.innerWidth)
+      if(window.innerWidth>1450){
+        $('#mini-side-nav').show();
+      }
+  }).catch(function (error) {
+    if(window.innerWidth>1450) {
+      $('#mini-side-nav').show()
+    }
 	});
-    window.addEventListener('resize', function(){
+  window.addEventListener('resize', function(){
 	  if(window.innerWidth>1450){
 		$('#mini-side-nav').show();
 	  }else {
@@ -419,7 +433,7 @@ $(document).on("click", "#orderModal button", function (e) {
 	  }
 	})
 
-  })
+})
 </script>
 <div style="display: none" id="mini-side-nav">
 	<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>

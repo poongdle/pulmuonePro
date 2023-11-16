@@ -388,32 +388,48 @@ $(document).on("click", "#orderModal button", function (e) {
 </div>
 </div>
 
-
 <script>
-  $(function(){
 
-    axios.get('/user_summary/default').then(function (response) {
+var windowRef = null;
+function openWindowPop(url, name){
+  var image = document.getElementById('guideImage');
+  var w = image.width;
+  var h = image.height;
+  var options = `width=${w},height=${h}, status=no, menubar=no, toolbar=no, resizable=no`;
+	if(windowRef===null|| windowRef.closed){
 
-      const {info, customerVo} = response.data.RESULT_MSG;
+  windowRef = window.open('', name, options);
+  windowRef.document.write(`<img src="${url}" width="${w}" maxWidth=100vw />`);
+  windowRef.document.body.style.margin=0;
+	}else {
+  windowRef.focus();
+	}
+
+}
+$(function(){
+
+  axios.get('/mypage.do').then(function (response) {
+
+    const {info, customerVo} = response.data.RESULT_MSG;
 
 		const ec = ( !info.overEnd) && (info.complex||info.hasHp) && customerVo.phiCustomerVo.intfacId == '0' && customerVo.phiCustomerVo.dlvyCustYn==='Y'
-        if(ec&&customerVo){
-          $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
-          $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
-        }else {
-          $('#quickChangeDrink').attr('href', `/mypage?with=01`)
-          $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
-        }
-        console.log(window.innerWidth)
-        if(window.innerWidth>1450){
-          $('#mini-side-nav').show();
-        }
-    }).catch(function (error) {
-      if(window.innerWidth>1450) {
-        $('#mini-side-nav').show()
+      if(ec&&customerVo){
+        $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
+        $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
+      }else {
+        $('#quickChangeDrink').attr('href', `/mypage?with=01`)
+        $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
       }
+      console.log(window.innerWidth)
+      if(window.innerWidth>1450){
+        $('#mini-side-nav').show();
+      }
+  }).catch(function (error) {
+    if(window.innerWidth>1450) {
+      $('#mini-side-nav').show()
+    }
 	});
-    window.addEventListener('resize', function(){
+  window.addEventListener('resize', function(){
 	  if(window.innerWidth>1450){
 		$('#mini-side-nav').show();
 	  }else {
@@ -421,7 +437,7 @@ $(document).on("click", "#orderModal button", function (e) {
 	  }
 	})
 
-  })
+})
 </script>
 <div style="display: none" id="mini-side-nav">
 	<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>

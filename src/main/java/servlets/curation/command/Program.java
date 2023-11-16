@@ -16,8 +16,7 @@ public class Program implements CommandHandler{
 		
 		System.out.println("> Program start..");
 
-		int num = 1;
-		
+		int num =2;
 		String path = request.getRequestURI();
 		ProgramService pg = ProgramService.getInstance();
 		
