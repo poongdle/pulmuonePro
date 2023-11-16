@@ -33174,7 +33174,7 @@ a.text-dark:hover {
   top: 50%;
   margin-left: -50px;
   margin-top: -50px;
-  background: #fff url("../images/loading_pulmuone.gif") no-repeat center;
+  background: #fff url("/resources/assets/images/common/loading_pulmuone.gif") no-repeat center;
   border-radius: 10px;
 }
 
@@ -33188,7 +33188,7 @@ a.text-dark:hover {
   top: 50%;
   margin-left: -50px;
   margin-top: -50px;
-  background: #fff url("../images/loading_pulmuone.gif") no-repeat center;
+  background: #fff url("/resources/assets/images/common/loading_pulmuone.gif") no-repeat center;
   border-radius: 10px;
 }
 
