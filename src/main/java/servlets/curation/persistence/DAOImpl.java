@@ -127,7 +127,7 @@ public class DAOImpl implements CurationDAO{
 				+ " system_name, price, products_size, products_sub_name,  lifestyle_change01, lifestyle_change02, lifestyle_change03 "
 				+ "from curation_result c join products_img pi on c.img_no = pi.img_no "
 				+ "join products p on c.products_no = p.products_no "
-				+ "where dayweek is null and program_no in ? "
+				+ "where dayweek is null and program_no in ( ? ) "
 				+ "order by curation_no";
 
 		ArrayList<CurationDTO> list = null;
@@ -182,7 +182,7 @@ public class DAOImpl implements CurationDAO{
 				+ " system_name, price, products_size, products_sub_name,  lifestyle_change01, lifestyle_change02, lifestyle_change03 "
 				+ "from curation_result c join products_img pi on c.img_no = pi.img_no "
 				+ "join products p on c.products_no = p.products_no "
-				+ "where dayweek is not null and program_no in ? "
+				+ "where dayweek is not null and program_no in ( ? ) "
 				+ "order by curation_no";
 				
 		ArrayList<CurationDTO> list = null;

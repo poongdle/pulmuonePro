@@ -35,7 +35,17 @@
 <script src="/resources/assets/js/daterangepicker.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 <link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
-
+<script type="text/javascript">
+<c:choose>
+<c:when test="${ auth.getName() eq null }">
+window.is_signed = false;
+</c:when>
+<c:otherwise>
+window.is_signed = true;
+window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderCode":"XQNGV"};
+</c:otherwise>
+</c:choose>
+</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -144,8 +154,10 @@ function sendKakao() {
     templateArgs: window.kakaoShareData.data,
   });
 }
+
 </script>
 <script type="text/javascript">
+var location.href = '/customer/product/result/kids.do';
 var nowArgs = undefined;
 window.orderProcess = function (args) {
   if (!window.is_signed) {
@@ -300,8 +312,9 @@ $(document).on("click", "#orderModal button", function (e) {
 								</ul>
 							</div>
 							<div class="button-set sm" style="margin: 20px 0px">
-								<button id="cartBtn" class="button-basic black">장바구니</button>
-								<button id="orderBtn" class="button-basic primary">주문하기</button>
+								<button id="cartBtn" class="button-basic black" onclick="location.href='/daily/order/step1.do'">장바구니</button>
+								<button id="orderBtn" class="button-basic primary" onclick="location.href='/daily/order/step1.do'">주문하기</button>
+								
 							</div>
 						</div>
 
@@ -359,8 +372,7 @@ $(document).on("click", "#orderModal button", function (e) {
 					</div>
 				</div>
 
-<!--  장바구니 -->
-<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" style="display: none;" aria-hidden="true">
+	<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" style="display: none;" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -392,41 +404,6 @@ $(document).on("click", "#orderModal button", function (e) {
 	</div>
 </div>
 
-<!-- 로그인 후  -->
-<div class="modal" id="orderModal" tabindex="-1" aria-labelledby="orderModal" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header" style="padding-bottom:8px;">
-                <h5 class="modal-title" id="orderModalLabel">선택하세요</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body select-wrapper">
-                <ul class="product-content-list order">    <li>
-        <label class="item-wrapper">
-            <input name="custnum" type="radio" value="230000234094" data-prtn-id="23812">
-            <div class="item">
-                <div class="contents">
-                    <p class="name">
-                        음용1 <span style="margin-left: 0;">230000234094</span>
-                    </p>
-                </div>
-            </div>
-        </label>
-    </li>
-</ul>
-            </div>
-            <div class="button-set">
-                <button type="button" class="button-basic black" data-type="continue">
-                    기존 주문에 상품 추가
-                </button>
-                <button type="button" class="button-basic primary" data-type="new">
-                    신규 배송지로 주문
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 </div>
 	</div>

@@ -17,11 +17,11 @@ public class Product implements CommandHandler{
 
 		System.out.println("> Products select start..");
 		int num = 1;
-
+		
 		String path = request.getRequestURI();
 		ProductService pd = ProductService.getInstance();
 		List<CurationDTO> list = pd.selectPD(path, num);
-
+		
 		request.setAttribute("list", list);
 
 		return "/WEB-INF/views/curation/result/products.jsp";

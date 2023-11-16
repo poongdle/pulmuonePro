@@ -39,6 +39,17 @@ img {
     overflow: clip;
 }
 </style>
+<script type="text/javascript">
+<c:choose>
+<c:when test="${ auth.getName() eq null }">
+window.is_signed = false;
+</c:when>
+<c:otherwise>
+window.is_signed = true;
+window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderCode":"XQNGV"};
+</c:otherwise>
+</c:choose>
+</script>
 </head>
 <body>
 <div class="wrapper">
@@ -108,7 +119,119 @@ img {
 
   })
 </script>
+<script type="text/javascript">
+var nowArgs = undefined;
+window.orderProcess = function (args) {
+  if (!window.is_signed) {
+    alertWithRedirect("로그인 후 이용가능합니다.", "/member/login?redirectUrl=" + location.href)
+    return;
+  }
+  nowArgs = args;
 
+  var codes = [];
+  for (var item of args.item) {
+    if (!item.itemCode) continue;
+    codes.push(item.itemCode);
+  }
+
+  $("#orderModal ul").html("");
+  $("#orderModal").addClass("loading").modal("show");
+
+  axios.post(`/product_available`, { ids: codes }).then(function (r) {
+    var o = r.data.RESULT_MSG;
+    if (o.fails.length) {
+      var itemCodes = o.fails.map(v => v.itemCode);
+      var args2 = {
+        item: args.item.filter(v => !itemCodes.includes(v.itemCode))
+      };
+      nowArgs = args2;
+      $("#orderModal").modal("hide").removeClass("loading");
+      showNotAvailModal(o.fails, function () {
+        $("#orderModal ul").html("");
+        $("#orderModal").addClass("loading").modal("show");
+
+        if (o.fails.length == codes.length) {
+          $("#orderModal").removeClass("loading").modal("hide");
+          return;
+        }
+
+        get({url: '/order/daily/check/option'}, function (r) {
+          if (typeof r.RESULT_MSG == 'object' && r.RESULT_MSG.length > 0) {
+            let customerList = r.RESULT_MSG
+            if (customerList.length > 5) {
+              customerList = customerList.slice(0, 5)
+            }
+
+            var latno = 0;
+            $.each(customerList, function (i, data) {
+              var tpl = $("#orderPosLi").text();
+              var nickname = data.nickname;
+              if (!nickname) {
+                if (latno == 0) {
+                  latno = customerList.filter(v => !!v.nickname).length
+                }
+                nickname = "음용 " + latno;
+                latno++;
+              }
+              tpl = tpl.replace(/\{nickname\}/g, nickname);
+              tpl = tpl.replace(/\{custnumber\}/g, data.custnumber);
+              tpl = tpl.replace(/\{prtnId\}/g, data.phiCustomerVo.prtnId);
+              $("#orderModal ul").append(tpl);
+            })
+            $('#orderModal input[name=custnum]:first').click()
+            $("#orderModal").removeClass("loading")
+          } else {
+            location.href = "/order/daily/step1?item=" + encodeURIComponent(JSON.stringify(args2));
+          }
+        });
+      });
+    }
+    else {
+      get({url: '/order/daily/check/option'}, function (r) {
+        if (typeof r.RESULT_MSG == 'object' && r.RESULT_MSG.length > 0) {
+          let customerList = r.RESULT_MSG
+          if (customerList.length > 5) {
+            customerList = customerList.slice(0, 5)
+          }
+          var latno = 0;
+          $.each(customerList, function (i, data) {
+            var tpl = $("#orderPosLi").text();
+            var nickname = data.nickname;
+            if (!nickname) {
+              if (latno == 0) {
+                latno = customerList.filter(v => !!v.nickname).length
+              }
+              nickname = "음용 " + latno;
+              latno++;
+            }
+            tpl = tpl.replace(/\{nickname\}/g, nickname);
+            tpl = tpl.replace(/\{custnumber\}/g, data.custnumber);
+            tpl = tpl.replace(/\{prtnId\}/g, data.phiCustomerVo.prtnId);
+            $("#orderModal ul").append(tpl);
+          })
+          $('#orderModal input[name=custnum]:first').click()
+          $("#orderModal").removeClass("loading")
+        } else {
+          location.href = "/order/daily/step1?item=" + encodeURIComponent(JSON.stringify(args));
+        }
+      });
+    }
+  });
+
+}
+$(document).on("click", "#orderModal button", function (e) {
+  var type = $(this).attr("data-type");
+  var p = encodeURIComponent(JSON.stringify(nowArgs));;
+  if (type === "new") {
+    location.href = "/order/daily/step1?item=" + p
+  } else if (type === "continue") {
+    var c = $("input[name='custnum']:checked");
+    var custNumber = c.val();
+    var prtnId = c.attr("data-prtn-id");
+    location.href = "/mypage/drink/drink/change/" + custNumber + "/" + prtnId + "?item=" + p;
+  }
+})
+</script>
 
 <div class="breadcrumb-style">
     <div class="container">
@@ -156,8 +279,8 @@ img {
    </div>
 
 <div class="button-set sm" style="margin: 20px 0px">
-          <button id="cartBtn" class="button-basic black">장바구니</button>
-          <button id="orderBtn" class="button-basic primary">주문하기</button>
+         <button id="cartBtn" class="button-basic black" onclick="location.href='/daily/order/step1.do'">장바구니</button>
+		<button id="orderBtn" class="button-basic primary" onclick="location.href='/daily/order/step1.do'">주문하기</button>
 </div>
 </div>
         
@@ -245,6 +368,8 @@ img {
 		</div>
 	</div>
 </div>
+
+<!-- 로그인모달 -->
 <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: none;" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -258,6 +383,8 @@ img {
 		</div>
 	</div>
 </div>
+
+
 </div>
 </div>
 
