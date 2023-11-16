@@ -36,7 +36,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-
 	<!-- controller -->
 	<servlet>
 		<servlet-name>ControllerUsingURI</servlet-name>
@@ -53,8 +52,31 @@
 	<servlet-mapping>
 		<servlet-name>ControllerUsingURI</servlet-name>
 		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>	
+	
+
+
+	<!-- ajax controller -->
+	<servlet>
+		<servlet-name>ajaxControllerUsingURI</servlet-name>
+		<servlet-class>mvc.controller.AjaxControllerUsingURI</servlet-class>
+		<init-param>
+			<param-name>configFile</param-name>
+			<param-value>
+                /WEB-INF/ajaxCommandHandlerURI.properties
+            </param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ajaxControllerUsingURI</servlet-name>
+		<url-pattern>*.ajax</url-pattern>
 	</servlet-mapping>
 
+
+
+>>>>>>> branch 'develop' of https://github.com/dhl1031/pulmuonePro.git
 	<jsp-config>
 		<jsp-property-group>
 			<!-- 코드를 붙일 페이지들의 url 패턴 -->
@@ -80,7 +102,9 @@
 		<url-pattern>/forum/faq/write.do</url-pattern>
 		<url-pattern>/forum/notice/write.do</url-pattern>
 		<url-pattern>/forum/inquiry/write.do</url-pattern>
-		
+		<url-pattern>/box/order/step1.do</url-pattern>
+		<url-pattern>/daily/order/step1.do</url-pattern>
+		<url-pattern>/taste/order/step1.do</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 

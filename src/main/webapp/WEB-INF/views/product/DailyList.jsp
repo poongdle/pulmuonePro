@@ -76,6 +76,8 @@
 				items : 4,
 				nav : true,
 			});
+		});
+		$(document).ready(function() {
 			var pbtn = "${param.tags}";
 			var ppbtn = pbtn.split(",");
 			for (var i = 0; i < 8; i++) {
@@ -85,8 +87,6 @@
 					}
 				}
 			}
-		});
-		$(document).ready(function() {
 			$(".ico-prd-wish").click(function() {
 				$("body").addClass('modal-open');
 				$("#alertModal").addClass('show');
@@ -143,6 +143,16 @@
 						</a>
 					</div>
 				</div>
+				<div class="breadcrumb-style"
+					style="padding-top: 32px; margin-bottom: 0px; background: #fff">
+					<div class="container">
+						<ul>
+							<li><a>홈</a></li>
+							<li><a href="/product/daily/dailylist.do" class="active"> 매일배송 </a></li>
+
+						</ul>
+					</div>
+				</div>
 				<div class="section best-section">
 					<div class="container">
 						<h2 class="part-title">BEST &amp; NEW</h2>
@@ -158,10 +168,36 @@
 														href="/product/daily/view.do?tag=${dto.products_tag }&eventIdx="
 														title="제품 상세페이지로 가기">
 														<div class="badges">
-															<c:if
-																test="${dto.products_no eq 0071654 or dto.products_no eq 0073019 or dto.products_no eq 0070680}">
-																<span class="badge">BEST</span>
-															</c:if>
+															<c:choose>
+																<c:when
+																	test="${dto.event_tag eq 'BEST' and dto.event_tag2 eq null }">
+																	<span class="badge">${dto.event_tag }</span>
+																</c:when>
+																<c:when
+																	test="${dto.event_tag eq 'NEW' and dto.event_tag2 eq null }">
+																	<span class="badge badge-new">${dto.event_tag }</span>
+																</c:when>
+																<c:when
+																	test="${dto.event_tag2 ne null and dto.event_tag2 eq 'SALE' }">
+																	<c:if test="${dto.event_tag eq 'BEST' }">
+																		<span class="badge">${dto.event_tag }</span>
+																	</c:if>
+																	<c:if test="${dto.event_tag eq 'NEW' }">
+																		<span class="badge badge-new">${dto.event_tag }</span>
+																	</c:if>
+																	<span class="badge badge-sale">${dto.event_tag2 }</span>
+																</c:when>
+																<c:when
+																	test="${dto.event_tag2 ne null and dto.event_tag2 eq 'NEW' }">
+																	<c:if test="${dto.event_tag eq 'BEST' }">
+																		<span class="badge">${dto.event_tag }</span>
+																	</c:if>
+																	<c:if test="${dto.event_tag eq 'NEW' }">
+																		<span class="badge badge-new">${dto.event_tag }</span>
+																	</c:if>
+																	<span class="badge badge-new">${dto.event_tag2 }</span>
+																</c:when>
+															</c:choose>
 														</div>
 														<div class="thumb">
 															<img src="/file/download/product/${dto.system_name }"
@@ -180,13 +216,13 @@
 														</div>
 													</a>
 													<div class="btn-area btn-area-center">
-														<button type="button" data-wish-id="281"
+														<button type="button" data-wish-id="${dto.products_tag }"
 															data-wish-type="daily"
 															class="btn-round btn-white wishlistBtn ">
 															<i class="ico ico-prd-wish"></i> <span class="hide">제품
 																찜하기</span>
 														</button>
-														<button type="button" data-cart-id="0071654"
+														<button type="button" data-cart-id="${dto.products_no }"
 															data-cart-type="daily" data-cart-event=""
 															class="btn-round addCartBtn">
 															<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
@@ -297,14 +333,22 @@
 													href="/product/daily/view.do?tag=${dto.products_tag }&eventIdx="
 													title="제품 상세페이지로 가기">
 													<div class="badges">
-														<c:if
-															test="${dto.products_no eq 0071654 or dto.products_no eq 0073019 or dto.products_no eq 0070680 or dto.products_no eq 0072348 }">
-															<span class="badge">BEST</span>
-														</c:if>
-														<c:if
-															test="${dto.products_no eq 0074095 or dto.products_no eq 0074008 or dto.products_no eq 0074033 or dto.products_no eq 0073579 }">
-															<span class="badge badge-new">NEW</span>
-														</c:if>
+														<c:choose>
+															<c:when test="${dto.event_tag eq 'BEST' }">
+																<span class="badge">${dto.event_tag }</span>
+															</c:when>
+															<c:when test="${dto.event_tag eq 'NEW' }">
+																<span class="badge badge-new">${dto.event_tag }</span>
+															</c:when>
+															<c:when
+																test="${dto.event_tag2 ne null and dto.event_tag2 eq 'SALE' }">
+																<span class="badge badge-sale">${dto.event_tag2 }</span>
+															</c:when>
+															<c:when
+																test="${dto.event_tag2 ne null and dto.event_tag2 eq 'NEW' }">
+																<span class="badge badge-new">${dto.event_tag2 }</span>
+															</c:when>
+														</c:choose>
 													</div>
 													<div class="thumb">
 														<img src="/file/download/product/${dto.system_name }"
