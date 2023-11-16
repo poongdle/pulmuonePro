@@ -353,13 +353,6 @@ function addLike(type, itemCode, options) {
     }
   })
 
-//  $(document).on("click", "[data-require-login]", function (e) {
-//    if (!window.is_signed) {
-//      e.preventDefault();
-//      location.href = "/member/login.do?redirectUrl=" + $(this).attr("href")
-//    }
-//  })
-
   $(document).on("click", "#ftc_link", function (e) {
     var h = $(this).attr("href");
     var p = window.open(h, 'ftc_link', 'width=750,height=700');
@@ -369,6 +362,8 @@ function addLike(type, itemCode, options) {
     return false;
   })
 
+
+let timer;
   window.alert = function (message, callback, okBtnText) {
     $("#alertModalLabel").html("");
     $("#alertModal .modal-body").html(message);
@@ -495,7 +490,9 @@ console.log(id);
     if (id) {
       $("#productPreviewModal .modal-content").html("");
       $("#productPreviewModal").addClass("loading").modal('show');
-      $("#productPreviewModal .modal-content").load("/product/preview/" + id, function () {
+
+      $("#productPreviewModal .modal-content").load("/product/preview/modalview.do?num=" + id, function () {
+
         $("#productPreviewModal").removeClass("loading");
       });
     }
@@ -545,7 +542,7 @@ console.log(id);
     var path = location.origin + location.pathname;
     var qs = location.search.substring(1).split("&");
     path += "?pageNo=" + nextPage;
-console.log(path);
+
     $.each(qs, function (i, str) {
       if (str == "") return;
       if (str.indexOf("pageNo=") != 0) {
@@ -590,6 +587,7 @@ console.log(path);
           // 다음페이지 파라미터 가져다 붙이기
 //          that.attr("data-param", moreNext.attr("data-param"));
 			that.attr("data-param", Number(nextPage)+1);
+
         }
       }
 
