@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import servlets.domain.order.drk.AcntInfoDTO;
-import servlets.domain.order.drk.CardInfoDTO;
-import servlets.domain.order.drk.DrkChangesDTO;
-import servlets.domain.order.drk.DrkHistoryDTO;
-import servlets.domain.order.drk.DrkOrderDTO;
-import servlets.domain.order.drk.DrkPayDTO;
-import servlets.domain.order.drk.DrkScheduleDTO;
-import servlets.domain.order.drk.DrkShipDTO;
+import servlets.order.domain.AcntInfoDTO;
+import servlets.order.domain.CardInfoDTO;
+import servlets.order.domain.DrkChangesDTO;
+import servlets.order.domain.DrkHistoryDTO;
+import servlets.order.domain.DrkOrderDTO;
+import servlets.order.domain.DrkPayDTO;
+import servlets.order.domain.DrkScheduleDTO;
+import servlets.order.domain.DrkShipDTO;
 
 public interface DrkOrderImpl {
 	

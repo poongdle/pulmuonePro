@@ -1,4 +1,4 @@
-package servlets.domain.order.box;
+package servlets.order.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrderMemberInfoDTO {
+public class BankDTO {
 	
-	private int memberNo;
-	private String name;
-	private String tel;
+	private int bankNo;
+	private String bankName;
 	
 }

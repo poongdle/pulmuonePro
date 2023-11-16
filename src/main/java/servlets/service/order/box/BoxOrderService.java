@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import servlets.domain.order.box.BoxOrderProductDTO;
-import servlets.domain.order.box.OrderCouponDTO;
-import servlets.domain.order.box.OrderMemberInfoDTO;
+import servlets.order.domain.BoxOrderProductDTO;
+import servlets.order.domain.OrderCouponDTO;
+import servlets.order.domain.OrderMemberInfoDTO;
 import servlets.persistence.order.BoxOrderDAO;
 
 public class BoxOrderService {

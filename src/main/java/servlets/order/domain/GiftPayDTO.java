@@ -1,4 +1,4 @@
-package servlets.domain.order.drk;
+package servlets.order.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BankDTO {
+public class GiftPayDTO {
 	
-	private int bankNo;
-	private String bankName;
+	private int drkOrderNo;
+	private String giftPayDateTime;
+	private int giftPayStatus;
+	private int giftFinalPrice;
 	
 }

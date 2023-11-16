@@ -5,11 +5,11 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
-import servlets.domain.order.drk.DrkHistoryDTO;
-import servlets.domain.order.drk.DrkScheduleDTO;
-import servlets.domain.order.gift.GiftOrderDTO;
-import servlets.domain.order.gift.GiftPayDTO;
-import servlets.domain.order.gift.GiftShipDTO;
+import servlets.order.domain.DrkHistoryDTO;
+import servlets.order.domain.DrkScheduleDTO;
+import servlets.order.domain.GiftOrderDTO;
+import servlets.order.domain.GiftPayDTO;
+import servlets.order.domain.GiftShipDTO;
 
 public interface GiftOrderImpl {
 	

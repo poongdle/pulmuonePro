@@ -6,13 +6,13 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import servlets.domain.order.box.BoxOrderDTO;
-import servlets.domain.order.box.BoxOrderProductDTO;
-import servlets.domain.order.box.BoxPayDTO;
-import servlets.domain.order.box.BoxShipDTO;
-import servlets.domain.order.box.OrderAddrBookDTO;
-import servlets.domain.order.box.OrderCouponDTO;
-import servlets.domain.order.box.OrderMemberInfoDTO;
+import servlets.order.domain.BoxOrderDTO;
+import servlets.order.domain.BoxOrderProductDTO;
+import servlets.order.domain.BoxPayDTO;
+import servlets.order.domain.BoxShipDTO;
+import servlets.order.domain.OrderAddrBookDTO;
+import servlets.order.domain.OrderCouponDTO;
+import servlets.order.domain.OrderMemberInfoDTO;
 
 public interface BoxOrderImpl {
 	

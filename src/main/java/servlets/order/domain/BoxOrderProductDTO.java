@@ -1,4 +1,4 @@
-package servlets.domain.order.box;
+package servlets.order.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

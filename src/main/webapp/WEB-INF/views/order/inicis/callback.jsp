@@ -37,7 +37,7 @@
 					int memberNo = member.getMemberNo();
 					String memberName = member.getName();
 					
-					MemberService service = new MemberService();
+					
 					
 					/* 
 					payMethod : Card
