@@ -67,7 +67,7 @@ public class LoginCheckFilter implements Filter {
          String referer = req.getRequestURI();
          String queryString = req.getQueryString();
          
-         if (!queryString.equals("")) {
+         if (queryString != null) {
             referer += "?" + queryString;
          }
          session.setAttribute("referer", referer);
