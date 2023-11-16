@@ -33,9 +33,10 @@
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 </head>
 <body>
-<script type="text/javascript">
+	<script type="text/javascript">
     $().ready(function () {
         $('#removeBanner').click(function (){
+
                 var setCookie = function(name, value, exp) {
                     var date = new Date();
                     var midnight = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59);
@@ -48,6 +49,7 @@
             $(this).closest('.highlight-bn').remove();
         })
     });
+
     function toggleMenu() {
       if ($("#gnb-item").css("display") == "block") {
         $("#gnb-item").slideUp();
@@ -69,72 +71,265 @@
         });
     });
 </script>
-<script type="text/javascript">
-	var itemType = "box";
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-150666346-1');
+</script>
+	<script>
 	var formatter = new Intl.NumberFormat();
-	var limitSize = parseInt("-1" || "-1", 10);
+	var days = ["A", "B", "C", "D", "E"];
 
-	function calculateBoxPrice() {
-		const qty = $('.box-qty').text()
-		const price = '19000'
-		$('#totalPrice b').text(formatter.format(qty * price))
+	var itemType = "box";
+	var itemCode = "0073165";
+	var eventIdx = "";
 
-	}
-    $().ready(function () {
-        // region 가격
-        $("input[name=r1]").change(function () {
-            if ($(this).is(":checked")) {
-                var totalPrice = 0;
-                if ($(this).hasClass('none-package')) {
-                    $('input[name=c1]').removeAttr('disabled');
-                    $('.check-list').find('input[type=checkbox]:not(:checked)').click()
-                    const cnt = $('input[name=c1]:checked').length
-                    const price = '19000'
-                    totalPrice = cnt * price * 4;
+	$(document).ready(function () {
+        document.addEventListener("contextmenu", function (e){
+            e.preventDefault();
+        }, false);
 
-                } else {
-                    $('.check-list').find('input[type=checkbox]:checked').click()
-                    $('input[name=c1]').attr('disabled', 'disabled');
-                    totalPrice = $(this).data("total-price") * 4;
+		//region 리스트 이미지
+		$('.sub-thumb li button').click(function () {
+			const src = $(this).find('img').attr('src')
+			$(this).parent().addClass('active').siblings().removeClass('active')
+			$('.main-thumb').find('img').attr('src', src);
+		})
+
+		$('.sub-thumb li:first button').click()
+		//endregion
+
+
+        $('input[name=coupon]').click(function () {
+            const li = $(this).closest('li');
+            li.toggleClass('active', this.checked)
+            const data = li.data('prop')
+            const ul = $(this).closest('ul');
+
+            var currentAmt = parseInt('');
+
+            var checked = ul.children().filter((i,v)=>$(v).hasClass('active'));
+
+            checked = checked.map((i,v)=>$(v).data('prop')).toArray().sort((a,b)=>{
+                if(a.benefitType===b.benfitType)return 0;
+                if(a.benfitType==='C'&&b.benfitType==='P'){
+                    return -1
+                }else {
+                    return 1
                 }
-                $("#totalPrice b").text(formatter.format(totalPrice));
-            }
-        });
-        $('input[name=c1]').change(function () {
-            if ($("input[name=r1]:checked").hasClass('none-package')) {
-                const cnt = $('input[name=c1]:checked').length
-                const price = '19000'
-                $("#totalPrice b").text(formatter.format(cnt * price * 4));
-            }
-        })     
-        calculateBoxPrice()        
+            });
 
-        $('.btn-plus').click(function () {
-            var qty = $('.box-qty').text()
-			var beSize = parseInt(qty, 10) + 1;
-			if (limitSize >= 0 && beSize > limitSize) {
-				alert("해당 상품은 한정수량 판매입니다.");
+            const totalDiscountPrice = checked.reduce((a,b)=>{
+                let discountPrice = 0;
+                if(b.benefitType==='P'){
+                    discountPrice = currentAmt * parseInt(b.benefitAmt) / 100;
+                    if(discountPrice>parseInt(b.maxDiscountAmt)){
+                        discountPrice = parseInt(b.maxDiscountAmt)
+                    }
+                    currentAmt = currentAmt-discountPrice;
+
+                }else {
+                    discountPrice = parseInt(b.benefitAmt);
+
+                    currentAmt = currentAmt-discountPrice;
+                }
+                a+=discountPrice;
+                return a;
+            },0)
+            console.log(totalDiscountPrice)
+            console.log(currentAmt)
+            if(currentAmt<0){
+                return alert('실시간 금액보다 할인 금액이 클 수 없습니다.',()=>{
+                    $(this).removeAttr('checked');
+                    $(this).closest('li').removeClass('active');
+                })
+            }
+
+
+            // region duplicateYn
+            if (data.duplicateYn === 'Y') {
+                if(ul.children().filter((i, v) => $(v).find('input').prop('checked')&&$(v).data('prop').duplicateYn === 'Y').length=== 0){
+
+                    ul.children().filter((i, v) =>
+                        $(v).data('prop').duplicateYn === 'N'
+                    ).toggleClass('disabled',false).find('input').removeAttr('disabled')
+
+                }else {
+                    ul.children().not(li).filter((i, v) =>
+                        $(v).data('prop').duplicateYn === 'N'
+                    ).toggleClass('disabled', true).find('input').attr('disabled', true)
+                }
+
+            } else {
+                ul.children().not(li).toggleClass('disabled', this.checked).find('input').attr('disabled', this.checked)
+            }
+            //	endregion
+            $('.discount-price').find('em').text(formatter.format(totalDiscountPrice));
+
+
+
+            //    region salePrice
+
+            //    endRegion
+            //    region useBtn
+
+            //    endregion
+        })
+		//region 제품 담기
+		$("#cartBtn").click(function () {
+			if (itemType != "daily") {
+				// 택배배송
+				var qty = parseInt($('.box-qty').text());
+				addCart("box", itemCode, {qty, eventIdx});
 				return;
 			}
-            $('.box-qty').text(beSize)
-            calculateBoxPrice()
-        })
-        $('.btn-minus').click(function () {
-            const qty = $('.box-qty').text()
-            if (qty > 1) {
-                $('.box-qty').text(parseInt(qty) - 1)
-                calculateBoxPrice()
-            }
-        })
-        //endregion
-        //    region 추천 패키지
-        $('.package-more').click(function () {
-			$(this).hide().parents(".select-package").addClass("show-all");
-        })
 
-        $('.none-package').click();
-		//    endregion
-    });
+			// 매일배송
+			var input = $('input[name=r1]:checked');
+			if (input.hasClass('none-package')) {
+				// 배송요일 선택 시
+				var checkedDay = input.next().find('input[type=checkbox]:checked');
+				if (checkedDay.length === 0) {
+					return alert("배송요일을 선택해주세요");
+				}
+				console.log(checkedDay)
+				const selectedDays = checkedDay.map(function (i, x) {
+					return parseInt($(x).val()) - 1;
+				}).toArray();
+				const dayQty = days.map(function (x, i) {
+					return selectedDays.includes(i) ? 1 : 0;
+				});
+
+				addCart("daily", itemCode, {dayQty, eventIdx});
+			} else {
+				// 추천 패키지 선택 시
+				var itemCodes = [];
+				var items = {};
+				input.next().find('.product-set').children().each(function (i, data) {
+					var itemCode = $(data).attr('data-itemcode');
+					var dayQty = items[itemCode] || [0, 0, 0, 0, 0];
+					dayQty[i] += 1;
+					items[itemCode] = dayQty;
+					itemCodes.push(itemCode);
+				});
+
+				var orderItems = [];
+				for (var key of Object.keys(items)) {
+					orderItems.push({itemCode: key, qty: items[key]});
+				}
+
+				orderItems.sort(function (a, b) {
+					var a1 = itemCodes.indexOf(a.itemCode);
+					var b1 = itemCodes.indexOf(b.itemCode);
+					return a1 > b1 ? 1 : a1 < b1 ? -1 : 0;
+				})
+
+				addCarts("daily", orderItems, eventIdx);
+			}
+		});
+		//endregion
+
+		//region 바로 구매
+		$("#orderBtn").click(function () {
+			if (itemType != "daily") {
+				// 택배배송
+				var args = { item: [{itemCode, qty: ($('.box-qty').text()) || "1", eventIdx: ""}] };
+				location.href = "/order/box/step1?item=" + encodeURIComponent(JSON.stringify(args));
+				return;
+			}
+
+			// 매일배송
+			var input = $('input[name=r1]:checked');
+
+			if (input.hasClass('none-package')) {
+				// 배송요일 선택 시
+				var checkedDay = input.next().find('input[type=checkbox]:checked');
+				if (checkedDay.length === 0) {
+					return alert("배송요일을 선택해주세요");
+				}
+				console.log(checkedDay)
+				const selectedDays = checkedDay.map(function (i, x) {
+					return parseInt($(x).val()) - 1;
+				}).toArray();
+				const dayQty = days.map(function (x, i) {
+					return selectedDays.includes(i) ? 1 : 0;
+				});
+
+				window.orderProcess({ item: [{itemCode, dayQty}] });
+			} else {
+				// 추천 패키지 선택 시
+				var items = {};
+				var itemCodes = [];
+				input.next().find('.product-set').children().each(function (i, data) {
+					var itemCode = $(data).attr('data-itemcode');
+					var dayQty = items[itemCode] || [0, 0, 0, 0, 0];
+					dayQty[i] += 1;
+					items[itemCode] = dayQty;
+					itemCodes.push(itemCode);
+				});
+
+				var orderItems = [];
+
+				for (var key of Object.keys(items)) {
+					orderItems.push({itemCode: key, dayQty: items[key]});
+				}
+
+				orderItems.sort(function (a, b) {
+					var a1 = itemCodes.indexOf(a.itemCode);
+					var b1 = itemCodes.indexOf(b.itemCode);
+					return a1 > b1 ? 1 : a1 < b1 ? -1 : 0;
+				})
+
+				window.orderProcess({ item: orderItems });
+			}
+		});
+		//endregion
+	});
+
+// 	var data = {"feature":"\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cimg src\u003d\"/editor/download/5463\" title\u003d\"231114_프레시스무디_크리스마스에디션_그리너지,토마토.png\" class\u003d\"180b2488-e436-4a42-8b70-8b54e3038889.png\"\u003e\u003cbr style\u003d\"clear:both;\"\u003e\u003cimg src\u003d\"/editor/download/4497\" title\u003d\"221125_프레시스무디_토마토(1140).png\" class\u003d\"a5d2ad8f-8d66-4182-b712-21e1c01e7733.png\"\u003e\u0026nbsp;\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u0026nbsp;\u003c/div\u003e","featureMobile":"\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cimg src\u003d\"/editor/download/5463\" title\u003d\"231114_프레시스무디_크리스마스에디션_그리너지,토마토.png\" class\u003d\"180b2488-e436-4a42-8b70-8b54e3038889.png\"\u003e\u003cbr style\u003d\"clear:both;\"\u003e\u003cimg src\u003d\"/editor/download/4497\" title\u003d\"221125_프레시스무디_토마토(1140).png\" class\u003d\"a5d2ad8f-8d66-4182-b712-21e1c01e7733.png\"\u003e\u0026nbsp;\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u0026nbsp;\u003c/div\u003e","nutrition":"{\"foodType\":{\"label\":\"식품의 유형\",\"value\":\"상세 참조\",\"sort\":1},\"producer\":{\"label\":\"생산지 및 소재지\",\"value\":\"상세 참조\",\"sort\":2},\"expirationDate\":{\"label\":\"제조연월일/유통기한 또는 품질유지기한\",\"value\":\"상세 참조\",\"sort\":3},\"packagingCapacity\":{\"label\":\"용량\",\"value\":\"상세 참조\",\"sort\":4,\"unit\":\"ml\"},\"packagingQty\":{\"label\":\"수량\",\"value\":\"상세 참조\",\"sort\":5},\"material\":{\"label\":\"원재료 및 함량\",\"value\":\"상세 참조\",\"sort\":6},\"nutrition\":{\"label\":\"영양성분\",\"value\":\"상세 참조\",\"sort\":7},\"geneticallyModifiedFood\":{\"label\":\"유전자변형식품 여부\",\"value\":\"해당 사항 없음\",\"sort\":11},\"importedFoodYn\":{\"label\":\"수입신고여부\",\"value\":\"해당 사항 없음\",\"sort\":13},\"consumerSafety\":{\"label\":\"소비자안전을 위한 주의사항\",\"value\":\"상세 참조\",\"sort\":12},\"csCallNum\":{\"label\":\"소비자 상담번호\",\"value\":\"080-800-0393\",\"sort\":14}}","detailImage1":"/product/20231114/8303f4fa-bb4a-4a32-b969-b094180ee1c0.png","limitSize":-1,"totalCount":0,"idx":637,"goodType":"BOX","itemCode":"0073165","thumbnail":"/product/20231114/8c0582a0-3868-4901-9987-2f6f9b707a00.png","productName":"프레시스무디 토마토 과채주스 6입","readNum":"6037","capacity":"190","unit":"ml","price":"27000","isHot":"Y","interestIdx":0,"slogan":"생기있는 아침을 위한 프레시 토마토 ","freebYn":"N","freebSloganYn":"N","freebQty":1,"isIce":"Y","unitBoxQty":"6","unitBox":"병","pkgIdx":0};
+// 	if (data.price) {
+// 		data.price = data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+// 	}
+// 	if (data.thumbnail) {
+// 		data.thumbnail = location.origin + "/file/download" + data.thumbnail;
+// 	}
+// 	if (data.detailImage1) {
+// 		data.detailImage1 = location.origin + "/file/download" + data.detailImage1;
+// 	}
+
+// 	window.kakaoShareData = {
+// 		key: 84344,
+// 		data: {
+// 			mobilehost: "https://mgreenjuice.pulmuone.com/",
+// 			webhost: "https://greenjuice.pulmuone.com/",
+// 			detailImage1: data.detailImage1,
+// 			weight: "190ml X 6병",
+// 			path: location.pathname,
+// 			productName: data.productName,
+// 			slogan: data.slogan,
+// 			thumbnail: data.thumbnail,
+// 			price: data.price,
+// 		}
+// 	};
+
+
+	//    region reviewPopup
+// 	$(document).on('click', '.review-item', function () {
+// 		const title = $(this).find('.title').text();
+// 		const content = $(this).find('.title').next().text();
+// 		const thumbnail = $(this).find('.thumb img').attr('src')
+// 		const nameAndDateEl = $(this).find('.span-tie')
+
+// 		const reviewModal = $('#reviewModal')
+// 		reviewModal.find('.header h4').text(title)
+// 		reviewModal.find('.thumb-area img').attr('src', thumbnail)
+// 		reviewModal.find('.scrollable p').text(content)
+// 		reviewModal.find('.scrollable .span-tie').replaceWith(nameAndDateEl.clone())
+// 	})
+	//    endregion
+
 </script>
 	<script>
   var nowArgs = undefined;
@@ -257,7 +452,7 @@
 					<div class="container">
 						<ul>
 							<li><a href="/">홈</a></li>
-							<li><a href="/product/daily/dailylist.do">매일배송</a></li>
+							<li><a href="/product/box/boxlist.do">택배배송</a></li>
 						</ul>
 					</div>
 				</div>
@@ -265,15 +460,15 @@
 					<div class="product-info-area">
 						<div class="thumb-area">
 							<c:forEach var="dto" items="${list }" end="0">
-								<div class="main-thumb">									
-										<img src="/file/download/product/${dto.system_name }">									
+								<div class="main-thumb">
+									<img src="/file/download/product/${dto.system_name }">
 								</div>
 							</c:forEach>
 							<ul class="sub-thumb">
 								<c:forEach var="dto" items="${list }" end="4">
 									<li class="active">
-										<button type="button" class="item">											
-												<img src="/file/download/product/${dto.system_name }">											
+										<button type="button" class="item">
+											<img src="/file/download/product/${dto.system_name }">
 										</button>
 									</li>
 								</c:forEach>
@@ -281,9 +476,9 @@
 						</div>
 						<div class="info-area">
 							<div class="label-line">
-								<label class="new">NEW</label>
+								<label class="best">BEST</label>
 							</div>
-							<div style="height: 6px"></div>
+							<span class="prd-state">냉장상품</span>
 							<div class="prd-detail-title-area">
 								<div style="flex: 1; padding-right: 10px">									
 										<h2>${dto.products_name }</h2>
@@ -306,6 +501,7 @@
 										<span>(${dto.products_size })</span>
 								</div>
 							</div>
+							<div class="buy-option"></div>
 						</div>
 					</div>
 				</div>
@@ -321,74 +517,7 @@
 			</div>
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="home">
-					<div class="recommend-product">
-						<div class="container">
-							<div class="prd-detail-image" style="margin-bottom: 74px">
-								<p>
-									<c:forEach var="dto" items="${list }" begin="1" end="1">
-										<c:if test="${dto.origin_name == 'ViewContent.png' }">
-											<img src="/file/download/product/${dto.system_name }"
-												title="비타맥스엑스투(1140).png"
-												class="8d4e7339-2e48-4c36-9cd8-6fe8e5bab379.png">
-											<br style="clear: both;">&nbsp;
-									</c:if>
-									</c:forEach>
-								</p>
-								<p>
-									<span style="font-size: 18.6667px;"><b> </b></span>
-								</p>
-								<div style="text-align: center;" align="center">
-									<b><b style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt;"><br></span></b></b></b>
-								</div>
-								<div style="text-align: center;" align="center">
-									<b><b style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt;">제품 구성</span></b></b><b
-										style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt;">&nbsp;</span></b></b></b>
-								</div>
-								<div style="text-align: center;" align="center">
-									<b><b style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt;"> <c:forEach var="dto"
-														items="${list }" begin="2" end="2">
-														<c:if test="${dto.origin_name == 'ViewContent.png' }">
-															<img src="/file/download/product/${dto.system_name }"
-																title="비타맥스엑스투.png"
-																class="51c56f1d-2b05-4243-8951-89256480522f.png">
-														</c:if>
-													</c:forEach>
-
-											</span></b></b></b>
-								</div>
-								<div style="text-align: center;" align="center">
-									<b><b style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt; color: rgb(0, 0, 0);">제품 정보 및
-													주의사항</span></b></b></b>
-								</div>
-								<div style="text-align: center;" align="center">
-									<b><b style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt;"> <c:forEach var="dto"
-														items="${list }" begin="3" end="3">
-														<c:if test="${dto.origin_name == 'ViewContent.png' }">
-															<img src="/file/download/product/${dto.system_name }"
-																title="비타맥스엑스투.png"
-																class="c424f176-361e-43f5-acee-1c4c59623bdb.png">
-														</c:if>
-													</c:forEach>
-											</span></b></b></b>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
+			${dto.content }				
 				<div role="tabpanel" class="tab-pane" id="info">
 					<div class="container">
 						<div class="product-spec">

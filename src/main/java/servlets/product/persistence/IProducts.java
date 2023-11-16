@@ -23,4 +23,10 @@ public interface IProducts {
 	   // 5. 공용 상품 상세보기
 	   ProductsDTO view(Connection con, int tag) throws Exception;
 	   List<ProductsDTO> viewlist(Connection con, int tag) throws SQLException, Exception;
+	   
+	   // Main 화면 상품 목록
+	   List<ProductsDTO> selectmainbest(Connection con) throws SQLException;
+	   
+	   // 찜한 상품 목록 추가
+	   
 }

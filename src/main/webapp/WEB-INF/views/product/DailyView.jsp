@@ -719,56 +719,6 @@
 			<!-- Tab panes -->
 			<div class="tab-content">
 			${dto.content }
-<!-- 				<div role="tabpanel" class="tab-pane" id="info"> -->
-<!-- 					<div class="container"> -->
-<!-- 						<div class="product-spec"> -->
-<!-- 							<ul> -->
-<!-- 								<li><label>식품의 유형</label> -->
-<!-- 									<p>상세 참조</p></li> -->
-
-<!-- 								<li><label>제조업소의 명칭과 소재지</label> -->
-<!-- 									<p>상세 참조</p></li> -->
-
-<!-- 								<li><label>제조연월일/유통기한</label> -->
-<!-- 									<p>상세 참조</p></li> -->
-
-<!-- 								<li><label>용량</label> -->
-<!-- 									<p>상세 참조</p></li> -->
-
-<!-- 								<li><label>수량</label> -->
-<!-- 									<p>상세 참조</p></li> -->
-
-<!-- 								<li><label>원재료 및 함량</label> -->
-<!-- 									<p>상세 참조</p></li> -->
-
-<!-- 								<li><label>영양정보</label> -->
-<!-- 									<p>상세 참조</p></li> -->
-
-<!-- 								<li><label>영양정보</label> -->
-<!-- 									<p>상세 참조</p></li> -->
-
-<!-- 								<li><label>섭취량,섭취방법 및 섭취시 주의사항 및 부작용 가능성</label> -->
-<!-- 									<p>상세 참조</p></li> -->
-
-<!-- 								<li><label>질병의 예방 및 치료를 위한 의약품이 아니라는 내용의 표현</label> -->
-<!-- 									<p>해당 사항 없음</p></li> -->
-
-<!-- 								<li><label>유전자변형건강기능식품에 해당하는 경우의 표시</label> -->
-<!-- 									<p>해당 사항 없음</p></li> -->
-
-<!-- 								<li><label>수입신고여부</label> -->
-<!-- 									<p>해당 사항 없음</p></li> -->
-
-<!-- 								<li><label>소비자안전을 위한 주의사항</label> -->
-<!-- 									<p>상세 참조</p></li> -->
-
-<!-- 								<li><label>소비자 상담번호</label> -->
-<!-- 									<p>080-800-0393</p></li> -->
-
-<!-- 							</ul> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
 			</div>
 			<a class="faq-product" href="/forum/faq">
 				<div class="container">

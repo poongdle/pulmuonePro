@@ -183,6 +183,7 @@ html {
 .pmenu-coupon i {width: 30px; height: 24px; background-image: url("/resources/assets/images/common/ico_coupon01.png");}
 
 
+
 .tasting-area > span {font-size: 13px; font-weight: 500; letter-spacing: -0.98px; color: #333;}
 .tasting-area > button {margin-top: 20px;}
 .tasting-btn {display: flex; flex: 1; justify-content: space-between; align-items: center; padding-top: 10px;}
@@ -326,7 +327,9 @@ html {
 }
 
 .event-list a.item img {width: 100%; height: 100%; object-fit: cover}
+
 .event-list .ico {position: absolute; right: 20px; bottom: 20px; z-index: 1; width: 80px; height: 80px; border-radius: 50%; box-shadow: 0px 2px 20px 0 rgba(0, 0, 0, 0.1); background: #77d04c url("/resources/assets/images/ui/ico-gift01.png") no-repeat center; background-size: 30px;}
+
 
 
 .gray-line-bg {background-color: #fafafa; border-top: 1px solid #e4e4e4;}
@@ -485,6 +488,7 @@ html {
 .select-checkout-area .nav-tabs {margin: 0 -10px; border: 0;}
 .select-checkout-area .nav-tabs .nav-item {flex-grow: unset;}
 .select-checkout-area .nav-tabs .nav-link {width: 160px; height: 150px; margin: 0 10px; padding: 102px 20px 0; border: solid 1px #e5e5e5; border-radius: 20px 0 20px 0; background-color: #fff; background-repeat: no-repeat; font-size: 16px; letter-spacing: -1.2px; color: #999;}
+
 #checkout-type-tab1 {background-image: url("../images/ui/ico-checkout-item01-off.png"); background-position: top 35px center; background-size: 58px;}
 #checkout-type-tab2 {background-image: url("../images/ui/ico-checkout-item02-off.png"); background-position: top 34px center; background-size: 50px;}
 #checkout-type-tab3 {background-image: url("../images/ui/ico-checkout-item03-off.png"); background-position: top 34px center; background-size: 54px;}
@@ -492,6 +496,7 @@ html {
 .select-checkout-area .nav-tabs .nav-item.show #checkout-type-tab1, .select-checkout-area .nav-tabs #checkout-type-tab1.active {background-image: url("/resources/assets/images/ui/ico-checkout-item01-on.png");}
 .select-checkout-area .nav-tabs .nav-item.show #checkout-type-tab2, .select-checkout-area .nav-tabs #checkout-type-tab2.active {background-image: url("/resources/assets/images/ui/ico-checkout-item02-on.png");}
 .select-checkout-area .nav-tabs .nav-item.show #checkout-type-tab3, .select-checkout-area .nav-tabs #checkout-type-tab3.active {background-image: url("/resources/assets/images/ui/ico-checkout-item03-on.png");}
+
 
 
 .cont-checkout-area .prd-checkout-area {padding-top: 14px; }
@@ -693,6 +698,7 @@ html {
 
 .tasting-gift-select-area .nav-tabs .nav-link {min-height: 311px; padding: 167px 20px 0; border-radius: 10px; border: solid 1px #7acc12; background-color: #fff; background-repeat: no-repeat; background-position: top 72px center; background-size: 70px;}
 
+
 .tasting-gift-select-area .nav-tabs .tabico_1 {background-image: url("/resources/assets/images/ui/tasting-intro-item01-off.png");}
 .tasting-gift-select-area .nav-tabs .tabico_2 {background-image: url("/resources/assets/images/ui/tasting-intro-item02-off.png");}
 .tasting-gift-select-area .nav-tabs .tabico_3 {background-image: url("/resources/assets/images/ui/tasting-intro-item03-off.png");}
@@ -704,6 +710,7 @@ html {
 .tasting-gift-select-area .nav-tabs .nav-item.show .tabico_3, .tasting-gift-select-area .nav-tabs .tabico_3.active {background-image: url("/resources/assets/images/ui/tasting-intro-item03-on.png");}
 .tasting-gift-select-area .nav-tabs .nav-item.show .tabico_4, .tasting-gift-select-area .nav-tabs .tabico_4.active {background-image: url("/resources/assets/images/ui/tasting-intro-item04-on.png");}
 .tasting-gift-select-area .nav-tabs .nav-item.show .tabico_5, .tasting-gift-select-area .nav-tabs .tabico_5.active {background-image: url("/resources/assets/images/ui/tasting-intro-item05-on.png");}
+
 
 
 .tasting-gift-select-area .nav-link b {display: block; margin-bottom: 10px; font-size: 20px; font-weight: bold; letter-spacing: -1.5px; color: #7acc12;}
@@ -1026,13 +1033,16 @@ html {
 
 .question-part .filled-radio-group .item input { display: none; }
 .question-part .filled-radio-group .item input+p { position:relative; font-size:14px; color:#666; font-weight:400; line-height:1; border-radius: 10px 0 10px 0; border:1px #e5e5e5 solid; height:120px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
 .question-part .filled-radio-group .item input+p:before { width:42px; height:42px; content:''; background:url('/resources/assets/images/contents/curation_icon01.png') no-repeat; display: block; margin-bottom:20px; }
 .question-part .filled-radio-group .item input+p:after { width:42px; height:42px; content:''; background:url('/resources/assets/images/contents/curation_icon01_on.png') no-repeat; position: absolute; left:50%; margin-left:-21px; top:21px; opacity: 0; transition-duration: .3s; }
+
 
 .question-part .filled-radio-group .item input:checked+p { background:#7acc12; transition-duration: .3s; color:#fff; }
 .question-part .filled-radio-group .item input:checked+p:before { opacity: 0; transition-duration: .3s; }
 .question-part .filled-radio-group .item input:checked+p:after { opacity: 1; transition-duration: .3s; }
 .question-part .filled-radio-group .item:hover input+p { border-color:#7acc12; transition-duration: .3s;  }
+
 
 .question-part .filled-radio-group .item:nth-child(2) input+p:before { background:url('/resources/assets/images/contents/curation_icon02.png') no-repeat; }
 .question-part .filled-radio-group .item:nth-child(2) input+p:after { background:url('/resources/assets/images/contents/curation_icon02_on.png') no-repeat; }

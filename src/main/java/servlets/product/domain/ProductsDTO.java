@@ -30,6 +30,9 @@ public class ProductsDTO {
 	   private int tag_no5;         // 태그5
 	   private int products_tag;         // 상품태그
 	   private Date reg_date;         // 등록날
+	   private String event_tag;         // 상품이벤트태그
+	   private String event_tag2;         // 상품이벤트태그
+	   
 	   
 	   private String system_name;         // 이미지
 	   private String origin_name;         // 이미지
