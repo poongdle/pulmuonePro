@@ -3,236 +3,19 @@
 
 <%@ include file="/WEB-INF/views/layouts/head.jsp" %>
 
-<style> /* 닫기 버튼 */
-
-	.relative {
-		position: relative;
-	}
-
-	a, a:hover, a:active {
-	    text-decoration: none;
-	    color: #333;
-	}
-
-	.member-close {
-	    width: 33px;
-	    height: 33px;
-	    display: block;
-	    position: absolute;
-	    right: 0;
-	    top: 40px;
-	    background: url("/resources/assets/images/button_layer_close.png") no-repeat;
-	}
-
-
-	.account-wrapper {
-	    width: 640px;
-	    margin: 0 auto;
-	}
-
-	.account-wrapper .account-logo-wrapper {
-	    padding-top: 40px;
-	    margin-bottom: 40px;
-	}
-
-	.account-wrapper .account-logo {
-	    display: block;
-	    margin: 40px auto 20px;
-	    width: 94px;
-	    height: 67px;    
-	    background: url("/resources/assets/images/common/main_logo.png") no-repeat;
-
-	}
-</style>
 
 
 <style> /* 상단 영역 */
-	.account-wrapper .title b {
-	    font-weight: 400;
-	}
 
-	.account-wrapper .textrow-layout {
-	    display: flex;
-	    align-items: flex-start;
-	    padding: 60px 0;
-	}
-	
-	.account-wrapper .textrow-layout .content {
-    	flex: 1;
-	}
-
-	.form-input:not(:last-of-type) {
-	    margin-bottom: 10px;
-	}
-	
-	.account-wrapper .title {
-	    font-size: 24px;
-	    line-height: 30px;
-	    letter-spacing: -1.8px;
-	    color: #333;
-	    font-weight: 300;
-	    flex: 1;
-	}
-	
-	
-	input[type="password"] {
-	    letter-spacing: 1px !important;
-	}
-	
-	/* 로그인 버튼 */	
-	.button-basic:hover {
-	    border-color: #7acc12 !important;
-	    transition-duration: .3s;
-	    color: #7acc12;
-	}
 	[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
 	    cursor: pointer;
 	}
-	.button-basic {
-	    display: flex;
-	    cursor: pointer;
-	    align-items: center;
-	    justify-content: center;
-	    width: 350px;
-	    height: 60px;
-	    letter-spacing: -1.65px;
-	    border-radius: 20px 0 20px 0;
-	    font-size: 18px;
-	    font-weight: 400;
-	    color: #333;
-	    background: #fff;
-	    transition-duration: .3s;
-	}
-	.border {
-	    border: 1px solid #dee2e6!important;
-	}
+
 	[type=button], [type=reset], [type=submit], button {
 	    -webkit-appearance: button;
 	}
 </style>
 
-
-<style> /*  탭 형식 구조 */
-
-.tab-border-style {
-    border-bottom: 1px #e5e5e5 solid;
-    display: flex;
-    align-items: center;
-}
-
-.tab-border-style .item {
-    border-bottom: 3px transparent solid;
-    margin-bottom: -1px;
-    position: relative;
-    z-index: 1;
-}
-
-.tab-border-style li+li {
-    margin-left: 20px;
-}
-
-.tab-border-style .item.active {
-    border-color: #333;
-}
-
-.tab-border-style .item button, .tab-border-style .item a {
-    display: block;
-    height: 54px;
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    color: #666;
-    letter-spacing: -1.35px;
-    line-height: 1;
-}
-
-.tab-border-style .item.active button, .tab-border-style .item.active a {
-    color: #333;
-    font-weight: 500;
-}
-
-
-</style>
-
-
-<style> /* 안내 영역 */
-
-.type-guide-area {
-    padding: 60px 90px 60px;
-}
-
-.caution-unit {
-    text-align: center;
-}
-
-.mark, mark {
-    padding: 0.2em;
-    background-color: #fcf8e3;
-}
-
-.caution-unit .mark {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 10px;
-    display: block;
-    border-radius: 50%;
-    background: #e5e5e5 url(/resources/assets/images/ico_caution.png) no-repeat center center;
-}
-
-.caution-unit h4 {
-    font-size: 20px;
-    color: #333;
-    font-weight: 400;
-    letter-spacing: -1.5px;
-    line-height: 28px;
-    margin-top: 26px;
-    display: block;
-}
-
-.small, small {
-    font-size: .875em;
-    font-weight: 400;
-}
-
-.caution-unit p {
-    margin-top: 20px;
-    font-size: 20px;
-    color: #666;
-    line-height: 1.5;
-    letter-spacing: -1.5px;
-    font-weight: 300;
-    text-align: center;
-}
-
-.caution-unit p.small {
-    margin-top: 12px;
-    font-size: 16px;
-    color: #999;
-}
-
-.button-set {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 36px 0;
-}
-
-.w-100 {
-    width: 100%!important;
-}
-
-[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
-    cursor: pointer;
-}
-
-
-.button-basic.primary {
-    background: #7acc12;
-    color: #fff;
-}
-
-
-</style>
 
 
 <body>
@@ -250,7 +33,7 @@
 			<div class="account-wrapper">
 				<ul class="tab-border-style">
 					
-					<li class="item active">
+					<li class="item">
 					
 					
 						<a href="/member/find/id.do" class="item">
@@ -259,7 +42,7 @@
 					</li>
 					
 					
-					<li class="item">
+					<li class="item active">
 					
 						<a href="/member/find/password.do" class="item">
 							비밀번호찾기
@@ -276,18 +59,21 @@
 			</div>
 			<div class="type-guide-area" style="padding-top: 56px">
 				<h5>일반회원</h5>
-				<div class="form-input" style="margin-bottom: -2px">
-					<dl>
-						<dt><label>아이디</label></dt>
-						<dd>
-							<input type="text" id="memberId">
-						</dd>
-					</dl>
-					<p id="memberIdError" style="padding-left: 136px"></p>
-				</div>
-				<div class="button-set" style="margin:20px 0 0">
-					<button class="button-basic primary w-100" id="findPwdAuth" style="height: 69px">본인인증</button>
-				</div>
+				<form action="/member/find/password-success.do" method="post" class="w-100">
+					<div class="form-input" style="margin-bottom: -2px">
+						<dl>
+							<dt><label>아이디</label></dt>
+							<dd>
+								<input type="text" name="memberId" id="memberId">
+							</dd>
+						</dl>
+						<p id="memberIdError" style="padding-left: 136px"></p>
+					</div>
+					<div class="button-set" style="margin:20px 0 0">
+<!-- 					<button class="button-basic primary w-100" id="findPwdAuth" style="height: 69px">본인인증</button> -->
+						<button class="button-basic primary w-100" id="findPwdAuth" style="height: 69px">본인인증(임시)</button>
+					</div>
+				</form>
 			</div>
 			<div class="type-guide-area" style="padding-top: 56px">
 				<h5>SNS 간편회원</h5>
@@ -296,14 +82,14 @@
 						<div class="ico">
 							<i></i>
 						</div>
-						<input type="radio" name="moveTo" value="/member/find/password-social?s=K">
+						<input type="radio" name="moveTo" value="/member/find/password-social.do?s=K">
 						<p>카카오</p>
 					</label>
 					<label class="naver item">
 						<div class="ico">
 							<i></i>
 						</div>
-						<input type="radio" name="moveTo" value="/member/find/password-social?s=N">
+						<input type="radio" name="moveTo" value="/member/find/password-social.do?s=N">
 						<p>네이버</p>
 
 					</label>
@@ -335,6 +121,78 @@
 	
 		
 </script>
+<script type="text/javascript">
+	var type = "password";
+	$().ready(function() {
+		// 아이디찾기 본인인증
+		$("#findIdAuth").click(function() {
+			fnIdPopup();
+		});
+		$("#memberId").on("keyup", function () {
+			hideErrorForm("memberIdError");
+		});
+		// 비밀번호찾기 본인인증
+		$("#findPwdAuth").click(function(e) {
+			e.preventDefault();
+			if ($.trim($("#memberId").val()) == "" ){
 
+				$(".form-input").addClass("error");
+				$("#memberIdError").text("아이디를 입력해 주세요.")
+				return;
+			} else {
+
+				// 기존 회원 확인
+			    var params = null;
+			    params = "memberId="+$("#memberId").val();   
+				$.ajax({
+					url:"/member/idCheck.ajax" , 
+					dataType:"json",
+					type:"POST",
+					data: params,
+					cache:false ,
+					success: function ( data,  textStatus, jqXHR ){
+						if( data.memberNo == "0" ) {
+							console.log("해당 아이디 없음");
+							$(".form-input").addClass("error");
+							$("#memberIdError").text("입력하신 정보를 확인 후 다시 입력해 주세요.")
+						} else {  
+							console.log(data.memberNo);
+		 					$(".form-input").parent().submit();		
+						}
+					 
+					},
+					error:function (){
+					 alert("에러~~~ ");
+					}
+				 
+				});
+			}
+
+		});
+
+		var type = "password";
+		if ( type == "id" ) {
+			tabOpen(0);
+		}
+		else {
+			tabOpen(1);
+		}
+	});
+	function fnIdPopup(){
+		niceWindowOpen('popupChk', "AgAFQlExMDNkZumZ4NH07/U6IktEs5OR/0KKRxI+Vfa/XAtirFx3HRVSB7k1FPc6Qd+huZEsefMYlVNXQEgq88UgDW4AvVRyK5os59N7JoRmnWh+zqWHBbd+JVCRmToNOdoBqDmPJ0ykiVAQuBn5WNx0uwafw9zmRV0C2LdjPb4dSLcnho13gNYGpmIwA1HP6CFDPBTgsixFwj35nI3qK4joNRCf7srpa9krKXtV59t3p3+MVTRKStOO/kRs/lHTsHpnqNbyoWwlJJf9w10PoOSr1lI8pSKLqxZUsPqabG0mU8cINPYAhbJTF8gXT4w8mKtnI2B6yz9xWOXsMTDq8rk5jfqkLsPjs+a+tLxv6wPtIK3w4w7MXDUSe6NbDB75b8V5zMfUSp2myVs4VIXPtuMHNsibB2CB/RlKfcTCZbpsE5yXtmqchKO1ESrdxC5PeMM0RMXcjIbf96622KpA9WYcC1G7incoSE4j+QSpy7gwf9tEuefQFDpH7Hs5PCTbnZpHjtMpGc4rF1iU84d3hPWjSLH4+A8S");
+	}
+	function fnPwdPopup(){
+		niceWindowOpen('popupChk', "AgAFQlExMDNhm93lpahONuyat71Ef7AvrhvnjCEH8QcNiKs971NM2RVSB7k1FPc6Qd+huZEsefMYlVNXQEgq88UgDW4AvVRygNOr0KiVtyXZbzvbVkfBGS47Pm2bzGxLEJVO4YLV6b84F34oPHeDZDsBSZXqwyt4F+Cyxw7eJliYPNbSwPsrL2pYpdn8UvpjGH0FyQuabSn1PlwnMSqamVZMFgkzOcP89zT4CUe3vL5hOh4yySxYZpK3AD6Ezcbf0TyWIy+5dwkqNMh5H2BSmKcYZWOQeMEQ0+oDcBDVKvePC20DFQ6AaqzQjwWLARBGwuaFR+f2G80Zu+KfNzFGc8Pw4VKoKTf2sBO278/tK3eP93ty5MRsjEX8Zs5poN3MM1iDhdLgz/ewvb4U4JEspU5tcN8mxsyB7sscoihHZVyDNYGZiRSXAJVCveGkye1a5K9n5qiL4N/OojCznYBuLMnmz6TfD39ohSeyIfG/qIPQjnohqzM0gwsIQpST75jPPdYT3ko4MecuhbAZwHw81T4bUaWje/Lc");
+	}
+	function moveSocial() {
+		var el = $("[name='moveTo']:checked");
+		if (!el.length) {
+			alert("SNS를 선택해주세요.")
+		}
+		else {
+			location.href = el.val();
+		}
+	}
+</script>
 
 </html>
