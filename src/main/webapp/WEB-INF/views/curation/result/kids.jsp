@@ -222,7 +222,7 @@ function sendKakao() {
 									<c:forEach var="dto" items="${list2 }">
 										<img src="/file/download/product/${dto.system_name }">
 									</c:forEach>
-																	</div>
+								</div>
 							</div>
 
 							<c:forEach var="dto" items="${list2}">
@@ -248,21 +248,6 @@ function sendKakao() {
 					</div>
 				</div>
 
-
-<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="alertModalLabel"></h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				</button>
-			</div>
-			<div class="modal-body">
-			</div>
-			<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
-		</div>
-	</div>
-</div>
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" style="display: none;" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
