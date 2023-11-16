@@ -4,7 +4,9 @@ import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import auth.AuthInfo;
 import mvc.command.CommandHandler;
 import servlets.inquiry.model.InquiryDTO;
 import servlets.inquiry.service.InquiryWriteService;
@@ -27,8 +29,12 @@ public class InquiryWrite implements CommandHandler{
 			String title = request.getParameter("title");
 			String contents = request.getParameter("contents");
 			
+			HttpSession session = request.getSession(false);
+			AuthInfo auth = (AuthInfo) session.getAttribute("auth");
+			String user_id = auth.getMemberId();
+			
 			int insertRow = 0;
-			InquiryDTO dto = new InquiryDTO(0, "aaaaaaaa", inquiry_cate, email, title, contents, null, "0");
+			InquiryDTO dto = new InquiryDTO(0, user_id, inquiry_cate, email, title, contents, null, "0");
 			
 			
 			insertRow = inquiryWriteService.write(dto);

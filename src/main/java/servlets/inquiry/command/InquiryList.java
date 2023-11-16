@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import auth.AuthInfo;
 import mvc.command.CommandHandler;
 import servlets.inquiry.model.InquiryDTO;
 import servlets.inquiry.service.InquiryListService;
@@ -18,8 +20,11 @@ public class InquiryList implements CommandHandler {
 		
 		String pcategory = request.getParameter("category");
 		String category = "all";
-		String user_id = "aaaaaaaa";
 		int totalCount = 0;
+		
+		HttpSession session = request.getSession(false);
+		AuthInfo auth = (AuthInfo) session.getAttribute("auth");
+		String user_id = auth.getMemberId();
 		
 		if( pcategory != null && pcategory != "" ) {
 			category = pcategory;
