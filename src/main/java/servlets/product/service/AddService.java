@@ -22,5 +22,16 @@ public class AddService {
 		}
 		return instance;
 	}
+	public int wishadd(int tag) {
+		int insertRow = 0;
+		try (Connection con = ConnectionProvider.getConnection() ) {			
+			ProductsDAO dao = ProductsDAO.getInstance();
+			insertRow = dao.wishadd(con, tag);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return insertRow;
+	}
 	
 }

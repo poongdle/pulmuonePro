@@ -442,29 +442,19 @@ let timer;
     var that = $(this);
     var type = that.attr("data-wish-type");
     var id = that.attr("data-wish-id");
-console.log(that);
-console.log(type);
-console.log(id);
+
     if (!window.is_signed) {
       alert("로그인 후 찜한상품으로 담을 수 있습니다.", function () {
         location.href = "/member/login.do?redirectUrl=" + encodeURIComponent(location.href);
       });
       return false;
     }
-      if (!that.hasClass("active")) {
-        $("[data-wish-type][data-wish-id='" + id + "']").addClass('active');
-        alert("찜한상품에 담겼습니다.");
-      } else {
-        $("[data-wish-type][data-wish-id='" + id + "']").removeClass('active');
-        alert("찜한상품이 해제되었습니다.");
-      }
+      
     axios.post('/product/' + type + '/interest.do?tag=' + id).then(function ({data}) {
-	console.log("시작");
-      if (!data.ok) {
-	console.log("없다");
-        return;
-      }
-	console.log("다시시작");
+	
+//      if (!data.ok) {
+//        return;
+//      }	
       console.log(that, that.hasClass("active"))
       if (!that.hasClass("active")) {
         $("[data-wish-type][data-wish-id='" + id + "']").addClass('active');
