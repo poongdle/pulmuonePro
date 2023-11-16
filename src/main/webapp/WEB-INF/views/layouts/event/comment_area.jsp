@@ -38,6 +38,51 @@
     </ul>
 </nav>
 
+<script>
+$(document).ready(function() {
+    
+    $(".page-link").click(function(e) {
+        e.preventDefault(); 
+
+        $(".page-item").removeClass("active");
+        $(this).parent().addClass("active");
+        
+        var pageNo = $(this).text();
+        var eventNo = ${eventView.event.event_no};
+
+        $.ajax({
+            url: "/event/event/view_lib.do", 
+            type: "GET",
+            data: {
+                event_no: eventNo,
+                currentPage: pageNo
+            },
+            dataType: "json",
+            success: function(response) {
+                
+                $("#pagable-list").empty();
+                $.each(response.comments, function(i, comment) {
+                    $("#pagable-list").append(
+                        '<li style="position: relative">' +
+                            '<div class="board-review-cont" style="width: 100%">' +
+                                '<b>' + comment.member_no + '</b>' +
+                                '<p class="review-content-' + comment.comment_no + '">' + comment.content + '</p>' +
+                                '<span class="text-day">' + comment.write_date + '</span>' +
+                            '</div>' +
+                            '<div class="review-util-btn" style="white-space: nowrap; position: absolute; top: 32px; right: 0" data-idx="' + comment.comment_no + '" data-eventidx="' + comment.event_no + '"></div>' +
+                        '</li>'
+                    );
+                });
+                $(".count > span").text(response.totalComments);
+            },
+            error: function(jqXHR, textStatus, errorThrown) { 
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
+});
+</script>
+
 <!-- 미완 댓글 작성 
 <script>
 document.getElementById('write-review').addEventListener('click', postComment);
