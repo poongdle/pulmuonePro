@@ -227,7 +227,6 @@
 		</div>
 	</div>
 </div>
-<div class="modal-backdrop fade show"></div>
     </div>
 </form>
 

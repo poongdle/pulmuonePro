@@ -353,12 +353,12 @@ function addLike(type, itemCode, options) {
     }
   })
 
-  $(document).on("click", "[data-require-login]", function (e) {
-    if (!window.is_signed) {
-      e.preventDefault();
-      location.href = "/member/login?redirectUrl=" + $(this).attr("href")
-    }
-  })
+//  $(document).on("click", "[data-require-login]", function (e) {
+//    if (!window.is_signed) {
+//      e.preventDefault();
+//      location.href = "/member/login?redirectUrl=" + $(this).attr("href")
+//    }
+//  })
 
   $(document).on("click", "#ftc_link", function (e) {
     var h = $(this).attr("href");
