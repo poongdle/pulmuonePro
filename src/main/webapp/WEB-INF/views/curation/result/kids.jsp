@@ -145,6 +145,119 @@ function sendKakao() {
   });
 }
 </script>
+<script type="text/javascript">
+var nowArgs = undefined;
+window.orderProcess = function (args) {
+  if (!window.is_signed) {
+    alertWithRedirect("로그인 후 이용가능합니다.", "/member/login?redirectUrl=" + location.href)
+    return;
+  }
+  nowArgs = args;
+
+  var codes = [];
+  for (var item of args.item) {
+    if (!item.itemCode) continue;
+    codes.push(item.itemCode);
+  }
+
+  $("#orderModal ul").html("");
+  $("#orderModal").addClass("loading").modal("show");
+
+  axios.post(`/product_available`, { ids: codes }).then(function (r) {
+    var o = r.data.RESULT_MSG;
+    if (o.fails.length) {
+      var itemCodes = o.fails.map(v => v.itemCode);
+      var args2 = {
+        item: args.item.filter(v => !itemCodes.includes(v.itemCode))
+      };
+      nowArgs = args2;
+      $("#orderModal").modal("hide").removeClass("loading");
+      showNotAvailModal(o.fails, function () {
+        $("#orderModal ul").html("");
+        $("#orderModal").addClass("loading").modal("show");
+
+        if (o.fails.length == codes.length) {
+          $("#orderModal").removeClass("loading").modal("hide");
+          return;
+        }
+
+        get({url: '/order/daily/check/option'}, function (r) {
+          if (typeof r.RESULT_MSG == 'object' && r.RESULT_MSG.length > 0) {
+            let customerList = r.RESULT_MSG
+            if (customerList.length > 5) {
+              customerList = customerList.slice(0, 5)
+            }
+
+            var latno = 0;
+            $.each(customerList, function (i, data) {
+              var tpl = $("#orderPosLi").text();
+              var nickname = data.nickname;
+              if (!nickname) {
+                if (latno == 0) {
+                  latno = customerList.filter(v => !!v.nickname).length
+                }
+                nickname = "음용 " + latno;
+                latno++;
+              }
+              tpl = tpl.replace(/\{nickname\}/g, nickname);
+              tpl = tpl.replace(/\{custnumber\}/g, data.custnumber);
+              tpl = tpl.replace(/\{prtnId\}/g, data.phiCustomerVo.prtnId);
+              $("#orderModal ul").append(tpl);
+            })
+            $('#orderModal input[name=custnum]:first').click()
+            $("#orderModal").removeClass("loading")
+          } else {
+            location.href = "/order/daily/step1?item=" + encodeURIComponent(JSON.stringify(args2));
+          }
+        });
+      });
+    }
+    else {
+      get({url: '/order/daily/check/option'}, function (r) {
+        if (typeof r.RESULT_MSG == 'object' && r.RESULT_MSG.length > 0) {
+          let customerList = r.RESULT_MSG
+          if (customerList.length > 5) {
+            customerList = customerList.slice(0, 5)
+          }
+          var latno = 0;
+          $.each(customerList, function (i, data) {
+            var tpl = $("#orderPosLi").text();
+            var nickname = data.nickname;
+            if (!nickname) {
+              if (latno == 0) {
+                latno = customerList.filter(v => !!v.nickname).length
+              }
+              nickname = "음용 " + latno;
+              latno++;
+            }
+            tpl = tpl.replace(/\{nickname\}/g, nickname);
+            tpl = tpl.replace(/\{custnumber\}/g, data.custnumber);
+            tpl = tpl.replace(/\{prtnId\}/g, data.phiCustomerVo.prtnId);
+            $("#orderModal ul").append(tpl);
+          })
+          $('#orderModal input[name=custnum]:first').click()
+          $("#orderModal").removeClass("loading")
+        } else {
+          location.href = "/order/daily/step1?item=" + encodeURIComponent(JSON.stringify(args));
+        }
+      });
+    }
+  });
+
+}
+$(document).on("click", "#orderModal button", function (e) {
+  var type = $(this).attr("data-type");
+  var p = encodeURIComponent(JSON.stringify(nowArgs));;
+  if (type === "new") {
+    location.href = "/order/daily/step1?item=" + p
+  } else if (type === "continue") {
+    var c = $("input[name='custnum']:checked");
+    var custNumber = c.val();
+    var prtnId = c.attr("data-prtn-id");
+    location.href = "/mypage/drink/drink/change/" + custNumber + "/" + prtnId + "?item=" + p;
+  }
+})
+</script>
 
 				<div class="breadcrumb-style">
 					<div class="container">
@@ -246,6 +359,7 @@ function sendKakao() {
 					</div>
 				</div>
 
+<!--  장바구니 -->
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" style="display: none;" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -263,6 +377,7 @@ function sendKakao() {
 	</div>
 </div>
 
+<!-- 로그인모달 -->
 <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: none;" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -275,6 +390,42 @@ function sendKakao() {
 			<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
 		</div>
 	</div>
+</div>
+
+<!-- 로그인 후  -->
+<div class="modal" id="orderModal" tabindex="-1" aria-labelledby="orderModal" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-bottom:8px;">
+                <h5 class="modal-title" id="orderModalLabel">선택하세요</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body select-wrapper">
+                <ul class="product-content-list order">    <li>
+        <label class="item-wrapper">
+            <input name="custnum" type="radio" value="230000234094" data-prtn-id="23812">
+            <div class="item">
+                <div class="contents">
+                    <p class="name">
+                        음용1 <span style="margin-left: 0;">230000234094</span>
+                    </p>
+                </div>
+            </div>
+        </label>
+    </li>
+</ul>
+            </div>
+            <div class="button-set">
+                <button type="button" class="button-basic black" data-type="continue">
+                    기존 주문에 상품 추가
+                </button>
+                <button type="button" class="button-basic primary" data-type="new">
+                    신규 배송지로 주문
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 </div>
