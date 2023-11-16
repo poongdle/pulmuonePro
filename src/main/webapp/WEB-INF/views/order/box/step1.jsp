@@ -6,39 +6,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>  
+
+<!-- 결제 API -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <body>
 	<div class="wrapper"> 
     	<%@ include file="/WEB-INF/views/layouts/header.jsp"%> 
         <main class="page order">
         	<div class="container">
-<textarea id="address_tpl" style="display: none">    &lt;div class="item" style="margin: 0 ; border-radius: 0"&gt;
-        &lt;div class="head"&gt;
-            &lt;div class="nickname-format xl"&gt;
-                &lt;label&gt;기본&lt;/label&gt;
-                &lt;h5&gt;{nickname}&lt;/h5&gt;
-            &lt;/div&gt;
-            &lt;ul class="info" style="margin-top:15px; padding-left:1px;"&gt;
-                &lt;li&gt;
-                    &lt;p&gt;{name}&lt;/p&gt;
-                &lt;/li&gt;
-                &lt;li&gt;
-                    &lt;p&gt;{phoneNumber}&lt;/p&gt;
-                &lt;/li&gt;
-                &lt;li&gt;
-                    &lt;p&gt;({post}) {addr1} {addr2}&lt;/p&gt;
-                &lt;/li&gt;
-            &lt;/ul&gt;
-        &lt;/div&gt;
-        &lt;div class="tail"&gt;
-            &lt;button type="button" class="adapt-address rounded-button"&gt;선택&lt;/button&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-</textarea>
+        	
+			<textarea id="address_tpl" style="display: none">
+				&lt;div class="item" style="margin: 0 ; border-radius: 0"&gt;
+				        &lt;div class="head"&gt;
+				            &lt;div class="nickname-format xl"&gt;
+				                &lt;label&gt;기본&lt;/label&gt;
+				                &lt;h5&gt;{nickname}&lt;/h5&gt;
+				            &lt;/div&gt;
+				            &lt;ul class="info" style="margin-top:15px; padding-left:1px;"&gt;
+				                &lt;li&gt;
+				                    &lt;p&gt;{name}&lt;/p&gt;
+				                &lt;/li&gt;
+				                &lt;li&gt;
+				                    &lt;p&gt;{phoneNumber}&lt;/p&gt;
+				                &lt;/li&gt;
+				                &lt;li&gt;
+				                    &lt;p&gt;({post}) {addr1} {addr2}&lt;/p&gt;
+				                &lt;/li&gt;
+				            &lt;/ul&gt;
+				        &lt;/div&gt;
+				        &lt;div class="tail"&gt;
+				            &lt;button type="button" class="adapt-address rounded-button"&gt;선택&lt;/button&gt;
+				        &lt;/div&gt;
+				 &lt;/div&gt;
+			</textarea>
+			
 				<div class="contents-area">
                 	<form id="orderForm">
-                    	<input type="hidden" name="cardValidation" id="cardValidation" value="N">
-                    	<input type="hidden" name="payMethod" value="CARD">
-                    	<input type="hidden" name="payPrice" value="195000">
+                    	<input type="hidden" name="payMethod" value="Card">
+                    	<input type="hidden" name="payPrice" value="">
                   
                   		<div class="location">
                         	<a href="/">홈</a> <a href="/">장바구니</a> <a href="/">주문서 작성</a>
@@ -196,7 +202,7 @@
                                  <dt>
                                     <span>상품 판매가 </span> <b>
                                        <div class="now-price" id="prd-origin-price">
-                                          <b data-price-view="origin" data-value=""></b> <span>원</span>
+                                          <b data-price-view="origin"></b> <span>원</span>
                                        </div>
                                     </b>
                                  </dt>
@@ -204,7 +210,7 @@
             
                                     <span>상품 할인 판매가</span> <b>
                                        <div class="now-price" id="prd-sale-price">
-                                          <b data-price-view="sale" class="minus" data-value=""></b><span>원</span>
+                                          <b data-price-view="sale" class="minus"></b><span>원</span>
                                        </div>
                                     </b>
                                  </dd>
@@ -213,7 +219,7 @@
                                     <span>쿠폰 할인 금액</span>
                                     <b>
                                        <div class="now-price minus" id="coupon-discount">
-                                          <b data-price-view="coupon" data-value="0">0</b><span>원</span>
+                                          <b data-price-view="coupon">0</b><span>원</span>
                                        </div>
                                     </b>
                                  </dd>
@@ -221,7 +227,7 @@
                                     <span>배송비</span>
                                     <b>
                                        <div class="now-price" id="ship-fee">
-                                          <b data-price-view="delivery" data-value="0">0</b><span>원</span>
+                                          <b data-price-view="delivery">0</b><span>원</span>
                                        </div>
                                     </b>
                                  </dd>
@@ -230,7 +236,7 @@
                                     <span>최종 결제금액</span>
                                     <b>
                                        <div class="now-price" id="final-pay-amount">
-                                          <b data-price-view="payment" data-value=""></b><span>원</span>
+                                          <b data-price-view="payment"></b><span>원</span>
                                        </div>
                                     </b>
                                  </dd>
@@ -276,6 +282,21 @@
 			</div>
 		</div>
 		</div>
+		
+		<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: none;" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="alertModalLabel"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						</button>
+					</div>
+					<div class="modal-body"></div>
+					<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+		</div>
+		
 		<div id="mini-side-nav">
 			<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>
 			<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick2.png" alt=""></a>
@@ -289,6 +310,12 @@
 		</button> 
          <%@ include file="/WEB-INF/views/layouts/footer.jsp"%> 
       </div>
+    
+    <script>
+    	$(".nav-link").on("click", function() {
+    		$("input[name=payMethod]").val($(this).attr("data-value"));
+    	});
+    </script>
 
 	<script>
          // 영수증 초기값 설정
@@ -309,11 +336,8 @@
             
             // 출력
             $("b[data-price-view=origin]").text(bpStr)
-            $("b[data-price-view=origin]").attr("data-value", originPrice);
             $("b[data-price-view=sale]").text(npStr)
-            $("b[data-price-view=sale]").attr("data-value", salePrice);
             $("b[data-price-view=payment]").text(npStr)
-            $("b[data-price-view=payment]").attr("data-value", salePrice);
             $("input[name='payPrice']").val(salePrice);
          })
     </script>
@@ -347,108 +371,105 @@
 			});
 		})
 		
-		// 쿠폰 선택 시
-		$("#coupon-selector").on("change", function() {
-			// 1. 쿠폰을 선택하세요. 선택 시
-			let index = $(this).find("option:selected").val();
-            if (index == 0) return;
-            
-         	// 2. 선택한 쿠폰 정보 가져오기
-         	let couponNo = allCoupons[index].couponNo;
-         	let couponName = allCoupons[index].couponName;
-         	let duplication = allCoupons[index].duplication;
-         	let maxDiscount = parseInt(allCoupons[index].maxDiscount).toFixed(0);
-         	let discount = parseInt(allCoupons[index].discount).toFixed(0);
-         	let isWon = allCoupons[index].isWon;
-         	let discountVal = isWon ? discount : salePrice*(discount/100);
-         	
-         	// 3. 중복 쿠폰 처리
-            // 쿠폰 한 개 이상 선택 시 중복 사용 불가능한 쿠폰 지우기
-			let opts = $(this).find("option");
-			if ($("#apply-coupon-list li").length >= 0) opts.filter("[data-duplicate='1']").remove();
-            
-			// 중복 사용 불가능한 쿠폰 선택 시 다른 쿠폰들 지우기
-			if (duplication == 1) {
-				opts.text("사용 가능한 쿠폰이 없습니다.");
-			    opts.not(":first").remove();
-			    $(this).prop("disabled", true);
-			} // if
-            
-         	// 4. 선택한 쿠폰 -> li 추가
-            let str = '<li data-coupon-inx="'+index+'" data-coupon-no="'+couponNo+'" data-coupon-name="'+couponName+'" data-duplicate="'+duplication+'" data-max-discount="'+maxDiscount+'" data-discount="'+discount+'" data-discount-val="'+discountVal+'">'
-                     + '<input type="hidden" name="couponIdx" value="'+couponNo+'">'
-                     + '<div>'
-                        + '<em>'+couponName+'</em>'
-                        + '<button type="button" class="coupon-remove btn-pop-close"><i class="ico-close ico"></i></button>'
-                     + '</div>';
-            if (isWon) str += '<div class="now-price">'+discount.toLocaleString()+'<span>원</span></div>'
-            else str += '<div class="now-price">'+discount.toLocaleString()+'<span>%</span></div>'
-            str += '</li>';
-            $("#apply-coupon-list").append(str);
-            
-        	// 5. 선택한 쿠폰 -> option 제거
-            let opt = $(this).find("option[value='"+index+"']");
-            opt.remove();
-            
-         	// 6. 영수증 - 쿠폰 할인가 수정
-            editReceipt(true, discountVal, salePrice);
-            
-			// 8. 쿠폰을 전부 다 선택했다면
-			if (opts.length == 1) {
-            	opts.text("사용 가능한 쿠폰이 없습니다.");
-               	$(this).prop("disabled", true);
-            } // if
-		})
-		
 		function editReceipt(option, discountVal, salePrice) {
 			// 영수증 객체 가져오기
 			let viewCoupon = $("b[data-price-view=coupon]");
 			let viewPay = $("b[data-price-view=payment]");
 			
 			// 현재 영수증 정보 불러오기
-			let realDiscount = parseInt(viewCoupon.attr("data-value"));   		// 진짜 쿠폰 할인가
 			let dispDiscount = parseInt(viewCoupon.text().replace(",", ""));	// 영수증에 찍힌 쿠폰 할인가
-			let realPayPrice = parseInt(viewPay.attr("data-value"));			// 진짜 결제 금액
 			let dispPayPrice = parseInt(viewPay.text().replace(",", ""));		// 영수증에 찍힌 결제 금액
 			
 			if (option == true) {	// 쿠폰 추가 시
 				viewCoupon.addClass("minus");
 				
-				// 쿠폰 할인가
-				realDiscount -= discountVal;											// 진짜 쿠폰 할인가
-	            let isOver = -salePrice > realDiscount;									// 상품가 > 쿠폰 할인가 ?
-	            dispDiscount = (isOver ? -salePrice : realDiscount).toLocaleString();	// 영수증에 찍힐 쿠폰 할인가	
+				dispDiscount -= discountVal; 					// 쿠폰 할인가에 추가
+				dispPayPrice = salePrice + dispDiscount;		// 결제 금액 계산
 				
-				// 결제 금액
-				realPayPrice -= discountVal;											// 진짜 결제 금액
-				dispPayPrice = isOver ? 0 : salePrice+realDiscount;						// 영수증에 찍힐 결제 금액
+				// 쿠폰 할인가가 상품 가격을 넘는다면
+				if (-salePrice > dispDiscount) {
+					dispDiscount = -salePrice;
+					dispPayPrice = 0;
+				} // if
 			} else {				// 쿠폰 삭제 시
-				viewCoupon.removeClass("minus");
+				dispDiscount -= -discountVal;					// 쿠폰 할인가에서 제거
+				dispPayPrice = salePrice + dispDiscount;		// 결제 금액 계산
 				
-				// 쿠폰 할인가
-				realDiscount += discountVal;									// 진짜 쿠폰 할인가
-				console.log("realDiscount : " + realDiscount);
-				let gap = realDiscount + dispDiscount;							// 실제 할인가와 영수증에 찍힌 쿠폰 할인가의 차이
-				console.log("gap : " + gap);
-				dispDiscount -= gap;											// 영수증에 찍힐 쿠폰 할인가
-				console.log("dispDiscount : " + dispDiscount);
-				
-				// 결제 금액
-				realPayPrice += discountVal;									// 진짜 결제 금액
-				dispPayPrice -= gap;
+				// 쿠폰 할인가가 0이하가 된다면
+				if (dispDiscount >= 0)  {
+					viewCoupon.removeClass("minus");
+					dispDiscount = 0;
+					dispPayPrice = salePrice;
+				} // if
 			} // if
 			
-			viewCoupon.attr("data-value", realDiscount);
 			viewCoupon.text(dispDiscount.toLocaleString());
-			viewPay.attr("data-value", realPayPrice);
             viewPay.text(dispPayPrice.toLocaleString());
             $("input[name='payPrice']").val(dispPayPrice);
 		}
 	</script>
+	
 	<script>
+		// 쿠폰 선택 시
+		$("#coupon-selector").on("change", function() {
+			// 1. 쿠폰을 선택하세요. 선택 시
+			let index = $(this).find("option:selected").val();
+	        if (index == 0) return;
+	        
+	     	// 2. 선택한 쿠폰 정보 가져오기
+	     	let couponNo = allCoupons[index].couponNo;
+	     	let couponName = allCoupons[index].couponName;
+	     	let duplication = allCoupons[index].duplication;
+	     	let maxDiscount = parseInt(allCoupons[index].maxDiscount).toFixed(0);
+	     	let discount = parseInt(allCoupons[index].discount).toFixed(0);
+	     	let isWon = allCoupons[index].isWon;
+	     	let discountVal = isWon ? discount : salePrice*(discount/100);
+	     	
+	     	// 3. 중복 쿠폰 처리 -> 이건 작동 되지만 스킵
+			let opts = $(this).find("option");
+	     	/*
+	        // 쿠폰 한 개 이상 선택 시 중복 사용 불가능한 쿠폰 지우기
+			if ($("#apply-coupon-list li").length >= 0) opts.filter("[data-duplicate='1']").remove();
+	        
+			// 중복 사용 불가능한 쿠폰 선택 시 다른 쿠폰들 지우기
+			if (duplication == 1) {
+				opts.text("사용 가능한 쿠폰이 없습니다.");
+			    opts.not(":first").remove();
+			    $(this).prop("disabled", true);
+			} // if
+	        */
+			
+	     	// 4. 선택한 쿠폰 -> li 추가
+	        let str = '<li data-coupon-inx="'+index+'" data-coupon-no="'+couponNo+'" data-coupon-name="'+couponName+'" data-duplicate="'+duplication+'" data-max-discount="'+maxDiscount+'" data-discount="'+discount+'" data-discount-val="'+discountVal+'">'
+	                 + '<input type="hidden" name="couponIdx" value="'+couponNo+'">'
+	                 + '<div>'
+	                    + '<em>'+couponName+'</em>'
+	                    + '<button type="button" class="coupon-remove btn-pop-close"><i class="ico-close ico"></i></button>'
+	                 + '</div>';
+	        if (isWon) str += '<div class="now-price">'+discount.toLocaleString()+'<span>원</span></div>'
+	        else str += '<div class="now-price">'+discount.toLocaleString()+'<span>%</span></div>'
+	        str += '</li>';
+	        $("#apply-coupon-list").append(str);
+	        
+	    	// 5. 선택한 쿠폰 -> option 제거
+	        let opt = $(this).find("option[value='"+index+"']");
+	        opt.remove();
+	        
+	     	// 6. 영수증 정보 수정
+	        editReceipt(true, discountVal, salePrice);
+	        
+			// 8. 쿠폰을 전부 다 선택했다면
+			if (opts.length == 1) {
+	        	opts.text("사용 가능한 쿠폰이 없습니다.");
+	           	$(this).prop("disabled", true);
+	        } // if
+		})
+		
+		// 쿠폰 삭제 시
         $(document).on("click", "button.coupon-remove", function() {
             // 1. li 태그 지우기
         	let li = $(this).parent().parent();
+            // let liCnt = li.siblings().length;	// 다른 선택된 쿠폰 갯수
             li.remove();
             
          	// 2. 선택한 쿠폰 정보 가져오기
@@ -461,34 +482,40 @@
          	let isWon = allCoupons[index].isWon;
          	let discountVal = isWon ? discount : salePrice*(discount/100);
          	
+         	// 3. 영수증 정보 수정
             editReceipt(false, discountVal, salePrice);
+            
+            // 4. option 태그 추가
+            addCouponOption(index, couponNo, duplication, maxDiscount, discount, isWon, couponName);
+                
+            // 중복 사용 스킵
+            // 5. 선택한 쿠폰을 전부 지웠다면 -> 중복 사용 불가능한 쿠폰도 다시 추가 
+            /*
+            if (liCnt == 0) {
+            	let coupons = allCoupons.filter(function(coupon) {
+            	    return coupon.duplication == 1;
+            	});
+            	for (var i = 0; i < coupons.length; i++) {
+					addCouponOption(coupons.index, coupons.couponNo, coupons.duplication, coupons.maxDiscount, coupons.discount, coupons.isWon, coupons.couponName);
+				} // for
+			} // if
+			*/
 		});
-
 		
+		function addCouponOption(index, couponNo, duplication, maxDiscount, discount, isWon, couponName) {
+			let str;
+           	if (isWon) {
+           		str = '<option value="' + index + '" data-coupon-no="' + couponNo + '" data-duplicate="' + duplication + '" data-max-discount="' + maxDiscount + '" data-discount="' + discount + '" data-coupon-name="' + couponName + '">'
+           	    	+ couponName + '&nbsp;&nbsp;/&nbsp;&nbsp;' + discount.toLocaleString() + '원 할인'
+                	+ '</option>';
+			} else {
+                str = '<option value="' + index + '" data-coupon-no="' + couponNo + '" data-duplicate="' + duplication + '" data-max-discount="' + maxDiscount + '" data-discount="' + discount + '" data-coupon-name="' + couponName + '">'
+                	+ couponName + '&nbsp;&nbsp;/&nbsp;&nbsp;' + discount.toLocaleString() + '% 할인'
+                	+ '</option>';
+			} // if;
+			$("#coupon-selector").append(str);	// append를 하면 순서대로 추가가 안 되는데 일단 스킵
+		} // addCouponOption()
     </script>
-	<script>
-			/* var type = "box";
-		  	var gap = type == 'daily' ? 4 : 1;
-		  	var dayOfWeekVal = ['A', 'B', 'C', 'D', 'E']
-				
-		  	var reqItems = [];
-		  	var nfsItem = "".split(",").filter(v=>!!v);
-		  	var nfsList = "".split(",").filter(v=>!!v);
-				
-		  	try {
-		    	var items = decodeURIComponent("{&quot;item&quot;:[{&quot;itemCode&quot;:&quot;0072964&quot;,&quot;qty&quot;:&quot;1&quot;,&quot;eventIdx&quot;:&quot;&quot;}]}").replace(/\&quot;/g, '"');
-		    	reqItems = JSON.parse(items).item;
-		    	reqItems = reqItems.filter(x => !nfsList.includes(x.itemCode));
-		    	console.log({reqItems})
-		  	} catch (e) {
-				console.log(e)
-		  	}
-		  	$(document).on("click", ".dropdown-menu .dropdown-item", function (e) {
-		    	$(this).parent().prev().click();
-		  	})
-				
-		  	console.log({nfsItem}) */
-	</script>
 	
 	<script>
 		var root = $('#addressModal .modal-body > .address');
@@ -606,5 +633,48 @@
 		});
 	</script>
 
+	<script>
+		$("#allOrderBtn").on("click", function() {
+			if ($("#receiver").val() == "") {
+				$('#alertModal').find(".modal-body").text("받는사람항목이 비어있습니다.");
+				showModal();
+				return;
+			}
+			if ($("#tel").val() == "") {
+				$('#alertModal').find(".modal-body").text("휴대폰번호항목이 비어있습니다.");
+				showModal();
+				return;
+			}
+			if ($("#zipcode").val() == "") {
+				$('#alertModal').find(".modal-body").text("우편번호항목이 비어있습니다.");
+				showModal();
+				return;
+			}
+			if (!$("#agree-11").is(':checked')) {
+				$('#alertModal').find(".modal-body").text("구매조건 확인 및 결제진행에 동의 해주세요.");
+				showModal();
+				return;
+			} 
+			$("#orderForm").attr({
+				method:"post"
+				, action:"/inicis/callback.do"
+			}).submit();
+		});
+		
+		function showModal() {
+			$('#alertModal').modal('show');
+			$('body').addClass("modal-open");
+			$('#alertModal').addClass("show");
+		} // showModal()
+
+		$(".modal-footer").on("click", function() {
+			$('#alertModal').modal('hide');
+			$('body').removeClass("modal-open");
+			$('#alertModal').removeClass("show");
+		});
+	</script>
+
+
+	</script>
 </body>
 </html>
