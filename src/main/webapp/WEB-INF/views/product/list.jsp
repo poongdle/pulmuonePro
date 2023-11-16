@@ -49,6 +49,73 @@
 </script>
 </head>
 <body>
+<script>
+	$(function (){
+		$('input[name=chk-prd1]').change(function () {
+			const checked = $('input[name=chk-prd1]:checked')
+			const checkedCnt = checked.length
+
+			const total = $('input[name=chk-prd1]').length
+			$('.prd-checkout-area .count span').text(checkedCnt)
+			$('#chk-all').prop('checked', total === checkedCnt)
+
+		})
+		$('#chk-all').click(function () {
+			$('input[name=chk-prd1]').prop('checked', $(this).is(':checked'))
+			$('input[name=chk-prd1]').trigger('change');
+		})
+		$(document).on('click', '.btn-delete', function () {
+			const idx = $(this).data('idx');
+			const el = $(this)
+			console.log(idx);
+			console.log(el);
+			confirmDesign("","찜한상품을 삭제하시겠습니까?",function(){
+				post({
+					url: '/mypage/product/delete.do',
+					param: $.param({'interestIdx[]': idx})							
+				}, function (r) {
+					if (r.RESULT_MSG) {
+						alert('목록에서 삭제되었습니다', () => location.reload())
+					} else {
+						alert('잘못된 요청입니다.');
+					}
+				})
+			})
+		});
+		$(document).on("click", '#deleteBtn', function () {
+			const checked = $('input[name=chk-prd1]:checked')
+			if (checked.length === 0) {
+				return alert('선택된 상품이 없습니다.');
+			}
+			const idxes = checked.map((i, v) => $(v).closest('li').data('idx')).toArray();
+			confirmDesign("","찜한상품을 삭제하시겠습니까?",function(){
+				post({
+					url: '/mypage/product/delete.do',
+					param: $.param({interestIdx: idxes})
+				}, function (r) {
+					if (r.RESULT_MSG) {
+						alert('목록에서 삭제되었습니다', () => location.reload())
+					} else {
+						alert('잘못된 요청입니다.');
+					}
+				});
+			})
+
+		});
+	});
+	function hrefMove(_this) {
+		let isSale = $(_this).data('issale');
+		let url = $(_this).data('url');
+		if (isSale == 'X') {
+			alert("판매가 중지된 상품입니다.");
+		} else if (isSale == 'N') {
+			alert("판매가 일지 중단된 상품입니다.");
+		} else {
+			location.href = url
+		}
+	}
+
+</script>
 	<div class="wrapper">
 
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
@@ -64,34 +131,7 @@
 				</div>
 			</div>
 			<div class="container aside-layout" style="padding-bottom: 120px;">
-
-
-				<div class="aside" id="mypage_lnb">
-					<h2 class="title">MY녹즙</h2>
-					<ul class="lnb-style">
-						<li class="indepth"><a>매일배송 음용내역</a>
-							<ul class="sub-navigation">
-								<li><a href="/mypage/drink/drink">음용내역</a></li>
-								<li><a href="/mypage/drink/bill">영수증조회</a></li>
-							</ul></li>
-						<li><a href="/mypage/order/box">택배배송 주문내역</a></li>
-						<li><a href="/mypage/benefit/taste">시음선물내역</a></li>
-						<li><a href="/mypage/benefit/coupon">쿠폰</a></li>
-						<li class="indepth active"><a>활동정보</a>
-							<ul class="sub-navigation">
-								<li class="active"><a href="/mypage/action/interest">찜한상품</a></li>
-								<li><a href="/mypage/action/counsel">1:1 문의</a></li>
-								<li><a href="/mypage/action/review">리뷰</a></li>
-							</ul></li>
-						<li class="indepth"><a>개인정보</a>
-							<ul class="sub-navigation">
-								<li><a href="/mypage/personal/address">주소록</a></li>
-								<li><a href="/mypage/personal/info">개인정보 변경</a></li>
-								<li><a href="/mypage/drink/paymethod">결제수단 관리</a></li>
-								<li><a href="/mypage/personal/refund">환불계좌 관리</a></li>
-							</ul></li>
-					</ul>
-				</div>
+				<%@ include file="/WEB-INF/views/layouts/mypage/aside.jsp"%>
 				<script>
   $(document).on("click", "#mypage_lnb .indepth>a", function (e) {
     var parent = $(this).parents("li");
@@ -133,7 +173,7 @@
 						style="align-items: center; margin-bottom: 17px;">
 						<div class="info-copy description" style="margin-top: 7px;">
 							<p style="padding: 0;">
-								총 <b class="cnt">2</b>건
+								총 <b class="cnt">${fn:length(wishlist) }</b>건
 							</p>
 						</div>
 					</div>
@@ -151,71 +191,55 @@
 						<ul class="drinkchange-list favorite" id="pagable-items"
 							data-list-object="append"
 							style="border: 1px solid #e5e5e5; border-radius: 10px">
+							<c:forEach items="${wishlist }" var="dto">
+								<li data-idx="${dto.idx }"><label class="item-wrapper"> <input
+										name="chk-prd1" type="checkbox">
+										<div class="item">
+											<a
+												data-url="/product/daily/view.do?tag=${dto.products_tag }&eventIdx="
+												onclick="event.preventDefault();hrefMove(this)"
+												data-issale="Y" style="display: flex">
+												<div class="thumb">
+													<img src="/file/download//product/${dto.system_name }"
+														alt="">
+												</div>
+												<div class="contents">
+													<p class="prd-title">${dto.products_name }</p>
+													<b class="price">${dto.price }<span>
+															원(${dto.products_size})</span>
+													</b>
+												</div>
+											</a>
+										</div>
 
-
-							<li data-idx="21958"><label class="item-wrapper"> <input
-									name="chk-prd1" type="checkbox">
-									<div class="item">
-										<a data-url="/product/daily/315"
-											onclick="event.preventDefault();hrefMove(this)"
-											data-issale="Y" style="display: flex">
-											<div class="thumb">
-												<img
-													src="/file/download//product/2476a7ea-a06c-4af4-a117-1666a39fe56f.jpg"
-													onerror="this.src='/resources/images/common/no_img.png'"
-													alt="">
-											</div>
-											<div class="contents">
-												<p class="prd-title">식물성유산균 위&amp;캡슐</p>
-												<b class="price">2,500<span> 원(130ml)</span>
-												</b>
-											</div>
-										</a>
-									</div>
-
-									<button type="button" data-idx="21958" class="btn-delete">
-										<i class="ico ico-prd-delete"></i> <span class="hide">카트에서
-											삭제</span>
-									</button>
-							</label></li>
-
-
-							<li data-idx="21957"><label class="item-wrapper"> <input
-									name="chk-prd1" type="checkbox">
-									<div class="item">
-										<a data-url="/product/daily/281"
-											onclick="event.preventDefault();hrefMove(this)"
-											data-issale="Y" style="display: flex">
-											<div class="thumb">
-												<img
-													src="/file/download//product/f1dfce0b-663c-4486-a7a3-188f199ba502.jpg"
-													onerror="this.src='/resources/images/common/no_img.png'"
-													alt="">
-											</div>
-											<div class="contents">
-												<p class="prd-title">위러브플러스</p>
-												<b class="price">2,900<span> 원(130ml)</span>
-												</b>
-											</div>
-										</a>
-									</div>
-
-									<button type="button" data-idx="21957" class="btn-delete">
-										<i class="ico ico-prd-delete"></i> <span class="hide">카트에서
-											삭제</span>
-									</button>
-							</label></li>
-
+										<button type="button" data-idx="${dto.idx }" class="btn-delete">
+											<i class="ico ico-prd-delete"></i> <span class="hide">카트에서
+												삭제</span>
+										</button>
+								</label></li>
+							</c:forEach>
 						</ul>
-
-
 					</div>
-
-
 				</div>
 			</div>
 		</main>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
+		<div class="modal fade" id="alertModal" tabindex="-1"
+			aria-labelledby="alertModalLabel"
+			style="display: none; padding-right: 17px;" aria-modal="true"
+			role="dialog">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="alertModalLabel"></h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">선택된 상품이 없습니다.</div>
+					<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/ui/modal.jsp"%>
 	<script>
