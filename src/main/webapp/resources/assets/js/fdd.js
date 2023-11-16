@@ -353,6 +353,7 @@ function addLike(type, itemCode, options) {
     }
   })
 
+
 //  $(DOCUMENT).ON("CLICK", "[DATA-REQUIRE-LOGIN]", FUNCTION (E) {
 //    IF (!WINDOW.IS_SIGNED) {
 //      E.PREVENTDEFAULT();
@@ -369,6 +370,8 @@ function addLike(type, itemCode, options) {
     return false;
   })
 
+
+let timer;
   window.alert = function (message, callback, okBtnText) {
     $("#alertModalLabel").html("");
     $("#alertModal .modal-body").html(message);
@@ -484,7 +487,9 @@ function addLike(type, itemCode, options) {
     if (id) {
       $("#productPreviewModal .modal-content").html("");
       $("#productPreviewModal").addClass("loading").modal('show');
-      $("#productPreviewModal .modal-content").load("/product/preview/" + id, function () {
+
+      $("#productPreviewModal .modal-content").load("/product/preview/modalview.do?num=" + id, function () {
+
         $("#productPreviewModal").removeClass("loading");
       });
     }
@@ -534,7 +539,7 @@ function addLike(type, itemCode, options) {
     var path = location.origin + location.pathname;
     var qs = location.search.substring(1).split("&");
     path += "?pageNo=" + nextPage;
-console.log(path);
+
     $.each(qs, function (i, str) {
       if (str == "") return;
       if (str.indexOf("pageNo=") != 0) {
@@ -579,6 +584,7 @@ console.log(path);
           // 다음페이지 파라미터 가져다 붙이기
 //          that.attr("data-param", moreNext.attr("data-param"));
 			that.attr("data-param", Number(nextPage)+1);
+
         }
       }
 

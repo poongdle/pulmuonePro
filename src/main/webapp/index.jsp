@@ -21,5 +21,4 @@
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
  	</div>
 </body>
-
 </html>
