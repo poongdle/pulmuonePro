@@ -35,6 +35,8 @@ public class NoticeImageUpload implements CommandHandler{
 	  	
 	  	File file = multiRequest.getFile("upload");
 	  	String realPath = request.getServletContext().getRealPath("/upload/notice");
+	  	
+	
 	  	if( file != null ) {
 	  		String fileSystemName = multiRequest.getFilesystemName("upload");
 	  		String originName = multiRequest.getOriginalFileName("upload");
@@ -47,33 +49,26 @@ public class NoticeImageUpload implements CommandHandler{
 	  		System.out.println(img_size);
 	  		System.out.println(img_type);
 	  		
+	  		PrintWriter out = response.getWriter();
 			
+	  		JSONObject outData = new JSONObject();
+	  		outData.put("uploaded", true);
+	  		outData.put("url", "/upload/notice/" + fileSystemName);
+	  		
+	  	  	System.out.println(">>>>>>>");
+		  	System.out.println(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + realPath + "/" + originName);
+		  	System.out.println(">>>>>>>");
+	  		response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+
+			out.print(outData);
+	  		//out.println(outData); //response
 	  	}
-	  	
-	  	////*
-	  	//request.setCharacterEncoding("UTF-8");
-		//String path = "/upload"; // 개발자 지정 폴더
-		//String real_save_path = request.getServletContext().getRealPath(path);
-		//MultipartRequest multi = new MultipartRequest(request, real_save_path, maxRequestSize, "UTF-8", new DefaultFileRenamePolicy());
-		//String fileName = multi.getOriginalFileName("upload"); // ckeditor5 static const
-		//JSONObject outData = new JSONObject();
-		//outData.put("uploaded", true);
-		//outData.put("url", request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + realPath + "/" + originName);
-		//response.setContentType("application/json");
-		//response.setCharacterEncoding("UTF-8");
-		//response.getWriter().print(outData.toString());
-		
-
-
-	  	
 	  	
 	  	System.out.println("-------");
 	  	System.out.println( file );
 		System.out.println("upload..");
-		return realPath;
-		
-		
-		
+		return null;
 	}
 
 }

@@ -591,8 +591,12 @@
 						<button class="button-fix interest-button " data-wish-type="daily"
 							data-wish-id="743"></button>
 						<!-- 품절용 가이드 추가 -->
-						<button id="cartBtn" class="button-fix black">장바구니</button>
-						<button id="orderBtn" class="button-fix primary">바로구매</button>
+						<form action="/box/order/step1.do" method="GET">
+					        <input type="hidden" name="productsNo" value="0073561">
+							<input type="hidden" name="productsCnt" value="1">
+							<button id="cartBtn" class="button-fix black">장바구니</button>
+							<button id="orderBtn" class="button-fix primary">바로구매</button>
+						</form>
 
 
 					</div>

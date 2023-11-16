@@ -41,7 +41,7 @@ public class MemberFindId implements CommandHandler {
 					
 
 			MemberService memberService = new MemberService();
-			MemberDTO dto = memberService.findId(name, tel, rrnBirthDate, rrnGenderCode);
+			MemberDTO dto = memberService.authorizeNICE(name, tel, rrnBirthDate, rrnGenderCode);
 			
 			int memberIdLength = dto.getMemberId().length();
 			String memberId = dto.getMemberId().substring(0, memberIdLength-2) + "**";

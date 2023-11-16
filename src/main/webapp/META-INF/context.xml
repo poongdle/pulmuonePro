@@ -7,8 +7,9 @@
         driverClassName="oracle.jdbc.OracleDriver"
          url="jdbc:oracle:thin:@192.168.10.166:1521:xe"
          username="pulmu" 
-         password="p1234" 
+         password="p1234"
          maxTotal="20" 
          maxIdle="10"
          maxWaitMillis="-1"/>
 </Context>
+<!-- url="jdbc:oracle:thin:@192.168.10.166:1521:xe" -->
