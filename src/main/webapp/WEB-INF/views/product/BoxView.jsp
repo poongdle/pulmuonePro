@@ -33,12 +33,59 @@
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 </head>
 <body>
+	<script type="text/javascript">
+    $().ready(function () {
+        $('#removeBanner').click(function (){
+
+                var setCookie = function(name, value, exp) {
+                    var date = new Date();
+                    var midnight = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59);
+                    document.cookie = name + '=' + value + ';expires=' + midnight + ';path=/';
+                };
+
+                setCookie('dontShowTopBanner', 'Y', 1);
+
+
+            $(this).closest('.highlight-bn').remove();
+        })
+    });
+
+    function toggleMenu() {
+      if ($("#gnb-item").css("display") == "block") {
+        $("#gnb-item").slideUp();
+      }
+      else {
+        $("#gnb-item").slideDown();
+      }
+    }
+    $('.logout-btn').click(function (){
+        if(confirm('로그아웃 하시겠습니까?')){
+
+        }
+    })
+    $(document).ready(function(){
+        $('.welcome b').hover(function() {
+            $('.logout-btn').stop().fadeIn('500');
+        }, function(){
+            $('.logout-btn').stop().fadeOut('500');
+        });
+    });
+</script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-150666346-1');
+</script>
 	<script>
 	var formatter = new Intl.NumberFormat();
 	var days = ["A", "B", "C", "D", "E"];
-	var itemType = "daily";
-	var itemCode = "${dto.products_no}";
+
+	var itemType = "box";
+	var itemCode = "0073165";
 	var eventIdx = "";
+
 	$(document).ready(function () {
         document.addEventListener("contextmenu", function (e){
             e.preventDefault();
@@ -241,114 +288,48 @@
 		//endregion
 	});
 
-	var data = {"feature":"\u003cp\u003e\u003cimg src\u003d\"/editor/download/5403\" title\u003d\"비타맥스엑스투(1140).png\" class\u003d\"8d4e7339-2e48-4c36-9cd8-6fe8e5bab379.png\"\u003e\u003cbr style\u003d\"clear:both;\"\u003e\u0026nbsp;\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"font-size: 18.6667px;\"\u003e\u003cb\u003e\r\n\r\n\u003c/b\u003e\u003c/span\u003e\u003c/p\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e제품 구성\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u0026nbsp;\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cimg src\u003d\"/editor/download/5404\" title\u003d\"비타맥스엑스투.png\" class\u003d\"51c56f1d-2b05-4243-8951-89256480522f.png\"\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt; color: rgb(0, 0, 0);\"\u003e제품 정보 및 주의사항\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cimg src\u003d\"/editor/download/5405\" title\u003d\"비타맥스엑스투.png\" class\u003d\"c424f176-361e-43f5-acee-1c4c59623bdb.png\"\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e","featureMobile":"\u003cp\u003e\u003cimg src\u003d\"/editor/download/5403\" title\u003d\"비타맥스엑스투(1140).png\" class\u003d\"8d4e7339-2e48-4c36-9cd8-6fe8e5bab379.png\"\u003e\u003cbr style\u003d\"clear:both;\"\u003e\u0026nbsp;\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"font-size: 18.6667px;\"\u003e\u003cb\u003e\r\n\r\n\u003c/b\u003e\u003c/span\u003e\u003c/p\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e제품 구성\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u0026nbsp;\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cimg src\u003d\"/editor/download/5404\" title\u003d\"비타맥스엑스투.png\" class\u003d\"51c56f1d-2b05-4243-8951-89256480522f.png\"\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt; color: rgb(0, 0, 0);\"\u003e제품 정보 및 주의사항\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cimg src\u003d\"/editor/download/5405\" title\u003d\"비타맥스엑스투.png\" class\u003d\"c424f176-361e-43f5-acee-1c4c59623bdb.png\"\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e","nutrition":"{\"foodType\":{\"label\":\"식품의 유형\",\"value\":\"상세 참조\",\"sort\":1},\"producer\":{\"label\":\"제조업소의 명칭과 소재지\",\"value\":\"상세 참조\",\"sort\":2},\"expirationDate\":{\"label\":\"제조연월일/유통기한\",\"value\":\"상세 참조\",\"sort\":3},\"packagingCapacity\":{\"label\":\"용량\",\"value\":\"상세 참조\",\"sort\":4,\"unit\":\"ml\"},\"packagingQty\":{\"label\":\"수량\",\"value\":\"상세 참조\",\"sort\":5},\"material\":{\"label\":\"원재료 및 함량\",\"value\":\"상세 참조\",\"sort\":6},\"nutrition\":{\"label\":\"영양정보\",\"value\":\"상세 참조\",\"sort\":7},\"nutritionFeature\":{\"label\":\"영양정보\",\"value\":\"상세 참조\",\"sort\":8},\"intakeType\":{\"label\":\"섭취량,섭취방법 및 섭취시 주의사항 및 부작용 가능성\",\"value\":\"상세 참조\",\"sort\":9},\"preventiveMedicine\":{\"label\":\"질병의 예방 및 치료를 위한 의약품이 아니라는 내용의 표현\",\"value\":\"해당 사항 없음\",\"sort\":9},\"geneticallyModifiedFood\":{\"label\":\"유전자변형건강기능식품에 해당하는 경우의 표시\",\"value\":\"해당 사항 없음\",\"sort\":11},\"importedFoodYn\":{\"label\":\"수입신고여부\",\"value\":\"해당 사항 없음\",\"sort\":13},\"consumerSafety\":{\"label\":\"소비자안전을 위한 주의사항\",\"value\":\"상세 참조\",\"sort\":12},\"csCallNum\":{\"label\":\"소비자 상담번호\",\"value\":\"080-800-0393\",\"sort\":14}}","detailImage1":"/product/20231101/d13025a6-2fe5-40d6-9d25-90c06e7bde0c.png","limitSize":-1,"totalCount":0,"idx":743,"goodType":"DAILY","itemCode":"0074095","thumbnail":"/product/20231101/b7323a61-8792-488b-9a32-571fe276bcea.png","productName":"비타맥스 엑스투","readNum":"1180","capacity":"137","unit":"g","price":"3500","isNew":"Y","interestIdx":0,"slogan":"한국인을 위한 멀티비타민\u0026미네랄 정제와 유기농 과채한가득 녹즙을 한 번에","freebYn":"Y","freebSloganYn":"N","freebQty":1,"isIce":"Y","unitBox":"포","pkgIdx":0};
-	if (data.price) {
-		data.price = data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
-	if (data.thumbnail) {
-		data.thumbnail = location.origin + "/file/download" + data.thumbnail;
-	}
-	if (data.detailImage1) {
-		data.detailImage1 = location.origin + "/file/download" + data.detailImage1;
-	}
+// 	var data = {"feature":"\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cimg src\u003d\"/editor/download/5463\" title\u003d\"231114_프레시스무디_크리스마스에디션_그리너지,토마토.png\" class\u003d\"180b2488-e436-4a42-8b70-8b54e3038889.png\"\u003e\u003cbr style\u003d\"clear:both;\"\u003e\u003cimg src\u003d\"/editor/download/4497\" title\u003d\"221125_프레시스무디_토마토(1140).png\" class\u003d\"a5d2ad8f-8d66-4182-b712-21e1c01e7733.png\"\u003e\u0026nbsp;\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u0026nbsp;\u003c/div\u003e","featureMobile":"\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cimg src\u003d\"/editor/download/5463\" title\u003d\"231114_프레시스무디_크리스마스에디션_그리너지,토마토.png\" class\u003d\"180b2488-e436-4a42-8b70-8b54e3038889.png\"\u003e\u003cbr style\u003d\"clear:both;\"\u003e\u003cimg src\u003d\"/editor/download/4497\" title\u003d\"221125_프레시스무디_토마토(1140).png\" class\u003d\"a5d2ad8f-8d66-4182-b712-21e1c01e7733.png\"\u003e\u0026nbsp;\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u0026nbsp;\u003c/div\u003e","nutrition":"{\"foodType\":{\"label\":\"식품의 유형\",\"value\":\"상세 참조\",\"sort\":1},\"producer\":{\"label\":\"생산지 및 소재지\",\"value\":\"상세 참조\",\"sort\":2},\"expirationDate\":{\"label\":\"제조연월일/유통기한 또는 품질유지기한\",\"value\":\"상세 참조\",\"sort\":3},\"packagingCapacity\":{\"label\":\"용량\",\"value\":\"상세 참조\",\"sort\":4,\"unit\":\"ml\"},\"packagingQty\":{\"label\":\"수량\",\"value\":\"상세 참조\",\"sort\":5},\"material\":{\"label\":\"원재료 및 함량\",\"value\":\"상세 참조\",\"sort\":6},\"nutrition\":{\"label\":\"영양성분\",\"value\":\"상세 참조\",\"sort\":7},\"geneticallyModifiedFood\":{\"label\":\"유전자변형식품 여부\",\"value\":\"해당 사항 없음\",\"sort\":11},\"importedFoodYn\":{\"label\":\"수입신고여부\",\"value\":\"해당 사항 없음\",\"sort\":13},\"consumerSafety\":{\"label\":\"소비자안전을 위한 주의사항\",\"value\":\"상세 참조\",\"sort\":12},\"csCallNum\":{\"label\":\"소비자 상담번호\",\"value\":\"080-800-0393\",\"sort\":14}}","detailImage1":"/product/20231114/8303f4fa-bb4a-4a32-b969-b094180ee1c0.png","limitSize":-1,"totalCount":0,"idx":637,"goodType":"BOX","itemCode":"0073165","thumbnail":"/product/20231114/8c0582a0-3868-4901-9987-2f6f9b707a00.png","productName":"프레시스무디 토마토 과채주스 6입","readNum":"6037","capacity":"190","unit":"ml","price":"27000","isHot":"Y","interestIdx":0,"slogan":"생기있는 아침을 위한 프레시 토마토 ","freebYn":"N","freebSloganYn":"N","freebQty":1,"isIce":"Y","unitBoxQty":"6","unitBox":"병","pkgIdx":0};
+// 	if (data.price) {
+// 		data.price = data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+// 	}
+// 	if (data.thumbnail) {
+// 		data.thumbnail = location.origin + "/file/download" + data.thumbnail;
+// 	}
+// 	if (data.detailImage1) {
+// 		data.detailImage1 = location.origin + "/file/download" + data.detailImage1;
+// 	}
 
-	window.kakaoShareData = {
-		key: 84344,
-		data: {
-			mobilehost: "https://mgreenjuice.pulmuone.com/",
-			webhost: "https://greenjuice.pulmuone.com/",
-			detailImage1: data.detailImage1,
-			weight: "137g",
-			path: location.pathname,
-			productName: data.productName,
-			slogan: data.slogan,
-			thumbnail: data.thumbnail,
-			price: data.price,
-		}
-	};
+// 	window.kakaoShareData = {
+// 		key: 84344,
+// 		data: {
+// 			mobilehost: "https://mgreenjuice.pulmuone.com/",
+// 			webhost: "https://greenjuice.pulmuone.com/",
+// 			detailImage1: data.detailImage1,
+// 			weight: "190ml X 6병",
+// 			path: location.pathname,
+// 			productName: data.productName,
+// 			slogan: data.slogan,
+// 			thumbnail: data.thumbnail,
+// 			price: data.price,
+// 		}
+// 	};
 
 
 	//    region reviewPopup
-	$(document).on('click', '.review-item', function () {
-		const title = $(this).find('.title').text();
-		const content = $(this).find('.title').next().text();
-		const thumbnail = $(this).find('.thumb img').attr('src')
-		const nameAndDateEl = $(this).find('.span-tie')
+// 	$(document).on('click', '.review-item', function () {
+// 		const title = $(this).find('.title').text();
+// 		const content = $(this).find('.title').next().text();
+// 		const thumbnail = $(this).find('.thumb img').attr('src')
+// 		const nameAndDateEl = $(this).find('.span-tie')
 
-		const reviewModal = $('#reviewModal')
-		reviewModal.find('.header h4').text(title)
-		reviewModal.find('.thumb-area img').attr('src', thumbnail)
-		reviewModal.find('.scrollable p').text(content)
-		reviewModal.find('.scrollable .span-tie').replaceWith(nameAndDateEl.clone())
-	})
+// 		const reviewModal = $('#reviewModal')
+// 		reviewModal.find('.header h4').text(title)
+// 		reviewModal.find('.thumb-area img').attr('src', thumbnail)
+// 		reviewModal.find('.scrollable p').text(content)
+// 		reviewModal.find('.scrollable .span-tie').replaceWith(nameAndDateEl.clone())
+// 	})
 	//    endregion
 
-</script>
-	<script type="text/javascript">
-	var itemType = "daily";
-	var formatter = new Intl.NumberFormat();
-	var limitSize = parseInt("-1" || "-1", 10);
-
-	function calculateBoxPrice() {
-		const qty = $('.box-qty').text()
-		const price = '3500'
-		$('#totalPrice b').text(formatter.format(qty * price))
-
-	}
-
-    $().ready(function () {
-        // region 가격
-        $("input[name=r1]").change(function () {
-            if ($(this).is(":checked")) {
-                var totalPrice = 0;
-                if ($(this).hasClass('none-package')) {
-                    $('input[name=c1]').removeAttr('disabled');
-                    $('.check-list').find('input[type=checkbox]:not(:checked)').click()
-                    const cnt = $('input[name=c1]:checked').length
-                    const price = '3500'
-                    totalPrice = cnt * price * 4;
-
-                } else {
-                    $('.check-list').find('input[type=checkbox]:checked').click()
-                    $('input[name=c1]').attr('disabled', 'disabled');
-                    totalPrice = $(this).data("total-price") * 4;
-                }
-                $("#totalPrice b").text(formatter.format(totalPrice));
-            }
-        });
-        $('input[name=c1]').change(function () {
-            if ($("input[name=r1]:checked").hasClass('none-package')) {
-                const cnt = $('input[name=c1]:checked').length
-                const price = '3500'
-                $("#totalPrice b").text(formatter.format(cnt * price * 4));
-            }
-        })    
-        $('.btn-plus').click(function () {
-            var qty = $('.box-qty').text()
-			var beSize = parseInt(qty, 10) + 1;
-			if (limitSize >= 0 && beSize > limitSize) {
-				alert("해당 상품은 한정수량 판매입니다.");
-				return;
-			}
-            $('.box-qty').text(beSize)
-            calculateBoxPrice()
-        })
-        $('.btn-minus').click(function () {
-            const qty = $('.box-qty').text()
-            if (qty > 1) {
-                $('.box-qty').text(parseInt(qty) - 1)
-                calculateBoxPrice()
-            }
-        })
-        //endregion
-        //    region 추천 패키지
-        $('.package-more').click(function () {
-			$(this).hide().parents(".select-package").addClass("show-all");
-        })
-
-        $('.none-package').click();
-		//    endregion
-    });
 </script>
 	<script>
   var nowArgs = undefined;
@@ -471,7 +452,7 @@
 					<div class="container">
 						<ul>
 							<li><a href="/">홈</a></li>
-							<li><a href="/product/daily/dailylist.do">매일배송</a></li>
+							<li><a href="/product/box/boxlist.do">택배배송</a></li>
 						</ul>
 					</div>
 				</div>
@@ -480,35 +461,28 @@
 						<div class="thumb-area">
 							<c:forEach var="dto" items="${list }" end="0">
 								<div class="main-thumb">
-									<c:if test="${dto.origin_name == 'View.png' }">
-										<img src="/file/download/product/${dto.system_name }">
-									</c:if>
+									<img src="/file/download/product/${dto.system_name }">
 								</div>
 							</c:forEach>
 							<ul class="sub-thumb">
-								<c:forEach var="dto" items="${list }" end="2">
+								<c:forEach var="dto" items="${list }" end="4">
 									<li class="active">
 										<button type="button" class="item">
-											<c:if test="${dto.origin_name == 'View.png' }">
-												<img src="/file/download/product/${dto.system_name }">
-											</c:if>
+											<img src="/file/download/product/${dto.system_name }">
 										</button>
 									</li>
 								</c:forEach>
 							</ul>
-
 						</div>
 						<div class="info-area">
 							<div class="label-line">
-								<label class="new">NEW</label>
+								<label class="best">BEST</label>
 							</div>
-							<div style="height: 6px"></div>
+							<span class="prd-state">냉장상품</span>
 							<div class="prd-detail-title-area">
-								<div style="flex: 1; padding-right: 10px">
-									<c:forEach var="dto" items="${list }" end="0">
+								<div style="flex: 1; padding-right: 10px">									
 										<h2>${dto.products_name }</h2>
 										<p>${dto.products_sub_name }</p>
-									</c:forEach>
 								</div>
 								<button data-toggle="modal" data-target="#shareModal"
 									type="button" class="ellipse-button primary"
@@ -519,199 +493,15 @@
 							<div class="product-addiction">
 								<div class="price-item">
 									<span style="padding-right: 12px; font-size: 22px;">
-										(원산지 :상품상세 참조) </span>
-									<c:forEach var="dto" items="${list }" end="0">
+										(원산지 :상품상세 참조) </span>								
 										<p>
 											<fmt:formatNumber value="${dto.price }" pattern="#,###" />
 											<span>원</span>
 										</p>
 										<span>(${dto.products_size })</span>
-									</c:forEach>
 								</div>
 							</div>
-							<div class="buy-option">
-								<div class="option-selector">
-									<h5>배송요일</h5>
-									<div class="select-week" style="margin-bottom: 34px;">
-										<label class="radio-item check-list-form"> <input
-											name="r1" class="none-package" type="radio">
-											<div class="item">
-												<ul class="check-list">
-													<li><label class="week-item"> <input name="c1"
-															value="1" type="checkbox"> <span>월</span>
-													</label></li>
-													<li><label class="week-item"> <input name="c1"
-															value="2" type="checkbox"> <span>화</span>
-													</label></li>
-													<li><label class="week-item"> <input name="c1"
-															value="3" type="checkbox"> <span>수</span>
-													</label></li>
-													<li><label class="week-item"> <input name="c1"
-															value="4" type="checkbox"> <span>목</span>
-													</label></li>
-													<li><label class="week-item"> <input name="c1"
-															value="5" type="checkbox"> <span>금</span>
-													</label></li>
-												</ul>
-												<p>배송을 원하는 날짜를 선택하세요</p>
-											</div>
-										</label>
-									</div>
-									<h5>추천패키지 상품</h5>
-									<div class="select-package">
-										<label class="radio-item package-item item-of-0"> <input
-											data-total-price="20600" name="r1" type="radio">
-											<div class="item">
-												<h6>추천패키지 1</h6>
-												<div class="product-set">
-													<button data-itemcode="0071928" data-product-preview="307"
-														type="button" class="product-item">
-														<span>월</span>
-														<div class="thumb">
-															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
-																alt="">
-
-														</div>
-														<div class="txt">
-															<p>산이내린녹용과삼의힘</p>
-														</div>
-													</button>
-													<button data-itemcode="0070604" data-product-preview="277"
-														type="button" class="product-item">
-														<span>화</span>
-														<div class="thumb">
-															<img
-																src="/file/download/product/20210923/83dc1b40-d2da-4fba-9853-0bef12bc65f7.jpg"
-																alt="">
-
-														</div>
-														<div class="txt">
-															<p>돌미나리와민들레</p>
-														</div>
-													</button>
-													<button data-itemcode="0071928" data-product-preview="307"
-														type="button" class="product-item">
-														<span>수</span>
-														<div class="thumb">
-															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
-																alt="">
-
-														</div>
-														<div class="txt">
-															<p>산이내린녹용과삼의힘</p>
-														</div>
-													</button>
-													<button data-itemcode="0070604" data-product-preview="277"
-														type="button" class="product-item">
-														<span>목</span>
-														<div class="thumb">
-															<img
-																src="/file/download/product/20210923/83dc1b40-d2da-4fba-9853-0bef12bc65f7.jpg"
-																alt="">
-
-														</div>
-														<div class="txt">
-															<p>돌미나리와민들레</p>
-														</div>
-													</button>
-													<button data-itemcode="0071928" data-product-preview="307"
-														type="button" class="product-item">
-														<span>금</span>
-														<div class="thumb">
-															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
-																alt="">
-
-														</div>
-														<div class="txt">
-															<p>산이내린녹용과삼의힘</p>
-														</div>
-													</button>
-
-												</div>
-											</div>
-										</label> <label class="radio-item package-item item-of-1"> <input
-											data-total-price="20400" name="r1" type="radio">
-											<div class="item">
-												<h6>추천패키지 2</h6>
-												<div class="product-set">
-													<button data-itemcode="0071928" data-product-preview="307"
-														type="button" class="product-item">
-														<span>월</span>
-														<div class="thumb">
-															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
-																alt="">
-														</div>
-														<div class="txt">
-															<p>산이내린녹용과삼의힘</p>
-														</div>
-													</button>
-													<button data-itemcode="0072348" data-product-preview="273"
-														type="button" class="product-item">
-														<span>화</span>
-														<div class="thumb">
-															<img
-																src="/file/download/product/20210923/a5e4ffc9-e98f-49a2-9371-2f2b9952dd9c.jpg"
-																alt="">
-														</div>
-														<div class="txt">
-															<p>오! 생즙</p>
-														</div>
-													</button>
-													<button data-itemcode="0071928" data-product-preview="307"
-														type="button" class="product-item">
-														<span>수</span>
-														<div class="thumb">
-															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
-																alt="">
-
-														</div>
-														<div class="txt">
-															<p>산이내린녹용과삼의힘</p>
-														</div>
-													</button>
-													<button data-itemcode="0072348" data-product-preview="273"
-														type="button" class="product-item">
-														<span>목</span>
-														<div class="thumb">
-															<img
-																src="/file/download/product/20210923/a5e4ffc9-e98f-49a2-9371-2f2b9952dd9c.jpg"
-																alt="">
-
-														</div>
-														<div class="txt">
-															<p>오! 생즙</p>
-														</div>
-													</button>
-													<button data-itemcode="0071928" data-product-preview="307"
-														type="button" class="product-item">
-														<span>금</span>
-														<div class="thumb">
-
-															<img
-																src="/file/download/product/20200319/6c0a390a-2fa7-49b7-9ec3-138d7afbe665.jpg"
-																alt="">
-														</div>
-														<div class="txt">
-															<p>산이내린녹용과삼의힘</p>
-														</div>
-													</button>
-
-												</div>
-											</div>
-										</label>
-										<div class="button-set b0">
-											<button style="width: 100%;"
-												class="button-basic border package-more">더보기</button>
-										</div>
-
-									</div>
-								</div>
-							</div>
+							<div class="buy-option"></div>
 						</div>
 					</div>
 				</div>
@@ -727,74 +517,7 @@
 			</div>
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="home">
-					<div class="recommend-product">
-						<div class="container">
-							<div class="prd-detail-image" style="margin-bottom: 74px">
-								<p>
-									<c:forEach var="dto" items="${list }" begin="1" end="1">
-										<c:if test="${dto.origin_name == 'ViewContent.png' }">
-											<img src="/file/download/product/${dto.system_name }"
-												title="비타맥스엑스투(1140).png"
-												class="8d4e7339-2e48-4c36-9cd8-6fe8e5bab379.png">
-											<br style="clear: both;">&nbsp;
-									</c:if>
-									</c:forEach>
-								</p>
-								<p>
-									<span style="font-size: 18.6667px;"><b> </b></span>
-								</p>
-								<div style="text-align: center;" align="center">
-									<b><b style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt;"><br></span></b></b></b>
-								</div>
-								<div style="text-align: center;" align="center">
-									<b><b style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt;">제품 구성</span></b></b><b
-										style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt;">&nbsp;</span></b></b></b>
-								</div>
-								<div style="text-align: center;" align="center">
-									<b><b style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt;"> <c:forEach var="dto"
-														items="${list }" begin="2" end="2">
-														<c:if test="${dto.origin_name == 'ViewContent.png' }">
-															<img src="/file/download/product/${dto.system_name }"
-																title="비타맥스엑스투.png"
-																class="51c56f1d-2b05-4243-8951-89256480522f.png">
-														</c:if>
-													</c:forEach>
-
-											</span></b></b></b>
-								</div>
-								<div style="text-align: center;" align="center">
-									<b><b style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt; color: rgb(0, 0, 0);">제품 정보 및
-													주의사항</span></b></b></b>
-								</div>
-								<div style="text-align: center;" align="center">
-									<b><b style="font-size: 16px;"><b
-											style="text-indent: 0in; font-size: 12px;"><span
-												style="font-size: 36pt;"> <c:forEach var="dto"
-														items="${list }" begin="3" end="3">
-														<c:if test="${dto.origin_name == 'ViewContent.png' }">
-															<img src="/file/download/product/${dto.system_name }"
-																title="비타맥스엑스투.png"
-																class="c424f176-361e-43f5-acee-1c4c59623bdb.png">
-														</c:if>
-													</c:forEach>
-											</span></b></b></b>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
+			${dto.content }				
 				<div role="tabpanel" class="tab-pane" id="info">
 					<div class="container">
 						<div class="product-spec">

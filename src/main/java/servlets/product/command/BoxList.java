@@ -29,12 +29,13 @@ public class BoxList implements CommandHandler{
 //		System.out.println(path);
 //		System.out.println(tag);
 		String tag = request.getParameter("tags");
+		String cal = request.getParameter("category");
 //		System.out.println(tag);
 		ListService listService = ListService.getInstance();
-	    List<ProductsDTO> list = listService.select(path);	    
-	    List<ProductsDTO> bestlist = listService.bestselect(path);	    
-	    List<ProductsDTO> searchlist = listService.search(path,tag,num);	
-	    List<ProductsDTO> searchcountlist = listService.searchcount(path,tag);
+		List<ProductsDTO> list = listService.select(path,cal);	    
+	    List<ProductsDTO> bestlist = listService.bestselect(path,cal);	    
+	    List<ProductsDTO> searchlist = listService.search(path,tag,num,cal);	
+	    List<ProductsDTO> searchcountlist = listService.searchcount(path,tag,cal);
 	    
 		//1.  포워딩 전 데이터 저장
 		request.setAttribute("list", list);
