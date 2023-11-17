@@ -49,7 +49,7 @@
 </script>
 </head>
 <body>
-<script>
+	<script>
 	$(function (){
 		$('input[name=chk-prd1]').change(function () {
 			const checked = $('input[name=chk-prd1]:checked')
@@ -67,21 +67,16 @@
 		$(document).on('click', '.btn-delete', function () {
 			const idx = $(this).data('idx');
 			const el = $(this)
-			console.log(idx);
-			console.log(el);
 			confirmDesign("","찜한상품을 삭제하시겠습니까?",function(){
-				post({
-					url: '/mypage/product/delete.do',
-					param: $.param({'interestIdx[]': idx})							
-				}, function (r) {
-					if (r.RESULT_MSG) {
-						alert('목록에서 삭제되었습니다', () => location.reload())
-					} else {
-						alert('잘못된 요청입니다.');
-					}
-				})
+			  $.post("/mypage/product/delete.do?idx="+idx,) 						
+			  .done(function(data){
+				  alert('목록에서 삭제되었습니다', () => location.reload())
+			  })
+			  .fail(function(data){
+				  alert('잘못된 요청입니다.');
+			  })
 			})
-		});
+			});		
 		$(document).on("click", '#deleteBtn', function () {
 			const checked = $('input[name=chk-prd1]:checked')
 			if (checked.length === 0) {
@@ -89,17 +84,14 @@
 			}
 			const idxes = checked.map((i, v) => $(v).closest('li').data('idx')).toArray();
 			confirmDesign("","찜한상품을 삭제하시겠습니까?",function(){
-				post({
-					url: '/mypage/product/delete.do',
-					param: $.param({interestIdx: idxes})
-				}, function (r) {
-					if (r.RESULT_MSG) {
-						alert('목록에서 삭제되었습니다', () => location.reload())
-					} else {
-						alert('잘못된 요청입니다.');
-					}
-				});
-			})
+				  $.post("/mypage/product/delete.do?idx="+idxes,) 						
+				  .done(function(data){
+					  alert('목록에서 삭제되었습니다', () => location.reload())
+				  })
+				  .fail(function(data){
+					  alert('잘못된 요청입니다.');
+				  })
+				})
 
 		});
 	});
@@ -192,8 +184,8 @@
 							data-list-object="append"
 							style="border: 1px solid #e5e5e5; border-radius: 10px">
 							<c:forEach items="${wishlist }" var="dto">
-								<li data-idx="${dto.idx }"><label class="item-wrapper"> <input
-										name="chk-prd1" type="checkbox">
+								<li data-idx="${dto.idx }"><label class="item-wrapper">
+										<input name="chk-prd1" type="checkbox">
 										<div class="item">
 											<a
 												data-url="/product/daily/view.do?tag=${dto.products_tag }&eventIdx="
@@ -212,7 +204,8 @@
 											</a>
 										</div>
 
-										<button type="button" data-idx="${dto.idx }" class="btn-delete">
+										<button type="button" data-idx="${dto.idx }"
+											class="btn-delete">
 											<i class="ico ico-prd-delete"></i> <span class="hide">카트에서
 												삭제</span>
 										</button>

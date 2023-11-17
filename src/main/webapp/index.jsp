@@ -18,6 +18,16 @@
 				loop : false
 			});
 		});
+		var owl = $('.prd-list.owl-carousel');
+		owl.owlCarousel({
+		    onInitialize : function(element){
+		        owl.children().sort(function(){
+		            return Math.round(Math.random()) - 0.5;
+		        }).each(function(){
+		            $(this).appendTo(owl);
+		        });
+		    },
+		});
 	</script>
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>

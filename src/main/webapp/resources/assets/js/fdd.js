@@ -76,11 +76,10 @@ function addCartToServer(type, data, eventIdx) {
 
   axios.post(`/product_available.do`, { ids: codes }).then(function (r) {
     var o = r.data.RESULT_MSG;
-	console.log(o);
+	
     var lockIds = o.fails.map(x => x.itemCode);
     var target = data.filter(x => lockIds.indexOf(x.itemCode) < 0);         
-    console.log(lockIds);
-    console.log(target);
+
     axios.post('/cart/save.do', {[type]: target, eventIdx}).then(function ({data}) {
       if (o.fails.length) {
         var nextDisabled = o.fails.length >= codes.length;
@@ -396,13 +395,11 @@ let timer;
     })
   };
 
-  window.confirmDesign = function (title, message, callback, option) {
-	console.log("여기맞니");
+  window.confirmDesign = function (title, message, callback, option) {	
     const body = {
         title: !message ? '' : title,
       content: !message ? title : message,
     };
-console.log(body);
     $("#confirmModal .modal-title").html(body.title);
     $("#confirmModal .modal-body").html(body.content);
     $("#confirmModal").modal('show');
