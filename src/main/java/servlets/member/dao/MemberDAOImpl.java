@@ -80,7 +80,7 @@ public class MemberDAOImpl implements MemberDAO {
 				} while (rs.next());
 				
 			} else {
-				System.out.println("MemberDAOImpl_selectOne : Invaild memberId / pwd");
+				System.err.println("[Warn] MemberDAOImpl_selectOne : Invaild memberId / pwd");
 			}
 
 		} catch (SQLException e) {
@@ -144,7 +144,7 @@ public class MemberDAOImpl implements MemberDAO {
 				} while (rs.next());
 				
 			} else {
-				System.out.println("MemberDAOImpl_selectOne : Invaild name / tel / birthDate");
+				System.err.println("[Warn] MemberDAOImpl_selectOne : Invaild name / tel / birthDate");
 			}
 
 		} catch (SQLException e) {
@@ -200,7 +200,7 @@ public class MemberDAOImpl implements MemberDAO {
 				} while (rs.next());
 				
 			} else {
-				System.out.println("MemberDAOImpl_selectOne : Invaild memberId");
+				System.err.println("[Warn] MemberDAOImpl_selectOne : Invaild memberId");
 			}
 
 		} catch (SQLException e) {
@@ -257,7 +257,7 @@ public class MemberDAOImpl implements MemberDAO {
 				} while (rs.next());
 				
 			} else {
-				System.out.println("MemberDAOImpl_selectOneWithInvCode : Invaild invCode");
+				System.err.println("[Warn] MemberDAOImpl_selectOneWithInvCode : Invaild invCode");
 			}
 
 		} catch (SQLException e) {
@@ -307,6 +307,7 @@ public class MemberDAOImpl implements MemberDAO {
 			rowCount = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
+			System.out.println("MemberDAOImpl_insert : Exception");
 			e.printStackTrace();
 		} finally {
 			pstmt.close();
@@ -335,6 +336,7 @@ public class MemberDAOImpl implements MemberDAO {
 			rowCount = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
+			System.out.println("MemberDAOImpl_updatePwd : Exception");
 			e.printStackTrace();
 		} finally {
 			pstmt.close();
