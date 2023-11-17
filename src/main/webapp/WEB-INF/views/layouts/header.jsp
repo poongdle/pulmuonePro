@@ -206,12 +206,11 @@
                   </li>
                   
                   <li>
-                     <a href="/search/branch" title="해당 페이지로 가기">배송가능지역 검색</a>
+                     <a href="/forum/franchise/search.do" title="해당 페이지로 가기">배송가능지역 검색</a>
                   </li>
                   
                </ul>
-            </li>
-            
+            </li>            
          </ol>
          <div class="sub-link">
             <div>
