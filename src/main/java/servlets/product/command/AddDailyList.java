@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.util.SystemPropertyReplacerListener;
+
 import mvc.command.CommandHandler;
 import servlets.product.domain.ProductsDTO;
 import servlets.product.service.AddService;
@@ -19,8 +21,9 @@ public class AddDailyList implements CommandHandler{
 		AddService addService = AddService.getInstance();
 		int tag = Integer.parseInt(request.getParameter("tag"));
 		int insertRow = 0;
-		insertRow = addService.wishadd(tag);
-
+		String user_id = "aaaaaaaa";
+		insertRow = addService.wishadd(user_id,tag);
+		
 		return "/WEB-INF/views/product/DailyList.jsp";
 		
 		

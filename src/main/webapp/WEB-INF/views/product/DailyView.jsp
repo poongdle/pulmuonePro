@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>풀무원 녹즙</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' connect.facebook.net www.google-analytics.com www.googletagmanager.com wcs.naver.net t1.daumcdn.net t1.kakaocdn.net stdpay.inicis.com cdn.jsdelivr.net stdux.inicis.com  ; object-src ">
 <link rel="shortcut icon" type="image/x-icon"
 	href="/resources/assets/images/pul_favicon.png">
 <link
@@ -21,6 +22,9 @@
 <link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
+
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
 <script src="/resources/assets/js/request.js"></script>
@@ -33,6 +37,20 @@
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 </head>
 <body>
+
+<script>
+Kakao.init('c153013cc3f2b9900924ea8e382fbf8d');
+//       function KakaoShare(propKey) {
+//         this.propKey = propKey;
+//         try {
+//           Kakao.init(this.propKey);
+//         } catch (e) {
+
+//         }
+//       }
+//       var kakaoAppKey = 'c153013cc3f2b9900924ea8e382fbf8d';
+//       var share = new KakaoShare(kakaoAppKey);
+	</script>
 	<script>
 	var formatter = new Intl.NumberFormat();
 	var days = ["A", "B", "C", "D", "E"];
@@ -241,30 +259,21 @@
 		//endregion
 	});
 
-	var data = {"feature":"\u003cp\u003e\u003cimg src\u003d\"/editor/download/5403\" title\u003d\"비타맥스엑스투(1140).png\" class\u003d\"8d4e7339-2e48-4c36-9cd8-6fe8e5bab379.png\"\u003e\u003cbr style\u003d\"clear:both;\"\u003e\u0026nbsp;\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"font-size: 18.6667px;\"\u003e\u003cb\u003e\r\n\r\n\u003c/b\u003e\u003c/span\u003e\u003c/p\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e제품 구성\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u0026nbsp;\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cimg src\u003d\"/editor/download/5404\" title\u003d\"비타맥스엑스투.png\" class\u003d\"51c56f1d-2b05-4243-8951-89256480522f.png\"\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt; color: rgb(0, 0, 0);\"\u003e제품 정보 및 주의사항\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cimg src\u003d\"/editor/download/5405\" title\u003d\"비타맥스엑스투.png\" class\u003d\"c424f176-361e-43f5-acee-1c4c59623bdb.png\"\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e","featureMobile":"\u003cp\u003e\u003cimg src\u003d\"/editor/download/5403\" title\u003d\"비타맥스엑스투(1140).png\" class\u003d\"8d4e7339-2e48-4c36-9cd8-6fe8e5bab379.png\"\u003e\u003cbr style\u003d\"clear:both;\"\u003e\u0026nbsp;\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"font-size: 18.6667px;\"\u003e\u003cb\u003e\r\n\r\n\u003c/b\u003e\u003c/span\u003e\u003c/p\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e제품 구성\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u0026nbsp;\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cimg src\u003d\"/editor/download/5404\" title\u003d\"비타맥스엑스투.png\" class\u003d\"51c56f1d-2b05-4243-8951-89256480522f.png\"\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt; color: rgb(0, 0, 0);\"\u003e제품 정보 및 주의사항\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cb\u003e\u003cb style\u003d\"font-size: 16px;\"\u003e\u003cb style\u003d\"text-indent: 0in; font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 36pt;\"\u003e\u003cimg src\u003d\"/editor/download/5405\" title\u003d\"비타맥스엑스투.png\" class\u003d\"c424f176-361e-43f5-acee-1c4c59623bdb.png\"\u003e\u003c/span\u003e\u003c/b\u003e\u003c/b\u003e\u003c/b\u003e\u003c/div\u003e","nutrition":"{\"foodType\":{\"label\":\"식품의 유형\",\"value\":\"상세 참조\",\"sort\":1},\"producer\":{\"label\":\"제조업소의 명칭과 소재지\",\"value\":\"상세 참조\",\"sort\":2},\"expirationDate\":{\"label\":\"제조연월일/유통기한\",\"value\":\"상세 참조\",\"sort\":3},\"packagingCapacity\":{\"label\":\"용량\",\"value\":\"상세 참조\",\"sort\":4,\"unit\":\"ml\"},\"packagingQty\":{\"label\":\"수량\",\"value\":\"상세 참조\",\"sort\":5},\"material\":{\"label\":\"원재료 및 함량\",\"value\":\"상세 참조\",\"sort\":6},\"nutrition\":{\"label\":\"영양정보\",\"value\":\"상세 참조\",\"sort\":7},\"nutritionFeature\":{\"label\":\"영양정보\",\"value\":\"상세 참조\",\"sort\":8},\"intakeType\":{\"label\":\"섭취량,섭취방법 및 섭취시 주의사항 및 부작용 가능성\",\"value\":\"상세 참조\",\"sort\":9},\"preventiveMedicine\":{\"label\":\"질병의 예방 및 치료를 위한 의약품이 아니라는 내용의 표현\",\"value\":\"해당 사항 없음\",\"sort\":9},\"geneticallyModifiedFood\":{\"label\":\"유전자변형건강기능식품에 해당하는 경우의 표시\",\"value\":\"해당 사항 없음\",\"sort\":11},\"importedFoodYn\":{\"label\":\"수입신고여부\",\"value\":\"해당 사항 없음\",\"sort\":13},\"consumerSafety\":{\"label\":\"소비자안전을 위한 주의사항\",\"value\":\"상세 참조\",\"sort\":12},\"csCallNum\":{\"label\":\"소비자 상담번호\",\"value\":\"080-800-0393\",\"sort\":14}}","detailImage1":"/product/20231101/d13025a6-2fe5-40d6-9d25-90c06e7bde0c.png","limitSize":-1,"totalCount":0,"idx":743,"goodType":"DAILY","itemCode":"0074095","thumbnail":"/product/20231101/b7323a61-8792-488b-9a32-571fe276bcea.png","productName":"비타맥스 엑스투","readNum":"1180","capacity":"137","unit":"g","price":"3500","isNew":"Y","interestIdx":0,"slogan":"한국인을 위한 멀티비타민\u0026미네랄 정제와 유기농 과채한가득 녹즙을 한 번에","freebYn":"Y","freebSloganYn":"N","freebQty":1,"isIce":"Y","unitBox":"포","pkgIdx":0};
-	if (data.price) {
-		data.price = data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
-	if (data.thumbnail) {
-		data.thumbnail = location.origin + "/file/download" + data.thumbnail;
-	}
-	if (data.detailImage1) {
-		data.detailImage1 = location.origin + "/file/download" + data.detailImage1;
-	}
+	var data = '${dto.content}';	
 
-	window.kakaoShareData = {
-		key: 84344,
+	window.kakaoShareData = {		
+		key: 100891,
 		data: {
-			mobilehost: "https://mgreenjuice.pulmuone.com/",
-			webhost: "https://greenjuice.pulmuone.com/",
-			detailImage1: data.detailImage1,
-			weight: "137g",
-			path: location.pathname,
-			productName: data.productName,
-			slogan: data.slogan,
-			thumbnail: data.thumbnail,
-			price: data.price,
-		}
+			mobilehost: "http://localhost",
+			webhost: "http://localhost/",
+			detailImage1: location.origin+ "/file/download"+'/product/${dto.system_name}',			
+			weight: "${dto.products_size}",
+			path: "product/daily/view.do?tag=${dto.products_tag}",
+			productName: "${dto.products_name}",
+			slogan: "${dto.products_sub_name}",
+			thumbnail: location.origin+ "/file/download"+'/product/${dto.system_name}',
+			price: "<fmt:formatNumber value="${dto.price }" pattern="#,###" />",
+		}	
 	};
 
 
@@ -754,7 +763,43 @@
 			</div>
 		</main>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
-
+		<input type="hidden" id="kakaoTitle" value="${dto.products_name }">
+		<input type="hidden" id="kakaoContents" value="${dto.products_sub_name }">
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: none; padding-right: 17px;" aria-modal="true" role="dialog">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="alertModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">URL 복사되었습니다</div>
+			<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
+		</div>
+	</div>
+</div>		
+<div class="modal " id="shareModal" tabindex="-1" aria-labelledby="shareModal" style="display: none; padding-right: 17px;" aria-modal="true" role="dialog">
+	<input type="text" style="opacity: 0" id="share_url_input" value="http://localhost/product/daily/view.do?tag=${dto.products_tag }">
+	<div class="modal-dialog modal-dialog-centered" style="width:430px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="shareModalLabel">공유하기</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body select-wrapper" style="padding:0 30px 30px;">
+				<a class="button-basic prefix kakao" style="width:100%;" onclick="shareToKakao('', 'http://localhost/product/daily/view.do?tag=${dto.products_tag }')">
+					<i class="ico"></i>
+					카카오톡으로 공유
+				</a>
+				<a class="button-basic prefix link" style="width:100%; margin-top:14px;" data-clipboard-target="#share_url_input">
+					<i class="ico"></i>
+					URL 복사하기
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
 	</div>
 </body>
 </html>

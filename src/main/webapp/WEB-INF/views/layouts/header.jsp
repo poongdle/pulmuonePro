@@ -152,23 +152,23 @@
                <ul>
                   
                   <li>
-                     <a href="/event/event" title="해당 페이지로 가기">진행중인 이벤트</a>
+                     <a href="/event/event/list.do" title="해당 페이지로 가기">진행중인 이벤트</a>
                   </li>
                   
                   <li>
-                     <a href="/event/event/end" title="해당 페이지로 가기">종료된 이벤트</a>
+                     <a href="/event/event/end/list.do" title="해당 페이지로 가기">종료된 이벤트</a>
                   </li>
                   
                   <li>
-                     <a href="/event/event/winner" title="해당 페이지로 가기">당첨자 발표</a>
+                     <a href="/event/winner.do" title="해당 페이지로 가기">당첨자 발표</a>
                   </li>
                   
                   <li>
-                     <a href="/event/event/view/2394" title="해당 페이지로 가기">친구초대</a>
+                     <a href="/event/event/view.do?event_no=2" title="해당 페이지로 가기">친구초대</a>
                   </li>
                   
                   <li>
-                     <a href="/event/event/view/2757" title="해당 페이지로 가기">회원혜택</a>
+                     <a href="/event/event/view.do?event_no=25" title="해당 페이지로 가기">회원혜택</a>
                   </li>
                   
                </ul>
@@ -179,11 +179,11 @@
                <ul>
                   
                   <li>
-                     <a href="/info/foundation" title="해당 페이지로 가기">가맹점 개설안내</a>
+                     <a href="/info/foundation.do" title="해당 페이지로 가기">가맹점 개설안내</a>
                   </li>
                   
                   <li>
-                     <a href="/info/business" title="해당 페이지로 가기">모닝스탭 안내</a>
+                     <a href="/info/business.do" title="해당 페이지로 가기">모닝스탭 안내</a>
                   </li>
                   
                </ul>
@@ -194,29 +194,28 @@
                <ul>
                   
                   <li>
-                     <a href="/forum/faq?category=top10" title="해당 페이지로 가기">FAQ</a>
+                     <a href="/forum/faq/list.do" title="해당 페이지로 가기">FAQ</a>
                   </li>
                   
                   <li>
-                     <a href="/forum/action/counsel/write" title="해당 페이지로 가기">1:1 문의</a>
+                     <a href="/forum/inquiry/write.do" title="해당 페이지로 가기">1:1 문의</a>
                   </li>
                   
                   <li>
-                     <a href="/forum/notice" title="해당 페이지로 가기">공지사항</a>
+                     <a href="/forum/notice/list.do" title="해당 페이지로 가기">공지사항</a>
                   </li>
                   
                   <li>
-                     <a href="/search/branch" title="해당 페이지로 가기">배송가능지역 검색</a>
+                     <a href="/forum/franchise/search.do" title="해당 페이지로 가기">배송가능지역 검색</a>
                   </li>
                   
                </ul>
-            </li>
-            
+            </li>            
          </ol>
          <div class="sub-link">
             <div>
                <b>맞춤큐레이션</b>
-               <a href="/customer/product" title="해당 페이지로 가기">간단한 질문에 답하면 고객 맞춤 상품을 추천드려요
+               <a href="/customer/product/product.do" title="해당 페이지로 가기">간단한 질문에 답하면 고객 맞춤 상품을 추천드려요
                   <i class="ico ico-arr-right6"></i>
                </a>
             </div>

@@ -22,11 +22,22 @@ public class AddService {
 		}
 		return instance;
 	}
-	public int wishadd(int tag) {
+	public int wishadd(String user_id, int tag) {
 		int insertRow = 0;
 		try (Connection con = ConnectionProvider.getConnection() ) {			
 			ProductsDAO dao = ProductsDAO.getInstance();
-			insertRow = dao.wishadd(con, tag);
+			insertRow = dao.wishadd(con,user_id, tag);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return insertRow;
+	}
+	public int cartadd(int tag) {
+		int insertRow = 0;
+		try (Connection con = ConnectionProvider.getConnection() ) {			
+			ProductsDAO dao = ProductsDAO.getInstance();
+			insertRow = dao.cartadd(con, tag);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
