@@ -26,17 +26,13 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<<<<<<< HEAD
 
-<!-- 오류 메시지 관련 처리용 -->
 <script src="/resources/assets/js/message.js"></script>
-
-=======
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
 <script src="/resources/assets/js/request.js"></script>
 <script src="/resources/assets/js/owl.carousel.min.js"></script>
->>>>>>> branch 'develop' of https://github.com/dhl1031/pulmuonePro.git
+
 </head>
 
 
