@@ -19,6 +19,7 @@ public class DailyView implements CommandHandler{
 		ViewService viewService = ViewService.getInstance();		
 		ProductsDTO dto = viewService.view(tag);
 		List<ProductsDTO> list = viewService.viewlist(tag);
+		
 		// 1. 포워딩 전에 데이터 저장
 		request.setAttribute("dto", dto);
 		request.setAttribute("list", list);
