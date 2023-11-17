@@ -21,7 +21,6 @@
 <script src="/resources/assets/js/design.js"></script>
 <script src="/resources/assets/js/request.js"></script>
 
-<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
 <link rel="stylesheet" href="/resources/assets/css/contents2.css">
 
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>

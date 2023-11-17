@@ -23,9 +23,6 @@
 <link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
 
 <script src="/resources/assets/js/owl.carousel.min.js"></script>
-
-<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
-<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
 <link rel="stylesheet" href="/resources/assets/css/contents2.css">
 
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
