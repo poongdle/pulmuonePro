@@ -14,11 +14,9 @@
         if ( type == "staff" ) {
             tabOpen(1);
         }
-
         if (location.hash.startsWith("#tab=") && location.hash.substring(5) === "1") {
             tabOpen(1);
         }
-
         /* else {
 			tabOpen(1);
 		} */

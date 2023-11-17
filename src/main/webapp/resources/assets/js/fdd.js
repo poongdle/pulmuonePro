@@ -168,7 +168,7 @@ function addLike(type, itemCode, options) {
       if (elem.is("input")) {
         if (elem.data("listener")) return;
 
-        console.log("!!!! ", el);
+//        console.log("!!!! ", el);
 
         var clone = elem.clone();
         clone.attr("name", "_x_" + clone.attr("name"));
@@ -490,8 +490,10 @@ let timer;
     return false;
   });
 
-  window.shareToKakao = function (title, uri) {
-    if (window.kakaoShareData) {
+  window.shareToKakao = function (title, uri) {	
+    if (window.kakaoShareData) {	
+		console.log(window.kakaoShareData.key);
+	console.log(window.kakaoShareData.data);		
       Kakao.Share.sendCustom({
         templateId: window.kakaoShareData.key,
         templateArgs: window.kakaoShareData.data,
