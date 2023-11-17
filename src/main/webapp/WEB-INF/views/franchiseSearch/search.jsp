@@ -195,63 +195,84 @@ function searchPostcode() {
 			let query = data.roadAddress;
 			
 			$.ajax({
-				url:"https://dapi.kakao.com/v2/local/search/address" , 
+				url:"/forum/franchise/search.ajax", 
 				dataType:"json",
 				type:"GET",
 				data: {query },
 				cache:false ,
-				headers: { Authorization: "KakaoAK 4e3d4720c5bff7fed4972483c92f49fd" },
 				success: function ( data,  textStatus, jqXHR ){
-					let lat = data.documents[0].y; // 위도 
-					let lng = data.documents[0].x; // 경도 
-				 	console.log(lat);
-				 	console.log(lng); 
+					if( data.result == 0 ) {
+						$("#deliveryResult").show();
+						$("#homeNoResult").show();
+						$("#officeNoResult").show();
+						return;
+					}
+					
+					// 결과 영역 show
+					$("#deliveryResult").show();
+					
+					$("#homeNoResult").show();
+					$("#officeNoResult").show();
+					
+					let home = [];
+					let office = [];
+					let both = [];
+					
+					data.forEach(function(el,i){
+						if( el.fc_type == 0) {
+							home.push(el);
+						}else  if( el.fc_type == 1) {
+							office.push(el);
+						}else if( el.fc_type == 2) {
+							both.push(el);
+						}
+					})
+					
+					// 가정배송 영역
+					if( home.length > 0 ) {
+						$("#homeNoResult").hide();
+						$("#hPrtnName").text(home[0].fc_name);
+						$("#hPrtnAddr").text(home[0].fc_addr);
+						$("#hPrtnTelno").text(home[0].fc_tel);
+						$("#hPrtnCphnno").text(home[0].fc_phone);
+						$("#homeResult").show();
+					}
+					// 사무실배송 영역
+					if (office.length > 0 ) {
+						$("#officeNoResult").hide();
+						$("#oPrtnName").text(office[0].fc_name)
+						$("#oPrtnAddr").text(office[0].fc_addr);
+						$("#oPrtnTelno").text(office[0].fc_tel);
+						$("#oPrtnCphnno").text(office[0].fc_phone);
+						$("#officeResult").show();
+					}
+					
+					// 가정배송없고 both 인경우 
+					if( home.length == 0 && both.length > 0 ) {
+						$("#homeNoResult").hide();
+						$("#hPrtnName").text(both[0].fc_name);
+						$("#hPrtnAddr").text(both[0].fc_addr);
+						$("#hPrtnTelno").text(both[0].fc_tel);
+						$("#hPrtnCphnno").text(both[0].fc_phone);
+						$("#homeResult").show();
+					}
+					// 사무실배송없고 both 인경우 
+					if( office.length == 0 && both.length > 0 ) {
+						$("#officeNoResult").hide();
+						$("#oPrtnName").text(both[0].fc_name)
+						$("#oPrtnAddr").text(both[0].fc_addr);
+						$("#oPrtnTelno").text(both[0].fc_tel);
+						$("#oPrtnCphnno").text(both[0].fc_phone);
+						$("#officeResult").show();
+					}
+					
+					// '배송 불가 지역 안내 ' 영역 노출
+					// $("#noDeliveryWrap").show();
 				},
 				error:function (){
 				 alert("에러~~~ ");
 				}
-			 
 			});
-			/* get({url : '/search/branch/' + data.zonecode + '/' +data.buildingCode+'', param : {}, duplicate: true}, function(response) {
-
-				// 기존 show요소 hide 처리
-				$("#homeResult").hide();
-				$("#homeNoResult").hide();
-				$("#officeResult").hide();
-				$("#officeNoResult").hide();
-
-				// 결과 영역 show
-				$("#deliveryResult").show();
-
-				var branchData = JSON.parse(response.RESULT_MSG);
-
-				// 가정배송 영역
-				if(branchData.home != undefined) {
-					$("#hPrtnName").text(branchData.home.prtnName);
-					$("#hPrtnAddr").text(branchData.home.prtnAddr1+" "+branchData.home.prtnAddr2);
-					$("#hPrtnTelno").text(branchData.home.buTelno);
-					$("#hPrtnCphnno").text(branchData.home.prtnChfCphnno);
-					$("#homeResult").show();
-				} else if(branchData.home == undefined) {
-					$("#homeNoResult").show();
-				}
-				// 사무실배송 영역
-				if(branchData.office != undefined) {
-					$("#oPrtnName").text(branchData.office.prtnName);
-					$("#oPrtnAddr").text(branchData.office.prtnAddr1+" "+branchData.office.prtnAddr2);
-					$("#oPrtnTelno").text(branchData.office.buTelno);
-					$("#oPrtnCphnno").text(branchData.office.prtnChfCphnno);
-					$("#officeResult").show();
-				} else if(branchData.office == undefined) {
-					$("#officeNoResult").show();
-				}
-                
-				// '배송 불가 지역 안내 ' 영역 노출
-				// $("#noDeliveryWrap").show();
-			}); */
-			
-			console.log(fullRoadAddr);
-			console.log(extraRoadAddr);
 			
 			// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
 			if(data.autoRoadAddress) {
@@ -264,11 +285,6 @@ function searchPostcode() {
 
 	}).open();
 }
-</script>
-
-<script>
-
-
 </script>
 
 </body>
