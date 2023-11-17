@@ -12,7 +12,8 @@ public interface IProducts {
 	   // 1. 매일배송 상품 목록
 //	   List<ProductsDTO> selectdaily(Connection con,String path, int num) throws SQLException;
 	   List<ProductsDTO> select(Connection con,String path, String cal) throws SQLException;
-	   List<ProductsDTO> selectbest(Connection con,String path, String cal) throws SQLException;
+	   List<ProductsDTO> selectbest(Connection con,String path, String cal) throws SQLException;	   
+	   
 //	   List<ProductsDTO> selectdailybest(Connection con) throws SQLException;	   
 	   // 2. 택배배송 상품 목록
 //	   List<ProductsDTO> selectbox(Connection con) throws SQLException;	 	   
@@ -28,6 +29,15 @@ public interface IProducts {
 	   // Main 화면 상품 목록
 	   List<ProductsDTO> selectmainbest(Connection con) throws SQLException;
 	   
-	   // 찜한 상품 목록 추가
-	   int wishadd(Connection con, int tag) throws SQLException;
+	   // 장바구니 상품 목록 추가
+	   int cartadd(Connection con, int tag) throws SQLException;
+	   
+	   // 찜한 상품 목록 추가,삭제
+	   int wishadd(Connection con, String user_id, int tag) throws SQLException;
+	   
+	   // MyPage 찜한 상품 목록 
+	   List<ProductsDTO> selectwish(Connection con) throws SQLException;
+	   
+	   // MyPage 찜한 상품 삭제
+	   int wishdelete(Connection con,String user_id, String idx) throws SQLException;
 }

@@ -21,16 +21,10 @@ public class BoxList implements CommandHandler{
 			num = String.join(", ",numarr);
 		}
 		String path = request.getRequestURI();						 
-//		String [] tags = request.getParameterValues("tags");		
-//		String tag = null;		
-//		if (tags != null) {
-//			tag = String.join(", ",tags);
-//		}			
-//		System.out.println(path);
-//		System.out.println(tag);
+
 		String tag = request.getParameter("tags");
 		String cal = request.getParameter("category");
-//		System.out.println(tag);
+		
 		ListService listService = ListService.getInstance();
 		List<ProductsDTO> list = listService.select(path,cal);	    
 	    List<ProductsDTO> bestlist = listService.bestselect(path,cal);	    
