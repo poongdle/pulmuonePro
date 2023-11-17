@@ -1,8 +1,0 @@
-INDEX VERSION 1.4+E:\Class\Workspace\JSPClass\pulmuonePro\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-1007024427.index
-2843935503.index
-925352629.index
-3416860629.index
-916001299.index
-1425716597.index
-657767704.index
