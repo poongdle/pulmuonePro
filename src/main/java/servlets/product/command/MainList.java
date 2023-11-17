@@ -24,7 +24,7 @@ public class MainList implements CommandHandler{
 		//1.  포워딩 전 데이터 저장
 		request.setAttribute("mainbestlist", mainbestlist);
 
-		return "/";
+		return "/index.jsp";
 		
 		
 	}

@@ -78,7 +78,6 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 							+ encodeURIComponent(idxs.join(",")));
 					// 	location.replace(location.pathname + "?category=" + category + "&tags=" + idxs.join(","));
 				});
-
 		$(document).ready(function() {
 			$(".visual-area").fddCarousel({
 				auto : 5000
