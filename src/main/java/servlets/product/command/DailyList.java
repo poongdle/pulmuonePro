@@ -23,19 +23,19 @@ public class DailyList implements CommandHandler{
 		String path = request.getRequestURI();						 
 
 		String tag = request.getParameter("tags");
-		String cal = request.getParameter("category");
-
+		String cal = request.getParameter("category");		
 		ListService listService = ListService.getInstance();
 	    List<ProductsDTO> list = listService.select(path,cal);	    
 	    List<ProductsDTO> bestlist = listService.bestselect(path,cal);	    
 	    List<ProductsDTO> searchlist = listService.search(path,tag,num,cal);	
 	    List<ProductsDTO> searchcountlist = listService.searchcount(path,tag,cal);
-	    
+	    List<ProductsDTO> wishlist = listService.selectwish();
 		//1.  포워딩 전 데이터 저장
 		request.setAttribute("list", list);
 		request.setAttribute("bestlist", bestlist);	
 		request.setAttribute("searchlist", searchlist);
 		request.setAttribute("searchcountlist", searchcountlist);		
+		request.setAttribute("wishlist", wishlist);
 
 		return "/WEB-INF/views/product/DailyList.jsp";
 		
