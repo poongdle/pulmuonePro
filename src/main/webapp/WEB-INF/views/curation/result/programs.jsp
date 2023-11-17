@@ -21,8 +21,6 @@
 <script src="/resources/assets/js/request.js"></script>
 
 <link rel="stylesheet" href="/resources/assets/css/a-guide.css">
-<link rel="stylesheet" href="/resources/assets/css/contents2.css">
-
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
 <script src="/resources/assets/js/daterangepicker.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
@@ -45,7 +43,6 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 </script>
 </head>
 <body>
-<div class="wrapper">
 <%@ include file="/WEB-INF/views/layouts/header.jsp" %>
 <main class="programs">
 <div id="container-wrapper" class="container-wrapper"> <!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
@@ -249,11 +246,15 @@ $(document).on("click", "#orderModal button", function (e) {
              <b>녹즙 프로그램</b>
             </h3>
        </div>
- <div class="card-item">
-  <div class="product-wrapper">
-
-             <p style="margin-bottom: 12px">${list[0].program_name }</p>
-
+       
+        <% int [] no = {1,2,3,4,5,6,7,8}; %>
+<div class="card-item">
+<c:set value="<%= new int[] {1,2,3,4,5,6,7,8} %>" var="arr" ></c:set>
+   <div class="product-wrapper">
+         <c:forEach var="n" items="arr">
+         <p>${list[0].program_name }</p>
+          </c:forEach>
+          
                  <ul class="product-list" id="order2">
         			<c:forEach var="dto" items="${list }" >
                       <li data-item-index="${dto.program_no }" data-item-link="product/daily/${dto.products_tag }" 
@@ -273,7 +274,7 @@ $(document).on("click", "#orderModal button", function (e) {
    </div>
 
 <div class="button-set sm" style="margin: 20px 0px">
-         <button id="cartBtn" class="button-basic black" onclick="location.href='/cart/daily/cart.do'">장바구니</button>
+         <button id="cartBtn" class="button-basic black" onclick="location.href='/cart/daily/cartdaily.do'">장바구니</button>
 		<button id="orderBtn" class="button-basic primary" >주문하기</button>
 <!-- 		onclick="location.href='/daily/order/step1.do'" -->
 </div>
@@ -381,7 +382,7 @@ $(document).on("click", "#orderModal button", function (e) {
 
 
 </div>
-</div>
+
 
 <script>
 
@@ -443,6 +444,6 @@ $(function(){
 </div>
 </main>
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
-</div>
+
 </body>
 </html>

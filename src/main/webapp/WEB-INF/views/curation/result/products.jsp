@@ -10,7 +10,7 @@
 <script src="/resources/assets/js/jquery.form.min.js"></script>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 
-<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+
 <link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 
@@ -21,8 +21,6 @@
 <script src="/resources/assets/js/request.js"></script>
 
 <link rel="stylesheet" href="/resources/assets/css/a-guide.css">
-<link rel="stylesheet" href="/resources/assets/css/contents2.css">
-
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
 <script src="/resources/assets/js/daterangepicker.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
@@ -45,7 +43,6 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 </script>
 </head>
 <body>
-<div class="wrapper">
 <%@ include file="/WEB-INF/views/layouts/header.jsp" %>
 <main class="products">
 <!--S:container-wrapper -->
@@ -246,17 +243,20 @@ $(document).on("click", "#orderModal button", function (e) {
                 <li class="active"><b>03.</b>생활습관</li>
             </ul>
         </div>
-    
 <div class="question-part">
         <div class="title">
             <h3> 당신에게 추천드리는
                  <b>맞춤 상품</b>
              </h3>
         </div>
+        
+ <% int [] no = {1,2,3,4,5,6,7,8}; %>
 <div class="card-item">
+<c:set value="<%= new int[] {1,2,3,4,5,6,7,8} %>" var="arr" ></c:set>
    <div class="product-wrapper">
+         <c:forEach var="n" items="arr">
          <p>${list[0].program_name }</p>
-          
+          </c:forEach>
           <c:forEach var="dto" items="${list}" >
             <div class="product-radio-group">
                 <label data-item-index="0"  data-item-link="/"  
@@ -274,11 +274,11 @@ $(document).on("click", "#orderModal button", function (e) {
 </div>
 
        <div class="button-set sm" style="margin: 20px 0px">
-             <button id="cartBtn" class="button-basic black" onclick="location.href='/cart/daily/cart.do'">장바구니</button>
+             <button id="cartBtn" class="button-basic black" onclick="location.href='/cart/daily/cartdaily.do'">장바구니</button>
 <!--              onclick="location.href='/daily/order/step1.do'" -->
              <button id="orderBtn" class="button-basic primary">주문하기</button>
        </div>
-</div>
+
        <div class="result-text">
             ${list[0].program_content }
         </div>
@@ -289,7 +289,7 @@ $(document).on("click", "#orderModal button", function (e) {
                      <li>대표적인 건강 위험 요인인 흡연! 자신과 사랑하는 사람들을 위해 금연을 시작합니다.</li>
                    </ul>
             </div>
-            <div class="button-set">
+            <div class="button-set">'
       <button class="button-basic border bottles prefix"
                             onclick="location.href='/customer/product/result/programs.do?singleYn=N'">
                         <i class="ico"></i>
@@ -301,10 +301,10 @@ $(document).on("click", "#orderModal button", function (e) {
                     <i class="ico"></i>
                     카카오톡으로 공유
                 </button>
-            </div>
-        
-
-    </div>
+            </div>        
+	</div>
+</div>
+</div>
     
     <div class="modal show" id="productPreviewModal" tabindex="-1" style="display: none; padding-right: 17px;" aria-modal="true" role="dialog">
 	<div class="modal-dialog modal-dialog-centered" style="width:430px;">
@@ -318,6 +318,8 @@ $(document).on("click", "#orderModal button", function (e) {
   <c:forEach var="dto" items="${list }">
         <img src="/file/download/product/${dto.system_name }">
 </c:forEach>
+
+
   </div>
 </div>
 <div class="modal-body">
@@ -377,7 +379,6 @@ $(document).on("click", "#orderModal button", function (e) {
 </div>
 
 
-</div>
 <script>
 
 var windowRef = null;
@@ -438,6 +439,6 @@ $(function(){
 </div>
 </main>
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
-</div>
+
 </body>
 </html>

@@ -502,8 +502,8 @@
     <label for="chk-prd-0072840"><span class="hide">해당제품선택</span></label>
   </div>
   
-  <c:forEach var="dto" items="${tag }">
   <a href="/product/daily/view.do?tag=${ tag.products_tag}&eventIdx=" class="prd-cart">
+  <c:forEach var="dto" items="${tag }">
     <div class="thumb">
   <c:forEach var="dto" items="${list }">
     <img src="/file/download/product/${dto.system_name }" alt="">
@@ -521,9 +521,8 @@
       <span>원</span>  
 	</div>
     </c:forEach>
-
-  </a>
   </c:forEach>
+  </a>
   <div class="prd-cart-select-daily">
   
     <ul data-cart-idx="" data-itemcode="0072840">

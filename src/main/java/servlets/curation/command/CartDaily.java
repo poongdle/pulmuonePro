@@ -22,7 +22,7 @@ public class CartDaily implements CommandHandler{
 				
 			System.out.println("> Cart start..");
 
-			int num =Integer.parseInt( request.getParameter("num"));
+			int num =1;
 			
 			CartService cartService = CartService.getInstance();
 			List<CartDTO> list = cartService.cartdaily(num);
