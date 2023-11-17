@@ -18,11 +18,10 @@
 <!-- 	<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" integrity="sha384-DRe+1gYJauFEenXeWS8TmYdBmDUqnR5Rcw7ax4KTqOxXWd4NAMP2VPU5H69U7yP9" crossorigin="anonymous"></script> -->
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/design.js"></script>
 <script src="/resources/assets/js/request.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
 
-<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css"/>
-<link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css"/>
 <script src="/resources/assets/js/owl.carousel.min.js"></script>
 
 <link rel="stylesheet" href="/resources/assets/css/layout_style.css">

@@ -15,25 +15,17 @@
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
-<!-- <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" integrity="sha384-DRe+1gYJauFEenXeWS8TmYdBmDUqnR5Rcw7ax4KTqOxXWd4NAMP2VPU5H69U7yP9" crossorigin="anonymous"></script> -->
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/design.js"></script>
 <script src="/resources/assets/js/request.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
 
-<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css"/>
-<link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css"/>
-<script src="/resources/assets/js/owl.carousel.min.js"></script>
-
-<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
 <link rel="stylesheet" href="/resources/assets/css/a-guide.css">
 <link rel="stylesheet" href="/resources/assets/css/contents2.css">
 
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
 <script src="/resources/assets/js/daterangepicker.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
-
-
 <style type="text/css">
 img {
     overflow-clip-margin: content-box;
@@ -264,6 +256,7 @@ $(document).on("click", "#orderModal button", function (e) {
 <div class="card-item">
    <div class="product-wrapper">
          <p>${list[0].program_name }</p>
+          
           <c:forEach var="dto" items="${list}" >
             <div class="product-radio-group">
                 <label data-item-index="0"  data-item-link="/"  
@@ -281,7 +274,8 @@ $(document).on("click", "#orderModal button", function (e) {
 </div>
 
        <div class="button-set sm" style="margin: 20px 0px">
-             <button id="cartBtn" class="button-basic black" onclick="location.href='/daily/order/step1.do'">장바구니</button>
+             <button id="cartBtn" class="button-basic black" onclick="location.href='/cart/daily/cart.do'">장바구니</button>
+<!--              onclick="location.href='/daily/order/step1.do'" -->
              <button id="orderBtn" class="button-basic primary">주문하기</button>
        </div>
 </div>

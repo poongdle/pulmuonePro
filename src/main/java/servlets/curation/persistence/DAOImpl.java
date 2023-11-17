@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import jdbc.JdbcUtil;
+import servlets.curation.domain.CartDTO;
 import servlets.curation.domain.CurationDTO;
 import servlets.curation.domain.KidsDTO;
 import servlets.curation.service.Step1Service;
@@ -63,7 +64,7 @@ public class DAOImpl implements CurationDAO{
 					dto.setProducts_size(rs.getString("products_size"));
 					dto.setProducts_sub_name(rs.getString("products_sub_name"));
 					dto.setOrigin_name(rs.getString("origin_name"));
-					
+
 					list.add(dto);
 				} while ( rs.next() );
 			} // 
@@ -81,25 +82,25 @@ public class DAOImpl implements CurationDAO{
 				+ "from  products_img pi join products p on p.products_no = pi.products_no "
 				+ "where img_no in ( ? ) "
 				+ "order by img_no desc"; 
-		
+
 		ArrayList<KidsDTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			pstmt = con.prepareStatement(sql);
 			System.out.println(sql);
 			pstmt.setInt(1, num);
-//			System.out.println(num);
-//			System.out.println(num2);
+			//			System.out.println(num);
+			//			System.out.println(num2);
 			rs = pstmt.executeQuery();
 			if ( rs.next() ) {
 				list = new ArrayList<KidsDTO>() ;
 				KidsDTO dto = null;
-				
+
 				do {
-				dto = new KidsDTO();
-				
+					dto = new KidsDTO();
+
 					dto.setImg_no(rs.getInt("img_no"));
 					dto.setProducts_name(rs.getString("products_name"));
 					dto.setProducts_tag(rs.getInt("products_tag"));
@@ -110,9 +111,9 @@ public class DAOImpl implements CurationDAO{
 					list.add(dto);
 				} while (rs.next());
 			}	
-			
+
 		} finally {
-			
+
 			JdbcUtil.close(pstmt);
 			JdbcUtil.close(rs);         
 		}
@@ -139,7 +140,7 @@ public class DAOImpl implements CurationDAO{
 			pstmt.setInt(1, num);
 			System.out.println(sql);
 			rs = pstmt.executeQuery();
-			
+
 			if ( rs.next() ) {
 				list = new ArrayList<CurationDTO>();
 				CurationDTO dto = null;
@@ -174,7 +175,7 @@ public class DAOImpl implements CurationDAO{
 
 		return list;
 	}
-	
+
 	// 프로그램 선택
 	@Override
 	public List<CurationDTO> selectPG(Connection con,String path, int num) throws SQLException {
@@ -184,7 +185,7 @@ public class DAOImpl implements CurationDAO{
 				+ "join products p on c.products_no = p.products_no "
 				+ "where dayweek is not null and program_no in ( ? ) "
 				+ "order by curation_no";
-				
+
 		ArrayList<CurationDTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -194,7 +195,7 @@ public class DAOImpl implements CurationDAO{
 			pstmt.setInt(1, num);
 			System.out.println(sql);
 			rs = pstmt.executeQuery();
-			
+
 			if ( rs.next() ) {
 				list = new ArrayList<CurationDTO>();
 				CurationDTO dto = null;
@@ -228,5 +229,48 @@ public class DAOImpl implements CurationDAO{
 
 		return list;
 	}
+	@Override
+	public List<CartDTO> cartdaily(Connection con, int num) throws SQLException {
+		String sql ="select products_name, system_name, price, products_tag, p.products_no "
+				+ "from products p join products_img pi on p.products_no = pi.products_no "
+				+ "where origin_name not like 'View%' and img_no in ? "
+				+ "order by products_no";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;    
+		ArrayList<CartDTO> list = null;
+
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			System.out.println(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+
+			if ( rs.next() ) {
+				list = new ArrayList<CartDTO>();
+				CartDTO dto = null;
+
+
+				do {
+					dto =  new CartDTO();
+
+					dto.setProducts_name(rs.getString("products_name"));
+					dto.setSystem_name(rs.getString("system_name"));
+					dto.setPrice(rs.getInt("price"));
+					dto.setProducts_tag(rs.getInt("products_tag"));
+					dto.setProducts_no(rs.getString("products_no"));
+
+					list.add(dto);
+				} while ( rs.next() );
+			} // 
+		} finally {
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);         
+		} // finally
+
+		return list;
+	}
+
 
 }

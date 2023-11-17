@@ -15,12 +15,12 @@ public class Program implements CommandHandler{
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		System.out.println("> Program start..");
-
-		int num =2;
+		int num = 1;
+		
 		String path = request.getRequestURI();
 		ProgramService pg = ProgramService.getInstance();
-		
 		List<CurationDTO> list = pg.selectPG(path, num);
+		
 		
 		request.setAttribute("list", list);
 		

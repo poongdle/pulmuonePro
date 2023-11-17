@@ -8,31 +8,24 @@
 <meta name="viewport"     content="width=device-width,initial-scale=1.0">
 <script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
-
+<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
-<!-- <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" integrity="sha384-DRe+1gYJauFEenXeWS8TmYdBmDUqnR5Rcw7ax4KTqOxXWd4NAMP2VPU5H69U7yP9" crossorigin="anonymous"></script> -->
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/design.js"></script>
 <script src="/resources/assets/js/request.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
 
-<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css"/>
-<link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css"/>
-<script src="/resources/assets/js/owl.carousel.min.js"></script>
-
-<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
 <link rel="stylesheet" href="/resources/assets/css/a-guide.css">
 <link rel="stylesheet" href="/resources/assets/css/contents2.css">
 
 <link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
 <script src="/resources/assets/js/daterangepicker.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
-<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 <style type="text/css">
 img {
     overflow-clip-margin: content-box;
@@ -263,12 +256,13 @@ $(document).on("click", "#orderModal button", function (e) {
 
                  <ul class="product-list" id="order2">
         			<c:forEach var="dto" items="${list }" >
-                      <li data-item-index="${dto.program_no }" data-item-link="product/daily/${dto.products_tag }" data-item-image="/file/download/product/${dto.img_no}" 
+                      <li data-item-index="${dto.program_no }" data-item-link="product/daily/${dto.products_tag }" 
+                      data-item-image="/file/download/product/${dto.img_no}" 
                             data-item-title="${dto.products_name }" data-item-desc="2000">
                           <input value="${dto.products_no }" name="itemCode" type="hidden">
                              <a class="item" data-product-preview="${dto.img_no }">
                                   <label>${dto.dayweek }</label>
-                                  <div class="thumb"><img src="/file/download/product/${dto.system_name }" alt=""></div>
+                                  <div class="thumb" data-product-preview="${dto.img_no}"><img src="/file/download/product/${dto.system_name }" alt=""></div>
                                   <div class="text-wrapper">  <span>${dto.products_name }</span>
                                    </div>
                               </a>
@@ -279,8 +273,9 @@ $(document).on("click", "#orderModal button", function (e) {
    </div>
 
 <div class="button-set sm" style="margin: 20px 0px">
-         <button id="cartBtn" class="button-basic black" onclick="location.href='/daily/order/step1.do'">장바구니</button>
-		<button id="orderBtn" class="button-basic primary" onclick="location.href='/daily/order/step1.do'">주문하기</button>
+         <button id="cartBtn" class="button-basic black" onclick="location.href='/cart/daily/cart.do'">장바구니</button>
+		<button id="orderBtn" class="button-basic primary" >주문하기</button>
+<!-- 		onclick="location.href='/daily/order/step1.do'" -->
 </div>
 </div>
         

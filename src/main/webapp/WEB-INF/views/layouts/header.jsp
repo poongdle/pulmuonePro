@@ -36,7 +36,7 @@
                   <a href="/customer/product/product.do">맞춤큐레이션</a>
                </li>
                <li>
-                  <a href="/taste/taste">시음선물</a>
+                  <a href="/taste/order/step1.do">시음선물</a>
                </li>
                <li>
                   <a href="/event/event/list.do">이벤트</a>
@@ -59,7 +59,7 @@
                <i class="ico ico-myIcon"></i>
                <span class="hide">로그인 페이지 / 마이 페이지로 가기</span>
             </a>
-             <a href="/cart/daily">
+             <a href="/cart/daily/cartdaily.do">
                <div class="counter hide" data-cart-size=""></div> <i class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
             </a>
          </div>
