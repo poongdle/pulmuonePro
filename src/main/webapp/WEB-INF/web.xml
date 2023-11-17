@@ -5,7 +5,14 @@
 	<welcome-file-list>		
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-
+  <error-page>
+	<error-code>404</error-code>
+	<location>/default.jsp</location>
+  </error-page>
+    <error-page>
+	<error-code>500</error-code>
+	<location>/default.jsp</location>
+  </error-page>
 	<!-- p 415 커넥션풀을 사용하기 위해서 설정한 코딩. -->
 	<resource-ref>
 		<description>Oracle Datasource example</description>
@@ -66,6 +73,8 @@
 		<servlet-name>ajaxControllerUsingURI</servlet-name>
 		<url-pattern>*.ajax</url-pattern>
 	</servlet-mapping>
+
+
 
 
 	<jsp-config>

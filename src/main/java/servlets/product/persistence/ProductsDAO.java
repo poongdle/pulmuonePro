@@ -384,7 +384,8 @@ public class ProductsDAO implements IProducts {
 						+ ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2 "	              
 						+ " from products a join products_img b on a.products_no = b.products_no "								
 						+ " where a.products_no in (0073184,0072348,0073080,0073344,0072969,0073271,0073136,0073405,0070680,0071654) "
-						+ " and origin_name not like 'View%' ";									       
+						+ " and origin_name not like 'View%' "
+						+ " order by DBMS_RANDOM.RANDOM ";									       
 		ArrayList<ProductsDTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;	        

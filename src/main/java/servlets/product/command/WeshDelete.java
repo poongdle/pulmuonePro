@@ -17,7 +17,7 @@ public class WeshDelete implements CommandHandler{
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println(">WashDelete.process ");
 		DeleteService deleteService = DeleteService.getInstance();
-		String [] idxs = request.getParameterValues("param");		
+		String [] idxs = request.getParameterValues("idx");		
 		String idx = null;		
 		if (idxs != null) {
 			idx = String.join(", ",idxs);

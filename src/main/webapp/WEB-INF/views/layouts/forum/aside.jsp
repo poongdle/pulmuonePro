@@ -13,7 +13,7 @@
 		<li data-page="notice">
 			<a href="/forum/notice/list.do">공지사항</a>
 		</li>
-		<li data-page="franchise_area">
+		<li data-page="franchise">
 			<a href="/forum/franchise/search.do">배송가능지역 검색</a>
 		</li>
 	</ul>
