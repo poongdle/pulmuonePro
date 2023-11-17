@@ -1,6 +1,5 @@
 package servlets.order.command;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -52,35 +51,36 @@ public class Inicis implements CommandHandler {
 		
 		// 1. 주문, 2. 주문상품, 3. 배송지 정보 추가
 		int boxOrderNo = service.insertBoxOrder(memberNo, boxOrderStatus);
-		int boxOrderProductsRowCnt = service.insertBoxOrderedProducts(boxOrderNo, productsNo, productsCnt);
+		service.insertBoxOrderedProducts(boxOrderNo, productsNo, productsCnt);
 		BoxShipDTO bsDTO = new BoxShipDTO(boxOrderNo, boxReceiver, boxTel, boxZipCode, boxAddr, boxAddrDetail, boxMemo, null);
-		int boxShipRowCnt = service.insertBoxShip(bsDTO);
+		service.insertBoxShip(bsDTO);
 		
 		// 4. 배송지 정보 -> 주소록에 저장
 		String saveAddrChk = request.getParameter("saveAddrChk");
 		OrderAddrBookDTO oabDTO = null;
-		int addrBookRowCnt = 0;
 		if (saveAddrChk != null) {
 			oabDTO = new OrderAddrBookDTO(-1, memberNo, boxReceiver, boxReceiver, boxTel, 0, boxZipCode, boxAddr, boxAddrDetail, boxMemo, 0);
-			addrBookRowCnt = service.insertAddrBook(oabDTO);
+			service.insertAddrBook(oabDTO);
 		} // if
 		
 		// 5. 결제 정보 추가
-		BoxPayDTO bpDTO = new BoxPayDTO(0, boxOrderNo, "", price, salePrice, discountPrice, shppingPrice, finalPrice, payMethod, -1);
+		int payStatus = 0;	// 결제 상태 : 결제 완료
+		if (payMethod == 2) payStatus--;	// 결제 방법이 무통장입금이면 결제 상태를 '결제 전'으로 바꿈
+		BoxPayDTO bpDTO = new BoxPayDTO(0, boxOrderNo, "", price, salePrice, discountPrice, shppingPrice, finalPrice, payMethod, payStatus);
 		int boxPayNo = service.insertPay(bpDTO);
 		
 		// 6. 쿠폰 사용 처리
-		int haveCouponRowCnt = 0;
-		if (couponNos!=null) haveCouponRowCnt = service.updateHaveCoupon(boxPayNo, memberNo, couponNos);
+		if (couponNos!=null) service.updateHaveCoupon(boxPayNo, memberNo, couponNos);
 		
-		// setAttribuet
 		request.setAttribute("boxOrderNo", boxOrderNo);
+		// 결과 확인용
+		/*
 		request.setAttribute("boxOrderProductsRowCnt", boxOrderProductsRowCnt);
 		request.setAttribute("boxShipRowCnt", boxShipRowCnt);
 		request.setAttribute("addrBookRowCnt", addrBookRowCnt);
 		request.setAttribute("boxPayNo", boxPayNo);
 		request.setAttribute("haveCouponRowCnt", haveCouponRowCnt);
-		
+		*/
 		return "/WEB-INF/views/order/inicis/callback.jsp";
 	} // process()
 

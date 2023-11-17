@@ -29,41 +29,22 @@
 			<div class="container">
 			
 				<%
+					// 확인용
+					/*
 					Enumeration<String> en = request.getAttributeNames();
 					while(en.hasMoreElements()){
 						String key = en.nextElement();
 						Object value = request.getAttribute(key);
 						value = value.toString();
 						out.print(key+" : "+ value +"<br>");
-					}
-					
+					} // while
+					*/
 					/*
 					boxShipRowCnt : 1
 					addrBookRowCnt : 1
 					boxOrderNo : 20
 					boxOrderProductsRowCnt : 1
 					boxPayNo : 33
-					*/
-					
-					/* 
-					price : 225000
-					salePrice : 195000
-					discountPrice : -170000
-					shppingPrice : 0
-					payPrice : 25000
-					payMethod : 0
-					productsNo : 0073561
-					productsCnt : 1
-					chk-same : on
-					orderName : 임재석
-					tel : 010-1234-1234
-					zipCode : 63503
-					addrRoad : 제주특별자치도 서귀포시 대정읍 대한로 632
-					addrDetail : 4층
-					orderMemo : 메모메모
-					saveAddrChk : on
-					couponIdx : 15
-					chk-agree-condition : on
 					*/
 				%>
 

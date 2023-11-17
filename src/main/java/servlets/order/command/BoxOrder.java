@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import auth.AuthInfo;
 import mvc.command.CommandHandler;
 import servlets.order.domain.BoxOrderProductDTO;
-import servlets.order.domain.OrderAddrBookDTO;
 import servlets.order.domain.OrderCouponDTO;
 import servlets.order.domain.OrderMemberInfoDTO;
 import servlets.order.service.BoxOrderService;

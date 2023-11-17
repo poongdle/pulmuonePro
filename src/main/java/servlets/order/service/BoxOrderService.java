@@ -2,11 +2,10 @@ package servlets.order.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import servlets.order.domain.BoxOrderDTO;
+import servlets.order.domain.BoxOrderInfoDTO;
 import servlets.order.domain.BoxOrderProductDTO;
 import servlets.order.domain.BoxPayDTO;
 import servlets.order.domain.BoxShipDTO;
@@ -178,4 +177,39 @@ public class BoxOrderService {
 			JdbcUtil.close(conn);
 		} // try
 	} // updateHaveCoupon()
+	
+	
+	public ArrayList<BoxOrderProductDTO> selectOrderProductList(int boxOrderNo) {
+		try {
+			conn = ConnectionProvider.getConnection();
+			BoxOrderDAO dao = BoxOrderDAO.getInstance();
+			ArrayList<BoxOrderProductDTO> list = null;
+			list = dao.selectOrderProductList(conn, boxOrderNo);
+			return list;
+		} catch (Exception e) {
+			System.out.println("BoxOrderService.selectOrderProductList() 에러");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(conn);
+		} // try
+	} // selectOrderProductList()
+	
+	public BoxOrderInfoDTO selectBoxOrderInfo(int boxOrderNo) {
+		try {
+			conn = ConnectionProvider.getConnection();
+			BoxOrderDAO dao = BoxOrderDAO.getInstance();
+			BoxOrderInfoDTO dto = null;
+			dto = dao.selectBoxOrderInfo(conn, boxOrderNo);
+			return dto;
+		} catch (Exception e) {
+			System.out.println("BoxOrderService.selectBoxOrderInfo() 에러");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(conn);
+		} // try
+	} // selectBoxOrderInfo()
+	
 }
+

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
 import servlets.order.domain.BoxOrderDTO;
+import servlets.order.domain.BoxOrderInfoDTO;
 import servlets.order.domain.BoxOrderProductDTO;
 import servlets.order.domain.BoxPayDTO;
 import servlets.order.domain.BoxShipDTO;
@@ -155,11 +156,9 @@ public class BoxOrderDAO implements BoxOrderImpl {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				do {
-					dto = new OrderMemberInfoDTO();
-					dto.setName(rs.getString("name"));
-					dto.setTel(rs.getString("tel"));
-				} while (rs.next());
+				dto = new OrderMemberInfoDTO();
+				dto.setName(rs.getString("name"));
+				dto.setTel(rs.getString("tel"));
 			} // if
 		} catch (Exception e) {
 			System.out.println("BoxOrderDAO getNameAndTel() error...");
@@ -355,23 +354,93 @@ public class BoxOrderDAO implements BoxOrderImpl {
 		return rowCount;
 	} // updateHaveCoupon
 
+
+
 	@Override
-	public ArrayList<BoxOrderDTO> selectList(Connection conn, int memberNo, Date startSearchDate, Date endSearchDate, int pageNo) throws SQLException {
+	public ArrayList<BoxOrderProductDTO> selectOrderProductList(Connection conn, int boxOrderNo) throws SQLException {
+		String sql = " SELECT DISTINCT products_name, img_path, origin_name "
+				+ " FROM products p JOIN box_order_products b ON p.products_no = b.products_no "
+				+ " JOIN products_img i ON p.products_no = i.products_no "
+				+ " WHERE box_order_no = "+boxOrderNo+" AND origin_name = 'View.png'";
+				
+		BoxOrderProductDTO dto = null;
+		ArrayList<BoxOrderProductDTO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					dto = new BoxOrderProductDTO();
+					dto.setProductsName(rs.getString("products_name"));
+					dto.setImgPath(rs.getString("img_path"));
+					dto.setOriginName(rs.getString("origin_name"));
+					list.add(dto);
+				} while (rs.next());
+			} // if
+		} catch (Exception e) {
+			System.out.println("BoxOrderDAO selectOrderProductList() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);
+		} // try
+		return list;
+	} // selectOrderProductList
+
+	@Override
+	public BoxOrderInfoDTO selectBoxOrderInfo(Connection conn, int boxOrderNo) throws SQLException {
+		String sql = " SELECT box_zip_code, box_addr, box_addr_detail, box_memo, box_price, box_sale_price, box_discount_price, box_shipping_fee, box_final_price, box_pay_method "
+				+ " FROM box_ship s JOIN box_pay p ON s.box_order_no = p.box_order_no "
+				+ " WHERE s.box_order_no = "+boxOrderNo;
+				
+		BoxOrderInfoDTO dto = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				dto = new BoxOrderInfoDTO();
+				dto.setZipCode(rs.getString("box_zip_code"));
+				dto.setAddr(rs.getString("box_addr"));
+				dto.setAddrDetail(rs.getString("box_addr_detail"));
+				dto.setMemo(rs.getString("box_memo"));
+				dto.setPrice(rs.getInt("box_price"));
+				dto.setSalePrice(rs.getInt("box_sale_price"));
+				dto.setDiscountPrice(rs.getInt("box_discount_price"));
+				dto.setShippingFee(rs.getInt("box_shipping_fee"));
+				dto.setFinalPrice(rs.getInt("box_final_price"));
+				dto.setPayMethod(rs.getInt("box_pay_method"));
+			} // if
+		} catch (Exception e) {
+			System.out.println("BoxOrderDAO selectOrderProductList() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);
+		} // try
+		return dto;
+	} // selectShipOne
+	
+	
+	
+	@Override
+	public ArrayList<BoxOrderDTO> selectOrderList(Connection conn, int memberNo, Date startSearchDate, Date endSearchDate, int pageNo) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BoxOrderDTO selectOne(Connection conn, int boxOrderNo) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int update(Connection conn, int boxOrderNo) throws SQLException {
+	public int updateOrder(Connection conn, int boxOrderNo) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 }
+
 

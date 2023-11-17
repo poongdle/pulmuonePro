@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="servlets.member.service.MemberService"%>
 <%@page import="servlets.member.dao.MemberDAO"%>
 <%@page import="servlets.member.dao.MemberDAOImpl"%>
@@ -5,6 +6,7 @@
 <%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,15 +26,6 @@
 		<main class="page">
 			<div class="container">
 			
-			<%
-					Enumeration<String> en = request.getParameterNames();
-					while(en.hasMoreElements()){
-						String key = en.nextElement();
-						String value = request.getParameter(key);
-						out.print(key+" : "+ value +"<br>");
-					}
-			%>
-			
 				<div class="contents-area">
 				<div class="container">
 					<div class="location">
@@ -50,31 +43,37 @@
 								<b>주문정보</b>
 								<div class="checkout-complete-info-text">
 									<div class="prd-area">
-										<span class="thumb">
-											<img src="/file/download/product/20221110/94d316cc-9749-41bd-a481-6fb46f3dfdce.png" alt="">
-										</span>
-										<b class="prd-title" style="text-align: left">제주 유기농 NFC 양배추주스 양배추즙</b>
+										<c:forEach items="${ orderProductlist }" var="p">
+											<span class="thumb">
+												<img src="${ p.imgPath }/${ p.originName }" alt="">
+											</span>
+											<b class="prd-title" style="text-align: left">${ p.productsName }</b>
+										</c:forEach>
 									</div>
 									<ul class="checkout-num-address">
 										<li>
 											<div>
 												<span>주문번호</span>
-												<b>13190</b>
+												<b>${ param.boxOrderNo }</b>
 											</div>
 											<div>
+											<%
+												Date today = new Date();
+												String boxOrderDate = String.format("%d.%d.%d", today.getYear()+1900, today.getMonth()+1, today.getDate());
+											%>
 												<span>주문일자</span>
-												<b>2023.11.16</b>
+												<b><%= boxOrderDate %></b>
 											</div>
 										</li>
 										<li>
 											<span>배송지</span>
 											<b>
-												[08843] 서울 관악구 문성로32가길 17, 201호
+												[${ boxOrderInfo.zipCode }] ${ boxOrderInfo.addr }, ${ boxOrderInfo.addrDetail }
 											</b>
 										</li>
 										<li>
 											<span>배송메모</span>
-											<em></em>
+											<em>${ boxOrderInfo.memo }</em>
 										</li>
 									</ul>
 								</div>
@@ -83,49 +82,88 @@
 										<dt>
 											<span>상품 판매가</span>
 											<b>
-												<div class="now-price total"><em>49,900</em><span>원</span></div>
+												<div class="now-price total">
+													<em>
+														<fmt:formatNumber value="${ boxOrderInfo.price }" type="number"></fmt:formatNumber>
+													</em>
+													<span>원</span>
+												</div>
 											</b>
 										</dt>
 										<dd>
 											<span>상품 할인 판매가</span>
 											<b>
-												<div class="now-price sale"><em class="minus" style="color: black">
-													49,900</em><span>원</span></div>
+												<div class="now-price sale">
+													<c:choose>
+														<c:when test="${ boxOrderInfo.salePrice eq boxOrderInfo.price }">
+															<em class="minus" style="color: black">
+																<fmt:formatNumber value="${ boxOrderInfo.salePrice }" type="number"></fmt:formatNumber>
+															</em>
+														</c:when>
+														<c:otherwise>
+															<em>
+																<fmt:formatNumber value="${ boxOrderInfo.salePrice }" type="number"></fmt:formatNumber>
+															</em>
+														</c:otherwise>
+													</c:choose>
+													<span>원</span>
+												</div>
 											</b>
 										</dd>
 										<dd>
 											<span>쿠폰 할인 금액</span>
 											<b>
 												<div class="now-price coupon">
-													<em class="">0</em><span>원</span>
+													<c:choose>
+														<c:when test="${ boxOrderInfo.discountPrice eq 0 }">
+															<em>0</em>
+														</c:when>
+														<c:otherwise>
+															<em class="minus">
+																<fmt:formatNumber value="${ boxOrderInfo.discountPrice }" type="number"></fmt:formatNumber>
+															</em>
+														</c:otherwise>
+													</c:choose>
+													<span>원</span>
 												</div>
 											</b>
 										</dd>
 										<dd>
 											<span>배송비</span>
 											<b>
-												<div class="now-price delivery"><em>0</em><span>원</span></div>
+												<div class="now-price delivery">
+													<em>
+														<fmt:formatNumber value="${ boxOrderInfo.shippingFee }" type="number"></fmt:formatNumber>
+													</em>
+													<span>원</span>
+												</div>
 											</b>
 										</dd>
 										<dd style="margin-bottom: 10px;">
 											<span>결제수단</span>
-											<b style="font-size: 16px; letter-spacing: -1.2px; color: #333; font-weight: 400">가상계좌</b>
+											<b style="font-size: 16px; letter-spacing: -1.2px; color: #333; font-weight: 400">
+												<c:choose>
+													<c:when test="${boxOrderInfo.payMethod eq 0}">카드결제</c:when>
+													<c:when test="${boxOrderInfo.payMethod eq 1}">실시간 계좌이체</c:when>
+													<c:otherwise>가상계좌</c:otherwise>
+												</c:choose>
+											</b>
 										</dd>
 										<dd class="checkout-sum" style="margin-top: 16px; margin-bottom: 28px">
 											<span style="font-weight: 500">최종결제금액</span>
 											<b>
 												<div class="now-price sum" style="font-size: 24px; font-weight: 500">
-													<em>49,900</em><span>원</span>
+													<em>
+														<fmt:formatNumber value="${ boxOrderInfo.finalPrice }" type="number"></fmt:formatNumber>
+													</em>
+													<span>원</span>
 												</div>
 											</b>
 										</dd>
 									</dl>
 									<div class="btn-area">
-										<button style="margin: 0px 14px; height: 60px" type="button" onclick="location.href='/'" class="btn-default btn-white">
-											메인으로
-										</button>
-										<button style="margin: 0px 14px; height: 60px" type="button" onclick="location.href='/mypage/order/box'" class="btn-default">주문내역
-										</button>
+										<button style="margin: 0px 14px; height: 60px" type="button" onclick="location.href='/'" class="btn-default btn-white">메인으로</button>
+										<button style="margin: 0px 14px; height: 60px" type="button" onclick="location.href='/mypage/order/box'" class="btn-default">주문내역</button>
 									</div>
 								</div>
 							</div>

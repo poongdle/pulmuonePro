@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 import servlets.order.domain.BoxOrderDTO;
+import servlets.order.domain.BoxOrderInfoDTO;
 import servlets.order.domain.BoxOrderProductDTO;
 import servlets.order.domain.BoxPayDTO;
 import servlets.order.domain.BoxShipDTO;
@@ -39,18 +40,20 @@ public interface BoxOrderImpl {
 	// 8. 쿠폰 사용 처리
 	int updateHaveCoupon(Connection conn, int boxPayNo, int memberNo, int couponNo) throws SQLException;
 	
+	
+	// 주문 후 주문서 확인 창
+	// 9. 주문한 상품 리스트 조회
+	ArrayList<BoxOrderProductDTO> selectOrderProductList(Connection conn, int boxOrderNo) throws SQLException;
+	// 10. 배송지 정보(우편번호, 주소, 상세주소, 배송메모), 결제 정보 조회(상품판매가, 상품할인판매가, 쿠폰할인금액, 배송비, 결제수단, 최종결제금액) 
+	BoxOrderInfoDTO selectBoxOrderInfo(Connection conn, int boxOrderNo) throws SQLException;
+	
+	
 	// 조회
 	// 2. 주문내역 조회
-	ArrayList<BoxOrderDTO> selectList(Connection conn, int memberNo, Date startSearchDate, Date endSearchDate, int pageNo) throws SQLException;
-	// int searchMonth 없어도 될 것 같아서 일단 지움
-	
+	ArrayList<BoxOrderDTO> selectOrderList(Connection conn, int memberNo, Date startSearchDate, Date endSearchDate, int pageNo) throws SQLException;
 	// 3. 주문 내역 상세 조회
-	BoxOrderDTO selectOne(Connection conn, int boxOrderNo) throws SQLException;
-	
 	// 4. 주문 취소
-	int update(Connection conn, int boxOrderNo) throws SQLException;
-	
-	
+	int updateOrder(Connection conn, int boxOrderNo) throws SQLException;
 	
 	// delete X
 }
