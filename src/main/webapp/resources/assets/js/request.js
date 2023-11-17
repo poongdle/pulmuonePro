@@ -210,8 +210,7 @@ var postForm = function (formId, url, callback, failCallback) {
         beforeSend:()=> $('#loading').modal('show'),
         complete: ()=>$('#loading').modal('hide'),
         success: function (response) {
-            // console.log(111111);
-            // console.log(callback)
+
             if (typeof callback === 'function') {
 
                 try {
