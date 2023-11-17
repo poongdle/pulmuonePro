@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <div class="board-write">
-	<span style="text-decoration: underline"> <a
-		href="/member/login?redirectUrl=/event/event/view/${event_no}">로그인</a>
-	</span>
-	<div class="textarea">
-		<textarea id="content" title="댓글을 남겨보세요." placeholder="댓글을 남겨보세요" maxlength="500"></textarea>
-		<button id="write-review" type="button">댓글등록</button>
-	</div>
+    <span style="text-decoration: underline">
+        <a href="/member/login?redirectUrl=/event/event/view/${event_no}" id="login-link">로그인</a>
+    </span>
+    <div class="textarea">
+        <textarea id="content" title="댓글을 남겨보세요." placeholder="댓글을 남겨보세요" maxlength="500"></textarea>
+        <button id="write-review" type="button">댓글등록</button>
+    </div>
 </div>
 <div class="board-review-list-area">
     <div class="list-head">
@@ -38,6 +38,83 @@
     </ul>
 </nav>
 
+<style> /* 모달창 스타일 */
+.modal-content {
+	max-width: 350px;
+}
+
+.modal-header{
+	border: 0px;
+	padding: 20px 20px 0px;
+}
+
+.modal-body {
+    font-weight: 300;
+    letter-spacing: -1.2px;
+    text-align: center;
+    color: #333;
+    padding: 30px 20px 40px;
+    background: #fff;
+}
+
+.modal-footer {
+	padding: 0px;
+}
+
+.modal-footer .cancel {
+	border-bottom-left-radius: 26px;
+    background: #333333;
+    color: #fff;
+    flex: 1;
+    font-size: 15px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.73;
+    letter-spacing: -1.13px;
+    text-align: center;
+    justify-content: center;
+    height: 60px;
+    margin: 0px;
+}
+
+.modal-footer .confirm {
+    border-bottom-right-radius: 26px;
+    background: #7acc12;
+    color: #fff;
+    flex: 1;
+    font-size: 15px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.73;
+    letter-spacing: -1.13px;
+    text-align: center;
+    justify-content: center;
+    height: 60px;
+    margin: 0px;
+}
+</style>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">로그인 후 참여가능합니다.</div>
+            <div class="modal-footer">
+                <button type="button" class="cancel" data-dismiss="modal">취소</button>
+                <button type="button" class="confirm" onclick="location.href=$('#login-link').attr('href');">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script>
 $(document).ready(function() {
     
@@ -51,7 +128,7 @@ $(document).ready(function() {
         var eventNo = ${eventView.event.event_no};
 
         $.ajax({
-            url: "/event/event/view_lib.do", 
+            url: "/event/event/EventComment.ajax", 
             type: "GET",
             data: {
                 event_no: eventNo,
@@ -74,6 +151,10 @@ $(document).ready(function() {
                     );
                 });
                 $(".count > span").text(response.totalComments);
+                
+                $('html, body').animate({
+                    scrollTop: $('.board-write').offset().top
+                }, 'slow');
             },
             error: function(jqXHR, textStatus, errorThrown) { 
                 console.log(textStatus, errorThrown);
@@ -81,6 +162,14 @@ $(document).ready(function() {
         });
     });
 });
+</script>
+
+<script> /* 모달창 */
+    $(document).ready(function() {
+        $('#write-review').click(function() {
+            $('#loginModal').modal('show');
+        });
+    });
 </script>
 
 <!-- 미완 댓글 작성 
