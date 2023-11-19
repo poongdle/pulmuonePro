@@ -14,9 +14,10 @@ public class WeshList implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(">AddDailyList.process ");
+		System.out.println(">WishList.process ");
 		ListService listService = ListService.getInstance();				
-
+		List<ProductsDTO> wishlist = listService.selectwish();
+		request.setAttribute("wishlist", wishlist);
 		return "/WEB-INF/views/product/list.jsp";
 		
 		

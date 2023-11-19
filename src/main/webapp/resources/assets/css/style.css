@@ -32877,7 +32877,7 @@ a.text-dark:hover {
   overflow: hidden;
   position: relative;
   display: inline-block;
-  background: url("../images/common/ico_sprite_pc.png") no-repeat -10px -10px;
+/*   background: url("../images/common/ico_sprite_pc.png") no-repeat -10px -10px; */
   background-size: 500px;
   vertical-align: top;
 }
@@ -35059,7 +35059,7 @@ input::-webkit-calendar-picker-indicator {
 ***********************************************************************************/
 /* 공통 */
 .ico {
-  background-image: none;
+/*   background-image: none; */
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
