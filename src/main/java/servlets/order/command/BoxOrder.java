@@ -20,8 +20,8 @@ public class BoxOrder implements CommandHandler {
 		System.out.println("> BoxOrder.process..");
 		
 		String productsNo [] = request.getParameterValues("productsNo");
-		HttpSession session = request.getSession(false);
 		
+		HttpSession session = request.getSession(false);
 		AuthInfo member = (AuthInfo) session.getAttribute("auth");
 		int memberNo = member.getMemberNo();
 		

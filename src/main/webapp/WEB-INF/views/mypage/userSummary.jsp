@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="/WEB-INF/views/layouts/head.jsp" %>
 
@@ -23,68 +24,45 @@
 						<h2 class="container-title light">
 							<b>${ auth.getName() }</b>님 안녕하세요
 						</h2>
+						
 						<ul class="stat-wrapper">
-									<li>
-										<a href="/mypage/drink/drink" class="item">
-											<label>매일배송</label>
-											<span>1</span>
-										</a>
-									</li>
-								
-									<li class="dim">
-										<a href="/mypage/order/box" class="item">
-											<label>택배배송</label>
-											<span style="color: #333;border-bottom: 1px solid #7acc12">2</span>
-										</a>
-									</li>
-								
 							<li>
-								
-									
-									
-										<a href="/taste/taste" class="item">
-											<label>시음선물</label>
-											<span class="blank_copy">선물해보세요</span>
-										</a>
-									
-								
+								<a href="/mypage/drink/drink" class="item">
+									<label>매일배송</label>
+									<span>1</span>
+								</a>
+							</li>
+							<li class="dim">
+								<a href="/mypage/order/box.do" class="item">
+									<label>택배배송</label>
+									<span style="color: #333;border-bottom: 1px solid #7acc12">${ boxOrderCnt }</span>
+								</a>
 							</li>
 							<li>
-								
-									
-									
-										<a href="/event/event/view/friends" class="item">
-											<label>쿠폰</label>
-											<span class="blank_copy">친구초대하고 쿠폰받으세요</span>
-										</a>
-									
-								
+								<a href="/taste/taste" class="item">
+									<label>시음선물</label>
+									<span class="blank_copy">선물해보세요</span>
+								</a>
 							</li>
-							
-								
-									<li>
-										<a href="/mypage/action/review" class="item">
-											<label>리뷰</label>
-											<span>5</span>
-										</a>
-									</li>
-								
-								
-							
-							
-								
-								
-									<li>
-										<a href="/mypage/action/counsel" class="item">
-											<label>1:1 문의</label>
-											<span style="border-bottom: none;color: #999">0</span>
-										</a>
-									</li>
-								
-							
+							<li>
+								<a href="/event/event/view/friends" class="item">
+									<label>쿠폰</label>
+									<span class="blank_copy">친구초대하고 쿠폰받으세요</span>
+								</a>
+							</li>
+							<li>
+								<a href="/mypage/action/review" class="item">
+									<label>리뷰</label>
+									<span>5</span>
+								</a>
+							</li>
+							<li>
+								<a href="/mypage/action/counsel" class="item">
+									<label>1:1 문의</label>
+									<span style="border-bottom: none;color: #999">0</span>
+								</a>
+							</li>
 						</ul>
-			
-			
 			
 						<div class="box-partition">
 							<div class="part">
@@ -94,51 +72,44 @@
 									</a>
 								</div>
 								
-									
-										<div class="box-layout" style="margin-bottom:6px;">
-											<div>
-												<div class="half-area nickname-format">
-													
-														<label>기본</label>
-													
-													<h5>음용1</h5>
-													<span>230000234094</span>
-												</div>
-												<a href="/mypage/drink/drinks/230000234094/23812" class="rounded-button">상세보기</a>
-											</div>
-											<div style="padding:20px 25px 20px 0;">
-												<div class="half-area">
-													<ul class="document-style">
-														<li>
-															<label style="font-weight:500">담당 가맹점</label>
-															<p>서초홈가맹점</p>
-														</li>
-													</ul>
-												</div>
-												<div class="half-area end">
-													<ul class="addiction-info">
-														<li class="tel">
-															<label></label>
-															<p data-call-text="">02-547-0519</p>
-														</li>
-														<li style="margin-left:30px;" class="phone">
-															<label></label>
-															<p data-call-text="">010-3899-4569</p>
-														</li>
-													</ul>
-												</div>
-											</div>
+								<div class="box-layout" style="margin-bottom:6px;">
+									<div>
+										<div class="half-area nickname-format">
+												<label>기본</label>
+											<h5>음용1</h5>
+											<span>230000234094</span>
 										</div>
-									
-									
-								
-			
+										<a href="/mypage/drink/drinks/230000234094/23812" class="rounded-button">상세보기</a>
+									</div>
+									<div style="padding:20px 25px 20px 0;">
+										<div class="half-area">
+											<ul class="document-style">
+												<li>
+													<label style="font-weight:500">담당 가맹점</label>
+													<p>서초홈가맹점</p>
+												</li>
+											</ul>
+										</div>
+										<div class="half-area end">
+											<ul class="addiction-info">
+												<li class="tel">
+													<label></label>
+													<p data-call-text="">02-547-0519</p>
+												</li>
+												<li style="margin-left:30px;" class="phone">
+													<label></label>
+													<p data-call-text="">010-3899-4569</p>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
 							</div>
+							
+							
 							<div class="part" style="border-bottom: none;padding-bottom: 35px">
 								<div class="part-head" style="margin-bottom: 16px;">
-									<a href="/mypage/order/box">
-										택배배송 주문내역
-									</a>
+									<a href="/mypage/order/box.do">택배배송 주문내역</a>
 								</div>
 									<ul class="delivery-process">
 										<li class="">
@@ -146,7 +117,9 @@
 												<div class="thumb">
 													<img src="/resources/assets/images/common/ico_delivery_process_img01.png">
 												</div>
-												<p>0</p>
+												<p>
+													<c:out value="${ boxOrderStatus[0] }"></c:out>
+												</p>
 												<span>결제완료</span>
 											</div>
 										</li>
@@ -155,7 +128,9 @@
 												<div class="thumb">
 													<img src="/resources/assets/images/common/ico_delivery_process_img02.png">
 												</div>
-												<p>0</p>
+												<p>
+													<c:out value="${ boxOrderStatus[1] }"></c:out>
+												</p>
 												<span>배송준비중</span>
 											</div>
 										</li>
@@ -164,16 +139,20 @@
 												<div class="thumb">
 													<img src="/resources/assets/images/common/ico_delivery_process_img03.png">
 												</div>
-												<p>0</p>
+												<p>
+													<c:out value="${ boxOrderStatus[2] }"></c:out>
+												</p>
 												<span>배송중</span>
 											</div>
 										</li>
-										<li class="active">
+										<li class="">
 											<div class="item">
 												<div class="thumb">
 													<img src="/resources/assets/images/common/ico_delivery_process_img04.png">
 												</div>
-												<p>1</p>
+												<p>
+													<c:out value="${ boxOrderStatus[3] }"></c:out>
+												</p>
 												<span>배송완료</span>
 											</div>
 										</li>
@@ -199,26 +178,30 @@
 										<th>주문상태</th>
 										<th>상세보기</th>
 									</tr>
-									<tr style="border-radius: 10px">
-										<td class="t-left">13024</td>
-										<td class="t-left">프레시업 5가지맛 혼합 7입 </td>
-										<td>30,700 원</td>
-										<td>2023-10-27</td>
-										<td><b>배송완료</b></td>
-										<td>
-											<a href="/mypage/order/box/13024" class="rounded-button sm">상세보기</a>
-										</td>
-									</tr>
-									<tr style="border-radius: 10px">
-										<td class="t-left">13021</td>
-										<td class="t-left">프레시업 5가지맛 혼합 7입 </td>
-										<td>30,700 원</td>
-										<td>2023-10-26</td>
-										<td><b>주문취소</b></td>
-										<td>
-											<a href="/mypage/order/box/13021" class="rounded-button sm">상세보기</a>
-										</td>
-									</tr>
+									<c:forEach items="${ boxOrderSimpleInfolist }" var="bosiList">
+										<tr style="border-radius: 10px; font-size: 13px;">
+											<td class="t-left">${ bosiList.orderNo }</td>
+											<td class="t-left">${ bosiList.productsName }</td>
+											<td><fmt:formatNumber value="${ bosiList.finalPrice }" type="number"></fmt:formatNumber> 원</td>
+											<td>
+												<fmt:parseDate value="${ bosiList.boxOrderDate }" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDate" />
+												<fmt:formatDate value="${ parsedDate }" pattern="yyyy-MM-dd" />
+											</td>
+											<td>
+												<b>
+													<c:choose>
+														<c:when test="${ bosiList.boxOrderStatus eq 1 }">결제완료</c:when>
+														<c:when test="${ bosiList.boxOrderStatus eq 2 }">배송준비중</c:when>
+														<c:when test="${ bosiList.boxOrderStatus eq 3 }">배송중</c:when>
+														<c:when test="${ bosiList.boxOrderStatus eq 4 }">배송완료</c:when>
+													</c:choose>
+												</b>
+											</td>
+											<td>
+												<a href="/mypage/order/box.do?boxOrderNo=${ bosiList.orderNo }" class="rounded-button sm">상세보기</a>
+											</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 							
@@ -230,5 +213,14 @@
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
 
  	</div> <!-- wrapper -->
+<script>
+	$(function () {
+	    $("div.item p").each(function(index) {
+	        if ($(this).text() != 0) {
+	            $("div.item:eq(" + index + ")").parent("li").addClass("active");
+	        } // if
+	    });
+	})
+</script>
 </body>
 </html>
