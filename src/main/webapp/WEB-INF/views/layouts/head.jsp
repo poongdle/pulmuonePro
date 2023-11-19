@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -25,7 +26,10 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
+<script src="/resources/assets/js/clipboard.min.js"></script>
+<script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/request.js"></script>
+<script src="/resources/assets/js/owl.carousel.min.js"></script>
 </head>
 
 
