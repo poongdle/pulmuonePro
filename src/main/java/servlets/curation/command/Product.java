@@ -18,8 +18,8 @@ public class Product implements CommandHandler{
 		System.out.println("> Products select start..");
 		String path = request.getRequestURI();
 		ProductService pd = ProductService.getInstance();
-		ProgramService pg = ProgramService.getInstance();
 		int num = (int)(Math.random()*8)+1; 
+		
 
 		List<CurationDTO> list = pd.selectPD(path, num);
 		
@@ -27,5 +27,6 @@ public class Product implements CommandHandler{
 		
 			return "/WEB-INF/views/curation/result/products.jsp";
 		
+			
 	}
 }

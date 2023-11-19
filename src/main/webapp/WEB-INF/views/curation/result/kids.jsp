@@ -5,9 +5,8 @@
 <html lang="ko">
 <head>
 <title>풀무원 녹즙 | 맞춤큐레이션</title>
-<title>풀무원 녹즙 | 맞춤큐레이션</title>
-<meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
 <meta name="viewport"     content="width=device-width,initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' connect.facebook.net www.google-analytics.com www.googletagmanager.com wcs.naver.net t1.daumcdn.net t1.kakaocdn.net stdpay.inicis.com cdn.jsdelivr.net stdux.inicis.com  ; object-src ">
 <script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
@@ -17,18 +16,19 @@
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
 <script src="/resources/assets/js/design.js"></script>
 <script src="/resources/assets/js/request.js"></script>
 
 <link rel="stylesheet" href="/resources/assets/css/contents2.css">
-
-<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
-<script src="/resources/assets/js/daterangepicker.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 
 <script type="text/javascript">
+Kakao.init('c153013cc3f2b9900924ea8e382fbf8d');
+
 <c:choose>
 <c:when test="${ auth.getName() eq null }">
 window.is_signed = false;
@@ -116,8 +116,8 @@ $(function () {
 var singleYn = "N" == 'Y';
 var title = "키즈";
 var data = {
-  mobilehost: "https://mgreenjuice.pulmuone.com/",
-  webhost: "https://greenjuice.pulmuone.com/",
+		mobilehost: "http://localhost",
+		webhost: "http://localhost/",
   title,
   result_path: location.pathname + location.search
 };
@@ -261,6 +261,23 @@ $(document).on("click", "#orderModal button", function (e) {
     location.href = "/mypage/drink/drink/change/" + custNumber + "/" + prtnId + "?item=" + p;
   }
 })
+
+	var data = '${dto.content}';	
+
+	window.kakaoShareData = {		
+		key: 100891,
+		data: {
+			mobilehost: "http://localhost",
+			webhost: "http://localhost/",
+			detailImage1: location.origin+ "/file/download"+'/product/${dto.system_name}',			
+			weight: "${dto.products_size}",
+			path: "product/daily/view.do?tag=${dto.products_tag}",
+			productName: "${dto.products_name}",
+			slogan: "${dto.products_sub_name}",
+			thumbnail: location.origin+ "/file/download"+'/product/${dto.system_name}',
+			price: "<fmt:formatNumber value="${dto.price }" pattern="#,###" />",
+		}	
+	};
 </script>
 
 <div class="breadcrumb-style">

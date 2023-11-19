@@ -3,21 +3,25 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>풀무원 녹즙 | 맞춤큐레이션</title><title>풀무원 녹즙 | 맞춤큐레이션</title>
-<meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
-<meta name="viewport"     content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"	rel="stylesheet">
 <script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
-<link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
-<script src="/resources/assets/js/design.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/resources/assets/js/clipboard.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
 <script src="/resources/assets/js/fdd.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/contents2.css">
+<script src="/resources/assets/js/request.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="/resources/assets/css/owl.theme.default.css">
+<script src="/resources/assets/js/owl.carousel.min.js"></script>
+<script src="/resources/assets/js/design.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/list.css">
 <link rel="stylesheet" href="/resources/assets/css/style.css">
-
 </head>
 <body>
 <div class="wrapper">

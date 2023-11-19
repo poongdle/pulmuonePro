@@ -17,11 +17,13 @@ import servlets.curation.domain.KidsDTO;
 import servlets.curation.service.Step1Service;
 
 public class DAOImpl implements CurationDAO{
+
 	// 1. 싱글톤
 	private DAOImpl() {}
 	public DAOImpl(Connection conn) {
 		// TODO Auto-generated constructor stub
 	}
+	
 	private static DAOImpl instance = new DAOImpl();
 	public static DAOImpl getInstance() {
 		return instance;
@@ -75,6 +77,8 @@ public class DAOImpl implements CurationDAO{
 
 		return list;
 	}
+	
+	//썸네일 이미지
 	@Override
 	public List<KidsDTO> select(Connection con,  int num) throws SQLException {
 		String sql = "select  img_no,  products_name, products_tag, system_name, price, "
@@ -121,7 +125,7 @@ public class DAOImpl implements CurationDAO{
 		return list;
 	}
 
-	//맞춤상품 선택
+	// 큐레이션 결과 - 맞춤상품 선택
 	@Override
 	public List<CurationDTO> selectPD(Connection con,String path, int num) throws SQLException {
 		String sql = "select curation_no, program_no,program_name, pi.img_no, dayweek, pi.products_no, p.products_name, program_content, products_tag, "
@@ -176,7 +180,7 @@ public class DAOImpl implements CurationDAO{
 		return list;
 	}
 
-	// 프로그램 선택
+	// 큐레이션 결과 - 프로그램 선택
 	@Override
 	public List<CurationDTO> selectPG(Connection con,String path, int num) throws SQLException {
 		String sql =  "select curation_no, program_no,program_name, pi.img_no, dayweek, pi.products_no, p.products_name, program_content, products_tag, "
@@ -229,6 +233,8 @@ public class DAOImpl implements CurationDAO{
 
 		return list;
 	}
+	
+	// 장바구니 - 쿼리 확인
 	@Override
 	public List<CartDTO> cartdaily(Connection con, int num) throws SQLException {
 		String sql ="select products_name, system_name, price, products_tag, p.products_no "

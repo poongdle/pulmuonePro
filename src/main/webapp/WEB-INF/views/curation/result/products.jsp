@@ -4,32 +4,30 @@
 <html lang="ko">
 <head>
 <title>풀무원 녹즙 | 맞춤큐레이션</title>
-<meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
 <meta name="viewport"     content="width=device-width,initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' connect.facebook.net www.google-analytics.com www.googletagmanager.com wcs.naver.net t1.daumcdn.net t1.kakaocdn.net stdpay.inicis.com cdn.jsdelivr.net stdux.inicis.com  ; object-src ">
 <script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
 
-
+<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
 <script src="/resources/assets/js/design.js"></script>
 <script src="/resources/assets/js/request.js"></script>
 
-<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
-<script src="/resources/assets/js/daterangepicker.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/contents2.css">
 <link rel="stylesheet" href="/resources/assets/css/style.css">
-<style type="text/css">
-img {
-    overflow-clip-margin: content-box;
-    overflow: clip;
-}
-</style>
+
 <script type="text/javascript">
+Kakao.init('c153013cc3f2b9900924ea8e382fbf8d');
+
 <c:choose>
 <c:when test="${ auth.getName() eq null }">
 window.is_signed = false;
@@ -111,6 +109,44 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
   })
   
 </script>
+
+<script>
+
+var singleYn = "N" == 'Y';
+var title = "${dto.products_name}";
+var data = {
+		mobilehost: "http://localhost",
+		webhost: "http://localhost/",
+  title,
+  result_path: location.pathname + location.search
+};
+$(document).ready(function () {
+  $("[data-item-index]").each(function () {
+    var subData = $(this).data();
+    var ix = subData.itemIndex + 1;
+    data["item_0" + ix + "_img"] = subData.itemImage;
+    data["item_0" + ix + "_path"] = subData.itemLink;
+    data["item_0" + ix + "_title"] = subData.itemTitle;
+    data["item_0" + ix + "_desc"] = String(subData.itemDesc).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+
+    console.log("!!!", subData);
+  });
+
+  window.kakaoShareData = {
+    key: singleYn ? 85888 : 85887,
+    data
+  };
+})
+
+function sendKakao() {
+  Kakao.Share.sendCustom({
+    templateId: window.kakaoShareData.key,
+    templateArgs: window.kakaoShareData.data,
+  });
+}
+
+</script>
+
 <script type="text/javascript">
 var nowArgs = undefined;
 window.orderProcess = function (args) {
