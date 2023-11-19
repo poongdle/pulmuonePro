@@ -343,17 +343,17 @@
 									title="베스트 녹즙"> <img
 									src="/file/download/banner/4d1a4dd5-821c-41db-a0d6-3535adb53a8e.png"
 									alt="">
-								</a> <a class="item left"
+								</a> <a class="item "
 									href="https://greenjuice.pulmuone.com/taste/taste?pkgIdx=54"
 									title="건강한 한 끼"> <img
 									src="/file/download/banner/b9842c83-f89d-4687-8351-c71beeba16e4.png"
 									alt="">
-								</a> <a class="item active"
+								</a> <a class="item "
 									href="https://greenjuice.pulmuone.com/taste/taste?pkgIdx=53"
 									title="아이사랑"> <img
 									src="/file/download/banner/57d7c4a5-9e5f-4158-9067-f8e2746a2ee8.png"
 									alt="">
-								</a> <a class="item right"
+								</a> <a class="item "
 									href="https://greenjuice.pulmuone.com/product/daily/743"
 									title="이달의 녹즙(비타맥스 엑스투)"> <img
 									src="/file/download/banner/c4f1a598-5bf4-4cb9-9acf-c733f86d3faf.png"
@@ -372,7 +372,7 @@
 
 								<li class=""></li>
 
-								<li class="active"></li>
+								<li class=""></li>
 
 								<li class=""></li>
 
@@ -394,7 +394,7 @@
 										style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1200px;">
 										<div class="owl-item active" style="width: 300px;">
 											<div class="prd-area">
-												<a href="/event/event/view/2957" title="제품 상세페이지로 가기">
+												<a href="/event/event/view.do?event_no=30" title="제품 상세페이지로 가기">
 													<div class="badges">
 														<span class="badge badge-new">NEW</span> <span
 															class="badge badge-sale">SALE</span>

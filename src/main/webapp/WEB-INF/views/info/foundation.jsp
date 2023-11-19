@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
+<script type="text/javascript" src="/resources/assets/js/common.ui.js"></script>
+<script type="text/javascript" src="/resources/assets/js/message.js"></script>
+<script type="text/javascript" src="/resources/assets/js/front.ui.js"></script>
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 		<main class="page">
@@ -13,9 +16,11 @@
         var type = "foundation";
         if ( type == "staff" ) {
             tabOpen(1);
+
         }
         if (location.hash.startsWith("#tab=") && location.hash.substring(5) === "1") {
             tabOpen(1);
+
         }
         /* else {
 			tabOpen(1);
@@ -2216,6 +2221,64 @@
 </script>
 </div>
 		</main>
+<div class="footer-wrapper">
+<script>
+  var windowRef = null;
+  function openWindowPop(url, name){
+    var image = document.getElementById('guideImage');
+    var w = image.width;
+    var h = image.height;
+    var options = `width=${w},height=${h}, status=no, menubar=no, toolbar=no, resizable=no`;
+	if(windowRef===null|| windowRef.closed){
+
+    windowRef = window.open('', name, options);
+    windowRef.document.write(`<img src="${url}" width="${w}" maxWidth=100vw />`);
+    windowRef.document.body.style.margin=0;
+	}else {
+    windowRef.focus();
+	}
+  }
+  $(function(){
+
+    axios.get('/user_summary/default').then(function (response) {
+
+      const {info, customerVo} = response.data.RESULT_MSG;
+
+		const ec = ( !info.overEnd) && (info.complex||info.hasHp) && customerVo.phiCustomerVo.intfacId == '0' && customerVo.phiCustomerVo.dlvyCustYn==='Y'
+        if(ec&&customerVo){
+          $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
+          $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
+        }else {
+          $('#quickChangeDrink').attr('href', `/mypage?with=01`)
+          $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
+        }
+        console.log(window.innerWidth)
+        if(window.innerWidth>1450){
+          $('#mini-side-nav').show();
+        }
+    }).catch(function (error) {
+      if(window.innerWidth>1450) {
+        $('#mini-side-nav').show()
+      }
+	});
+    window.addEventListener('resize', function(){
+	  if(window.innerWidth>1450){
+		$('#mini-side-nav').show();
+	  }else {
+		$('#mini-side-nav').hide();
+	  }
+	})
+
+  })
+</script>
+<div style="display: none;" id="mini-side-nav">
+	<a href="/mypage/drink/drink"><img src="/resources/images/ui/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/images/ui/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/images/ui/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/images/ui/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/images/ui/quickTop.png" alt=""></a>
+</div>
+</div>		
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
 		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 	</div>
