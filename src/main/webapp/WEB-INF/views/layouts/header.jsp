@@ -3,6 +3,21 @@
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
 <!-- header -->
 <header id="header">
+<%@ page import="auth.AuthInfo" %>
+<%-- <%
+    AuthInfo authInfo = (AuthInfo) session.getAttribute("auth");
+    String loginInfo;
+    if (authInfo == null) {
+        // 로그인 상태가 아님
+        loginInfo = "null";
+    } else {
+        // 로그인 상태임
+        loginInfo = "회원번호: " + authInfo.getMemberNo() + ", 회원ID: " + authInfo.getMemberId() + ", 이름: " + authInfo.getName();
+    }
+%>
+<p><%= loginInfo %></p> --%>
+
+
    <div class="container">
       <div class="logo-gnb-area">
          <!-- logo -->

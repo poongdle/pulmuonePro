@@ -1,15 +1,20 @@
 package servlets.event.command;
 
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import auth.AuthInfo;
 import jdbc.connection.ConnectionProvider;
 import mvc.command.CommandHandler;
-import servlets.event.domain.EventCommentDTO;
-import servlets.event.persistence.EventCommentDAO;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import servlets.event.domain.EventCommentDTO;
+import servlets.event.persistence.EventCommentDAO;
 
 public class EventComment implements CommandHandler{
 
@@ -38,6 +43,7 @@ public class EventComment implements CommandHandler{
                     jsonComment.put("member_no", comment.getMember_no());
                     jsonComment.put("write_date", comment.getWrite_date().toString());
                     jsonComment.put("content", comment.getContent());
+                    jsonComment.put("name", comment.getName());
 
                     jsonCommentArr.add(jsonComment);
                 }
@@ -55,9 +61,47 @@ public class EventComment implements CommandHandler{
             response.getWriter().write(jsonResponse.toString());
 
         } else { // POST
+        	
+        	int event_no = Integer.parseInt(request.getParameter("event_no"));
+        	String content = URLDecoder.decode(request.getParameter("content"), "UTF-8");
 
-            // POST 요청 처리 로직
-            // ...
+        	// 세션에서 사용자 정보 가져오기
+        	HttpSession session = request.getSession();
+        	AuthInfo authInfo = (AuthInfo) session.getAttribute("auth");
+
+        	// 로그인 상태 확인
+        	if (authInfo == null) {
+        	    // 로그인이 되어 있지 않은 경우
+        	    JSONObject jsonResponse = new JSONObject();
+        	    jsonResponse.put("result", "not_logged_in");
+
+        	    response.setContentType("application/json; charset=utf-8");
+        	    response.getWriter().write(jsonResponse.toString());
+        	} else {
+        	    // 로그인이 되어 있는 경우
+        	    EventCommentDTO commentDTO = new EventCommentDTO();
+        	    commentDTO.setEvent_no(event_no);
+        	    // 세션에서 가져온 사용자 정보에서 memberNo를 가져옴
+        	    commentDTO.setMember_no(authInfo.getMemberNo());
+        	    commentDTO.setContent(content);
+        	    commentDTO.setName(authInfo.getName());
+
+        	    try (Connection conn = ConnectionProvider.getConnection()) {
+        	        int result = commentDAO.insert(conn, commentDTO);
+
+        	        JSONObject jsonResponse = new JSONObject();
+        	        if(result > 0) {
+        	            jsonResponse.put("result", "success");
+        	        } else {
+        	            jsonResponse.put("result", "fail");
+        	        }
+
+        	        response.setContentType("application/json; charset=UTF-8");
+        	        response.getWriter().write(jsonResponse.toString());
+        	    }
+        	}
+
+
 
         } // if
 

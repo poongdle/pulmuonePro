@@ -13,10 +13,11 @@ public class EventCommentDAO implements IEventCommnet{
 	    int end = start + numberPerPage - 1;
 
 	    String sql = "SELECT * FROM (" +
-	                 "  SELECT rownum rnum, comment_no, event_no, member_no, write_date, content " +
+	                 "  SELECT rownum rnum, c.comment_no, c.event_no, c.member_no, c.write_date, c.content, m.name " +
 	                 "  FROM (" +
 	                 "    SELECT * FROM event_comment WHERE event_no = ? ORDER BY comment_no DESC" +
-	                 "  )" +
+	                 "  ) c" +
+	                 "  INNER JOIN member m ON c.member_no = m.member_no" +
 	                 ") WHERE rnum BETWEEN ? AND ?";
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
@@ -36,10 +37,11 @@ public class EventCommentDAO implements IEventCommnet{
 	            comment.setMember_no(rs.getInt("member_no"));
 	            comment.setWrite_date(rs.getDate("write_date"));
 	            comment.setContent(rs.getString("content"));
+	            comment.setName(rs.getString("name")); // 사용자 이름 설정
 	            comments.add(comment);
 	        }
 	    } catch (SQLException e) {
-	    	System.out.println("EventCommentDAO.java selectList() error...");
+	        System.out.println("EventCommentDAO.java selectList() error...");
 	        e.printStackTrace();
 	    } finally {
 	        if (rs != null) {
@@ -63,17 +65,18 @@ public class EventCommentDAO implements IEventCommnet{
 
 
 
-    @Override
-    public int insert(Connection con, EventCommentDTO dto) throws SQLException {
-        String sql = "INSERT INTO event_comment (event_no, member_no, write_date, content) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
-            pstmt.setInt(1, dto.getEvent_no());
-            pstmt.setInt(2, dto.getMember_no());
-            pstmt.setDate(3, dto.getWrite_date());
-            pstmt.setString(4, dto.getContent());
-            return pstmt.executeUpdate();
-        }
-    }
+
+	@Override
+	public int insert(Connection con, EventCommentDTO dto) throws SQLException {
+	    String sql = "INSERT INTO event_comment (event_no, member_no, content) VALUES (?, ?, ?)";
+	    try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+	        pstmt.setInt(1, dto.getEvent_no());
+	        pstmt.setInt(2, dto.getMember_no());
+	        pstmt.setString(3, dto.getContent());
+	        return pstmt.executeUpdate();
+	    }
+	}
+
 
     @Override
     public int delete(Connection con, int comment_no) throws SQLException {

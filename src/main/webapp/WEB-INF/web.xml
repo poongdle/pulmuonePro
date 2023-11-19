@@ -101,6 +101,7 @@
 		<url-pattern>/box/order/step1.do</url-pattern>
 		<url-pattern>/daily/order/step1.do</url-pattern>
 		<url-pattern>/taste/order/step1.do</url-pattern>
+		<url-pattern>/event/comment/write.do</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 

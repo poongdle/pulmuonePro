@@ -2,7 +2,7 @@
 
 <div class="board-write">
     <span style="text-decoration: underline">
-        <a href="/member/login?redirectUrl=/event/event/view/${event_no}" id="login-link">로그인</a>
+        <a href="/mypage.do" id="login-link">로그인</a>
     </span>
     <div class="textarea">
         <textarea id="content" title="댓글을 남겨보세요." placeholder="댓글을 남겨보세요" maxlength="500"></textarea>
@@ -17,7 +17,7 @@
         <c:forEach var="comment" items="${comments}">
             <li style="position: relative">
                 <div class="board-review-cont" style="width: 100%">
-                    <b>${comment.member_no}</b> <!-- 회원 번호를 표시. 회원 이름을 표시하려면 적절한 속성을 사용하세요 -->
+                    <b>${comment.name}</b>
                     <p class="review-content-${comment.comment_no}">${comment.content}</p>
                     <span class="text-day">${comment.write_date}</span>
                 </div>
@@ -142,7 +142,7 @@ $(document).ready(function() {
                     $("#pagable-list").append(
                         '<li style="position: relative">' +
                             '<div class="board-review-cont" style="width: 100%">' +
-                                '<b>' + comment.member_no + '</b>' +
+                                '<b>' + comment.name + '</b>' +
                                 '<p class="review-content-' + comment.comment_no + '">' + comment.content + '</p>' +
                                 '<span class="text-day">' + comment.write_date + '</span>' +
                             '</div>' +
@@ -160,38 +160,51 @@ $(document).ready(function() {
                 console.log(textStatus, errorThrown);
             }
         });
+        
     });
 });
 </script>
 
-<script> /* 모달창 */
-    $(document).ready(function() {
-        $('#write-review').click(function() {
-            $('#loginModal').modal('show');
-        });
-    });
-</script>
-
-<!-- 미완 댓글 작성 
 <script>
-document.getElementById('write-review').addEventListener('click', postComment);
-
-function postComment() {
-    var content = document.getElementById('content').value;
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/event/comment/post.do');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('event_no=' + encodeURIComponent(${eventView.event.event_no}) + '&content=' + encodeURIComponent(content));
-
-    xhr.onload = function() {
-        if (xhr.status === 200 || xhr.status === 201) {
-            alert('댓글이 등록되었습니다.');
-            location.reload();
+$(document).ready(function() {
+    $('#write-review').click(function(e) {
+        e.preventDefault(); // 버튼의 기본 동작을 중단합니다.
+        var authInfo = '<%= session.getAttribute("auth") %>';
+        if (authInfo == "null") {
+            // 로그인이 필요한 경우
+            $('#loginModal').modal('show');
         } else {
-            console.error(xhr.responseText);
+            postComment();
         }
-    };
-}
+    });
+
+    function postComment() {
+        var content = document.getElementById('content').value;
+
+        $.ajax({
+            type: "POST",
+            url: "/event/comment/write.do",
+            data: {
+            	'event_no': encodeURIComponent('${eventView.event.event_no}'),
+                'content': encodeURIComponent(content),
+                'member_no': encodeURIComponent('${session.getAttribute("auth").getMemberNo()}')
+            },
+            dataType: "json",
+            success: function(response) {
+                if (response.result == "success") {
+                    // 댓글 등록 성공
+                    alert('댓글이 등록되었습니다.');
+                    location.reload();
+                } else {
+                    // 그 외 실패 경우
+                    console.error("댓글 등록 실패");
+                }
+            },
+            error: function(response) {
+                console.error("요청 처리 중 오류 발생");
+            }
+        });
+    }
+});
 </script>
- -->
+
