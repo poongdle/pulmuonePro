@@ -233,22 +233,6 @@ $("#nextPage").on("click", function() {
 	}	
 })
 
-var windowRef = null;
-function openWindowPop(url, name){
-  var image = document.getElementById('guideImage');
-  var w = image.width;
-  var h = image.height;
-  var options = `width=${w},height=${h}, status=no, menubar=no, toolbar=no, resizable=no`;
-	if(windowRef===null|| windowRef.closed){
-
-  windowRef = window.open('', name, options);
-  windowRef.document.write(`<img src="${url}" width="${w}" maxWidth=100vw />`);
-  windowRef.document.body.style.margin=0;
-	}else {
-  windowRef.focus();
-	}
-
-}
 $(function(){
 
   axios.get('/mypage.do').then(function (response) {

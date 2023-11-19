@@ -48,12 +48,13 @@ public class Program implements CommandHandler{
 			break;
 		}
 
-
 		List<CurationDTO> list = pg.selectPG(path, num);
 		
 		request.setAttribute("list", list);
 		
-		
+	
+			
 			return "/WEB-INF/views/curation/result/programs.jsp";
-	}
+		}
+
 }

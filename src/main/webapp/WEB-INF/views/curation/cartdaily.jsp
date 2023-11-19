@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>풀무원 녹즙 | 맞춤큐레이션</title>
-<meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
+<title>풀무원 녹즙</title>
 <meta name="viewport"     content="width=device-width,initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' connect.facebook.net www.google-analytics.com www.googletagmanager.com wcs.naver.net t1.daumcdn.net t1.kakaocdn.net stdpay.inicis.com cdn.jsdelivr.net stdux.inicis.com  ; object-src ">
 <script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
@@ -17,20 +17,14 @@
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
 <script src="/resources/assets/js/design.js"></script>
 <script src="/resources/assets/js/request.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
 
-<script src="/resources/assets/js/owl.carousel.min.js"></script>
-
-<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
-<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
 <link rel="stylesheet" href="/resources/assets/css/contents2.css">
-
-<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
-<script src="/resources/assets/js/daterangepicker.js"></script>
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 
 </head>
@@ -40,134 +34,6 @@
 <main class="Cart">
 
 <div id="container-wrapper" class="container-wrapper"> <!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
-<script>
-  var nowArgs = undefined;
-  window.orderProcess = function (args) {
-    if (!window.is_signed) {
-      alertWithRedirect("로그인 후 이용가능합니다.", "/member/login?redirectUrl=" + location.href)
-      return;
-    }
-    nowArgs = args;
-
-    var codes = [];
-    for (var item of args.item) {
-      if (!item.itemCode) continue;
-      codes.push(item.itemCode);
-    }
-
-    $("#orderModal ul").html("");
-    $("#orderModal").addClass("loading").modal("show");
-
-    axios.post(`/product_available`, { ids: codes }).then(function (r) {
-      var o = r.data.RESULT_MSG;
-      if (o.fails.length) {
-        var itemCodes = o.fails.map(v => v.itemCode);
-        var args2 = {
-          item: args.item.filter(v => !itemCodes.includes(v.itemCode))
-        };
-        nowArgs = args2;
-        $("#orderModal").modal("hide").removeClass("loading");
-        showNotAvailModal(o.fails, function () {
-          $("#orderModal ul").html("");
-          $("#orderModal").addClass("loading").modal("show");
-
-          if (o.fails.length == codes.length) {
-            $("#orderModal").removeClass("loading").modal("hide");
-            return;
-          }
-
-          get({url: '/order/daily/check/option'}, function (r) {
-            if (typeof r.RESULT_MSG == 'object' && r.RESULT_MSG.length > 0) {
-              let customerList = r.RESULT_MSG
-              if (customerList.length > 5) {
-                customerList = customerList.slice(0, 5)
-              }
-
-              var latno = 0;
-              $.each(customerList, function (i, data) {
-                var tpl = $("#orderPosLi").text();
-                var nickname = data.nickname;
-                if (!nickname) {
-                  if (latno == 0) {
-                    latno = customerList.filter(v => !!v.nickname).length
-                  }
-                  nickname = "음용 " + latno;
-                  latno++;
-                }
-                tpl = tpl.replace(/\{nickname\}/g, nickname);
-                tpl = tpl.replace(/\{custnumber\}/g, data.custnumber);
-                tpl = tpl.replace(/\{prtnId\}/g, data.phiCustomerVo.prtnId);
-                $("#orderModal ul").append(tpl);
-              })
-              $('#orderModal input[name=custnum]:first').click()
-              $("#orderModal").removeClass("loading")
-            } else {
-              location.href = "/order/daily/step1?item=" + encodeURIComponent(JSON.stringify(args2));
-            }
-          });
-        });
-      }
-      else {
-        get({url: '/order/daily/check/option'}, function (r) {
-          if (typeof r.RESULT_MSG == 'object' && r.RESULT_MSG.length > 0) {
-            let customerList = r.RESULT_MSG
-            if (customerList.length > 5) {
-              customerList = customerList.slice(0, 5)
-            }
-
-            var latno = 0;
-            $.each(customerList, function (i, data) {
-              var tpl = $("#orderPosLi").text();
-              var nickname = data.nickname;
-              if (!nickname) {
-                if (latno == 0) {
-                  latno = customerList.filter(v => !!v.nickname).length
-                }
-                nickname = "음용 " + latno;
-                latno++;
-              }
-              tpl = tpl.replace(/\{nickname\}/g, nickname);
-              tpl = tpl.replace(/\{custnumber\}/g, data.custnumber);
-              tpl = tpl.replace(/\{prtnId\}/g, data.phiCustomerVo.prtnId);
-              $("#orderModal ul").append(tpl);
-            })
-            $('#orderModal input[name=custnum]:first').click()
-            $("#orderModal").removeClass("loading")
-          } else {
-            location.href = "/order/daily/step1?item=" + encodeURIComponent(JSON.stringify(args));
-          }
-        });
-      }
-    });
-
-  }
-
-  $(document).on("click", "#orderModal button", function (e) {
-    var type = $(this).attr("data-type");
-    var p = encodeURIComponent(JSON.stringify(nowArgs));;
-    if (type === "new") {
-      location.href = "/order/daily/step1?item=" + p
-    } else if (type === "continue") {
-      var c = $("input[name='custnum']:checked");
-      var custNumber = c.val();
-      var prtnId = c.attr("data-prtn-id");
-      location.href = "/mypage/drink/drink/change/" + custNumber + "/" + prtnId + "?item=" + p;
-    }
-  })
-</script>
-<textarea id="orderPosLi" style="display: none">    &lt;li&gt;
-        &lt;label class="item-wrapper"&gt;
-            &lt;input name="custnum" type="radio" value="{custnumber}" data-prtn-id="{prtnId}" /&gt;
-            &lt;div class="item"&gt;
-                &lt;div class="contents"&gt;
-                    &lt;p class="name"&gt;
-                        {nickname} &lt;span style="margin-left: 0;"&gt;{custnumber}&lt;/span&gt;
-                    &lt;/p&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/label&gt;
-    &lt;/li&gt;
-</textarea>
 
 <div class="modal" id="orderModal" tabindex="-1" aria-labelledby="orderModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
