@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="/WEB-INF/views/layouts/head.jsp"%>  
+<%@ include file="/WEB-INF/views/layouts/madalHead.jsp"%>
 <body>
 	<div class="wrapper"> 
     	<%@ include file="/WEB-INF/views/layouts/header.jsp"%> 
@@ -292,7 +292,9 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						</button>
 					</div>
-					<div class="modal-body"></div>
+					<div class="modal-body" style="max-height: 80vh; overflow-y: scroll; padding: 0px;">
+						<div class="drinking-list address" style="margin: 0"></div>
+					</div>
 					<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
 				</div>
 			</div>

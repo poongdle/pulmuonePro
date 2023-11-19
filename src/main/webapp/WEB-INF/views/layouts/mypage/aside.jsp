@@ -11,7 +11,7 @@
             </ul>
         </li>
         <li>
-            <a href="/mypage/order/box">택배배송 주문내역</a>
+            <a href="/mypage/order/box.do">택배배송 주문내역</a>
         </li>
         <li>
             <a href="/mypage/benefit/taste">시음선물내역</a>
