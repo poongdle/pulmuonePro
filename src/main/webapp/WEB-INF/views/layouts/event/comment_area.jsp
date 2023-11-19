@@ -1,8 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="auth.AuthInfo" %>
+<%
+    AuthInfo authInfo = (AuthInfo)session.getAttribute("auth");
+%>
 
 <div class="board-write">
     <span style="text-decoration: underline">
-        <a href="/mypage.do" id="login-link">로그인</a>
+		<% if(authInfo != null){ %>
+          	<%=authInfo.getName()%>
+        <% }else{ %>
+            <a href="/mypage.do" id="login-link">로그인</a>
+        <% } %>
     </span>
     <div class="textarea">
         <textarea id="content" title="댓글을 남겨보세요." placeholder="댓글을 남겨보세요" maxlength="500"></textarea>
