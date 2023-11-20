@@ -5,49 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>풀무원 녹즙</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" type="image/x-icon"
-	href="/resources/assets/images/pul_favicon.png">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-	rel="stylesheet">
-<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
-<script src="/resources/assets/js/jquery.form.min.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
-<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/resources/assets/js/clipboard.min.js"></script>
-<script src="/resources/assets/js/fdd.js"></script>
-<script src="/resources/assets/js/request.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="/resources/assets/css/owl.theme.default.css">
-<script src="/resources/assets/js/owl.carousel.min.js"></script>
-<script src="/resources/assets/js/design.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/list.css">
-<link rel="stylesheet" href="/resources/assets/css/style.css">
-<script>            
-      window.is_signed = true;
-      window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderCode":"XQNGV"};                 
-</script>
-<script>
-	window.dataLayer = window.dataLayer || [];
-
-	function gtag() {
-		dataLayer.push(arguments);
-	}
-
-	gtag('js', new Date());
-
-	gtag('config', 'UA-150666346-1');
-
-	var timer = undefined
-</script>
-</head>
+<%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
 	<script>
 	$(function (){
@@ -66,9 +24,10 @@
 		})
 		$(document).on('click', '.btn-delete', function () {
 			const idx = $(this).data('idx');
+			const tag = $(this).data('tag');
 			const el = $(this)
 			confirmDesign("","찜한상품을 삭제하시겠습니까?",function(){
-			  $.post("/mypage/product/delete.do?idx="+idx,) 						
+			  $.post("/mypage/product/delete.do?idx="+idx+"&tag="+tag,) 						
 			  .done(function(data){
 				  alert('목록에서 삭제되었습니다', () => location.reload())
 			  })
@@ -83,8 +42,9 @@
 				return alert('선택된 상품이 없습니다.');
 			}
 			const idxes = checked.map((i, v) => $(v).closest('li').data('idx')).toArray();
+			const tags = checked.map((i, v) => $(v).closest('li').data('tag')).toArray();
 			confirmDesign("","찜한상품을 삭제하시겠습니까?",function(){
-				  $.post("/mypage/product/delete.do?idx="+idxes,) 						
+				  $.post("/mypage/product/delete.do?idx="+idxes+"&tag="+tags,) 						
 				  .done(function(data){
 					  alert('목록에서 삭제되었습니다', () => location.reload())
 				  })
@@ -184,7 +144,7 @@
 							data-list-object="append"
 							style="border: 1px solid #e5e5e5; border-radius: 10px">
 							<c:forEach items="${wishlist }" var="dto">
-								<li data-idx="${dto.idx }"><label class="item-wrapper">
+								<li data-idx="${dto.idx }" data-tag="${dto.products_tag}"><label class="item-wrapper">
 										<input name="chk-prd1" type="checkbox">
 										<div class="item">
 											<a
@@ -204,7 +164,7 @@
 											</a>
 										</div>
 
-										<button type="button" data-idx="${dto.idx }"
+										<button type="button" data-idx="${dto.idx }" data-tag="${dto.products_tag}"
 											class="btn-delete">
 											<i class="ico ico-prd-delete"></i> <span class="hide">카트에서
 												삭제</span>
