@@ -333,7 +333,7 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 				<!--S:띠배너 슬라이드-->
 				<div class="banner-area survey">
 					<div class="banner-list">
-						<a class="item" href="/customer/product" title="해당 페이지로 가기"
+						<a class="item" href="/customer/product/product.do" title="해당 페이지로 가기"
 							style="background-color: #4d54e7"> <img
 							src="/resources/assets/images/contents/banner_item01.jpg">
 							<span class="hide">어떤 녹즙을 드셔야 할까요? 간단한 설문을 통해 풀무원녹즙이 제안하는
@@ -347,33 +347,33 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 					<div class="container">
 						<div class="event-area section-area">
 							<h2 class="section-area-title title-more-btn">
-								녹즙 시음을 선물해보세요! <a href="/taste/taste" class="btn-more"> 전체보기
+								녹즙 시음을 선물해보세요! <a href="/taste/taste.do" class="btn-more"> 전체보기
 									<i class="ico ico-arr-right6"></i>
 								</a>
 							</h2>
 							<div class="event-list" data-carousel="items">
 								<a class="item"
-									href="https://greenjuice.pulmuone.com/taste/taste?pkgIdx=56"
+									href="/taste/taste.do?pkgIdx=56"
 									title="베스트 녹즙"> <img
 									src="/file/download/banner/4d1a4dd5-821c-41db-a0d6-3535adb53a8e.png"
 									alt="">
 								</a> <a class="item "
-									href="https://greenjuice.pulmuone.com/taste/taste?pkgIdx=54"
+									href="/taste/taste.do?pkgIdx=54"
 									title="건강한 한 끼"> <img
 									src="/file/download/banner/b9842c83-f89d-4687-8351-c71beeba16e4.png"
 									alt="">
 								</a> <a class="item "
-									href="https://greenjuice.pulmuone.com/taste/taste?pkgIdx=53"
+									href="/taste/taste.do?pkgIdx=53"
 									title="아이사랑"> <img
 									src="/file/download/banner/57d7c4a5-9e5f-4158-9067-f8e2746a2ee8.png"
 									alt="">
 								</a> <a class="item "
-									href="https://greenjuice.pulmuone.com/product/daily/743"
+									href="/product/daily/view.do?tag=743"
 									title="이달의 녹즙(비타맥스 엑스투)"> <img
 									src="/file/download/banner/c4f1a598-5bf4-4cb9-9acf-c733f86d3faf.png"
 									alt="">
 								</a> <a class="item"
-									href="https://greenjuice.pulmuone.com/taste/taste?pkgIdx=58 "
+									href="/taste/taste.do?pkgIdx=58 "
 									title="융복합"> <img
 									src="/file/download/banner/ba6cd618-ea64-4c9e-a6ed-18186f895d6b.png"
 									alt="">
@@ -638,10 +638,10 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 									</a>
 								</div>
 								<div class="guide-area">
-									<a href="/info/foundation" title="해당 페이지로 가기" class="bg-green">
+									<a href="/forum/faq/list.do" title="해당 페이지로 가기" class="bg-green">
 										<span>풀무원녹즙 <br>고객기쁨센터
 									</span> <img src="/resources/assets/images/ui/ico-bag01.png" alt="">
-									</a> <a href="/search/branch" title="해당 페이지로 가기" class="bg-purple">
+									</a> <a href="/forum/franchise/search.do" title="해당 페이지로 가기" class="bg-purple">
 										<span>매일배송 <br>가능지역검색
 									</span> <img src="/resources/assets/images/ui/ico-map01.png" alt="">
 									</a>
