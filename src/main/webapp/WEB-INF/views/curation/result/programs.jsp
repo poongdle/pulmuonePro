@@ -131,7 +131,7 @@ window.orderProcess = function (args) {
   $("#orderModal ul").html("");
   $("#orderModal").addClass("loading").modal("show");
 
-  axios.post(`/product_available`, { ids: codes }).then(function (r) {
+  axios.post(`/product_available.do`, { ids: codes }).then(function (r) {
     var o = r.data.RESULT_MSG;
     if (o.fails.length) {
       var itemCodes = o.fails.map(v => v.itemCode);

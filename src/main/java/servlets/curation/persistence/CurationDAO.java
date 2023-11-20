@@ -2,6 +2,7 @@ package servlets.curation.persistence;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import servlets.curation.domain.CurationDTO;
@@ -26,7 +27,7 @@ public interface CurationDAO {
 //   int cartadd(Connection con, int tag) throws SQLException;
 // 장바구니
    
-   List<CurationDTO> cartdaily(Connection con , int num) throws SQLException;
+   int addcart (Connection con , int num) throws SQLException;
   List<CurationDTO> dailyadd(Connection con,  CurationDTO dto) throws SQLException;
-    
+//ArrayList<CurationDTO> addcart(Connection con, ArrayList<String> products_tag) throws SQLException;
 }

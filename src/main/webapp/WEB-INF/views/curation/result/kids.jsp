@@ -130,7 +130,7 @@
     $("#orderModal ul").html("");
     $("#orderModal").addClass("loading").modal("show");
 
-    axios.post(`/product_available`, { ids: codes }).then(function (r) {
+    axios.post(`/product_available.do`, { ids: codes }).then(function (r) {
       var o = r.data.RESULT_MSG;
       if (o.fails.length) {
         var itemCodes = o.fails.map(v => v.itemCode);
@@ -278,22 +278,13 @@
 
 				<div class="question-part">
 					<div class="title">
-
-						<h3>
-							당신에게 추천드리는 <b>녹즙 프로그램</b>
-						</h3>
-
-
+						<h3>	당신에게 추천드리는 <b>녹즙 프로그램</b></h3>
 					</div>
-
-
 
 					<div class="card-item">
 						<div class="product-wrapper">
 
 							<p style="margin-bottom: 12px">키즈</p>
-
-
 							<ul class="product-list" id="order2">
 
 								<li data-item-index="0" data-item-link="product/daily/430"

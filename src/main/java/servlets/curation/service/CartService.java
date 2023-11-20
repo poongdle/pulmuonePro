@@ -2,6 +2,7 @@ package servlets.curation.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -26,23 +27,17 @@ public class CartService {
 	      return instance;
 	   }
 
-		public List<CurationDTO> cartdaily(int num) {
+		public int addcart(int num){
 			
-			Connection con = null;
-			try {	
-
-				con  = ConnectionProvider.getConnection();
+			int insertRow = 0;
+			try (Connection con = ConnectionProvider.getConnection() ) {			
 				DAOImpl dao = DAOImpl.getInstance();
-				List<CurationDTO> dto = null;
-				dto= dao.cartdaily(con, num);
-				return dto;
-				
-			 } catch (NamingException | SQLException e) { 
-		         //e.printStackTrace();  syso("ListService.select() 에러 : ")
-		         throw new RuntimeException(e);
-		      } finally {
-		         JdbcUtil.close(con);
-		      }
-	   }
+				insertRow = dao.addcart(con, num);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return insertRow;
+		}
 
 }//class

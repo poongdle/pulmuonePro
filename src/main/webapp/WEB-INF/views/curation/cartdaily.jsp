@@ -284,7 +284,7 @@ String cartId = session.getId();
 					alertWithRedirect("로그인 후 이용가능합니다.", "/member/login?redirectUrl=" + location.href)
 					return;
 				}
-				location.href = "/order/box/step1.애?item=" + encodeURIComponent(JSON.stringify(order));
+				location.href = "/order/box/step1?item=" + encodeURIComponent(JSON.stringify(order));
 				return;
 			}
 			else {

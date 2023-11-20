@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import jdbc.JdbcUtil;
@@ -271,7 +272,7 @@ public class DAOImpl implements CurationDAO{
 //		return insertRow;
 //	}
 	
-	
+
 	// 장바구니 - 쿼리 확인	
 	@Override
 	public List<CurationDTO> dailyadd(Connection con, CurationDTO dto) throws SQLException {
@@ -317,8 +318,9 @@ public class DAOImpl implements CurationDAO{
 	}
 
 	
+	
 	@Override
-	public List<CurationDTO> cartdaily(Connection con, int num) throws SQLException {
+	public int addcart(Connection con, int num) throws SQLException {
 		PreparedStatement pstmt = null;		
 		ResultSet rs = null;
 		String sql = " select * from cart_daily ";
@@ -327,7 +329,8 @@ public class DAOImpl implements CurationDAO{
 //		System.out.println(tag);
 //		System.out.println(sql);
 		List<CurationDTO> list = null;
-		rs = pstmt.executeQuery();		
+		rs = pstmt.executeQuery();	
+		int insertRow=0;
 		if( rs.next() ) {
 			sql = " DELETE FROM products_wish where products_tag = ? ";			
 		}else {			
@@ -366,7 +369,9 @@ public class DAOImpl implements CurationDAO{
 			JdbcUtil.close(rs);         
 		}
 
-		return list;
+		return insertRow;
 	}
-
+	
+	
+	
 }
