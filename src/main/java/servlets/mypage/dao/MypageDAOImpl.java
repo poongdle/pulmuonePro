@@ -156,10 +156,11 @@ public class MypageDAOImpl implements MypageDAO {
 				+ " WHERE member_no = ? AND box_order_date BETWEEN ? AND ? "
 				+ " ORDER BY box_order_date DESC ";
 		
-		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, origin_name "
+		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, origin_name, tracking_no "
 				+ " FROM box_order_products o JOIN products p ON o.products_no = p.products_no "
 										+ " JOIN products_img i ON p.products_no = i.products_no "
-				+ " WHERE box_order_no = ? AND origin_name = 'View.png' ";
+										+ " JOIN box_ship s ON o.box_order_no = s.box_order_no "
+				+ " WHERE o.box_order_no = ? AND origin_name = 'View.png' ";
 		
 		PreparedStatement pstmt1 = null;
 		ResultSet rs1 = null;
@@ -202,6 +203,7 @@ public class MypageDAOImpl implements MypageDAO {
 							pdto.setEventPrice(rs2.getInt("event_price"));
 							pdto.setImgPath(rs2.getString("img_path"));
 							pdto.setOriginName(rs2.getString("origin_name"));
+							pdto.setTrackingNo(rs2.getString("tracking_no"));
 							list2.add(pdto);
 						} while (rs2.next());
 					} // if
@@ -230,7 +232,7 @@ public class MypageDAOImpl implements MypageDAO {
 	//		a. 주문 내역, 주문 상품 정보 조회
 	@Override
 	public BoxOrderListDTO selectBoxOrder(int orderNo) throws SQLException {
-		String sql = " SELECT box_order_date "
+		String sql = " SELECT box_order_date, box_order_status "
 				+ " FROM box_order "
 				+ " WHERE box_order_no = ? ";
 		
@@ -256,6 +258,7 @@ public class MypageDAOImpl implements MypageDAO {
 				odto = new BoxOrderListDTO();
 				odto.setBoxOrderNo(orderNo);
 				odto.setBoxOrderDate(rs1.getString("box_order_date"));
+				odto.setBoxOrderStatus(rs1.getInt("box_order_status"));
 				
 				pstmt2 = conn.prepareStatement(sql2);
 				pstmt2.setInt(1, orderNo);
