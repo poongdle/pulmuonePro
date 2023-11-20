@@ -19,7 +19,8 @@ public class MemberSignUpStep3 implements CommandHandler {
 		
 		if (method.equals("GET")) {
 			
-//			return "/WEB-INF/views/member/regist/step3.jsp";
+			response.sendRedirect("/member/regist/step1.do");
+			return null;
 		} else { // POST
 			
 			request.setCharacterEncoding("UTF-8");

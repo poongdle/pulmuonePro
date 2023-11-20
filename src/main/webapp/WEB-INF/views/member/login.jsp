@@ -57,7 +57,7 @@
 			                    <div class="form-input none-dt">
 			                        <dl>
 			                            <dd>
-			                                <input type="password" id="loginPwd" name="pwd" placeholder="비밀번호" autocomplete="off" value="a1234567!"/>
+			                                <input type="password" id="loginPwd" name="pwd" placeholder="비밀번호" autocomplete="off"/>
 			                            </dd>
 			                        </dl>
 			                    </div>

@@ -31,8 +31,6 @@
 								<b style="margin-right: 3px">01.</b>
 								본인인증
 							</h2>
-							<input type="hidden" name="name" value="${ name }">
-							<input type="hidden" name="tel" value="${ tel }">
 							<input type="hidden" name="rrnBirthDate" value="${ rrnBirthDate }">
 							<input type="hidden" name="rrnGenderCode" value="${ rrnGenderCode }">
 						</li>
@@ -308,7 +306,7 @@ $(document).ready(function () {
 			return false;
 		}
 
-      const phone = "01005279612";
+      const phone = "\${ tel }";
       const password = $("#memberPwd").val();
       const email = $("#email").val();
       if(message.member.regist.password.isContainsPersonalInfo(password, phone, email,19871222)){
