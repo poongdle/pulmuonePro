@@ -15,8 +15,11 @@
 					<input type="hidden" name="payPrice" value="58000">
 
 					<div class="location">
-						<a href="/">홈</a> <a href="/">장바구니</a> <a href="/">주문서 작성</a>
+						<a href="/">홈</a>
+						<a href="/">장바구니</a>
+						<a href="/">주문서 작성</a>
 					</div>
+					
 					<div class="cont-checkout-area">
 						<div class="title-tab-area">
 							<h2 class="cont-title">주문서 작성</h2>
@@ -34,6 +37,7 @@
 									</div>
 									
 									<ul style="" class="prd-cart-list" id="order_targets">
+									
 										<li data-id="" data-itemcode="0071654" class="order-item order-chk active" data-price="2900">
 
 											<a href="/product/daily/281" class="prd-cart">
@@ -50,7 +54,6 @@
 											<div class="prd-cart-select-daily">
 												<ul data-cart-idx="" data-itemcode="0071654">
 
-
 													<li><input type="hidden" data-count="0" value="1">
 														<span>월</span>
 														<div class="prd-select-daily">
@@ -64,7 +67,6 @@
 																<span class="hide">제품 빼기</span>
 															</button>
 														</div></li>
-
 
 													<li class="active"><input type="hidden" data-count="1"
 														value="1"> <span>화</span>
@@ -80,7 +82,6 @@
 															</button>
 														</div></li>
 
-
 													<li><input type="hidden" data-count="2" value="1">
 														<span>수</span>
 														<div class="prd-select-daily">
@@ -94,7 +95,6 @@
 																<span class="hide">제품 빼기</span>
 															</button>
 														</div></li>
-
 
 													<li><input type="hidden" data-count="3" value="1">
 														<span>목</span>
@@ -110,7 +110,6 @@
 															</button>
 														</div></li>
 
-
 													<li><input type="hidden" data-count="4" value="1">
 														<span>금</span>
 														<div class="prd-select-daily">
@@ -123,11 +122,15 @@
 																class="prod-remove ea-control btn-minus" data-index="4">
 																<span class="hide">제품 빼기</span>
 															</button>
-														</div></li>
+														</div>
+													</li>
 
 												</ul>
-											</div></li>
+											</div>
+										</li>
+										
 									</ul>
+									
 									<div class="select-daily-amount"
 										style="padding: 18px 28px 26px 30px">
 										<span>요일별 수량을 선택해주세요.</span>
@@ -135,6 +138,7 @@
 											style="padding: 0 25px; margin-top: 2px;">상품추가하기</button>
 									</div>
 								</div>
+								
 								<div class="checkout-input-area">
 									<div class="checkout-input-title-area">
 										<h3 class="checkout-input-title">배송정보</h3>
@@ -143,6 +147,7 @@
 												닫기</span>
 										</button>
 									</div>
+									
 									<div class="checkout-input-box">
 										<div class="prd-cart-all-select">
 											<div class="checkbox chk-type3">
