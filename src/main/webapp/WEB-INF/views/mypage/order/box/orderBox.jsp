@@ -11,85 +11,6 @@
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
 <body>
-	<script type="text/javascript">
-	$(document).ready(function () {
-        $(".visual-area").fddCarousel({ auto: 5000 });
-		$(".event-area").fddCarousel({ auto: 5000, activeClick: true });
-		$('.prd-list.owl-carousel').owlCarousel({
-            items: 4,
-            nav: true,
-		  loop:false
-		});		
-	});	
-</script>
-
-<script>
-  	$(function () {
-		let searchMonth = '';
-		if(searchMonth != "" && searchMonth != undefined){
-			$("#searchMonth").val(searchMonth);
-			let target = "." + searchMonth;
-			$('.dropdown-toggle').data('value', searchMonth)
-			$('.dropdown-toggle').text($(target).text())
-		} // if
-			
-		$(document).on('click','.invoice',function () {
-		    $('#sweet').find('#t_code').val($(this).data('courier'))
-		    $('#sweet').find('#t_invoice').val($(this).data('invo').toString().replaceAll('-',''))
-		    $('#sweet').submit()
-		})
-			
-		$('.dropdown-item').click(function () {
-			const value = $(this).data('value');
-			const text = $(this).text();
-			$('.dropdown-toggle').data('value', value)
-			$('.dropdown-toggle').text(text)
-			
-			if (value === '3m') {
-			    var startDate = new Date();
-			    var endDate = new Date();
-			    startDate.setMonth(startDate.getMonth() - 3);
-			} else if (value === '6m') {
-				$("#searchMonth").val("6m");
-			    var startDate = new Date();
-			    var endDate = new Date();
-			    startDate.setMonth(startDate.getMonth() - 6);
-			} else {
-				$("#searchMonth").val("1y");
-			    var startDate = new Date();
-			    var endDate = new Date();
-			    startDate.setMonth(startDate.getMonth() - 12);
-			}
-			$('input[name="daterange"]').daterangepicker({startDate, endDate});
-			$("#searchBtn").click();
-		})
-			
-		$(document).on('click', '.applyBtn', function () {
-			$("#searchBtn").click();
-		});
-		
-		var startDate = new Date();
-		var endDate = new Date();
-		startDate.setMonth(startDate.getMonth() - 3);
-		
-		$('input[name="daterange"]').daterangepicker({
-			opens: 'left',
-			startDate,
-			endDate
-		}, function (start, end, label) {
-			console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-		});
-			
-		$('#searchBtn').click(function () {
-			const selectedRange = $('input[name=daterange]').val()
-			console.log(selectedRange)
-			$('input[name=startSearchDate]').val(selectedRange.split('~')[0].trim().replaceAll(' ', ''))
-			$('input[name=endSearchDate]').val(selectedRange.split('~')[1].trim().replaceAll(' ', ''))
-			$('#searchForm').submit();
-		})
-	});
-</script>
-
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 		<main class="page">
@@ -104,6 +25,7 @@
 					</ul>
 				</div>
 			</div>
+			
 			<div class="container aside-layout" style="padding-bottom:120px; ">
 	
 				<%@ include file="/WEB-INF/views/layouts/mypage/aside.jsp" %>
@@ -202,7 +124,7 @@
 											<span><label>주문번호</label><%= order.getBoxOrderNo() %></span>
 										</div>
 										<div class="status">
-											<a style="width:115px; padding:2px 0 0; height:41px;" href="/mypage/order/box/view.do" class="rounded-button">주문내역조회</a>
+											<a style="width:115px; padding:2px 0 0; height:41px;" href="/mypage/order/box/orderBoxView.do?boxOrderNo=<%= order.getBoxOrderNo() %>" class="rounded-button">주문내역조회</a>
 										</div>
 									</div>
 							<%
@@ -210,8 +132,6 @@
 										pIr = prdList.iterator();
 										while(pIr.hasNext()) {
 											prd = pIr.next();
-											
-										
 							%>
 									<div class="box-item">
 										<div class="item-wrapper">
@@ -272,7 +192,22 @@
 												            break;
 												        case 2: case 3: case 4:
 												%>
-												<button class="btn-default invoice btn-black" data-courier="04" data-invo="6813-2692-9623" data-status="2" >배송조회</button>
+												<!-- <button class="btn-default invoice btn-black" data-invo="6813-2692-9623" data-status="2" >배송조회</button> -->
+												<form action="http://info.sweettracker.co.kr/tracking/5" method="post">
+										            <div class="form-group" style="display: none">
+										              <label for="t_key">API key</label>
+										              <input type="text" class="form-control" id="t_key" name="t_key" placeholder="제공받은 APIKEY" value="Ppgk5mfovfq2cMhSjFOnYA">
+										            </div>
+										            <div class="form-group" style="display: none">
+										              <label for="t_code">택배사 코드</label>
+										              <input type="text" class="form-control" name="t_code" id="t_code" placeholder="택배사 코드" value="04">
+										            </div>
+										            <div class="form-group" style="display: none">
+										              <label for="t_invoice">운송장 번호</label>
+										              <input type="text" class="form-control" name="t_invoice" id="t_invoice" placeholder="운송장 번호" value="<%= prd.getTrackingNo() %>">
+										            </div>
+										            <button class="btn-default invoice btn-black" data-invo="<%= prd.getTrackingNo() %>" data-status="2" >배송조회</button>
+										        </form>
 												<%
 												            break;
 												    } // switch
@@ -433,9 +368,86 @@
 		$('#mini-side-nav').hide();
 	  }
 	})
-
   })
-  
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+        $(".visual-area").fddCarousel({ auto: 5000 });
+		$(".event-area").fddCarousel({ auto: 5000, activeClick: true });
+		$('.prd-list.owl-carousel').owlCarousel({
+            items: 4,
+            nav: true,
+		  loop:false
+		});		
+	});	
+</script>
+
+<script>
+  	$(function () {
+		let searchMonth = '';
+		if(searchMonth != "" && searchMonth != undefined){
+			$("#searchMonth").val(searchMonth);
+			let target = "." + searchMonth;
+			$('.dropdown-toggle').data('value', searchMonth)
+			$('.dropdown-toggle').text($(target).text())
+		} // if
+			
+		$(document).on('click','.invoice',function () {
+		    $('#sweet').find('#t_code').val($(this).data('courier'))
+		    $('#sweet').find('#t_invoice').val($(this).data('invo').toString().replaceAll('-',''))
+		    $('#sweet').submit()
+		})
+			
+		$('.dropdown-item').click(function () {
+			const value = $(this).data('value');
+			const text = $(this).text();
+			$('.dropdown-toggle').data('value', value)
+			$('.dropdown-toggle').text(text)
+			
+			if (value === '3m') {
+			    var startDate = new Date();
+			    var endDate = new Date();
+			    startDate.setMonth(startDate.getMonth() - 3);
+			} else if (value === '6m') {
+				$("#searchMonth").val("6m");
+			    var startDate = new Date();
+			    var endDate = new Date();
+			    startDate.setMonth(startDate.getMonth() - 6);
+			} else {
+				$("#searchMonth").val("1y");
+			    var startDate = new Date();
+			    var endDate = new Date();
+			    startDate.setMonth(startDate.getMonth() - 12);
+			}
+			$('input[name="daterange"]').daterangepicker({startDate, endDate});
+			$("#searchBtn").click();
+		})
+			
+		$(document).on('click', '.applyBtn', function () {
+			$("#searchBtn").click();
+		});
+		
+		var startDate = new Date();
+		var endDate = new Date();
+		startDate.setMonth(startDate.getMonth() - 3);
+		
+		$('input[name="daterange"]').daterangepicker({
+			opens: 'left',
+			startDate,
+			endDate
+		}, function (start, end, label) {
+			console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+		});
+			
+		$('#searchBtn').click(function () {
+			const selectedRange = $('input[name=daterange]').val()
+			console.log(selectedRange)
+			$('input[name=startSearchDate]').val(selectedRange.split('~')[0].trim().replaceAll(' ', ''))
+			$('input[name=endSearchDate]').val(selectedRange.split('~')[1].trim().replaceAll(' ', ''))
+			$('#searchForm').submit();
+		})
+	});
 </script>
 </body>
 </html>
