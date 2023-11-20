@@ -96,7 +96,8 @@
 <summary>이동현</summary>
 <div markdown="1">
 <h4>🌴 고객기쁨센터</h4>
-🌟<strong>FAQ</strong> <br>
+🌟<strong>FAQ</strong> <br> <br>
+  
   - FAQ 검색<br>
   - 카테고리별 목록 조회<br>
   - (관리자) FAQ 등록<br>
