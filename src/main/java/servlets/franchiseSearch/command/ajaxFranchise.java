@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,53 +51,58 @@ public class ajaxFranchise implements CommandHandler{
 			conn.setDoOutput(true); int responseCode = conn.getResponseCode();
 			System.out.println("### getAccessToken responseCode : " + responseCode);
 
-			BufferedReader br = null; if( responseCode == 200 ) { 
+			BufferedReader br = null; 
+			if( responseCode == 200 ) { 
 				br = new BufferedReader(new InputStreamReader(conn.getInputStream())); 
 			}else { 
 				br = new BufferedReader(new InputStreamReader(conn.getErrorStream())); 
 			}
 
-			String line; StringBuffer res = new StringBuffer();
+			String line; 
+			StringBuffer res = new StringBuffer();
 			while ( (line = br.readLine() ) != null ) { 
 				res.append(line); 
 			}
-
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(res.toString());
 			JSONObject jsonObj = (JSONObject) obj;
 			JSONArray documents = (JSONArray) jsonObj.get("documents");
+			if( documents.size() == 0 ) {
+				return emptyList();
+			}
 			JSONObject info = (JSONObject) documents.get(0);
 
+			// 주소
 			String address_name = pquery;
+			// 경도
 			Double fc_lng = Double.parseDouble( (String) info.get("x") );
+			// 위도
 			Double fc_lat = Double.parseDouble((String) info.get("y") );
 
 			AddressDTO vo = new AddressDTO(address_name, fc_lng, fc_lat);
 
 			ArrayList<FranchiseDTO> list = null;
 			list = frService.select(vo);
-			PrintWriter out = response.getWriter();
+
 			if( list != null ) {
-				// []
-				JSONArray resArr = new JSONArray();
 				Gson gson = new Gson();
-				Iterator<FranchiseDTO> ir = list.iterator();
-				while (ir.hasNext()) {
-					FranchiseDTO item = ir.next();
-					resArr.add( parser.parse(gson.toJson(item)) );
-				}
-				out.println(resArr);
+				return gson.toJson(list);
 			}else {
-				JSONObject emptyObj = new JSONObject();
-				emptyObj.put("result", 0);
-				out.println(emptyObj);
+				return emptyList();
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return null;
+	}
+
+	public static String emptyList () {
+		JSONObject emptyObj = null; 
+		HashMap<String, Integer> hashmap = new HashMap<>();
+		hashmap.put("result", 0);
+		emptyObj = new JSONObject(hashmap);
+		System.out.println(">> 검색결과 없음");
+		return emptyObj.toJSONString();
 	}
 
 }
