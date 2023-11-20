@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import servlets.member.dto.MemberDTO;
 import servlets.refund.dto.RefundDTO;
 
 @Setter

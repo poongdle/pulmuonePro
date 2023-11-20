@@ -29,6 +29,7 @@ public class RefundList implements CommandHandler {
 			
 			request.setAttribute("insttName", dto.getInsttName());
 			request.setAttribute("acctOwner", dto.getAcctOwner());
+			request.setAttribute("acctNum", acctNum);
 			request.setAttribute("maskedAcctNum", maskedAcctNum);
 			
 		}		
