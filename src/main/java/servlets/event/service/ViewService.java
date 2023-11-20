@@ -37,8 +37,8 @@ public class ViewService {
             DataSource ds = (DataSource) envContext.lookup("jdbc/myoracle");
             conn = ds.getConnection();
 
-            String sql = "SELECT e.event_no, e.event_name, e.event_start, e.event_end, e.event_notice, i.img_no, i.system_name, i.origin_name, i.img_size, i.img_type, i.img_path, i.img_link " +
-                         "FROM event e INNER JOIN event_image i ON e.event_no = i.event_no WHERE e.event_no = ?";
+            String sql = "SELECT e.event_no, e.event_name, e.event_start, e.event_end, e.event_notice, e.event_cmt, i.img_no, i.system_name, i.origin_name, i.img_size, i.img_type, i.img_path, i.img_link " +
+                    "FROM event e INNER JOIN event_image i ON e.event_no = i.event_no WHERE e.event_no = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, event_no);
             rs = pstmt.executeQuery();
@@ -54,6 +54,7 @@ public class ViewService {
                     eventDTO.setEvent_start(rs.getDate("event_start"));
                     eventDTO.setEvent_end(rs.getDate("event_end"));
                     eventDTO.setEvent_notice(rs.getString("event_notice"));
+                    eventDTO.setEvent_cmt(rs.getInt("event_cmt"));
                     dto.setEvent(eventDTO);  // EventDTO 객체 설정
                 }
 

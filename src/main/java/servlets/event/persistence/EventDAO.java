@@ -21,19 +21,20 @@ public class EventDAO implements IEvent{
 
 	@Override
 	public void createEvent(EventDTO event) throws SQLException {
-		String sql = "INSERT INTO event (event_no, event_name, event_start, event_end, event_notice) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO event (event_no, event_name, event_start, event_end, event_notice, event_cmt) VALUES (?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, event.getEvent_no());
 		pstmt.setString(2, event.getEvent_name());
 		pstmt.setDate(3, event.getEvent_start());
 		pstmt.setDate(4, event.getEvent_end());
 		pstmt.setString(5, event.getEvent_notice());
+		pstmt.setInt(6, event.getEvent_cmt());
 		pstmt.executeUpdate();
 	}
 
 	@Override
 	public EventDTO viewEvent(int event_no) throws SQLException {
-		String sql = "SELECT * FROM even WHERE event_no = ?";
+		String sql = "SELECT * FROM event WHERE event_no = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, event_no);
 		ResultSet rs = pstmt.executeQuery();
@@ -45,6 +46,7 @@ public class EventDAO implements IEvent{
 					rs.getDate("event_start"),
 					rs.getDate("event_end"),
 					rs.getString("event_notice"),
+					rs.getInt("event_cmt"),
 					null
 					);
 			return event;
@@ -55,13 +57,14 @@ public class EventDAO implements IEvent{
 
 	@Override
 	public void updateEvent(EventDTO event) throws SQLException {
-		String sql = "UPDATE event SET event_name = ?, event_start = ?, event_end = ?, event_notice = ? WHERE event_no = ?";
+		String sql = "UPDATE event SET event_name = ?, event_start = ?, event_end = ?, event_notice = ?, event_cmt = ? WHERE event_no = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, event.getEvent_name());
 		pstmt.setDate(2, event.getEvent_start());
 		pstmt.setDate(3, event.getEvent_end());
 		pstmt.setString(4, event.getEvent_notice());
-		pstmt.setInt(5, event.getEvent_no());
+		pstmt.setInt(5, event.getEvent_cmt());
+		pstmt.setInt(6, event.getEvent_no());
 		pstmt.executeUpdate();
 	}
 
