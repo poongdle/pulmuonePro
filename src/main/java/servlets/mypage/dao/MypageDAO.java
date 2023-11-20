@@ -7,10 +7,12 @@ import java.util.Map;
 import servlets.mypage.dto.BoxOrderListDTO;
 import servlets.mypage.dto.BoxOrderSimpleInfoDTO;
 import servlets.order.domain.BoxOrderDTO;
+import servlets.order.domain.BoxPayDTO;
 
 public interface MypageDAO {
 	
 	// 1. 매일배송 관련
+	
 	
 	// 2. 택배배송 관련
 	// 	1) 총 택배배송 주문 건수
@@ -24,6 +26,17 @@ public interface MypageDAO {
 	
 	// 	3) 택배배송 주문 내역 - 리스트 조회 및 날짜 검색
 	ArrayList<BoxOrderListDTO> selectBoxOrderList(int memberNo, String startSearchDate, String endSearchDate) throws SQLException;
+	
+	// 	4) 택배배송 주문 취소
+	//		a. 주문 내역, 주문 상품 정보 조회
+	BoxOrderListDTO selectBoxOrder(int orderNo) throws SQLException;
+	//		b. 결제 정보 조회
+	BoxPayDTO selectBoxPay(int orderNo) throws SQLException;
+	// 		c. 주문 정보 업데이트
+	int updateBoxOrder(int orderNo) throws SQLException;
+	//		d. 결제 정보 업데이트
+	int updateBoxPay(int orderNo) throws SQLException;
+	
 	
 	// 3. 시음선물 관련
 			

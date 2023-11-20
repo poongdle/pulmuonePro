@@ -21,90 +21,10 @@
 		});		
 	});		
 </script>
-	
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 		<main class="page">
 			<div id="container-wrapper" class="container-wrapper"> <!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
-
-<script>
-	var formatter = new Intl.NumberFormat();
-	$(function () {
-		if(false){
-			alert("주문내역 중 취소가 불가능한 상품이 있습니다. 고객센터에 문의해주세요.",function (){
-				location.href='/mypage/order/box.do';
-			});
-		} // if
-		
-		$('input[name=select-product]').prop('checked', true);
-		$('input[name=select-product-all]').prop('checked', true);
-
-		$('#select-all').click(function (){
-			$('input[name=select-product]').prop('checked', $(this).is(':checked'));
-			$('input[name=select-product-all]').prop('checked', $(this).is(':checked'));
-		})
-
-		$('input[name=select-product]').change(function () {
-			var item = $('input[name=select-product]').length;
-			var checkItem = $('input[name=select-product]:checked').length;
-
-			if(item === checkItem)$('#select-all').prop('checked','checked')
-			else $('#select-all').prop('checked',false)
-		})
-
-		// 쵀대값일 경우 + disabled
-
-		$('.btn-plus').click(function () {
-			alert("부분취소는 고객센터에 문의해주세요.");
-			return;
-
-			const maxQty = $(this).siblings('.box-qty').data('max-qty');
-			const qty = $(this).siblings('.box-qty').text()
-			// console.log(maxQty, qty)
-			if(maxQty===parseInt(qty)){
-				$(this).prop('disabled','disabled')
-				return;
-			}
-			$(this).siblings('.box-qty').text(parseInt(qty) + 1)
-			calculateBoxPrice($(this))
-		})
-		$('.btn-minus').click(function () {
-			alert("부분취소는 고객센터에 문의해주세요.");
-			return;
-
-			$('.btn-plus').prop('disabled',false)
-			const qty = $(this).siblings('.box-qty').text()
-			if (qty > 1) {
-				$(this).siblings('.box-qty').text(parseInt(qty) - 1)
-				calculateBoxPrice($(this))
-			}
-		})
-
-		$('.item').click(function(){
-			var orders = 2;
-			// 택배배송리스트 1개인 경우
-			if(orders == 1) $(".select-product-checkbox.each").prop("disabled", false);
-			else alert("부분취소는 고객센터에 문의해주세요.");
-		})
-	})
-	
-	function calculateBoxPrice(propThis) {
-		let qty;
-		if(propThis.is('.btn-plus')) qty = propThis.prev().text();
-		else if(propThis.is('.btn-minus')) qty = propThis.next().text();
-
-		// 가격 변동
-		const eachPrice = propThis.parent().parent().parent().find('.value.origin').data('eachprice');
-		propThis.parent().parent().parent().find('.value.origin').text(formatter.format(eachPrice * qty));
-
-		// 세일가격 변동
-		if(propThis.parent().parent().parent().find('.value').is('.value.sale')){
-			const eachSalePrice = propThis.parent().parent().parent().find('.value.sale').data('eachprice');
-			propThis.parent().parent().parent().find('.value.sale').text(formatter.format((eachPrice * qty)-(eachSalePrice * qty)));
-		} // if
-
-	}
-</script>
 
 <div class="breadcrumb-style">
 	<div class="container">
@@ -128,16 +48,21 @@
 		
 		<div class="page-addiction-wrapper" style="align-items: center; margin-bottom:23px;">
 			<div class="info-copy" style="padding-left:2px; padding-top:9px;">
-				<p class="detailsinfo">${ boxOrder.boxOrderDate.substring(0, 10) }</p>
 				<p class="detailsinfo"><label>주문번호</label>${ boxOrder.boxOrderNo }</p>
 			</div>
+			<p class="detailsinfo" align="right">취소접수일자&nbsp&nbsp&nbsp&nbsp
+				<script>
+					let today = new Date();
+					let year = today.getFullYear();
+					let month = today.getMonth()+1;
+					let date = today.getDate();
+					document.write(year+"."+month+"."+date);
+				</script>
+			</p>
 		</div>
 		
-		<div class="box-partition" style="margin-bottom:12px; padding:0 20px; height:60px;">
-			<label class="check-type">
-				<input type="checkbox" class="select-product-checkbox" id="select-all" name="select-product-all">
-				<span style="font-size:16px; margin-bottom:4px; padding-left:51px;">전체선택</span>
-			</label>
+		<div class="complete-copy-wrapper" style="margin-bottom:20px;">
+			<span class="complete-copy">주문취소가 완료되었습니다.</span>
 		</div>
 		
 		<div class="box-partition">
@@ -155,10 +80,9 @@
 					%>
 					<li>
 						<label class="item-wrapper">
-							<input name="select-product" class="select-product-checkbox each" data-status="BOCC001" data-ordernum="${ boxOrder.boxOrderNo }" type="checkbox" disabled="">
 							<div class="item" href="/">
 								<a class="thumb">
-									<img src="<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt=""><!-- onerror="this.src='/resources/images/common/no_img.png'"  -->
+									<img src="<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt="">
 								</a>
 								<div class="contents">
 									<div class="product">
@@ -170,7 +94,7 @@
 										<div class="select-item horizontal">
 											<span>수량</span>
 											<div class="unit">
-												<em data-max-qty="<%= prd.getProductsCnt() %>" class="box-qty"><%= prd.getProductsCnt() %></em>
+												<em data-max-qty="1" class="box-qty"><%= prd.getProductsCnt() %></em>
 											</div>
 										</div>
 					<%
@@ -288,7 +212,6 @@
 		
 		<div class="btn-area-right" style="margin-top:20px;">
 			<a style="padding:0; width:140px;" class="btn-default btn-white" onclick="location.href='/mypage/order/box.do'">목록으로</a>
-			<button id="cancelBtn" type="button" style="padding:0; width:140px;" class="btn-default btn-black" data-toggle="modal" data-target="#pauseModal">취소하기</button>
 		</div>
 		
 	</div>
@@ -302,79 +225,60 @@
     var h = image.height;
     var options = `width=${w},height=${h}, status=no, menubar=no, toolbar=no, resizable=no`;
 	if(windowRef===null|| windowRef.closed){
-	    windowRef = window.open('', name, options);
-	    windowRef.document.write(`<img src="${url}" width="${w}" maxWidth=100vw />`);
-	    windowRef.document.body.style.margin=0;
-	} else {
-    	windowRef.focus();
-	} // if
-  } // openWindowPop
-</script>
 
+    windowRef = window.open('', name, options);
+    windowRef.document.write(`<img src="${url}" width="${w}" maxWidth=100vw />`);
+    windowRef.document.body.style.margin=0;
+	}else {
+    windowRef.focus();
+	}
+
+  }
+  $(function(){
+
+    axios.get('/user_summary/default').then(function (response) {
+
+      const {info, customerVo} = response.data.RESULT_MSG;
+
+		const ec = ( !info.overEnd) && (info.complex||info.hasHp) && customerVo.phiCustomerVo.intfacId == '0' && customerVo.phiCustomerVo.dlvyCustYn==='Y'
+        if(ec&&customerVo){
+          $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
+          $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
+        }else {
+          $('#quickChangeDrink').attr('href', `/mypage?with=01`)
+          $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
+        }
+        console.log(window.innerWidth)
+        if(window.innerWidth>1450){
+          $('#mini-side-nav').show();
+        }
+    }).catch(function (error) {
+      if(window.innerWidth>1450) {
+        $('#mini-side-nav').show()
+      }
+	});
+    window.addEventListener('resize', function(){
+	  if(window.innerWidth>1450){
+		$('#mini-side-nav').show();
+	  }else {
+		$('#mini-side-nav').hide();
+	  }
+	})
+
+  })
+</script>
 <div style="" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/resources/images/ui/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/images/ui/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/images/ui/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/resources/images/ui/quick4.png" alt=""></a>
-	<a href="#"><img src="/resources/images/ui/quickTop.png" alt=""></a>
+	<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>
+	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick2.png" alt=""></a>
+	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick3.png" alt=""></a>
+	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
+	<a href="#"><img src="/resources/assets/images/ui/quickTop.png" alt=""></a>
 </div>
 
 </div>
 		</main>		
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
-		
-		<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: none;" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="alertModalLabel"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						</button>
-					</div>
-					<div class="modal-body">주문취소된 상품입니다.</div>
-					<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
-				</div>
-			</div>
-		</div>
-		
-		<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="confirmModalLabel"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						</button>
-					</div>
-					<div class="modal-body">
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="cancel" data-dismiss="modal">취소</button>
-						<button type="button" class="confirm">확인</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	
- </div>
-
- <script>
-	$("#cancelBtn").click(function(){
-		const checked = $('input[name=select-product]:checked');
-		
-		if(checked.length===0){
-			return alert('취소할 상품을 선택해주세요');
-		} // if
-		
-		let orderNo = ${ param.orderNo };
-		
-		confirmDesign('','선택하신 상품 주문을 취소 하시겠습니까?',function (){
-			let url = "/mypage/order/box/canceled.do?orderNo=" + orderNo;
-			alert('취소가 완료되었습니다.');
-			location.href = url
-		})
-	})
-</script>
- 
+ 	</div>
 </body>
 
 </html>

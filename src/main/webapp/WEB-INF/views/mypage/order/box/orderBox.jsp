@@ -156,13 +156,6 @@
 						<input type="text" name="endSearchDate" value="2023.11.18">
 					</form>
 					
-					<script>
-						$(function () {
-							
-						});
-					</script>
-					
-					
 					<div class="delivery-order-list">
 						<ul id="post-items" data-list-object="append">
 							<%
@@ -264,7 +257,7 @@
 											</div>
 										</div>
 											<div class="button-area">
-												<button class="btn-default btn-white" onclick="location.href='/mypage/action/counsel/write?orderNum=13021'">1:1 문의</button>
+												<button class="btn-default btn-white" onclick="location.href='/forum/inquiry/write.do">1:1 문의</button><!-- 왜 안되지? -->
 												<%
 													switch (orderStatus) {
 												        case -1:
@@ -272,29 +265,14 @@
 												<button class="btn-default btn-black" style="background: grey" onclick="alert('주문취소된 상품입니다.')">주문취소</button>
 												<%
 												            break;
-												        case 0:
+												        case 0: case 1:
 												%>
-												<button class="btn-default btn-black">주문취소</button>
+												<button class="btn-default btn-black" data-status="0" data-order-no="<%= order.getBoxOrderNo() %>">주문취소</button>
 												<%
 												            break;
-												        case 1:
+												        case 2: case 3: case 4:
 												%>
-												<button class="btn-default btn-black">주문취소</button>
-												<%
-												            break;
-												        case 2:
-												%>
-												<button data-courier="04" data-invo="6813-2692-9623" class="btn-default invoice btn-black">배송조회</button>
-												<%
-												            break;
-												        case 3:
-												%>
-												<button data-courier="04" data-invo="6813-2692-9623" class="btn-default invoice btn-black">배송조회</button>
-												<%
-												            break;
-												        case 4:
-												%>
-												<button data-courier="04" data-invo="6813-2692-9623" class="btn-default invoice btn-black">배송조회</button>
+												<button class="btn-default invoice btn-black" data-courier="04" data-invo="6813-2692-9623" data-status="2" >배송조회</button>
 												<%
 												            break;
 												    } // switch
@@ -328,6 +306,51 @@
 </div>
 
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
+
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: none;" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="alertModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">주문취소된 상품입니다.</div>
+			<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	$("div.button-area > button").on("click", function() {
+		let status = $(this).attr("data-status");
+		if(status == 0) {	// 주문 취소
+			let orderNo = $(this).attr("data-order-no");
+			location.href = "/mypage/order/box/cancel.do?orderNo=" + orderNo;
+		} // if
+		if(status == 2) {	// 배송조회
+			alert("배송조회");
+		} // if
+	});
+</script>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="confirmModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="cancel" data-dismiss="modal">취소</button>
+				<button type="button" class="confirm">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script>
   $(document).on("click", "#mypage_lnb .indepth>a", function (e) {
@@ -412,6 +435,7 @@
 	})
 
   })
+  
 </script>
 </body>
 </html>

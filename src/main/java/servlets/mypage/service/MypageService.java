@@ -10,6 +10,7 @@ import servlets.mypage.dao.MypageDAOImpl;
 import servlets.mypage.dto.BoxOrderListDTO;
 import servlets.mypage.dto.BoxOrderSimpleInfoDTO;
 import servlets.order.domain.BoxOrderDTO;
+import servlets.order.domain.BoxPayDTO;
 
 public class MypageService {
 	
@@ -92,9 +93,7 @@ public class MypageService {
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao = new MypageDAOImpl(conn);
-			
 			list = dao.selectBoxOrderList(memberNo, startSearchDate, endSearchDate);
-			
 		} catch (Exception e) {
 			System.out.println("MypageService.selectBoxOrderList() error...");
 			e.printStackTrace();
@@ -103,6 +102,71 @@ public class MypageService {
 		} // try
 		return list;
 	} // selectBoxOrderList()
+
+	// 	4) 택배배송 취소
+	//		a. 주문 내역, 주문 상품 정보 조회
+	public BoxOrderListDTO selectBoxOrder(int boxOrderNo) {
+		Connection conn = null;
+		MypageDAOImpl dao = null;
+		BoxOrderListDTO order = null;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = new MypageDAOImpl(conn);
+			
+			order = dao.selectBoxOrder(boxOrderNo);
+			
+		} catch (Exception e) {
+			System.out.println("MypageService.selectBoxOrder() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+		} // try
+		return order;
+	} // selectBoxOrder()
+	
+	//		b. 결제 정보 조회
+	public BoxPayDTO selectBoxPay(int boxOrderNo) {
+		Connection conn = null;
+		MypageDAOImpl dao = null;
+		BoxPayDTO dto = null;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = new MypageDAOImpl(conn);
+			
+			dto = dao.selectBoxPay(boxOrderNo);
+			
+		} catch (Exception e) {
+			System.out.println("MypageService.selectBoxPay() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+		} // try
+		return dto;
+	} // selectBoxPay()
+
+	//		c, d. 결제 정보 조회
+	public int updateBoxOrder(int boxOrderNo) {
+		Connection conn = null;
+		MypageDAOImpl dao = null;
+		int rowCnt1 = 0, rowCnt2 = 0;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = new MypageDAOImpl(conn);
+			
+			rowCnt1 = dao.updateBoxOrder(boxOrderNo);
+			rowCnt2 = dao.updateBoxPay(boxOrderNo);
+		} catch (Exception e) {
+			System.out.println("MypageService.updateBoxOrder() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+		} // try
+		return rowCnt1+rowCnt2;
+	} // updateBoxOrder()
+	
 	
 	
 

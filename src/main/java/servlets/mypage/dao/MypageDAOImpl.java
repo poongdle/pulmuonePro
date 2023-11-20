@@ -18,6 +18,7 @@ import servlets.mypage.dto.BoxOrderSimpleInfoDTO;
 import servlets.order.domain.BoxOrderDTO;
 import servlets.order.domain.BoxOrderInfoDTO;
 import servlets.order.domain.BoxOrderProductDTO;
+import servlets.order.domain.BoxPayDTO;
 
 
 @Setter
@@ -152,7 +153,8 @@ public class MypageDAOImpl implements MypageDAO {
 	public ArrayList<BoxOrderListDTO> selectBoxOrderList(int memberNo, String startSearchDate, String endSearchDate) throws SQLException {
 		String sql = " SELECT box_order_no, box_order_date, box_order_status "
 				+ " FROM box_order "
-				+ " WHERE member_no = ? AND box_order_date BETWEEN ? AND ? ";
+				+ " WHERE member_no = ? AND box_order_date BETWEEN ? AND ? "
+				+ " ORDER BY box_order_date DESC ";
 		
 		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, origin_name "
 				+ " FROM box_order_products o JOIN products p ON o.products_no = p.products_no "
@@ -223,6 +225,154 @@ public class MypageDAOImpl implements MypageDAO {
 		return list1;
 	}
 
+
+	// 	4) 택배배송 취소
+	//		a. 주문 내역, 주문 상품 정보 조회
+	@Override
+	public BoxOrderListDTO selectBoxOrder(int orderNo) throws SQLException {
+		String sql = " SELECT box_order_date "
+				+ " FROM box_order "
+				+ " WHERE box_order_no = ? ";
+		
+		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, origin_name "
+				+ " FROM box_order_products o JOIN products p ON o.products_no = p.products_no "
+										+ " JOIN products_img i ON p.products_no = i.products_no "
+				+ " WHERE box_order_no = ? AND origin_name = 'View.png' ";
+		
+		PreparedStatement pstmt1 = null;
+		ResultSet rs1 = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs2 = null;
+		
+		BoxOrderListDTO odto = null;
+		BoxOrderProductDTO pdto = null;
+		ArrayList<BoxOrderProductDTO> list2 = null;
+
+		try {
+			pstmt1 = conn.prepareStatement(sql);
+			pstmt1.setInt(1, orderNo);
+			rs1 = pstmt1.executeQuery();
+			if (rs1.next()) {
+				odto = new BoxOrderListDTO();
+				odto.setBoxOrderNo(orderNo);
+				odto.setBoxOrderDate(rs1.getString("box_order_date"));
+				
+				pstmt2 = conn.prepareStatement(sql2);
+				pstmt2.setInt(1, orderNo);
+				rs2 = pstmt2.executeQuery();
+				
+				if (rs2.next()) {
+					list2 = new ArrayList<>();
+					do {
+						pdto = new BoxOrderProductDTO();
+						pdto.setProductsNo(rs2.getString("products_no"));
+						pdto.setProductsType(rs2.getString("products_type"));
+						pdto.setProductsName(rs2.getString("products_name"));
+						pdto.setProductsSize(rs2.getString("products_size"));
+						pdto.setProductsCnt(rs2.getString("products_cnt"));
+						pdto.setPrice(rs2.getInt("price"));
+						pdto.setEventPrice(rs2.getInt("event_price"));
+						pdto.setImgPath(rs2.getString("img_path"));
+						pdto.setOriginName(rs2.getString("origin_name"));
+						list2.add(pdto);
+					} while (rs2.next());
+					odto.setProductList(list2);
+				} // if
+					
+				JdbcUtil.close(pstmt2);
+				JdbcUtil.close(rs2);
+			} // if
+		} catch (Exception e) {
+			System.out.println("MypageDAOImpl.selectBoxOrder() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt1);
+			JdbcUtil.close(rs1);
+		} // try
+		return odto;
+	} // selectBoxOrder
+
+	
+	//		b. 결제 정보 조회
+	@Override
+	public BoxPayDTO selectBoxPay(int orderNo) throws SQLException {
+		String sql = " SELECT box_pay_no, box_pay_datetime, box_price, box_sale_price, box_discount_price, box_shipping_fee, box_final_price, box_pay_method, box_pay_status " 
+				+ " FROM box_pay "
+				+ " WHERE box_order_no = " + orderNo;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoxPayDTO dto = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				dto = new BoxPayDTO();
+				dto.setBoxPayNo(rs.getInt("box_pay_no"));
+				dto.setBoxPayDateTime(rs.getString("box_pay_datetime"));
+				dto.setBoxPrice(rs.getInt("box_price"));
+				dto.setBoxSalePrice(rs.getInt("box_sale_price"));
+				dto.setBoxDiscountPrice(rs.getInt("box_discount_price"));
+				dto.setBoxShippingFee(rs.getInt("box_shipping_fee"));
+				dto.setBoxFinalPrice(rs.getInt("box_final_price"));
+				dto.setBoxPayMethod(rs.getInt("box_pay_method"));
+				dto.setBoxPayStatus(rs.getInt("box_pay_status"));
+			} // if
+		} catch (Exception e) {
+			System.out.println("MypageDAOImpl.selectBoxPay() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);
+		} // try
+		return dto;
+	} // selectBoxPay
+
+	//		c. 주문 결제 정보 업데이트
+	@Override
+	public int updateBoxOrder(int orderNo) throws SQLException {
+		String sql1 = " UPDATE box_order " 
+				+ " SET box_order_status = -1 "
+				+ " WHERE box_order_no = " + orderNo;
+
+		PreparedStatement pstmt = null;
+		int rowCnt = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql1);
+			rowCnt = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("MypageDAOImpl.updateBoxOrder() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		} // try
+		return rowCnt;
+	} // updateBoxOrder
+	
+	//		d. 주문 결제 정보 업데이트
+	@Override
+	public int updateBoxPay(int orderNo) throws SQLException {
+		String sql1 = " UPDATE box_pay " 
+				+ " SET box_pay_status = 1 "
+				+ " WHERE box_order_no = " + orderNo;
+	
+		PreparedStatement pstmt = null;
+		int rowCnt = 0;
+	
+		try {
+			pstmt = conn.prepareStatement(sql1);
+			rowCnt = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("MypageDAOImpl.updateBoxPay() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		} // try
+		return rowCnt;
+	} // updateBoxPay
+	
 	
 	// 3. 시음선물 관련
 	

@@ -190,6 +190,8 @@
 											<td>
 												<b>
 													<c:choose>
+														<c:when test="${ bosiList.boxOrderStatus eq -1 }">주문취소</c:when>
+														<c:when test="${ bosiList.boxOrderStatus eq 0 }">결제대기-(가상계좌)</c:when>
 														<c:when test="${ bosiList.boxOrderStatus eq 1 }">결제완료</c:when>
 														<c:when test="${ bosiList.boxOrderStatus eq 2 }">배송준비중</c:when>
 														<c:when test="${ bosiList.boxOrderStatus eq 3 }">배송중</c:when>

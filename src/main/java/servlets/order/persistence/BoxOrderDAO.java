@@ -305,7 +305,7 @@ public class BoxOrderDAO implements BoxOrderImpl {
 			cstmt.setInt(2, dto.getBoxPrice());
 			cstmt.setInt(3, dto.getBoxSalePrice());
 			cstmt.setInt(4, dto.getBoxDiscountPrice());
-			cstmt.setInt(5, dto.getBoxShippingPrice());
+			cstmt.setInt(5, dto.getBoxShippingFee());
 			cstmt.setInt(6, dto.getBoxFinalPrice());
 			cstmt.setInt(7, dto.getBoxPayMethod());
 			cstmt.registerOutParameter(8, Types.INTEGER);

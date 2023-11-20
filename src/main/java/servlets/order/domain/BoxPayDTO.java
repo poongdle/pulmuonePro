@@ -17,7 +17,7 @@ public class BoxPayDTO {
 	private int boxPrice;
 	private int boxSalePrice;
 	private int boxDiscountPrice;
-	private int boxShippingPrice;
+	private int boxShippingFee;
 	private int boxFinalPrice;
 	private int boxPayMethod;
 	private int boxPayStatus;

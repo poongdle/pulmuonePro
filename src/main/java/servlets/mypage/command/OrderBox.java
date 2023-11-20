@@ -24,9 +24,9 @@ public class OrderBox implements CommandHandler {
 		int memberNo = member.getMemberNo();
 		
 		// > service 객체 생성
+		MypageService service = new MypageService();
 		
 		// 1. 총 택배배송 주문 건수
-		MypageService service = new MypageService();
 		int boxOrderCnt = service.boxOrderCnt(memberNo);
 		request.setAttribute("boxOrderCnt", boxOrderCnt);
 		
@@ -45,9 +45,6 @@ public class OrderBox implements CommandHandler {
 		
 		ArrayList<BoxOrderListDTO> boxOrderList = service.selectBoxOrderList(memberNo, startSearchDate, endSearchDate);
 		request.setAttribute("boxOrderList", boxOrderList);
-		
-		
-		
 		
 		return "/WEB-INF/views/mypage/order/box/orderBox.jsp";
 	}
