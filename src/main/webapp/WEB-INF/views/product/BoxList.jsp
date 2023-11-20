@@ -449,8 +449,7 @@
 					</div>
 				</form>
 			</div>
-		</main>
-		<%@ include file="/WEB-INF/views/layouts/quick_menu.jsp"%>
+		</main>		
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
 		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 		<%@ include file="/WEB-INF/views/ui/wishmodal.jsp"%>
