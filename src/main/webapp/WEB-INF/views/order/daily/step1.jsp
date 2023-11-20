@@ -965,7 +965,7 @@
 										
 											<li data-id="" data-itemcode="${ prd.productsNo }" class="order-item order-chk active" data-price="${ prd.price }">
 	
-												<a href="/product/daily/281" class="prd-cart">
+												<a href="/product/daily/view.do?tag=281" class="prd-cart">
 													<div class="thumb">
 														<img src="/${ prd.imgPath }/${ prd.systemName }" alt="">
 													</div>
@@ -1477,7 +1477,7 @@
                 		<div class="input-search-bar">
                     		<input name="searchKeyword" placeholder="검색어를 입력하세요">
                     		<button id="productSearch">
-                       			<img src="/resources/images/ui/ico-srh02.png">
+                       			<img src="/resources/assets/images/ui/ico-srh02.png">
                     		</button>
                 		</div>
             		</form>
@@ -1486,7 +1486,7 @@
                 		<ul class="product-content-list add-popup" id="add-product-targets">
                 			<li class="product-add" style="cursor:pointer;" data-available="null" data-addproduct="0071654">
     							<div class="thumb">
-    								<img src="/file/download/product/20221108/f1dfce0b-663c-4486-a7a3-188f199ba502.jpg" onerror="this.src='/resources/images/common/no_img.png'" alt="">
+    								<img src="/file/download/product/f1dfce0b-663c-4486-a7a3-188f199ba502.jpg" onerror="this.src='/resources/assets/images/common/no_img.png'" alt="">
     							</div>
     							<div class="contents">
         							<p class="name">위러브플러스<span>(130ml)</span></p>

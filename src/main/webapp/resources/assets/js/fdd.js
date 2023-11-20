@@ -74,7 +74,7 @@ function addCartToServer(type, data, eventIdx) {
     codes.push(item.itemCode);
   }
 
-  axios.post(`/product_available.do`, { ids: codes }).then(function (r) {
+  axios.post(`/product_available`, { ids: codes }).then(function (r) {
     var o = r.data.RESULT_MSG;
 	
     var lockIds = o.fails.map(x => x.itemCode);
