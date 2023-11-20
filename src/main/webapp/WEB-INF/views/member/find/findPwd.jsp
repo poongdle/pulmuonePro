@@ -64,7 +64,7 @@
 						<dl>
 							<dt><label>아이디</label></dt>
 							<dd>
-								<input type="text" name="memberId" id="memberId">
+								<input type="text" name="inputMemberId" id="inputMemberId">
 							</dd>
 						</dl>
 						<p id="memberIdError" style="padding-left: 136px"></p>
@@ -122,7 +122,7 @@
 		// 비밀번호찾기 본인인증
 		$("#findPwdAuth").click(function(e) {
 			e.preventDefault();
-			if ($.trim($("#memberId").val()) == "" ){
+			if ($.trim($("#inputMemberId").val()) == "" ){
 
 				$(".form-input").addClass("error");
 				$("#memberIdError").text("아이디를 입력해 주세요.")
@@ -131,7 +131,7 @@
 
 				// 기존 회원 확인
 			    var params = null;
-			    params = "memberId="+$("#memberId").val();   
+			    params = "memberId="+$("#inputMemberId").val();   
 				$.ajax({
 					url:"/member/idCheck.ajax" , 
 					dataType:"json",
@@ -146,6 +146,7 @@
 						} else {  
 							console.log(data.memberNo);
 							$(".form-input.error").removeClass("error");
+							$("#memberId").val( $("#inputMemberId").val() );
 							prompt();
 						}
 					 
@@ -221,6 +222,7 @@
 			</div>
 			<div class="modal-body">
 				<form id="authorizeNICE" action="/member/find/password-success.do" method="post">
+					<input type="hidden" name="memberId" id="memberId">
 					<div class="form-input">
 						<dl>
 							<dt>

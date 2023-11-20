@@ -38,6 +38,10 @@ public class MemberFindPwd implements CommandHandler {
 			MemberService memberService = new MemberService();
 			MemberDTO dto = memberService.isExistingId(memberId);
 			
+			System.out.println(memberId);
+			System.out.println(dto);
+			System.out.println(dto.getEmail());
+			
 			String inputTel = request.getParameter("tel");
 			String tel = String.format("%s-%s-%s", inputTel.substring(0, 3), inputTel.substring(3, 7), inputTel.substring(7, 11));
 
