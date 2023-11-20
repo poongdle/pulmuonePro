@@ -136,7 +136,7 @@
 									<div class="box-item">
 										<div class="item-wrapper">
 											<div class="thumb">
-												<img src="<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt="">
+												<img src="/<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt="">
 											</div>
 										<div class="contents">
 											<a href="/product/box/<%= prd.getProductsNo() %>" class="prd-info">

@@ -1,7 +1,8 @@
 package servlets.mypage.command;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,16 +35,37 @@ public class OrderBox implements CommandHandler {
 		String startSearchDate = request.getParameter("startSearchDate");
 		String endSearchDate = request.getParameter("endSearchDate");
 		
-		if (startSearchDate == null || endSearchDate == null) {
-			Date today = new Date();
-			int month = today.getMonth()+1;
-			endSearchDate = String.format("%d.%d.%d", today.getYear()+1900, month, today.getDate());
-			Date threeMonAgo = new Date();
-			threeMonAgo.setMonth(month-3);
-			startSearchDate = String.format("%d.%d.%d", threeMonAgo.getYear()+1900, threeMonAgo.getMonth()+1, threeMonAgo.getDate());
+		int year, month, date;
+		Date startDate = null, endDate = null;
+		if (startSearchDate == null || endSearchDate == null) {	// null일 시, 오늘 날짜
+			java.util.Date t = new java.util.Date();
+			year = t.getYear();
+			month = t.getMonth()+1;
+			date = t.getDate();
+			
+			endDate = new Date(year, month, date);
+			startDate = new Date(year, month, date);
+			startDate.setMonth(month-3);
+		} else {	// 
+			year = Integer.parseInt(startSearchDate.substring(0, 4))-1900;
+			month = Integer.parseInt(startSearchDate.substring(5, 7));
+			date = Integer.parseInt(startSearchDate.substring(8, 10));
+			
+			startDate = new Date(year, month, date);
+			
+			year = Integer.parseInt(endSearchDate.substring(0, 4))-1900;
+			month = Integer.parseInt(endSearchDate.substring(5, 7));
+			date = Integer.parseInt(endSearchDate.substring(8, 10));
+			
+			endDate = new Date(year, month, date);
+			
+			endDate.setDate(endDate.getDate()+1);	// 하루 추가
+			
+			System.out.println("startDate = " + startDate);
+			System.out.println("endDate = " + endDate);
 		} // if
 		
-		ArrayList<BoxOrderListDTO> boxOrderList = service.selectBoxOrderList(memberNo, startSearchDate, endSearchDate);
+		ArrayList<BoxOrderListDTO> boxOrderList = service.selectBoxOrderList(memberNo, startDate, endDate);
 		request.setAttribute("boxOrderList", boxOrderList);
 		
 		return "/WEB-INF/views/mypage/order/box/orderBox.jsp";
