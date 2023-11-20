@@ -19,11 +19,12 @@ public class MainList implements CommandHandler{
 
 		ListService listService = ListService.getInstance();	    	   
 	    List<ProductsDTO> mainbestlist = listService.mainbestselect();	    
-	    
+	    List<ProductsDTO> wishlist = listService.selectwish();
 	    
 		//1.  포워딩 전 데이터 저장
 		request.setAttribute("mainbestlist", mainbestlist);
-
+		request.setAttribute("wishlist", wishlist);
+		
 		return "/index.jsp";
 		
 		

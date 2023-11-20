@@ -22,11 +22,11 @@ public class DeleteService {
 		}
 		return instance;
 	}
-	public int wishdelete(String user_id,String idx) {
+	public int wishdelete(String user_id,String idx,String tag) {
 		int deleteRow = 0;
 		try (Connection con = ConnectionProvider.getConnection() ) {			
 			ProductsDAO dao = ProductsDAO.getInstance();
-			deleteRow = dao.wishdelete(con, user_id, idx);
+			deleteRow = dao.wishdelete(con, user_id, idx,tag);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
