@@ -477,12 +477,12 @@ let timer;
   $(document).on("click", "[data-product-preview]", function (e) {
     var that = $(this);
     var id = parseInt(that.attr("data-product-preview"), 10);
+	
     if (id) {
       $("#productPreviewModal .modal-content").html("");
       $("#productPreviewModal").addClass("loading").modal('show');
 
       $("#productPreviewModal .modal-content").load("/product/preview/modalview.do?num=" + id, function () {
-
         $("#productPreviewModal").removeClass("loading");
       });
     }

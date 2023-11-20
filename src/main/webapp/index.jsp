@@ -3,17 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
-<script type="text/javascript">
-<c:choose>
-<c:when test="${ auth.getName() eq null }">
-window.is_signed = false;
-</c:when>
-<c:otherwise>
-window.is_signed = true;
-window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderCode":"XQNGV"};
-</c:otherwise>
-</c:choose>
-</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".visual-area").fddCarousel({
@@ -667,8 +656,7 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 					</div>
 				</div>
 			</div>
-		</main>
-		<%@ include file="/WEB-INF/views/layouts/quick_menu.jsp"%>
+		</main>		
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
 		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 		<%@ include file="/WEB-INF/views/ui/wishmodal.jsp"%>
