@@ -92,7 +92,6 @@
 </div>
 
 <!--E:cbody-->
-
 </main>
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
 </div>
