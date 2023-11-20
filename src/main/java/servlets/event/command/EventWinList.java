@@ -28,12 +28,9 @@ public class EventWinList implements CommandHandler {
         }
 
         try (Connection conn = ConnectionProvider.getConnection()) {
-            List<EventWinnerDTO> eventWinners = eventWinnerDAO.selectList(conn);
-            int totalPages = (int) Math.ceil((double) eventWinners.size() / numberPerPage);
-
-            int start = (currentPage - 1) * numberPerPage;
-            int end = Math.min(start + numberPerPage, eventWinners.size());
-            List<EventWinnerDTO> eventWinnersForCurrentPage = eventWinners.subList(start, end);
+            List<EventWinnerDTO> eventWinnersForCurrentPage = eventWinnerDAO.selectList(conn, currentPage, numberPerPage);
+            int totalRecords = eventWinnerDAO.getTotalRecords(conn);
+            int totalPages = (int) Math.ceil((double) totalRecords / numberPerPage);
 
             request.setAttribute("eventWinners", eventWinnersForCurrentPage);
             request.setAttribute("currentPage", currentPage);
@@ -50,4 +47,5 @@ public class EventWinList implements CommandHandler {
             throw e;
         }
     }
+
 }

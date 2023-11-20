@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<div class="footer-wrapper">
 <script>
 
 var windowRef = null;
@@ -61,4 +61,4 @@ $(function(){
 	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
 	<a href="#"><img src="/resources/assets/images/ui/quickTop.png" alt=""></a>
 </div>
-
+</div>

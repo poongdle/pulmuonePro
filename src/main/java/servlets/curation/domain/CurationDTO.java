@@ -1,6 +1,5 @@
 package servlets.curation.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,5 +26,14 @@ public class CurationDTO {
 	private int products_tag;
 	private String Products_size;
 	private String Products_sub_name;
+	
+	private int cart_no;  
+	private int member_no;  
+	private int mon_cnt;  
+	private int tue_cnt;    
+	private int wed_cnt;   
+	private int thu_cnt;    
+	private int fir_cnt;   
+	private String reg_date;
 }
 

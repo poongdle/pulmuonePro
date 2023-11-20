@@ -20,7 +20,7 @@ public class Kids implements CommandHandler{
 			System.out.println(num);
 //			System.out.println(num);
 			List<KidsDTO> list = kid.selectList();
-//			List<KidsDTO> list2 = kid.select(24);
+//			List<KidsDTO> list2 = kid.select(22);
 //			
 			
 			request.setAttribute("list", list);

@@ -64,14 +64,14 @@
 						<dl>
 							<dt><label>아이디</label></dt>
 							<dd>
-								<input type="text" name="memberId" id="memberId">
+								<input type="text" name="inputMemberId" id="inputMemberId">
 							</dd>
 						</dl>
 						<p id="memberIdError" style="padding-left: 136px"></p>
 					</div>
 					<div class="button-set" style="margin:20px 0 0">
 <!-- 					<button class="button-basic primary w-100" id="findPwdAuth" style="height: 69px">본인인증</button> -->
-						<button class="button-basic primary w-100" id="findPwdAuth" style="height: 69px">본인인증(임시)</button>
+						<button class="button-basic primary w-100" id="findPwdAuth" style="height: 69px">본인인증</button>
 					</div>
 				</form>
 			</div>
@@ -95,7 +95,7 @@
 					</label>
 				</div>
 				<div class="button-set" style="margin-top: 30px">
-					<button class="button-basic primary w-100" onclick="moveSocial()" style="height: 69px">인증하기</button>
+					<button type="button" class="button-basic primary w-100" onclick="moveSocial()" style="height: 69px">인증하기</button>
 				</div>
 			</div>
 		</div>
@@ -106,35 +106,23 @@
 			</div>
 		</div>
  	</div>
-</body>
-
-<script type="text/javascript">
-	$("#findIdAuth").on("click", function() {
-
-		$(this).parent().submit();
-		
-// 		//window.open("[팝업을 띄울 파일명 path]", "[별칭]", "[팝업 옵션]")
-// 		var url  = "https://nice.checkplus.co.kr/CheckPlusSafeModel/service.cb?m=authMobileMain";
-// 		window.open(url, "mypopup", "width=450, height=250, top=150, left=200");
-	
-	})
-	
-		
-</script>
+ 	
 <script type="text/javascript">
 	var type = "password";
 	$().ready(function() {
 		// 아이디찾기 본인인증
-		$("#findIdAuth").click(function() {
-			fnIdPopup();
-		});
+// 		$("#findIdAuth").click(function() {
+// 			fnIdPopup();
+// 		});
+		
 		$("#memberId").on("keyup", function () {
 			hideErrorForm("memberIdError");
 		});
+		
 		// 비밀번호찾기 본인인증
 		$("#findPwdAuth").click(function(e) {
 			e.preventDefault();
-			if ($.trim($("#memberId").val()) == "" ){
+			if ($.trim($("#inputMemberId").val()) == "" ){
 
 				$(".form-input").addClass("error");
 				$("#memberIdError").text("아이디를 입력해 주세요.")
@@ -143,7 +131,7 @@
 
 				// 기존 회원 확인
 			    var params = null;
-			    params = "memberId="+$("#memberId").val();   
+			    params = "memberId="+$("#inputMemberId").val();   
 				$.ajax({
 					url:"/member/idCheck.ajax" , 
 					dataType:"json",
@@ -157,7 +145,9 @@
 							$("#memberIdError").text("입력하신 정보를 확인 후 다시 입력해 주세요.")
 						} else {  
 							console.log(data.memberNo);
-		 					$(".form-input").parent().submit();		
+							$(".form-input.error").removeClass("error");
+							$("#memberId").val( $("#inputMemberId").val() );
+							prompt();
 						}
 					 
 					},
@@ -170,6 +160,7 @@
 
 		});
 
+		
 		var type = "password";
 		if ( type == "id" ) {
 			tabOpen(0);
@@ -194,5 +185,101 @@
 		}
 	}
 </script>
+ 	
+<script type="text/javascript">
+
+	let timer;
+	window.prompt = function (message, callback, okBtnText) {
+		$("#customModalLabel").html("");
+//  	$("#customModal .modal-body").html(message);
+	    $("#customModal").modal('show');
+	    if (okBtnText) {
+	    	$("#customModal").find('.modal-footer').text(okBtnText);
+	    }
+	    if (callback && typeof callback == 'function') {
+	    	$("#customModal .modal-footer").on("click", function () {
+	    		$("#customModal").find('.modal-footer').text('확인');
+	    		callback();
+	    		$("#customModal .modal-footer").off("click")
+			});
+	    }
+	    $("#customModal").on("hide.bs.modal", function () {
+		    $('#customModal .modal-footer').removeClass('disabled')
+		    $('#customModal .modal-footer').prop('disabled',false);
+		    $("#customModal .modal-footer").off("click")
+		    $("#customModal").find('.modal-footer').text('확인');
+		    clearTimeout(timer)
+	    });
+  	}
+</script>
+
+<div class="modal fade" id="customModal" tabindex="-1" aria-labelledby="promptModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="promptModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form id="authorizeNICE" action="/member/find/password-success.do" method="post">
+					<input type="hidden" name="memberId" id="memberId">
+					<div class="form-input">
+						<dl>
+							<dt>
+								<label>이름</label>
+							</dt>
+							<dd>
+								<input type="text" placeholder="이름" id="name" name="name" autocomplete="off">
+							</dd>
+						</dl>
+						<p id="nameError"></p>
+					</div>
+					<div class="form-input">
+						<dl>
+							<dt>
+								<label>주민번호 앞 6자리</label>
+							</dt>
+							<dd>
+								<input type="text" placeholder="주민번호 앞 6자리" id="rrnBirthDate" name="rrnBirthDate" autocomplete="off" pattern="\d*" maxlength="6">
+							</dd>
+						</dl>
+						<p id="rrnBirthDateError"></p>
+					</div>
+					<div class="form-input">
+						<dl>
+							<dt>
+								<label>주민번호 뒤 1자리</label>
+							</dt>
+							<dd>
+								<input type="text" placeholder="주민번호 뒤 1자리" id="rrnGenderCode" name="rrnGenderCode" autocomplete="off" pattern="\d*" maxlength="1">
+							</dd>
+						</dl>
+						<p id="rrnBirthDateError"></p>
+					</div>
+					<div class="form-input">
+						<dl>
+							<dt>
+								<label>휴대폰 번호</label>
+							</dt>
+							<dd>
+								<input type="tel" placeholder="휴대폰 번호" id="tel" name="tel" autocomplete="off" pattern="\d{11}" maxlength="11">
+							</dd>
+						</dl>
+						<p id="telError"></p>
+					</div>
+				</form>
+			</div>
+			<button type="submit" class="modal-footer" form="authorizeNICE">확인</button>
+<!-- 			<button type="button" class="modal-footer" data-dismiss="modal" form="authorizeNICE">확인</button> -->
+		</div>
+	</div>
+</div> 	
+ 	
+ 	
+ 	
+</body>
+
+
+
 
 </html>

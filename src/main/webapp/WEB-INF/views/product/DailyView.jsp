@@ -212,8 +212,7 @@
 		});
 		//endregion
 	});
-
-	var data = '${dto.content}';	
+	
 	window.kakaoShareData = {		
 		key: 100891,
 		data: {
@@ -253,7 +252,7 @@
 
 	function calculateBoxPrice() {
 		const qty = $('.box-qty').text()
-		const price = '3500'
+		const price = '${dto.price}'
 		$('#totalPrice b').text(formatter.format(qty * price))
 
 	}
@@ -267,7 +266,7 @@
                     $('input[name=c1]').removeAttr('disabled');
                     $('.check-list').find('input[type=checkbox]:not(:checked)').click()
                     const cnt = $('input[name=c1]:checked').length
-                    const price = '3500'
+                    const price = '${dto.price}'
                     totalPrice = cnt * price * 4;
 
                 } else {
@@ -281,7 +280,7 @@
         $('input[name=c1]').change(function () {
             if ($("input[name=r1]:checked").hasClass('none-package')) {
                 const cnt = $('input[name=c1]:checked').length
-                const price = '3500'
+                const price = '${dto.price}'
                 $("#totalPrice b").text(formatter.format(cnt * price * 4));
             }
         })    
@@ -440,16 +439,16 @@
 				<div class="container">
 					<div class="product-info-area">
 						<div class="thumb-area">
-							<c:forEach var="dto" items="${list }" end="0">
+							<c:forEach var="dao" items="${list }" end="0">
 								<div class="main-thumb">									
-										<img src="/file/download/product/${dto.system_name }">									
+										<img src="/file/download/product/${dao.system_name }">									
 								</div>
 							</c:forEach>
 							<ul class="sub-thumb">
-								<c:forEach var="dto" items="${list }" end="4">
+								<c:forEach var="dao" items="${list }" end="4">
 									<li class="active">
 										<button type="button" class="item">											
-												<img src="/file/download/product/${dto.system_name }">											
+												<img src="/file/download/product/${dao.system_name }">											
 										</button>
 									</li>
 								</c:forEach>
@@ -661,7 +660,6 @@
 											<button style="width: 100%;"
 												class="button-basic border package-more">더보기</button>
 										</div>
-
 									</div>
 								</div>
 							</div>
@@ -682,7 +680,7 @@
 			<div class="tab-content">
 			${dto.content }
 			</div>
-			<a class="faq-product" href="/forum/faq">
+			<a class="faq-product" href="/forum/faq/list.do">
 				<div class="container">
 					<h2 class="part-title">FAQ</h2>
 					<p>자주 묻는 질문입니다.</p>
@@ -695,7 +693,7 @@
 							<span>4주 예상 주문 금액</span>
 							<p id="totalPrice" class="price"
 								style="margin-left: 39px; margin-bottom: 8px">
-								<b>70,000</b><span>원</span>
+								<b></b><span>원</span>
 							</p>
 						</div>
 					</div>
@@ -705,7 +703,7 @@
 							data-wish-id="743"></button>
 						<!-- 품절용 가이드 추가 -->
 						<form action="/daily/order/step1.do" method="GET">
-					        <input type="hidden" name="item" value='{"item":[{"itemCode":"0071654","dayQty":[1,1,1,1,1]}]'>
+					        <input type="hidden" name="item" value='{"item":[{"itemCode":"${dto.products_no }","dayQty":[1,1,1,1,1]}]'>
 							<button id="cartBtn" class="button-fix black">장바구니</button>
 							<button id="orderBtn" class="button-fix primary">바로구매</button>
 						</form>

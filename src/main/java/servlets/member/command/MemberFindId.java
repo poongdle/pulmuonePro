@@ -17,15 +17,8 @@ public class MemberFindId implements CommandHandler {
 		System.out.println("MemberFindId.java : 아이디 찾기");
 		
 		String method = request.getMethod();
-		String requestUri = request.getRequestURI();
-		
-		String idSuccessUri = "/member/find/id-success.do";
 		
 		if (method.equals("GET")) {
-			
-			if (requestUri.equals(idSuccessUri)) {
-				return idSuccessUri;
-			}
 			
 			return "/WEB-INF/views/member/find/findId.jsp";
 			
@@ -34,35 +27,58 @@ public class MemberFindId implements CommandHandler {
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 
-			String tel = "010-2374-1546";
-			String name = "사공보경";
-			String rrnBirthDate = "930205";
-			String rrnGenderCode = "2";
-					
+			MemberDTO dto = null;
+			
+			try {
+				
+				String inputTel = request.getParameter("tel");
+				String tel = String.format("%s-%s-%s", inputTel.substring(0, 3), inputTel.substring(3, 7), inputTel.substring(7, 11));
+	
+				String name = request.getParameter("name");
+				String rrnBirthDate = request.getParameter("rrnBirthDate");
+				String rrnGenderCode = request.getParameter("rrnGenderCode");
+				
+//				String tel = "01023741546";
+//				String name = "사공보경";
+//				String rrnBirthDate = "930205";
+//				String rrnGenderCode = "2";
+				
+				MemberService memberService = new MemberService();
+				dto = memberService.authorizeNICE(name, tel, rrnBirthDate, rrnGenderCode);				
+				
+			} catch (NullPointerException e) {
+				System.err.println("[Warn] MemberFindId.java : tel == null");
+			} catch (Exception e) {
+				System.err.println("[Warn] MemberFindId.java : dto == null (고객정보 불일치)");
+			}
+			
+			if (dto == null) {
+				
+				response.sendRedirect("/member/find/id.do");
+				
+			} else {
 
-			MemberService memberService = new MemberService();
-			MemberDTO dto = memberService.authorizeNICE(name, tel, rrnBirthDate, rrnGenderCode);
-			
-			int memberIdLength = dto.getMemberId().length();
-			String memberId = dto.getMemberId().substring(0, memberIdLength-2) + "**";
-
-			String datePattern = "yyyy년 MM월 dd일";
-			SimpleDateFormat sdf = new SimpleDateFormat(datePattern);
-			String regDate = sdf.format(dto.getRegDate());
-			
-			request.setAttribute("memberId", memberId);
-			request.setAttribute("regDate", regDate);
-			
-			String path = "/WEB-INF/views/member/find/findId_success.jsp";
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-			dispatcher.forward(request, response);
+				int memberIdLength = dto.getMemberId().length();
+				String memberId = dto.getMemberId().substring(0, memberIdLength-2) + "**";
+	
+				String datePattern = "yyyy년 MM월 dd일";
+				SimpleDateFormat sdf = new SimpleDateFormat(datePattern);
+				String regDate = sdf.format(dto.getRegDate());
+				
+				request.setAttribute("memberId", memberId);
+				request.setAttribute("regDate", regDate);
+				
+				String path = "/WEB-INF/views/member/find/findId_success.jsp";
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+				dispatcher.forward(request, response);
+				
+			}
 			
 			return null;
 		}
 		
-		
-		
+
 	}
 
 }

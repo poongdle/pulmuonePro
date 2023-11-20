@@ -4,36 +4,25 @@
 <html lang="ko">
 <head>
 <title>풀무원 녹즙 | 맞춤큐레이션</title>
-<meta name="description" content="하루 한 병 건강한 습관 풀무원녹즙, 신선한 채소와 과일의 영양을 매일 아침 배송합니다.">
-<meta name="viewport"     content="width=device-width,initial-scale=1.0">
-<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
-	<script src="/resources/assets/js/jquery.form.min.js"></script>
-
-
-	<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
-	<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
-
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
-<!-- 	<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" integrity="sha384-DRe+1gYJauFEenXeWS8TmYdBmDUqnR5Rcw7ax4KTqOxXWd4NAMP2VPU5H69U7yP9" crossorigin="anonymous"></script> -->
-	<script src="/resources/assets/js/clipboard.min.js"></script>
-	<script src="/resources/assets/js/fdd.js"></script>
-	<script src="/resources/assets/js/request.js"></script>
-	<link rel="stylesheet" href="/resources/assets/css/contents_v1.css">
-
-
-	<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css"/>
-	<link rel="stylesheet" href="/resources/assets/css/owl.theme.default.css"/>
-	<script src="/resources/assets/js/owl.carousel.min.js"></script>
-
-	<link rel="stylesheet" href="/resources/assets/css/layout_style.css">
-	<link rel="stylesheet" href="/resources/assets/css/a-guide.css">
-	<link rel="stylesheet" href="/resources/assets/css/contents2.css">
-
-	<link rel="stylesheet" href="/resources/assets/css/daterangepicker.css"/>
-	<script src="/resources/assets/js/daterangepicker.js"></script>
-	<link rel="stylesheet" href="/resources/assets/css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/x-icon" href="/resources/assets/images/pul_favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"	rel="stylesheet">
+<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/resources/assets/js/jquery.form.min.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
+<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/resources/assets/js/clipboard.min.js"></script>
+<script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/request.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
+<link rel="stylesheet"	href="/resources/assets/css/owl.theme.default.css">
+<script src="/resources/assets/js/owl.carousel.min.js"></script>
+<script src="/resources/assets/js/design.js"></script>
+<link rel="stylesheet" href="/resources/assets/css/list.css">
+<link rel="stylesheet" href="/resources/assets/css/style.css">
+
 <style>
 	.question-section > div {
 		display: none;
@@ -157,6 +146,9 @@
 						bmi = getBmi(req1.weight, req1.tallness)
 					}
 					
+					location.href +=  data.RESULT_MSG.execution.idx
+					+ '&bmi=' + bmi + '&questions='
+					+ data.RESULT_MSG.questions.join(',');
 // 					location.href = '/customer/product/result/products.do' + data.RESULT_MSG.execution.idx
 // 					+ '?singleYn=' + singleYn + '&bmi=' + bmi + '&questions='
 // 					+ data.RESULT_MSG.questions.join(',');
@@ -424,48 +416,6 @@
 </div>
 </form>
 
-<script>
-  
-  $(function(){
-
-    axios.get('/mypage.do').then(function (response) {
-
-      const {info, customerVo} = response.data.RESULT_MSG;
-
-		const ec = ( !info.overEnd) && (info.complex||info.hasHp) && customerVo.phiCustomerVo.intfacId == '0' && customerVo.phiCustomerVo.dlvyCustYn==='Y'
-        if(ec&&customerVo){
-          $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
-          $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
-        }else {
-          $('#quickChangeDrink').attr('href', `/mypage?with=01`)
-          $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
-        }
-        console.log(window.innerWidth)
-        if(window.innerWidth>1450){
-          $('#mini-side-nav').show();
-        }
-    }).catch(function (error) {
-      if(window.innerWidth>1450) {
-        $('#mini-side-nav').show()
-      }
-	});
-    window.addEventListener('resize', function(){
-	  if(window.innerWidth>1450){
-		$('#mini-side-nav').show();
-	  }else {
-		$('#mini-side-nav').hide();
-	  }
-	})
-
-  })
-</script>
-<div style="display: none" id="mini-side-nav">
-	<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>
-	<a id="quickChangeDrink" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick2.png" alt=""></a>
-	<a id="quickChangeSchedule" href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick3.png" alt=""></a>
-	<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
-	<a href="#"><img src="/resources/assets//images/ui/quickTop.png" alt=""></a>
-</div>
 </main>
 <%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
 </div>

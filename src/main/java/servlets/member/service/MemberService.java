@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Random;
 
 import javax.naming.NamingException;
 
+import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import servlets.member.dao.MemberDAOImpl;
 import servlets.member.dto.MemberDTO;
@@ -30,7 +32,7 @@ public class MemberService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			conn.close();
+			JdbcUtil.close(conn);
 		}
 		
 		return dto;
@@ -56,13 +58,13 @@ public class MemberService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			conn.close();
+			JdbcUtil.close(conn);
 		}
 		
 		return dto;		
 	}
 	
-	// 3. 입력받은 아이디를 가진 회원 계정의 개수를 반환
+	// 3. 입력받은 아이디를 가진 회원 계정 정보 반환
 	public MemberDTO isExistingId(String memberId) throws SQLException {
 		Connection conn = null;
 		MemberDAOImpl dao = null;
@@ -78,15 +80,92 @@ public class MemberService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			conn.close();
+			JdbcUtil.close(conn);
 		}
 		
 		return dto;
 	}
+
+	// 4. 비밀번호 변경
+	public int changePwd(String memberId, String pwd, String newPwd) throws SQLException {
+		Connection conn = null;
+		MemberDAOImpl dao = null;
+		MemberDTO dto = null;
+		
+		int rowCount = 0;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = new MemberDAOImpl(conn);
+			dto = dao.selectOne(memberId, pwd);
+			
+			if (dto != null) {
+				int memberNo = dto.getMemberNo();
+				rowCount = dao.updatePwd(memberNo, newPwd);
+				
+			} else {
+				System.out.println("회원번호와 비밀번호가 일치하지 않습니다.");
+			}
+			
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+		
+		return rowCount;
+	}
+
+	// 5. 회원가입
+	public int signup(MemberDTO dto) throws SQLException {
+		Connection conn = null;
+		MemberDAOImpl dao = null;
+		
+		int rowCount = 0;
+		
+		String invCode = getRandomInvCode();
+		dto.setInvCode(invCode);
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = new MemberDAOImpl(conn);
+			rowCount = dao.insert(dto);
+			
+			
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+		
+		return rowCount;
+	}
 	
+	
+	private String getRandomInvCode() {
+		String charRange = "abcdefgehijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		int charRangeLength = charRange.length();
+		int invCodeLength = 5;
+		int randomIndex;
+		
+		StringBuilder invCodeBuilder = new StringBuilder(invCodeLength);
+		for (int i = 0; i < invCodeLength; i++) {
+			randomIndex = (int) ( Math.random() * (charRangeLength + 1) );
+			invCodeBuilder.append(charRange.charAt(randomIndex));
+		}
+		
+		String invCode = invCodeBuilder.toString();
+		
+		return invCode;
+	}
+
 
 	// 주민등록번호 형식으로 전달받은 값을  sql.Date 형식으로 변환
-	private Date getBirthDate(String rrnBirthDate, String rrnGenderCode) {
+	public Date getBirthDate(String rrnBirthDate, String rrnGenderCode) {
 		Date birthDate = null;
 
 		System.out.println(rrnBirthDate + "-"+ rrnGenderCode);
@@ -111,6 +190,32 @@ public class MemberService {
 		
 		return birthDate;
 	}
+
+
+	public MemberDTO isExistingInvCode(String invCode) throws SQLException {
+		Connection conn = null;
+		MemberDAOImpl dao = null;
+		MemberDTO dto = null;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = new MemberDAOImpl(conn);
+			dto = dao.selectOneWithInvCode(invCode);
+			
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+		
+		return dto;
+	}
+
+
+
+
 
 
 }

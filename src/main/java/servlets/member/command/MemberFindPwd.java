@@ -1,7 +1,5 @@
 package servlets.member.command;
 
-import java.text.SimpleDateFormat;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,15 +37,24 @@ public class MemberFindPwd implements CommandHandler {
 			
 			MemberService memberService = new MemberService();
 			MemberDTO dto = memberService.isExistingId(memberId);
+			
+			System.out.println(memberId);
+			System.out.println(dto);
+			System.out.println(dto.getEmail());
+			
+			String inputTel = request.getParameter("tel");
+			String tel = String.format("%s-%s-%s", inputTel.substring(0, 3), inputTel.substring(3, 7), inputTel.substring(7, 11));
 
-			String[] telArr = dto.getTel().split("-");
+			String[] telArr = tel.split("-");
 			String markedTel = String.format("%s-%s-%s", telArr[0], "*".repeat(telArr[1].length()) ,telArr[2]);
 			
-			request.setAttribute("tel", dto.getTel());
+			request.setAttribute("memberId", memberId);
+			request.setAttribute("tel", tel);
 			request.setAttribute("email", dto.getEmail());
 			request.setAttribute("maskedTel", markedTel); // 중간 번호가 가려진 전화번호
 
-			String path = "/WEB-INF/views/member/find/findPwd_success.jsp";
+//			String path = "/WEB-INF/views/member/find/findPwd_success.jsp";
+			String path = "/WEB-INF/views/member/find/changePassword.jsp";
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 			dispatcher.forward(request, response);
