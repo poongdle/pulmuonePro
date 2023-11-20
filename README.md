@@ -59,6 +59,7 @@
 맞춤큐레이션:..<br>
 장바구니: ..<br>
 </div>
+<hr>
 </details>
 
 <details>
@@ -67,6 +68,7 @@
 이벤트: ...<br>
 쿠폰:..<br>
 </div>
+<hr>
 </details>
 
 <details>
@@ -76,6 +78,7 @@
 택배배송 상품:<br>
 매일배송 상품:<br>
 </div>
+<hr>
 </details>
 
 <details>
@@ -96,6 +99,7 @@
 
 🌟 개인정보 변경 페이지<br><br>
 </div>
+<hr>
 </details>
 
 <details>
@@ -125,6 +129,7 @@
   - 배송가능 지역 검색하기 <br><br>
   
 </div>
+<hr>
 </details>
 
 <details>
