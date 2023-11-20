@@ -455,7 +455,7 @@ let timer;
 //      if (!data.ok) {
 //        return;
 //      }	
-      console.log(that, that.hasClass("active"))
+
       if (!that.hasClass("active")) {
         $("[data-wish-type][data-wish-id='" + id + "']").addClass('active');
         alert("찜한상품에 담겼습니다.");

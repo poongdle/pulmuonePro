@@ -10,7 +10,7 @@ import mvc.command.CommandHandler;
 import servlets.product.domain.ProductsDTO;
 import servlets.product.service.ListService;
 
-public class WeshList implements CommandHandler{
+public class WishList implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
