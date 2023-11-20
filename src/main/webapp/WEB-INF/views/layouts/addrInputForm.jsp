@@ -45,7 +45,7 @@
 				<label for="phone">휴대폰번호</label>
 			</dt>
 			<dd>
-				<input type="tel" id="tel" maxlength="13" placeholder="휴대폰번호를 입력하세요" value="${ miDto.tel }">
+				<input type="tel" id="tel" name="tel" maxlength="13" placeholder="휴대폰번호를 입력하세요" value="${ miDto.tel }">
 			</dd>
 		</dl>
 	</div>
@@ -125,7 +125,7 @@
 	</div>
 	
 		<div class="checkbox chk-type3" style="margin-top: 28px">
-			<input type="checkbox" id="saveAddrChk" name="saveAddrChk" value="Y">
+			<input type="checkbox" id="saveAddrChk" name="saveAddrChk">
 			<label for="saveAddrChk">주소록에 저장</label>
 		</div>
 	</div>
