@@ -18,6 +18,7 @@ $(function () {
 
   function getItems(lbl) {
     var items = {};
+    var itemCode = "${dto.products_no}";
     $("input[name='itemCode']").each(function (i, item) {
       var el = $(item);
       if (el.is(":checked") || el.is("[type='hidden']")) {
@@ -171,7 +172,7 @@ window.orderProcess = function (args) {
             $('#orderModal input[name=custnum]:first').click()
             $("#orderModal").removeClass("loading")
           } else {
-            location.href = "/daily/order/step1.do?item=" + encodeURIComponent(JSON.stringify(args2));
+            location.href = "/daily/order/step1?item=" + encodeURIComponent(JSON.stringify(args2));
           }
         });
       });
@@ -202,7 +203,7 @@ window.orderProcess = function (args) {
           $('#orderModal input[name=custnum]:first').click()
           $("#orderModal").removeClass("loading")
         } else {
-          location.href = "/daily/order/step1.do?item=" + encodeURIComponent(JSON.stringify(args));
+          location.href = "/daily/order/step1?item=" + encodeURIComponent(JSON.stringify(args));
         }
       });
     }
@@ -213,7 +214,7 @@ $(document).on("click", "#orderModal button", function (e) {
   var type = $(this).attr("data-type");
   var p = encodeURIComponent(JSON.stringify(nowArgs));;
   if (type === "new") {
-    location.href = "/daily/order/step1.do?item=" + p
+    location.href = "/daily/order/step1?item=" + p
   } else if (type === "continue") {
     var c = $("input[name='custnum']:checked");
     var custNumber = c.val();
@@ -269,9 +270,8 @@ $(document).on("click", "#orderModal button", function (e) {
 								<c:forEach var="dto" items="${list}">
 									<li data-item-index="0" data-item-link="/"
 										data-item-title="${dto.products_name }" data-item-desc="2000">
-										<input value="${dto.products_no }" name="itemCode"
-										type="hidden"> <a class="item"
-										data-product-preview="${dto.img_no}"> <label>${dto.dayweek }</label>
+										<input value="/" name="itemCode" type="hidden"> <a
+										class="item" data-product-preview="${dto.img_no}"> <label>${dto.dayweek }</label>
 											<div class="thumb">
 												<img src="/file/download/product/${dto.system_name }">
 											</div>
@@ -284,15 +284,16 @@ $(document).on("click", "#orderModal button", function (e) {
 							</ul>
 						</div>
 
-						<form action="/daily/order/step1.do" method="GET">
-							<div class="button-set sm" style="margin: 20px 0px">
-								<input type="hidden" name="item" value='{"item":[{"itemCode":"${dto.products_no}","dayQty":[1,1,1,1,1]}]'>
-								<button id="cartBtn" class="button-basic black" >장바구니</button>
-								<!-- 					onclick="location.href='/cart/daily/cartdaily.do'" -->
+						<div class="button-set sm" style="margin: 20px 0px">
+							<button id="cartBtn" class="button-basic black">장바구니</button>
+							<form action="/daily/order/step1.do" method="GET">
+								<c:forEach var="dto" items="${list }">
+									<input type="hidden" name="item"
+										value='{"item":[{"itemCode":"${dto.products_no}","dayQty":[1,1,1,1,1]}]'>
+								</c:forEach>
 								<button id="orderBtn" class="button-basic primary">주문하기</button>
-								<!-- 					 onclick="location.href='/daily/order/step1.do'" -->
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
 
 					<div class="result-text">${list[0].program_content }</div>

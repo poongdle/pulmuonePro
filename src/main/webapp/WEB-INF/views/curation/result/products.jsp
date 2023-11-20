@@ -282,16 +282,17 @@ $(document).on("click", "#orderModal button", function (e) {
 						</div>
 					</div>
 
-					<form action="/daily/order/step1.do" method="GET">
-						<div class="button-set sm" style="margin: 20px 0px">
-							<input type="hidden" name="item"
-								value='{"item":[{"itemCode":"${dto.products_no}","dayQty":[1,1,1,1,1]}]'>
+					<div class="button-set sm" style="margin: 20px 0px">
 							<button id="cartBtn" class="button-basic black">장바구니</button>
-							<!-- 					onclick="location.href='/cart/daily/cartdaily.do'" -->
-							<button id="orderBtn" class="button-basic primary">주문하기</button>
-							<!-- 					 onclick="location.href='/daily/order/step1.do'" -->
+							<form action="/daily/order/step1.do" method="GET">
+								<c:forEach var="dto" items="${list }">
+									<input type="hidden" name="item"
+										value='{"item":[{"itemCode":"${dto.products_no}","dayQty":[1,1,1,1,1]}]'>
+								</c:forEach>
+								<button id="orderBtn" class="button-basic primary">주문하기</button>
+							</form>
 						</div>
-					</form>
+					</div>
 
 					<div class="result-text">${list[0].program_content }</div>
 					<div class="alert-area">
