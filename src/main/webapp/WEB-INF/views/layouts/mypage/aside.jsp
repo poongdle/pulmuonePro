@@ -19,7 +19,7 @@
         <li>
             <a href="/mypage/benefit/coupon">쿠폰</a>
         </li>
-        <li class="indepth active">
+        <li class="indepth">
             <a>활동정보</a>
             <ul class="sub-navigation">
                 <li><a href="/mypage/product/list.do">찜한상품</a></li>
@@ -33,7 +33,7 @@
                 <li><a href="/mypage/personal/address">주소록</a></li>
                 <li><a href="/mypage/personal/info">개인정보 변경</a></li>
                 <li><a href="/mypage/drink/paymethod">결제수단 관리</a></li>
-                <li><a href="/mypage/personal/refund">환불계좌 관리</a></li>
+                <li><a href="/mypage/personal/refund.do">환불계좌 관리</a></li>
             </ul>
         </li>
     </ul>
