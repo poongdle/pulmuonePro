@@ -21,5 +21,6 @@ public class BoxOrderProductDTO {
 	private int eventPrice;
 	private String imgPath;
 	private String originName;
+	private String TrackingNo;
 	
 }
