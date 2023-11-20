@@ -22,9 +22,7 @@
             tabOpen(1);
 
         }
-        /* else {
-			tabOpen(1);
-		} */
+     
         //창업FAQ
         if (localStorage.getItem('val') == 7) {
             $('.js-btab-cont-' + localStorage.getItem('val'))

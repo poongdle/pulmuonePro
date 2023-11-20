@@ -441,9 +441,9 @@
 							</div>
 							<span class="prd-state">냉장상품</span>
 							<div class="prd-detail-title-area">
-								<div style="flex: 1; padding-right: 10px">									
-										<h2>${dto.products_name }</h2>
-										<p>${dto.products_sub_name }</p>
+								<div style="flex: 1; padding-right: 10px">
+									<h2>${dto.products_name }</h2>
+									<p>${dto.products_sub_name }</p>
 								</div>
 								<button data-toggle="modal" data-target="#shareModal"
 									type="button" class="ellipse-button primary"
@@ -454,12 +454,12 @@
 							<div class="product-addiction">
 								<div class="price-item">
 									<span style="padding-right: 12px; font-size: 22px;">
-										(원산지 :상품상세 참조) </span>								
-										<p>
-											<fmt:formatNumber value="${dto.price }" pattern="#,###" />
-											<span>원</span>
-										</p>
-										<span>(${dto.products_size })</span>
+										(원산지 :상품상세 참조) </span>
+									<p>
+										<fmt:formatNumber value="${dto.price }" pattern="#,###" />
+										<span>원</span>
+									</p>
+									<span>(${dto.products_size })</span>
 								</div>
 							</div>
 							<div class="buy-option"></div>
@@ -478,7 +478,7 @@
 			</div>
 			<!-- Tab panes -->
 			<div class="tab-content">
-			${dto.content }				
+				${dto.content }
 				<div role="tabpanel" class="tab-pane" id="info">
 					<div class="container">
 						<div class="product-spec">
@@ -539,33 +539,38 @@
 			<div class="bottom-fixed-layer">
 				<div class="container">
 					<div class="info">
-						<div class="prd-detail-modal-title ">
-							<span>4주 예상 주문 금액</span>
-							<p id="totalPrice" class="price"
-								style="margin-left: 39px; margin-bottom: 8px">
-								<b>70,000</b><span>원</span>
+						<div class="prd-detail-modal-title">
+							<span>수량선택</span>
+							<div class="prd-select-amount">
+								<button type="button" class="btn-minus">
+									<span class="hide">제품 빼기</span>
+								</button>
+								<em class="box-qty" style="margin: 0px 20px">1</em>
+								<button class="btn-plus" type="button">
+									+<span class="hide">제품 추가</span>
+								</button>
+							</div>
+						</div>
+						<div class="prd-detail-modal-title " style="margin-left: 50px">
+							<span>금액</span>
+							<p id="totalPrice" class="price">
+								<b style="font-weight: 400">60,000</b><span>원</span>
 							</p>
 						</div>
 					</div>
 					<div class="button-set"
 						style="margin-right: -4px; margin-bottom: 7px">
-						<button class="button-fix interest-button " data-wish-type="daily"
-							data-wish-id="743"></button>
+						<button class="button-fix interest-button " data-wish-type="box"
+							data-wish-id="658"></button>
 						<!-- 품절용 가이드 추가 -->
-						<form action="/box/order/step1.do" method="GET">
-					        <input type="hidden" name="productsNo" value="0073561">
-							<input type="hidden" name="productsCnt" value="1">
-							<button id="cartBtn" class="button-fix black">장바구니</button>
-							<button id="orderBtn" class="button-fix primary">바로구매</button>
-						</form>
-
-
+						<button id="cartBtn" class="button-fix black">장바구니</button>
+						<button id="orderBtn" class="button-fix primary">바로구매</button>
 					</div>
 				</div>
 			</div>
 		</main>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
-
+		<%@ include file="/WEB-INF/views/ui/kakaomodal.jsp"%>
 	</div>
 </body>
 </html>
