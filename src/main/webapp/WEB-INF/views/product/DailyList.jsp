@@ -28,7 +28,7 @@
 	href="/resources/assets/css/owl.theme.default.css">
 <script src="/resources/assets/js/owl.carousel.min.js"></script>
 <script src="/resources/assets/js/design.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/list.css">
+<!-- <link rel="stylesheet" href="/resources/assets/css/list.css"> -->
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 <script type="text/javascript">
 <c:choose>
@@ -170,7 +170,7 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 							<div id="head-items" class="owl-carousel owl-loaded owl-drag">
 								<div class="owl-stage-outer">
 									<div class="owl-stage"
-										style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 6170px;">
+										style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 6170px;">										
 										<c:forEach items="${bestlist }" var="dto" varStatus="status">
 											<div class="owl-item active" style="width: 308.5px;">
 												<div class="prd-area">
@@ -227,48 +227,51 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 													</a>
 													<div class="btn-area btn-area-center">
 														<c:if test="${ auth.getName() ne null }">
-															<c:forEach items="${wishlist }" var="dao">
-																<c:choose>
-																	<c:when test="${dao.products_tag eq dto.products_tag }">
-																		<button type="button"
-																			data-wish-id="${dto.products_tag }"
-																			data-wish-type="daily"
-																			class="btn-round btn-white wishlistBtn active">
-																			<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																				찜하기</span>
-																		</button>
-																	</c:when>
-																	<c:otherwise>
-																		<button type="button"
-																			data-wish-id="${dto.products_tag }"
-																			data-wish-type="daily"
-																			class="btn-round btn-white wishlistBtn ">
-																			<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																				찜하기</span>
-																		</button>
-																		<button type="button"
-																			data-cart-id="${dto.products_no }"
-																			data-cart-type="daily" data-cart-event=""
-																			class="btn-round addCartBtn">
-																			<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																				담기</span>
-																		</button>
-																	</c:otherwise>
-																</c:choose>
-															</c:forEach>
+														<c:choose>
+														<c:when test="${dto.wish_status eq 1 }">
+															<button type="button" data-wish-id="${dto.products_tag }"
+																data-wish-type="daily"
+																class="btn-round btn-white wishlistBtn active ">
+																<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																	찜하기</span>
+															</button>
+															<button type="button" data-cart-id="${dto.products_no }"
+																data-cart-type="daily" data-cart-event=""
+																class="btn-round addCartBtn">
+																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																	담기</span>
+															</button>
+															</c:when>
+															<c:otherwise>
+															<button type="button" data-wish-id="${dto.products_tag }"
+																data-wish-type="daily"
+																class="btn-round btn-white wishlistBtn ">
+																<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																	찜하기</span>
+															</button>
+															<button type="button" data-cart-id="${dto.products_no }"
+																data-cart-type="daily" data-cart-event=""
+																class="btn-round addCartBtn">
+																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																	담기</span>
+															</button>
+															</c:otherwise>
+														</c:choose>
 														</c:if>
-														<button type="button" data-wish-id="${dto.products_tag }"
-															data-wish-type="daily"
-															class="btn-round btn-white wishlistBtn ">
-															<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																찜하기</span>
-														</button>
-														<button type="button" data-cart-id="${dto.products_no }"
-															data-cart-type="daily" data-cart-event=""
-															class="btn-round addCartBtn">
-															<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																담기</span>
-														</button>
+														<c:if test="${ auth.getName() eq null }">
+															<button type="button" data-wish-id="${dto.products_tag }"
+																data-wish-type="daily"
+																class="btn-round btn-white wishlistBtn ">
+																<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																	찜하기</span>
+															</button>
+															<button type="button" data-cart-id="${dto.products_no }"
+																data-cart-type="daily" data-cart-event=""
+																class="btn-round addCartBtn">
+																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																	담기</span>
+															</button>
+														</c:if>
 													</div>
 												</div>
 											</div>
@@ -408,50 +411,53 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 													</div>
 												</a>
 												<div class="btn-area btn-area-center">
-													<c:if test="${ auth.getName() ne null }">
-														<c:forEach items="${wishlist }" var="dao">
-															<c:choose>
-																<c:when test="${dao.products_tag eq dto.products_tag }">
-																	<button type="button"
-																		data-wish-id="${dto.products_tag }"
-																		data-wish-type="daily"
-																		class="btn-round btn-white wishlistBtn active">
-																		<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																			찜하기</span>
-																	</button>
-																</c:when>
-																<c:otherwise>
-																	<button type="button"
-																		data-wish-id="${dto.products_tag }"
-																		data-wish-type="daily"
-																		class="btn-round btn-white wishlistBtn ">
-																		<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																			찜하기</span>
-																	</button>
-																	<button type="button"
-																		data-cart-id="${dto.products_no }"
-																		data-cart-type="daily" data-cart-event=""
-																		class="btn-round addCartBtn">
-																		<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																			담기</span>
-																	</button>
-																</c:otherwise>
-															</c:choose>
-														</c:forEach>
-													</c:if>
-													<button type="button" data-wish-id="${dto.products_tag }"
-														data-wish-type="daily"
-														class="btn-round btn-white wishlistBtn ">
-														<i class="ico ico-prd-wish"></i> <span class="hide">제품
-															찜하기</span>
-													</button>
-													<button type="button" data-cart-id="${dto.products_no }"
-														data-cart-type="daily" data-cart-event=""
-														class="btn-round addCartBtn">
-														<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-															담기</span>
-													</button>
-												</div>
+														<c:if test="${ auth.getName() ne null }">
+														<c:choose>
+														<c:when test="${dto.wish_status eq 1 }">
+															<button type="button" data-wish-id="${dto.products_tag }"
+																data-wish-type="daily"
+																class="btn-round btn-white wishlistBtn active ">
+																<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																	찜하기</span>
+															</button>
+															<button type="button" data-cart-id="${dto.products_no }"
+																data-cart-type="daily" data-cart-event=""
+																class="btn-round addCartBtn">
+																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																	담기</span>
+															</button>
+															</c:when>
+															<c:otherwise>
+															<button type="button" data-wish-id="${dto.products_tag }"
+																data-wish-type="daily"
+																class="btn-round btn-white wishlistBtn ">
+																<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																	찜하기</span>
+															</button>
+															<button type="button" data-cart-id="${dto.products_no }"
+																data-cart-type="daily" data-cart-event=""
+																class="btn-round addCartBtn">
+																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																	담기</span>
+															</button>
+															</c:otherwise>
+														</c:choose>
+														</c:if>
+														<c:if test="${ auth.getName() eq null }">
+															<button type="button" data-wish-id="${dto.products_tag }"
+																data-wish-type="daily"
+																class="btn-round btn-white wishlistBtn ">
+																<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																	찜하기</span>
+															</button>
+															<button type="button" data-cart-id="${dto.products_no }"
+																data-cart-type="daily" data-cart-event=""
+																class="btn-round addCartBtn">
+																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																	담기</span>
+															</button>
+														</c:if>
+													</div>
 											</div>
 										</c:forEach>
 									</div>
@@ -470,40 +476,10 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 				</form>
 			</div>
 		</main>
+		<%@ include file="/WEB-INF/views/layouts/sidebar.jsp"%>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
-		<div class="modal fade" id="alertModal" tabindex="-1"
-			aria-labelledby="alertModalLabel" style="display: none;"
-			aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="alertModalLabel"></h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">로그인 후 찜한상품으로 담을 수 있습니다.</div>
-					<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="confirmModal" tabindex="-1"
-			aria-labelledby="confirmModalLabel" style="display: none;"
-			aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="confirmModalLabel"></h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">제품이 담겼습니다. 담은 제품을 확인하시겠습니까?</div>
-					<div class="modal-footer">
-						<button type="button" class="cancel" data-dismiss="modal">취소</button>
-						<button type="button" class="confirm">확인</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/ui/wishmodal.jsp"%>
+		<%@ include file="/WEB-INF/views/ui/cartmodal.jsp"%>
 	</div>
 </body>
 </html>

@@ -22,7 +22,7 @@ public class ProductsDAO implements IProducts {
 	public List<ProductsDTO> select(Connection con,String path, String cal) throws SQLException {
 		String sql =
 				" select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
-						+ ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2 "	              
+						+ ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2,wish_status "	              
 						+ " from products a join products_img b on a.products_no = b.products_no "
 						+ " where delivery_type = ? "
 						+ " and origin_name not like 'View%' ";
@@ -64,6 +64,7 @@ public class ProductsDAO implements IProducts {
 					dto.setSystem_name(rs.getString("system_name"));
 					dto.setEvent_tag(rs.getString("event_tag"));
 					dto.setEvent_tag2(rs.getString("event_tag2"));
+					dto.setWish_status(rs.getString("wish_status"));
 					list.add(dto);
 				} while ( rs.next() );
 			} // 
@@ -78,7 +79,7 @@ public class ProductsDAO implements IProducts {
 	public List<ProductsDTO> selectbest(Connection con, String path, String cal) throws SQLException {
 		String sql =
 				" select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
-						+ ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2 "	              
+						+ ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2,wish_status "	              
 						+ " from products a join products_img b on a.products_no = b.products_no "
 						+ " where delivery_type = ? ";
 		if(cal!=null && cal != "") {
@@ -127,6 +128,7 @@ public class ProductsDAO implements IProducts {
 					dto.setSystem_name(rs.getString("system_name"));
 					dto.setEvent_tag(rs.getString("event_tag"));
 					dto.setEvent_tag2(rs.getString("event_tag2"));
+					dto.setWish_status(rs.getString("wish_status"));
 					dailylist.add(dto);
 				} while ( rs.next() );
 			} // 
@@ -141,7 +143,7 @@ public class ProductsDAO implements IProducts {
 	public List<ProductsDTO> searchcount(Connection con,String path, String tags, String cal) throws SQLException {
 		String sql =
 	              "  select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
-	              + ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2 "	              
+	              + ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2,wish_status "	              
 	              + " from products a join products_img b on a.products_no = b.products_no "
 	              + " where delivery_type = ? "
 	              + " and origin_name not like 'View%' ";	  
@@ -161,10 +163,10 @@ public class ProductsDAO implements IProducts {
 	        try {
 	           pstmt = con.prepareStatement(sql);
 	           pstmt.setString(1, path);		           
-	           System.out.println("searchcount");
+//	           System.out.println("searchcount");
 //	           System.out.println(path);
 //	           System.out.println(tags);
-	           System.out.println(sql);
+//	           System.out.println(sql);
 	           rs = pstmt.executeQuery();	  
 	           if ( rs.next() ) {	        	
 	              list = new ArrayList<ProductsDTO>();
@@ -191,6 +193,7 @@ public class ProductsDAO implements IProducts {
 	                 	dto.setSystem_name(rs.getString("system_name"));
 	                 	dto.setEvent_tag(rs.getString("event_tag"));
 						dto.setEvent_tag2(rs.getString("event_tag2"));
+						dto.setWish_status(rs.getString("wish_status"));
 //	                 	System.out.println(dto);
 	                 list.add(dto);
 //	                 System.out.println(list);
@@ -216,12 +219,12 @@ public class ProductsDAO implements IProducts {
 		}
 		int end = begin+11;
 		String sql = " SELECT products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price "
-				+ " , products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2 "
+				+ " , products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2,wish_status "
 				+ "FROM ( "
 				+ "        SELECT ROWNUM no, t.* "
 				+ "        FROM (  "
 				+ "                select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price "
-				+ "	              ,products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2 "
+				+ "	              ,products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2,wish_status "
 				+ "	               from products a join products_img b on a.products_no = b.products_no "
 				+ "	               where delivery_type = ? "
 				+ "	               and origin_name not like 'View%' ";
@@ -247,10 +250,10 @@ public class ProductsDAO implements IProducts {
 	           pstmt.setString(1, path);		           
 	           pstmt.setInt(2, begin);
 	           pstmt.setInt(3, end);
-	           System.out.println("search");
+//	           System.out.println("search");
 //	           System.out.println(begin);
 //	           System.out.println(end);
-	           System.out.println(sql);
+//	           System.out.println(sql);
 	           rs = pstmt.executeQuery();	  
 	           if ( rs.next() ) {	        	
 	              list = new ArrayList<ProductsDTO>();
@@ -277,6 +280,7 @@ public class ProductsDAO implements IProducts {
 	                 	dto.setSystem_name(rs.getString("system_name"));	 
 	                 	dto.setEvent_tag(rs.getString("event_tag"));
 						dto.setEvent_tag2(rs.getString("event_tag2"));
+						dto.setWish_status(rs.getString("wish_status"));
 	                 list.add(dto);
 	              } while ( rs.next() );
 	           } // 
@@ -347,8 +351,8 @@ public class ProductsDAO implements IProducts {
 		pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1,tag);
 		ProductsDTO dto = null;
-		System.out.println("view");
-		System.out.println(sql);
+//		System.out.println("view");
+//		System.out.println(sql);
 		rs = pstmt.executeQuery();
 		if(rs.next()) {
 			dto = ProductsDTO.builder()
@@ -381,7 +385,7 @@ public class ProductsDAO implements IProducts {
 	@Override
 	public List<ProductsDTO> selectmainbest(Connection con) throws SQLException {
 		String sql = " select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price"
-						+ ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2 "	              
+						+ ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2,wish_status "	              
 						+ " from products a join products_img b on a.products_no = b.products_no "								
 						+ " where a.products_no in (0073184,0072348,0073080,0073344,0072969,0073271,0073136,0073405,0070680,0071654) "
 						+ " and origin_name not like 'View%' "
@@ -418,6 +422,7 @@ public class ProductsDAO implements IProducts {
 					dto.setSystem_name(rs.getString("system_name"));
 					dto.setEvent_tag(rs.getString("event_tag"));
 					dto.setEvent_tag2(rs.getString("event_tag2"));
+					dto.setWish_status(rs.getString("wish_status"));
 					list.add(dto);
 				} while ( rs.next() );
 			} // 
@@ -433,13 +438,17 @@ public class ProductsDAO implements IProducts {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = " select * from products_wish WHERE products_tag = ?";
+		String sql1 = null;
 		pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1,tag);		
 		rs = pstmt.executeQuery();		
 		int insertRow = 0;
+		int updateRow = 0;
 		if( rs.next() ) {
 			sql = " DELETE FROM products_wish where products_tag = ? ";			
-			System.out.println("if들어옴");
+			sql1 = " UPDATE products "
+					+ " set wish_status = 0 "
+					+ " WHERE products_tag = ? ";			
 		}else {			
 			sql = " INSERT INTO products_wish "
 					+ "select products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price "
@@ -447,12 +456,20 @@ public class ProductsDAO implements IProducts {
 					+ " from products , member  "
 					+ " WHERE products_tag = ? ";
 					sql += String.format(" and member_id = '%s' ", user_id);
+			sql1 = " UPDATE products "
+					+ " set wish_status = 1 "
+					+ " WHERE products_tag = ? ";
 			
 		}try {
-		pstmt = con.prepareStatement(sql);
-		System.out.println(sql);			
-		pstmt.setInt(1,tag);		
+		pstmt = con.prepareStatement(sql);		
+//		System.out.println(tag);
+//		System.out.println(sql);
+//		System.out.println(sql1);
+		pstmt.setInt(1,tag);			
 		insertRow = pstmt.executeUpdate();
+		pstmt = con.prepareStatement(sql1);
+		pstmt.setInt(1,tag);
+		updateRow = pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -467,6 +484,7 @@ public class ProductsDAO implements IProducts {
 						+ ", products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name, event_tag, event_tag2, idx "	              
 						+ " from products_wish a join products_img b on a.products_no = b.products_no "														
 						+ " where origin_name not like 'View%' ";									       
+						
 		ArrayList<ProductsDTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;	        
@@ -523,9 +541,9 @@ public class ProductsDAO implements IProducts {
 			pstmt = con.prepareStatement(sql);
 //			pstmt.setString(1, user_id);			
 //			pstmt.setString(2, idx);
-			System.out.println(user_id);
-			System.out.println(idx);
-			System.out.println(sql);
+//			System.out.println(user_id);
+//			System.out.println(idx);
+//			System.out.println(sql);
 			deleteRow = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -562,9 +580,9 @@ public class ProductsDAO implements IProducts {
 		try {
 			pstmt = con.prepareStatement(sql);	
 			pstmt.setInt(1,tag);
-			System.out.println("wishadd");
-			System.out.println(tag);
-			System.out.println(sql);
+//			System.out.println("wishadd");
+//			System.out.println(tag);
+//			System.out.println(sql);
 			insertRow = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {

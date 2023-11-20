@@ -97,7 +97,7 @@
 
 $(function(){
 
-  axios.get('/user_summary/default').then(function (response) {
+  axios.get('/mypage.do').then(function (response) {
 
     const {info, customerVo} = response.data.RESULT_MSG;
 

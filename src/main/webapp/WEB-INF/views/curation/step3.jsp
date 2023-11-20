@@ -425,35 +425,10 @@
 </form>
 
 <script>
-
-// let timer;
-//   window.alert = function (message, callback, okBtnText) {
-//     $("#alertModalLabel").html("");
-//     $("#alertModal .modal-body").html(message);
-//     $("#alertModal").modal('show');
-//     if (okBtnText) {
-//       $("#alertModal").find('.modal-footer').text(okBtnText);
-//     }
-//     if (callback && typeof callback == 'function') {
-//       $("#alertModal .modal-footer").on("click", function () {
-//         $("#alertModal").find('.modal-footer').text('확인');
-//         callback();
-//         $("#alertModal .modal-footer").off("click")
-
-//       });
-//     }
-//       $("#alertModal").on("hide.bs.modal", function () {
-//         $('#alertModal .modal-footer').removeClass('disabled')
-//         $('#alertModal .modal-footer').prop('disabled',false);
-//         $("#alertModal .modal-footer").off("click")
-//         $("#alertModal").find('.modal-footer').text('확인');
-//         clearTimeout(timer)
-//       });
-//   }
   
   $(function(){
 
-    axios.get('/user_summary/default').then(function (response) {
+    axios.get('/mypage.do').then(function (response) {
 
       const {info, customerVo} = response.data.RESULT_MSG;
 

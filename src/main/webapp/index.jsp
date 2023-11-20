@@ -3,6 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
+<script type="text/javascript">
+<c:choose>
+<c:when test="${ auth.getName() eq null }">
+window.is_signed = false;
+</c:when>
+<c:otherwise>
+window.is_signed = true;
+window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderCode":"XQNGV"};
+</c:otherwise>
+</c:choose>
+</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".visual-area").fddCarousel({
@@ -184,7 +195,7 @@
 											<i class="ico ico-personal-03"></i>
 										</div> <span>배송일정변경</span>
 								</a></li>
-								<li class="item"><a href="/mypage/action/interest"
+								<li class="item"><a href="/mypage/product/list.do"
 									data-require-login="">
 										<div class="cover">
 											<i class="ico ico-personal-04"></i>
@@ -661,40 +672,11 @@
 				</div>
 			</div>
 		</main>
+		<%@ include file="/WEB-INF/views/layouts/sidebar.jsp"%>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
-		<div class="modal fade" id="alertModal" tabindex="-1"
-			aria-labelledby="alertModalLabel" style="display: none;"
-			aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="alertModalLabel"></h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">로그인 후 찜한상품으로 담을 수 있습니다.</div>
-					<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="confirmModal" tabindex="-1"
-			aria-labelledby="confirmModalLabel" style="display: none;"
-			aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="confirmModalLabel"></h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">제품이 담겼습니다. 담은 제품을 확인하시겠습니까?</div>
-					<div class="modal-footer">
-						<button type="button" class="cancel" data-dismiss="modal">취소</button>
-						<button type="button" class="confirm">확인</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/ui/wishmodal.jsp"%>
+		<%@ include file="/WEB-INF/views/ui/cartmodal.jsp"%>
+
 	</div>
 </body>
 </html>

@@ -259,8 +259,7 @@ Kakao.init('c153013cc3f2b9900924ea8e382fbf8d');
 		//endregion
 	});
 
-	var data = '${dto.content}';	
-
+// 	var data = '${dto.content}';	
 	window.kakaoShareData = {		
 		key: 100891,
 		data: {
