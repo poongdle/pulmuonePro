@@ -15,7 +15,7 @@ WebFontConfig = {
     custom: {
         families:['Noto Sans KR'],
         //urls:['//fonts.googleapis.com/earlyaccess/notosanskr.css']  //20200220 구글폰트로 사용
-        urls:['../../resources/css/notosanskr.css']//20171109 경로수정 //20200220 로컬 폰트 사용X // 20200309 ie 대응 위해 css만 내부용으로 교체(font파일은 google)
+        urls:['/resources/assets/css/notosanskr.css']//20171109 경로수정 //20200220 로컬 폰트 사용X // 20200309 ie 대응 위해 css만 내부용으로 교체(font파일은 google)
     },
     timeout: 0
 };
@@ -23,7 +23,7 @@ WebFontConfig = {
     var wf = document.createElement('script');
     //wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
     //'://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    wf.src = '../../resources/assets/js/webfont.js';//20171109 경로수정
+    wf.src = '/resources/assets/js/webfont.js';//20171109 경로수정
     wf.type = 'text/javascript';
     wf.async = 'true';
     var s = document.getElementsByTagName('script')[0];
@@ -41,7 +41,7 @@ $( function() {
         dayNamesMin: ['일','월','화','수','목','금','토'], // 20200305 요일이름 한글로 수정
         showOn: 'button',
         showMonthAfterYear: true,
-        buttonImage : '../../resources/images/ui/ui_ico_calendar.png',
+        buttonImage : '../images/ui/ui_ico_calendar.png',
         buttonImageOnly: false,// 수정 웹접근성 관련
         buttonText: '날짜 선택',
         currentText: '현재',

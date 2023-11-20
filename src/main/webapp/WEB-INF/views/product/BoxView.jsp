@@ -46,13 +46,6 @@
     });
 </script>
 	<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-150666346-1');
-</script>
-	<script>
 	var formatter = new Intl.NumberFormat();
 	var days = ["A", "B", "C", "D", "E"];
 
@@ -210,10 +203,10 @@
 			if (itemType != "daily") {
 				// 택배배송
 				var args = { item: [{itemCode, qty: ($('.box-qty').text()) || "1", eventIdx: ""}] };
-				location.href = "/order/box/step1?item=" + encodeURIComponent(JSON.stringify(args));
+				console.log(args);
+				location.href = "/box/order/step1.do?item=" + encodeURIComponent(JSON.stringify(args));
 				return;
 			}
-
 			// 매일배송
 			var input = $('input[name=r1]:checked');
 
@@ -290,6 +283,75 @@
 			reviewModal.find('.scrollable p').text(content)
 			reviewModal.find('.scrollable .span-tie').replaceWith(nameAndDateEl.clone())
 		})		
+
+</script>
+<script type="text/javascript">
+	var itemType = "box";
+	var formatter = new Intl.NumberFormat();
+	var limitSize = parseInt("-1" || "-1", 10);
+
+	function calculateBoxPrice() {
+		const qty = $('.box-qty').text()
+		const price = '${dto.price}'
+		$('#totalPrice b').text(formatter.format(qty * price))
+
+	}
+    $().ready(function () {
+        // region 가격
+        $("input[name=r1]").change(function () {
+            if ($(this).is(":checked")) {
+                var totalPrice = 0;
+                if ($(this).hasClass('none-package')) {
+                    $('input[name=c1]').removeAttr('disabled');
+                    $('.check-list').find('input[type=checkbox]:not(:checked)').click()
+                    const cnt = $('input[name=c1]:checked').length
+                    const price = '${dto.price}'
+                    totalPrice = cnt * price * 4;
+
+                } else {
+                    $('.check-list').find('input[type=checkbox]:checked').click()
+                    $('input[name=c1]').attr('disabled', 'disabled');
+                    totalPrice = $(this).data("total-price") * 4;
+                }
+                $("#totalPrice b").text(formatter.format(totalPrice));
+            }
+        });
+        $('input[name=c1]').change(function () {
+            if ($("input[name=r1]:checked").hasClass('none-package')) {
+                const cnt = $('input[name=c1]:checked').length
+                const price = '${dto.price}'
+                $("#totalPrice b").text(formatter.format(cnt * price * 4));
+            }
+        })
+        calculateBoxPrice()       
+        $('.btn-plus').click(function () {
+            var qty = $('.box-qty').text()
+			var beSize = parseInt(qty, 10) + 1;
+			if (limitSize >= 0 && beSize > limitSize) {
+				alert("해당 상품은 한정수량 판매입니다.");
+				return;
+			}
+            $('.box-qty').text(beSize)
+            calculateBoxPrice()
+        })
+        $('.btn-minus').click(function () {
+            const qty = $('.box-qty').text()
+            if (qty > 1) {
+                $('.box-qty').text(parseInt(qty) - 1)
+                calculateBoxPrice()
+            }
+        })
+        //endregion
+
+        //    region 추천 패키지
+        $('.package-more').click(function () {
+			$(this).hide().parents(".select-package").addClass("show-all");
+        })
+
+        $('.none-package').click();
+		//    endregion
+    });
+
 
 </script>
 	<script>
@@ -390,7 +452,6 @@
         });
       }
     });
-
   }
   $(document).on("click", "#orderModal button", function (e) {
     var type = $(this).attr("data-type");
@@ -530,7 +591,7 @@
 					</div>
 				</div>
 			</div>
-			<a class="faq-product" href="/forum/faq">
+			<a class="faq-product" href="/forum/faq/list.do">
 				<div class="container">
 					<h2 class="part-title">FAQ</h2>
 					<p>자주 묻는 질문입니다.</p>
@@ -554,17 +615,21 @@
 						<div class="prd-detail-modal-title " style="margin-left: 50px">
 							<span>금액</span>
 							<p id="totalPrice" class="price">
-								<b style="font-weight: 400">60,000</b><span>원</span>
+								<b style="font-weight: 400"></b><span>원</span>
 							</p>
 						</div>
 					</div>
 					<div class="button-set"
 						style="margin-right: -4px; margin-bottom: 7px">
 						<button class="button-fix interest-button " data-wish-type="box"
-							data-wish-id="658"></button>
+							data-wish-id="${dto.products_tag }"></button>
 						<!-- 품절용 가이드 추가 -->
+						<form action="/box/order/step1.do" method="GET">
+					        <input type="hidden" name="productsNo" value="${dto.products_no }">
+							<input type="hidden" name="productsCnt" value="1">
 						<button id="cartBtn" class="button-fix black">장바구니</button>
 						<button id="orderBtn" class="button-fix primary">바로구매</button>
+						</form>
 					</div>
 				</div>
 			</div>

@@ -293,7 +293,7 @@ public class ProductsDAO implements IProducts {
 	
 	@Override
 	public List<ProductsDTO> viewlist(Connection con, int tag) throws Exception {
-		String sql = "select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price, products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name,origin_name, event_tag, event_tag2 "
+		String sql = "select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price, products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name,origin_name, event_tag, event_tag2,wish_status "
 				+ " from products a join products_img b on a.products_no = b.products_no "
 				+ " where products_tag = ? "
 				+ " and origin_name like 'View%' ";
@@ -330,6 +330,7 @@ public class ProductsDAO implements IProducts {
 					dto.setOrigin_name(rs.getString("origin_name"));
 					dto.setEvent_tag(rs.getString("event_tag"));
 					dto.setEvent_tag2(rs.getString("event_tag2"));
+					dto.setWish_status(rs.getString("wish_status"));
 					list.add(dto);
 				} while ( rs.next() );
 			} // 
@@ -342,7 +343,7 @@ public class ProductsDAO implements IProducts {
 	}
 	@Override
 	public ProductsDTO view(Connection con, int tag) throws Exception {
-		String sql = "select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price, products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name,origin_name, event_tag, event_tag2 "
+		String sql = "select a.products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price, products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, system_name,origin_name, event_tag, event_tag2,wish_status "
 				+ " from products a join products_img b on a.products_no = b.products_no "
 				+ " where products_tag = ? "
 				+ " and origin_name like 'View%' ";
@@ -376,7 +377,8 @@ public class ProductsDAO implements IProducts {
 					.system_name(rs.getString("system_name"))
 					.origin_name(rs.getString("origin_name"))
 					.event_tag(rs.getString("event_tag"))
-					.event_tag2(rs.getString("event_tag2")).build();
+					.event_tag2(rs.getString("event_tag2"))
+					.wish_status(rs.getString("wish_status")).build();
 		}
 		rs.close();
 		pstmt.close();
