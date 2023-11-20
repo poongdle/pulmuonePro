@@ -51,7 +51,7 @@
                   <a href="/customer/product/product.do">맞춤큐레이션</a>
                </li>
                <li>
-                  <a href="/taste/taste">시음선물</a>
+                  <a href="/taste/taste.do">시음선물</a>
                </li>
                <li>
                   <a href="/event/event/list.do">이벤트</a>
