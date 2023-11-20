@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import auth.AuthInfo;
 import mvc.command.CommandHandler;
 import servlets.product.domain.ProductsDTO;
 import servlets.product.service.DeleteService;
@@ -28,7 +30,9 @@ public class WishDelete implements CommandHandler{
 			tag = String.join(", ",tags);
 		}			
 		int deleteRow = 0;
-		String user_id = "aaaaaaaa";
+		HttpSession session = request.getSession(false);
+		AuthInfo auth = (AuthInfo) session.getAttribute("auth");
+		String user_id = auth.getMemberId();
 //		System.out.println(idx);
 //		System.out.println(tag);
 //		System.out.println(user_id);
