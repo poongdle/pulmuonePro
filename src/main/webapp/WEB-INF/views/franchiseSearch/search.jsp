@@ -201,6 +201,12 @@ function searchPostcode() {
 				data: {query },
 				cache:false ,
 				success: function ( data,  textStatus, jqXHR ){
+					
+					$("#homeResult").hide();
+					$("#homeNoResult").hide();
+					$("#officeResult").hide();
+					$("#officeNoResult").hide();
+					
 					if( data.result == 0 ) {
 						$("#deliveryResult").show();
 						$("#homeNoResult").show();
@@ -210,9 +216,6 @@ function searchPostcode() {
 					
 					// 결과 영역 show
 					$("#deliveryResult").show();
-					
-					$("#homeNoResult").show();
-					$("#officeNoResult").show();
 					
 					let home = [];
 					let office = [];

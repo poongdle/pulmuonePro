@@ -11,27 +11,38 @@ import servlets.event.domain.EventWinnerDTO;
 
 public class EventWinnerDAO implements IEventWinner {
     
-    @Override
-    public List<EventWinnerDTO> selectList(Connection con) throws SQLException {
-        String sql = "SELECT * FROM winner_board ORDER BY win_board_no DESC";
-        PreparedStatement stmt = con.prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery();
+	@Override
+	public List<EventWinnerDTO> selectList(Connection con, int currentPage, int numberPerPage) throws SQLException {
+	    int start = (currentPage - 1) * numberPerPage + 1;
+	    int end = start + numberPerPage - 1;
 
-        List<EventWinnerDTO> winBoards = new ArrayList<>();
-        while (rs.next()) {
-            EventWinnerDTO winBoard = new EventWinnerDTO();
-            winBoard.setWin_board_no(rs.getInt("win_board_no"));
-            winBoard.setWin_title(rs.getString("win_title"));
-            winBoard.setWin_content(rs.getString("win_content"));
-            winBoard.setWin_regdate(rs.getDate("win_regdate"));
-            winBoards.add(winBoard);
-        }
+	    String sql = "SELECT * FROM (" +
+	                 "  SELECT rownum rnum, win_board_no, win_title, win_content, win_regdate " +
+	                 "  FROM (" +
+	                 "    SELECT * FROM winner_board ORDER BY win_board_no DESC" +
+	                 "  )" +
+	                 ") WHERE rnum BETWEEN ? AND ?";
+	    PreparedStatement stmt = con.prepareStatement(sql);
+	    stmt.setInt(1, start);
+	    stmt.setInt(2, end);
+	    ResultSet rs = stmt.executeQuery();
 
-        rs.close();
-        stmt.close();
+	    List<EventWinnerDTO> winBoards = new ArrayList<>();
+	    while (rs.next()) {
+	        EventWinnerDTO winBoard = new EventWinnerDTO();
+	        winBoard.setWin_board_no(rs.getInt("win_board_no"));
+	        winBoard.setWin_title(rs.getString("win_title"));
+	        winBoard.setWin_content(rs.getString("win_content"));
+	        winBoard.setWin_regdate(rs.getDate("win_regdate"));
+	        winBoards.add(winBoard);
+	    }
 
-        return winBoards;
-    }
+	    rs.close();
+	    stmt.close();
+
+	    return winBoards;
+	}
+
 
     @Override
     public int insert(Connection con, EventWinnerDTO dto) throws SQLException {
@@ -81,4 +92,22 @@ public class EventWinnerDAO implements IEventWinner {
 
         return affectedRows;
     }
+    
+    @Override
+    public int getTotalRecords(Connection con) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM winner_board";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        
+        int totalRecords = 0;
+        if (rs.next()) {
+            totalRecords = rs.getInt(1);
+        }
+
+        rs.close();
+        stmt.close();
+
+        return totalRecords;
+    }
+
 }

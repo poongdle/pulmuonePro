@@ -11,15 +11,14 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @NoArgsConstructor
-public class EventDTO {
+public class HaveCouponDTO {
 
-	private int event_no;
-	private String event_name;
-	private Date event_start;
-	private Date event_end;
-	private String event_notice;
-	private int event_cmt;
-	
-	private EventThumbnailDTO thumbnail;
+	private int coupon_no;
+	private int member_no; 
+	private Date issue_date;
+	private Date expiry_date;
+	private int used;
+	private int box_pay_no;
+	private int drk_pay_no;
 	
 }

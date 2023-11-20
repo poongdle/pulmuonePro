@@ -5,7 +5,7 @@
 <body>
     <div class="wrapper">
         <%@ include file="/WEB-INF/views/layouts/header.jsp"%>
-        <main class="page event">
+        <div class="contents-area">
             <div class="container">
                 <div class="location">
                     <a href="/">홈</a> <a href="/event/event/list.do">이벤트</a>
@@ -39,21 +39,22 @@
                         </table>
                         
                         <nav aria-label="Page navigation example" class="pagenavi-area" data-pagination="">
-                            <input type="hidden" id="pageNo" name="pageNo">
-                            <ul class="pagination">
-                                <c:forEach var="i" begin="1" end="${totalPages}">
-                                    <li class="page-item ${i == currentPage ? 'active' : ''}">
-                                        <a class="page-link" href="/event/winlist.do?currentPage=${i}">${i}</a>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </nav>
+						    <input type="hidden" id="pageNo" name="pageNo">
+						    <ul class="pagination">
+						        <c:forEach var="i" begin="1" end="${totalPages}">
+						            <li class="page-item ${i == currentPage ? 'active' : ''}">
+						                <a class="page-link" href="/event/winner.do?currentPage=${i}">${i}</a>
+						            </li>
+						        </c:forEach>
+						    </ul>
+						</nav>
+
                         
                     </div>
                     
                 </div>
             </div>
-        </main>
+        </div>
         <%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
     </div>
 </body>
