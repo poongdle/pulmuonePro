@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.naming.NamingException;
 
+import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import servlets.member.dao.MemberDAOImpl;
 import servlets.member.dto.MemberDTO;
@@ -31,7 +32,7 @@ public class MemberService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			conn.close();
+			JdbcUtil.close(conn);
 		}
 		
 		return dto;
@@ -57,7 +58,7 @@ public class MemberService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			conn.close();
+			JdbcUtil.close(conn);
 		}
 		
 		return dto;		
@@ -79,7 +80,7 @@ public class MemberService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			conn.close();
+			JdbcUtil.close(conn);
 		}
 		
 		return dto;
@@ -111,7 +112,7 @@ public class MemberService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			conn.close();
+			JdbcUtil.close(conn);
 		}
 		
 		return rowCount;
@@ -138,7 +139,7 @@ public class MemberService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			conn.close();
+			JdbcUtil.close(conn);
 		}
 		
 		return rowCount;
@@ -206,7 +207,7 @@ public class MemberService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			conn.close();
+			JdbcUtil.close(conn);
 		}
 		
 		return dto;
