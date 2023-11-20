@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import servlets.event.domain.CouponDTO;
 import servlets.event.domain.HaveCouponDTO;
 
 public class EventCouponDAO implements IEventCoupon {
 
-	// 쿠폰 발급 메소드
+	// 쿠폰 발급
 	public int setCoupon(Connection conn, HaveCouponDTO coupon) throws SQLException {
 	    String sql = "INSERT INTO have_coupon (coupon_no, member_no, issue_date, expiry_date, used) VALUES (?, ?, ?, ?, ?)";
 	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -23,6 +24,7 @@ public class EventCouponDAO implements IEventCoupon {
 	    }
 	}
 	
+	// 쿠폰 확인
 	public CouponDTO getCoupon(Connection conn, int coupon_no) throws SQLException {
 	    String sql = "SELECT * FROM coupon WHERE coupon_no = ?";
 	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -43,6 +45,8 @@ public class EventCouponDAO implements IEventCoupon {
 	    }
 	    return null;
 	}
+	
+	
 }
 
 

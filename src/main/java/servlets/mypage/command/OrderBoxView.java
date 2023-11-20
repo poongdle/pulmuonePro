@@ -1,11 +1,16 @@
 package servlets.mypage.command;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mvc.command.CommandHandler;
 import servlets.mypage.dto.BoxOrderListDTO;
 import servlets.mypage.service.MypageService;
+import servlets.order.domain.BoxPayDTO;
+import servlets.order.domain.BoxShipDTO;
+import servlets.order.domain.OrderCouponDTO;
 
 public class OrderBoxView implements CommandHandler {
 
@@ -19,20 +24,23 @@ public class OrderBoxView implements CommandHandler {
 		// > 주문번호 가져오기
 		int orderNo = Integer.parseInt(request.getParameter("boxOrderNo"));
 		
-		// 1. 주문일 조회
+		// 1. 주문 및 상품 정보 조회
 		BoxOrderListDTO boxOrder = service.selectBoxOrder(orderNo);
 		request.setAttribute("boxOrder", boxOrder);
 		
-		// 2. 상품 타입, 상품명, 상품 용량, 주문수량, 주문상태, 상품가격, trackingNo
-		// 3. 배송지 정보(이름, 연락처, 우편번호, 주소, 상세주소, 메모)
-		// 4. 결제정보(판매가, 할인판매가, 쿠폰할인금액, 배송비, 결제수단, 최종결제금액)
-		// 5. 사용된 쿠폰(이름, 혜택(금액/율)
+		// 2. 배송지 정보(이름, 연락처, 우편번호, 주소, 상세주소, 메모)
+		BoxShipDTO boxShip = service.selectBoxShip(orderNo);
+		request.setAttribute("boxShip", boxShip);
 		
-		/*
-		// 1. 총 택배배송 주문 건수
-		int boxOrderCnt = service.boxOrderCnt(memberNo);
-		request.setAttribute("boxOrderCnt", boxOrderCnt);
-		*/
+		// 3. 결제 정보 조회
+		BoxPayDTO boxPay = service.selectBoxPay(orderNo);
+		request.setAttribute("boxPay", boxPay);
+		
+		// 4. 사용된 쿠폰(이름, 혜택(금액/율)
+		int payNo = boxPay.getBoxPayNo();
+		ArrayList<OrderCouponDTO> couponList = service.selectUsedCoupon(payNo);
+		request.setAttribute("couponList", couponList);
+		
 		
 		return "/WEB-INF/views/mypage/order/box/orderBoxView.jsp";
 	}

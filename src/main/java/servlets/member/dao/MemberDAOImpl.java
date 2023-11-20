@@ -59,7 +59,18 @@ public class MemberDAOImpl implements MemberDAO {
 
 		int memberNo;
 		String name;
-
+		String tel;
+		String email;
+		Date birthdate;
+		String invCode;
+		int interestCode1;
+		int interestCode2;
+		int interestCode3;
+		String naverToken;
+		String kakaoToken;
+		int adApproval;
+		int marketingApproval;
+		Date regDate;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -74,9 +85,34 @@ public class MemberDAOImpl implements MemberDAO {
 				do {
 					memberNo = rs.getInt("member_no");
 					name = rs.getString("name");
+					tel = rs.getString("tel");
+					email = rs.getString("email");
+					birthdate = rs.getDate("birthdate");
+					invCode = rs.getString("inv_code");
+					interestCode1 = rs.getInt("interest_code1");
+					interestCode2 = rs.getInt("interest_code2");
+					interestCode3 = rs.getInt("interest_code3");
+					naverToken = rs.getString("naver_token");
+					kakaoToken = rs.getString("kakao_token");
+					adApproval = rs.getInt("ad_approval");
+					marketingApproval = rs.getInt("marketing_approval");
+					regDate = rs.getDate("reg_date");
 					
-					
-					dto = MemberDTO.builder().memberNo(memberNo).name(name).build();
+					dto = MemberDTO.builder().memberNo(memberNo)
+											.name(name)
+											.tel(tel)
+											.email(email)
+											.birthDate(birthdate)
+											.invCode(invCode)
+											.interestCode1(interestCode1)
+											.interestCode2(interestCode2)
+											.interestCode3(interestCode3)
+											.naverToken(naverToken)
+											.kakaoToken(kakaoToken)
+											.adApproval(adApproval)
+											.marketingApproval(marketingApproval)
+											.regDate(regDate)
+											.build();
 				} while (rs.next());
 				
 			} else {

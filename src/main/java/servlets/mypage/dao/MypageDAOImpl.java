@@ -1,12 +1,11 @@
 package servlets.mypage.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import jdbc.JdbcUtil;
 import lombok.AllArgsConstructor;
@@ -15,10 +14,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import servlets.mypage.dto.BoxOrderListDTO;
 import servlets.mypage.dto.BoxOrderSimpleInfoDTO;
-import servlets.order.domain.BoxOrderDTO;
-import servlets.order.domain.BoxOrderInfoDTO;
 import servlets.order.domain.BoxOrderProductDTO;
 import servlets.order.domain.BoxPayDTO;
+import servlets.order.domain.BoxShipDTO;
+import servlets.order.domain.OrderCouponDTO;
 
 
 @Setter
@@ -150,17 +149,18 @@ public class MypageDAOImpl implements MypageDAO {
 	
 	// 	3) 택배배송 주문 내역 - 리스트 조회 및 날짜 검색
 	@Override
-	public ArrayList<BoxOrderListDTO> selectBoxOrderList(int memberNo, String startSearchDate, String endSearchDate) throws SQLException {
+	public ArrayList<BoxOrderListDTO> selectBoxOrderList(int memberNo, Date startSearchDate, Date endSearchDate) throws SQLException {
 		String sql = " SELECT box_order_no, box_order_date, box_order_status "
 				+ " FROM box_order "
 				+ " WHERE member_no = ? AND box_order_date BETWEEN ? AND ? "
 				+ " ORDER BY box_order_date DESC ";
 		
-		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, origin_name, tracking_no "
+		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, system_name, tracking_no "
 				+ " FROM box_order_products o JOIN products p ON o.products_no = p.products_no "
 										+ " JOIN products_img i ON p.products_no = i.products_no "
 										+ " JOIN box_ship s ON o.box_order_no = s.box_order_no "
-				+ " WHERE o.box_order_no = ? AND origin_name = 'View.png' ";
+				+ " WHERE o.box_order_no = ? AND origin_name != 'View.png'"
+				+ " ORDER BY p.products_no ";
 		
 		PreparedStatement pstmt1 = null;
 		ResultSet rs1 = null;
@@ -175,8 +175,8 @@ public class MypageDAOImpl implements MypageDAO {
 		try {
 			pstmt1 = conn.prepareStatement(sql);
 			pstmt1.setInt(1, memberNo);
-			pstmt1.setString(2, startSearchDate);
-			pstmt1.setString(3, endSearchDate);
+			pstmt1.setDate(2, startSearchDate);
+			pstmt1.setDate(3, endSearchDate);
 			rs1 = pstmt1.executeQuery();
 			if (rs1.next()) {
 				list1 = new ArrayList<>();
@@ -202,7 +202,7 @@ public class MypageDAOImpl implements MypageDAO {
 							pdto.setPrice(rs2.getInt("price"));
 							pdto.setEventPrice(rs2.getInt("event_price"));
 							pdto.setImgPath(rs2.getString("img_path"));
-							pdto.setOriginName(rs2.getString("origin_name"));
+							pdto.setOriginName(rs2.getString("system_name"));
 							pdto.setTrackingNo(rs2.getString("tracking_no"));
 							list2.add(pdto);
 						} while (rs2.next());
@@ -227,7 +227,6 @@ public class MypageDAOImpl implements MypageDAO {
 		return list1;
 	}
 
-
 	// 	4) 택배배송 취소
 	//		a. 주문 내역, 주문 상품 정보 조회
 	@Override
@@ -236,10 +235,12 @@ public class MypageDAOImpl implements MypageDAO {
 				+ " FROM box_order "
 				+ " WHERE box_order_no = ? ";
 		
-		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, origin_name "
+		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, system_name, tracking_no "
 				+ " FROM box_order_products o JOIN products p ON o.products_no = p.products_no "
 										+ " JOIN products_img i ON p.products_no = i.products_no "
-				+ " WHERE box_order_no = ? AND origin_name = 'View.png' ";
+										+ " JOIN box_ship s ON o.box_order_no = s.box_order_no "
+				+ " WHERE o.box_order_no = ? AND origin_name != 'View.png' "
+				+ " ORDER BY p.products_no ";
 		
 		PreparedStatement pstmt1 = null;
 		ResultSet rs1 = null;
@@ -276,7 +277,8 @@ public class MypageDAOImpl implements MypageDAO {
 						pdto.setPrice(rs2.getInt("price"));
 						pdto.setEventPrice(rs2.getInt("event_price"));
 						pdto.setImgPath(rs2.getString("img_path"));
-						pdto.setOriginName(rs2.getString("origin_name"));
+						pdto.setOriginName(rs2.getString("system_name"));
+						pdto.setTrackingNo(rs2.getString("tracking_no"));
 						list2.add(pdto);
 					} while (rs2.next());
 					odto.setProductList(list2);
@@ -295,7 +297,6 @@ public class MypageDAOImpl implements MypageDAO {
 		return odto;
 	} // selectBoxOrder
 
-	
 	//		b. 결제 정보 조회
 	@Override
 	public BoxPayDTO selectBoxPay(int orderNo) throws SQLException {
@@ -374,7 +375,75 @@ public class MypageDAOImpl implements MypageDAO {
 			JdbcUtil.close(pstmt);
 		} // try
 		return rowCnt;
-	} // updateBoxPay
+	}
+
+	//	5) 택배배송 주문 상세 내역
+	@Override
+	public BoxShipDTO selectBoxShip(int orderNo) throws SQLException {
+		String sql = " SELECT box_receiver, box_tel, box_zip_code, box_addr, box_addr_detail, box_memo "
+				+ " FROM box_ship "
+				+ " WHERE box_order_no = " + orderNo;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoxShipDTO dto = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				dto = new BoxShipDTO();
+				dto.setBoxReceiver(rs.getString("box_receiver"));
+				dto.setBoxTel(rs.getString("box_tel"));
+				dto.setBoxZipCode(rs.getString("box_zip_code"));
+				dto.setBoxAddr(rs.getString("box_addr"));
+				dto.setBoxAddrDetail(rs.getString("box_addr_detail"));
+				dto.setBoxMemo(rs.getString("box_memo"));
+			} // if
+		} catch (Exception e) {
+			System.out.println("MypageDAOImpl.selectBoxShip() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);
+		} // try
+		return dto;
+	} // selectBoxShip
+
+	
+	// 	6) 사용한 쿠폰 리스트
+	@Override
+	public ArrayList<OrderCouponDTO> selectUsedCoupon(int payNo) throws SQLException {
+		String sql = " SELECT coupon_name, discount "
+				+ " FROM have_coupon h JOIN coupon c ON h.coupon_no = c.coupon_no "
+				+ " WHERE box_pay_no = " + payNo;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		OrderCouponDTO dto = null;
+		ArrayList<OrderCouponDTO> list = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					dto = new OrderCouponDTO();
+					dto.setCouponName(rs.getString("coupon_name"));
+					dto.setDiscount(rs.getDouble("discount"));
+					list.add(dto);
+				} while (rs.next());
+			} // if
+		} catch (Exception e) {
+			System.out.println("MypageDAOImpl.selectUsedCoupon() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);
+		} // try
+		return list;
+	} // selectUsedCoupon
 	
 	
 	// 3. 시음선물 관련
