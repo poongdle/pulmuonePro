@@ -77,7 +77,7 @@
                <div class="counter hide" data-cart-size=""></div> <i class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
             </a>
          </div>
-         <form class="search-area" action="/product/search">
+         <form class="search-area" action="/product/search.do">
             <input type="text" id="" name="searchKeyword" value="" title="검색어 입력">
             <button>
                <i class="ico ico-srh1"></i>
