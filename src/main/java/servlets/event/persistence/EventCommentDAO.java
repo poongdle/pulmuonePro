@@ -24,7 +24,7 @@ public class EventCommentDAO implements IEventCommnet{
 	    List<EventCommentDTO> comments = new ArrayList<>();
 	    
 	    try {
-	        stmt = con.prepareStatement(sql);
+	        stmt = con.prepareStatement(sql);                                                                    
 	        stmt.setInt(1, event_no);  // event_no 값을 설정
 	        stmt.setInt(2, start);
 	        stmt.setInt(3, end);
