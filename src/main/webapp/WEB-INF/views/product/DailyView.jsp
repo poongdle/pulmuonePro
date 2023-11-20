@@ -329,7 +329,7 @@
     $("#orderModal ul").html("");
     $("#orderModal").addClass("loading").modal("show");
 
-    axios.post(`/product_available`, { ids: codes }).then(function (r) {
+    axios.post(`/product_available.do`, { ids: codes }).then(function (r) {
       var o = r.data.RESULT_MSG;
       if (o.fails.length) {
         var itemCodes = o.fails.map(v => v.itemCode);
@@ -440,15 +440,15 @@
 					<div class="product-info-area">
 						<div class="thumb-area">
 							<c:forEach var="dao" items="${list }" end="0">
-								<div class="main-thumb">									
-										<img src="/file/download/product/${dao.system_name }">									
+								<div class="main-thumb">
+									<img src="/file/download/product/${dao.system_name }">
 								</div>
 							</c:forEach>
 							<ul class="sub-thumb">
 								<c:forEach var="dao" items="${list }" end="4">
 									<li class="active">
-										<button type="button" class="item">											
-												<img src="/file/download/product/${dao.system_name }">											
+										<button type="button" class="item">
+											<img src="/file/download/product/${dao.system_name }">
 										</button>
 									</li>
 								</c:forEach>
@@ -460,9 +460,9 @@
 							</div>
 							<div style="height: 6px"></div>
 							<div class="prd-detail-title-area">
-								<div style="flex: 1; padding-right: 10px">									
-										<h2>${dto.products_name }</h2>
-										<p>${dto.products_sub_name }</p>
+								<div style="flex: 1; padding-right: 10px">
+									<h2>${dto.products_name }</h2>
+									<p>${dto.products_sub_name }</p>
 								</div>
 								<button data-toggle="modal" data-target="#shareModal"
 									type="button" class="ellipse-button primary"
@@ -473,12 +473,12 @@
 							<div class="product-addiction">
 								<div class="price-item">
 									<span style="padding-right: 12px; font-size: 22px;">
-										(원산지 :상품상세 참조) </span>								
-										<p>
-											<fmt:formatNumber value="${dto.price }" pattern="#,###" />
-											<span>원</span>
-										</p>
-										<span>(${dto.products_size })</span>
+										(원산지 :상품상세 참조) </span>
+									<p>
+										<fmt:formatNumber value="${dto.price }" pattern="#,###" />
+										<span>원</span>
+									</p>
+									<span>(${dto.products_size })</span>
 								</div>
 							</div>
 							<div class="buy-option">
@@ -677,9 +677,7 @@
 				</div>
 			</div>
 			<!-- Tab panes -->
-			<div class="tab-content">
-			${dto.content }
-			</div>
+			<div class="tab-content">${dto.content }</div>
 			<a class="faq-product" href="/forum/faq/list.do">
 				<div class="container">
 					<h2 class="part-title">FAQ</h2>
@@ -700,11 +698,12 @@
 					<div class="button-set"
 						style="margin-right: -4px; margin-bottom: 7px">
 						<button class="button-fix interest-button " data-wish-type="daily"
-							data-wish-id="743"></button>
+							data-wish-id="${dto.products_tag }"></button>
 						<!-- 품절용 가이드 추가 -->
+						<button id="cartBtn" class="button-fix black">장바구니</button>
 						<form action="/daily/order/step1.do" method="GET">
-					        <input type="hidden" name="item" value='{"item":[{"itemCode":"${dto.products_no }","dayQty":[1,1,1,1,1]}]'>
-							<button id="cartBtn" class="button-fix black">장바구니</button>
+							<input type="hidden" name="item"
+								value='{"item":[{"itemCode":"${dto.products_no }","dayQty":[1,1,1,1,1]}]'>
 							<button id="orderBtn" class="button-fix primary">바로구매</button>
 						</form>
 
