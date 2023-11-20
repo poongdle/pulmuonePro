@@ -5,6 +5,7 @@
 <%@page import="servlets.order.domain.BoxOrderProductDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/views/layouts/head.jsp" %>
 <script src="/resources/assets/js/owl.carousel.min.js"></script>
 <script src="/resources/assets/js/clipboard.min.js"></script>
@@ -158,7 +159,7 @@
 							<input name="select-product" class="select-product-checkbox each" data-status="BOCC001" data-ordernum="${ boxOrder.boxOrderNo }" type="checkbox" disabled="">
 							<div class="item" href="/">
 								<a class="thumb">
-									<img src="<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt=""><!-- onerror="this.src='/resources/images/common/no_img.png'"  -->
+									<img src="/<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt="">
 								</a>
 								<div class="contents">
 									<div class="product">
@@ -272,7 +273,7 @@
 						<label>환불 수단</label>
 						<c:choose>
 							<c:when test="${ boxPay.boxPayMethod eq 0 }">
-								<p>카드결제</p>
+								<p>신용카드</p>
 							</c:when>
 							<c:when test="${ boxPay.boxPayMethod eq 1 }">
 								<p>실시간 계좌이체</p>

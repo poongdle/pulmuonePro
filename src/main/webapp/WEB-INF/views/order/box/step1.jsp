@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="/WEB-INF/views/layouts/madalHead.jsp"%>
+<%@ include file="/WEB-INF/views/layouts/modalHead.jsp"%>
 <body>
 	<div class="wrapper"> 
     	<%@ include file="/WEB-INF/views/layouts/header.jsp"%> 
@@ -77,7 +77,7 @@
 	                                    	<div class="prd-cart-info-area">
 	                                        	<div class="flex-l">
 	                                            	<a class="thumb">
-	                                                   <img src="${ prd.imgPath }/${ prd.originName }" alt="${ prd.productsName }">
+	                                                   <img src="/${ prd.imgPath }/${ prd.originName }" alt="${ prd.productsName }">
 	                                                </a>
 	                                                <div class="prd-info-select-amount">
 	                                                   <a href="/product/box/728?eventIdx=" class="prd-info">
