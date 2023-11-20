@@ -5,11 +5,24 @@
 %>
 
 <div class="board-write">
-    <span style="text-decoration: underline">
-		<% if(authInfo != null){ %>
-          	<%=authInfo.getName()%>
+    <span style="text-decoration: none">
+        <% if(authInfo != null){ %>
+            <% 
+                String name = authInfo.getName();
+                String maskedName;
+                if(name.length() > 2){
+                    maskedName = name.substring(0, 1);
+                    for(int i = 1; i < name.length()-1; i++){
+                        maskedName += "*";
+                    }
+                    maskedName += name.substring(name.length()-1);
+                } else {
+                    maskedName = name;
+                }
+            %>
+            <%=maskedName%>
         <% }else{ %>
-            <a href="/mypage.do" id="login-link">로그인</a>
+            <a href="/mypage.do" id="login-link" style="text-decoration: underline;">로그인</a>
         <% } %>
     </span>
     <div class="textarea">
@@ -17,6 +30,7 @@
         <button id="write-review" type="button">댓글등록</button>
     </div>
 </div>
+
 <div class="board-review-list-area">
     <div class="list-head">
         <em class="count">댓글 <span>${totalComments}</span></em>
@@ -144,7 +158,6 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function(response) {
-                
                 $("#pagable-list").empty();
                 $.each(response.comments, function(i, comment) {
                     $("#pagable-list").append(
@@ -168,6 +181,8 @@ $(document).ready(function() {
                 console.log(textStatus, errorThrown);
             }
         });
+
+
         
     });
 });

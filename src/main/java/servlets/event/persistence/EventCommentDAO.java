@@ -37,7 +37,14 @@ public class EventCommentDAO implements IEventCommnet{
 	            comment.setMember_no(rs.getInt("member_no"));
 	            comment.setWrite_date(rs.getDate("write_date"));
 	            comment.setContent(rs.getString("content"));
-	            comment.setName(rs.getString("name")); // 사용자 이름 설정
+	            // 이름 마스킹 처리
+	            String name = rs.getString("name");
+	            if (name.length() > 2) {
+	                name = name.charAt(0) + "*".repeat(name.length() - 2) + name.charAt(name.length() - 1);
+	            } else if (name.length() == 2) {
+	                name = name.charAt(0) + "*";
+	            }
+	            comment.setName(name);
 	            comments.add(comment);
 	        }
 	    } catch (SQLException e) {
