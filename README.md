@@ -80,20 +80,21 @@
 
 <details>
 <summary>신종혁</summary>
-<div markdown="1">
+<div markdown="1"><br>
 🌟 로그인/회원가입 <br><br>
   
   - 아이디 찾기<br>
   - 비밀번호 찾기<br>
-  
+
 🌟 환불계좌 관리 페이지<br>
 
-- 환불계좌 등록/변경 페이지<br>
+  - 환불계좌 등록/변경 페이지<br>
 
 🌟 개인정보 페이지<br>
-- 변경 시, 비밀번호 확인<br>
-- 개인정보 변경<br>
 
+  - 변경 시, 비밀번호 확인<br>
+
+🌟 개인정보 변경 페이지<br><br>
 </div>
 </details>
 
@@ -101,7 +102,7 @@
 <summary>이동현</summary>
 <div markdown="1">
 <h4>🌴 고객기쁨센터</h4>
-🌟<strong>FAQ</strong> <br><br>
+🌟<strong>FAQ</strong> <br> <br>
   
   - FAQ 검색<br>
   - 카테고리별 목록 조회<br>
@@ -128,8 +129,18 @@
 
 <details>
 <summary>이지현</summary>
-<div markdown="1">
-택배,매일 배송/주문:..
+<div markdown="1"><br>
+🌟<strong>택배배송 주문</strong><br><br>
+  
+  - 주문서 작성<br>
+  - 주문서 작성 완료 -> 확인
 
+🌟<strong>마이페이지</strong><br>
+
+  - My녹즙(택배 배송 관련 부분)<br>
+  - 택배배송 주문내역<br>
+  - 주문 취소<br>
+  - 주문 내역 조회<br>
+  - 배송 조회<br><br>
 </div>
 </details>
