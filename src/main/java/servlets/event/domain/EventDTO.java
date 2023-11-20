@@ -18,6 +18,7 @@ public class EventDTO {
 	private Date event_start;
 	private Date event_end;
 	private String event_notice;
+	private int event_cmt;
 	
 	private EventThumbnailDTO thumbnail;
 	

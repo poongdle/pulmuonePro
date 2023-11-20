@@ -17,11 +17,19 @@ public interface MemberDAO {
 	// 1-3. 아이디 존재 여부 확인
 	MemberDTO selectOne(String memberId) throws SQLException;
 	
+
+	MemberDTO selectOneWithInvCode(String invCode) throws SQLException;
+
 	// 2. 회원 가입
 	int insert(MemberDTO dto) throws SQLException;
-	
+
+	// 3. 비밀번호 변경
+	int updatePwd(int memberNo, String newPwd) throws SQLException;
+
 	// 3. 회원 탈퇴
 	int delete(MemberDTO dto) throws SQLException;
+
+
 
 	
 	

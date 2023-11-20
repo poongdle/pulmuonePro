@@ -7,7 +7,7 @@
 
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 
-		<main class="page event">
+		<div class="contents-area">
 			<div class="container">
 				<div class="location">
 					<a href="/">홈</a> <a href="/event/event/list.do">이벤트</a>
@@ -62,7 +62,7 @@
 					</div>
 				</div>
 			</div>
-		</main>
+		</div>
 
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
 

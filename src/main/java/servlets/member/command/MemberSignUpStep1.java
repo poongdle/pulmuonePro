@@ -5,12 +5,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import mvc.command.CommandHandler;
 
-public class MemberSignUp implements CommandHandler {
+public class MemberSignUpStep1 implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return "/WEB-INF/views/member/signup.jsp";
+		
+		String method = request.getMethod();
+		
+		if (method.equals("GET")) {
+			
+			return "/WEB-INF/views/member/regist/step1.jsp";
+		} else { // POST
+			
+
+			
+			return null;
+		}
 	}
 
 }
