@@ -58,7 +58,6 @@ public class DailyOrder implements CommandHandler {
         // > service 객체 생성
         DrkOrderService service = DrkOrderService.getInstanse();
         
-        
         // 1. 상품 정보 출력
         ArrayList<DrkOrderProductDTO> prdList = service.selectProducts(itemCodeList);
         request.setAttribute("prdList", prdList);

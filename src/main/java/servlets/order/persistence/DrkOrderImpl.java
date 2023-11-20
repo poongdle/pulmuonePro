@@ -19,7 +19,7 @@ public class DrkOrderImpl implements DrkOrderDAO {
 		return instance;
 	}
 	
-	
+	// 1. 상품 정보 조회
 	@Override
 	public ArrayList<DrkOrderProductDTO> selectProducts(Connection conn, ArrayList<String> productsNo) throws SQLException {
 		Iterator<String> ir = productsNo.iterator();

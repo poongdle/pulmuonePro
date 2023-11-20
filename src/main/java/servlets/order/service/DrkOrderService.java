@@ -39,7 +39,5 @@ public class DrkOrderService {
 		} // try
 	} // selectProducts()
 	
-	
-	
 }
 
