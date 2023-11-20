@@ -359,9 +359,9 @@ $(function (){
 
 <script>
 
-$("#nextPage").click(function() {
-	location.href="/customer/product/step3.do";
-})
+// $("#nextPage").click(function() {
+// 	location.href="/customer/product/step3.do";
+// })
 
 
 $(function(){

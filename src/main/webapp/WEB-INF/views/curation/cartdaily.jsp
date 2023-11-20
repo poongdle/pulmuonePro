@@ -368,7 +368,8 @@
     <label for="chk-prd-0072840"><span class="hide">해당제품선택</span></label>
   </div>
   
-  <a href="/product/daily/view.do?tag=${ tag.products_tag}&eventIdx=" class="prd-cart">
+
+  <a href="/product/daily/view.do?tag=${ list[0].products_tag}&eventIdx=" class="prd-cart">
   <c:forEach var="dto" items="${tag }">
     <div class="thumb">
   <c:forEach var="dto" items="${list }">
@@ -389,6 +390,8 @@
     </c:forEach>
   </c:forEach>
   </a>
+ 
+  
   <div class="prd-cart-select-daily">
   
     <ul data-cart-idx="" data-itemcode="0072840">
@@ -550,22 +553,6 @@
 
 <script>
 
-var windowRef = null;
-function openWindowPop(url, name){
-  var image = document.getElementById('guideImage');
-  var w = image.width;
-  var h = image.height;
-  var options = `width=${w},height=${h}, status=no, menubar=no, toolbar=no, resizable=no`;
-	if(windowRef===null|| windowRef.closed){
-
-  windowRef = window.open('', name, options);
-  windowRef.document.write(`<img src="${url}" width="${w}" maxWidth=100vw />`);
-  windowRef.document.body.style.margin=0;
-	}else {
-  windowRef.focus();
-	}
-
-}
 $(function(){
 
   axios.get('/mypage.do').then(function (response) {

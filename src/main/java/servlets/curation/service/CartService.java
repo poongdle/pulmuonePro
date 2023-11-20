@@ -2,15 +2,12 @@ package servlets.curation.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.naming.NamingException;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import servlets.curation.domain.CartDTO;
-import servlets.curation.domain.KidsDTO;
-import servlets.curation.persistence.CurationDAO;
+import servlets.curation.domain.CurationDTO;
 import servlets.curation.persistence.DAOImpl;
 
 public class CartService {
@@ -25,23 +22,33 @@ public class CartService {
 	      return instance;
 	   }
 
-	   public List<CartDTO> cartdaily(int num){
-		   Connection con = null;
-		      try {
-		         con = ConnectionProvider.getConnection();
-		          DAOImpl dao = DAOImpl.getInstance();
-		          
-		         List<CartDTO> dto = null;
-		        
-		         dto = dao.cartdaily(con, num);
-		         return dto;
-		         
-		      } catch (NamingException | SQLException e) { 
-		         //e.printStackTrace();  syso("ListService.select() 에러 : ")
-		         throw new RuntimeException(e);
-		      } finally {
-		         JdbcUtil.close(con);
-		      }
-	   }
+		public int insert(CurationDTO dto ){
+			//
+			Connection con = null;
+			int rowCount = 0;
+			try {
+				con = ConnectionProvider.getConnection();
+				DAOImpl dao = DAOImpl.getInstance();
+
+				con.setAutoCommit(false);  
+
+				// 금액 != 0 -> 상품 갯수 증가?
+				if (dto.getPrice() != 0) {
+					dao.insert(con, dto);
+				}//if
+
+				rowCount = dao.insert(con, dto);
+
+				con.commit();
+			} catch (NamingException | SQLException e) {
+				JdbcUtil.rollback(con);
+				throw new RuntimeException(e);
+			} finally {
+				JdbcUtil.close(con);
+			}
+			return rowCount;
+		}
+		
+		
 
 }//class

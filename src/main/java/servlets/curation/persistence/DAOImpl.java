@@ -5,16 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import jdbc.JdbcUtil;
-import servlets.curation.domain.CartDTO;
 import servlets.curation.domain.CurationDTO;
 import servlets.curation.domain.KidsDTO;
-import servlets.curation.service.Step1Service;
+
 
 public class DAOImpl implements CurationDAO{
 
@@ -23,7 +19,7 @@ public class DAOImpl implements CurationDAO{
 	public DAOImpl(Connection conn) {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	private static DAOImpl instance = new DAOImpl();
 	public static DAOImpl getInstance() {
 		return instance;
@@ -77,7 +73,7 @@ public class DAOImpl implements CurationDAO{
 
 		return list;
 	}
-	
+
 	//썸네일 이미지
 	@Override
 	public List<KidsDTO> select(Connection con,  int num) throws SQLException {
@@ -233,40 +229,63 @@ public class DAOImpl implements CurationDAO{
 
 		return list;
 	}
-	
-	// 장바구니 - 쿼리 확인
+
+	// 장바구니 - 쿼리 확인	
 	@Override
-	public List<CartDTO> cartdaily(Connection con, int num) throws SQLException {
+	public int insert(Connection con, CurationDTO dto) throws SQLException {
+
+		PreparedStatement pstmt = null;
+		int rowCount = 0;
+
+		String sql = "insert into cart_daily "
+				+ " values( ?, ? , '?', ? , ?, ?, ?, ?, sysdate)";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, dto.getCart_no());
+			pstmt.setInt(2, dto.getMember_no());
+			pstmt.setString(3, dto.getProducts_no());
+			pstmt.setInt(4, dto.getMon_cnt());
+			pstmt.setInt(5, dto.getTue_cnt());
+			pstmt.setInt(6, dto.getWed_cnt());
+			pstmt.setInt(7, dto.getThu_cnt());
+			pstmt.setInt(8, dto.getFir_cnt());
+
+			rowCount = pstmt.executeUpdate();
+
+		}finally {
+			JdbcUtil.close(pstmt);
+			// JdbcUtil.close(con);  서비스 에서  트랜잭션 처리 후에  conn  닫기
+		} 
+
+		return rowCount;
+	}
+	
+	@Override
+	public List<CurationDTO> cartdaily(Connection con, int num) throws SQLException {
 		String sql ="select products_name, system_name, price, products_tag, p.products_no "
 				+ "from products p join products_img pi on p.products_no = pi.products_no "
 				+ "where origin_name not like 'View%' and img_no in ? "
 				+ "order by products_no";
-
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;    
-		ArrayList<CartDTO> list = null;
-
-
+		ArrayList<CurationDTO> list = null;
 		try {
 			pstmt = con.prepareStatement(sql);
 			System.out.println(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
-
 			if ( rs.next() ) {
-				list = new ArrayList<CartDTO>();
-				CartDTO dto = null;
-
-
+				list = new ArrayList<CurationDTO>();
+				CurationDTO dto = null;
 				do {
-					dto =  new CartDTO();
-
+					dto =  new CurationDTO();
 					dto.setProducts_name(rs.getString("products_name"));
 					dto.setSystem_name(rs.getString("system_name"));
 					dto.setPrice(rs.getInt("price"));
 					dto.setProducts_tag(rs.getInt("products_tag"));
 					dto.setProducts_no(rs.getString("products_no"));
-
 					list.add(dto);
 				} while ( rs.next() );
 			} // 
@@ -274,9 +293,6 @@ public class DAOImpl implements CurationDAO{
 			JdbcUtil.close(pstmt);
 			JdbcUtil.close(rs);         
 		} // finally
-
 		return list;
 	}
-
-
 }

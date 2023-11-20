@@ -2,10 +2,8 @@ package servlets.curation.persistence;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import servlets.curation.domain.CartDTO;
 import servlets.curation.domain.CurationDTO;
 import servlets.curation.domain.KidsDTO;
 
@@ -26,6 +24,9 @@ public interface CurationDAO {
    List<KidsDTO> select(Connection con, int num) throws SQLException;
    
 // 장바구니
-   List<CartDTO> cartdaily(Connection con, int num) throws SQLException;    
+   
+   List<CurationDTO> cartdaily(Connection con , int num) throws SQLException;
+   int insert(Connection con,  CurationDTO dto) throws SQLException;
+    
    
 }
