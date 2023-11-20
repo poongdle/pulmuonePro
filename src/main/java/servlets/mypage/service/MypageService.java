@@ -1,6 +1,7 @@
 package servlets.mypage.service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import servlets.mypage.dto.BoxOrderListDTO;
 import servlets.mypage.dto.BoxOrderSimpleInfoDTO;
 import servlets.order.domain.BoxOrderDTO;
 import servlets.order.domain.BoxPayDTO;
+import servlets.order.domain.BoxShipDTO;
+import servlets.order.domain.OrderCouponDTO;
 
 public class MypageService {
 	
@@ -85,7 +88,7 @@ public class MypageService {
 	
 	
 	// 	3) 택배배송 주문 내역 - 리스트 조회 및 날짜 검색
-	public ArrayList<BoxOrderListDTO> selectBoxOrderList(int memberNo, String startSearchDate, String endSearchDate) {
+	public ArrayList<BoxOrderListDTO> selectBoxOrderList(int memberNo, Date startSearchDate, Date endSearchDate) {
 		Connection conn = null;
 		MypageDAOImpl dao = null;
 		ArrayList<BoxOrderListDTO> list = null;
@@ -108,21 +111,20 @@ public class MypageService {
 	public BoxOrderListDTO selectBoxOrder(int boxOrderNo) {
 		Connection conn = null;
 		MypageDAOImpl dao = null;
-		BoxOrderListDTO order = null;
+		BoxOrderListDTO dto = null;
 		
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao = new MypageDAOImpl(conn);
 			
-			order = dao.selectBoxOrder(boxOrderNo);
-			
+			dto = dao.selectBoxOrder(boxOrderNo);
 		} catch (Exception e) {
 			System.out.println("MypageService.selectBoxOrder() error...");
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(conn);
 		} // try
-		return order;
+		return dto;
 	} // selectBoxOrder()
 	
 	//		b. 결제 정보 조회
@@ -167,7 +169,45 @@ public class MypageService {
 		return rowCnt1+rowCnt2;
 	} // updateBoxOrder()
 	
+	//	5) 택배배송 주문 상세 내역
+	public BoxShipDTO selectBoxShip(int boxOrderNo) {
+		Connection conn = null;
+		MypageDAOImpl dao = null;
+		BoxShipDTO dto = null;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = new MypageDAOImpl(conn);
+			
+			dto = dao.selectBoxShip(boxOrderNo);
+		} catch (Exception e) {
+			System.out.println("MypageService.selectBoxShip() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+		} // try
+		return dto;
+	} // selectBoxShip()
 	
+	//	5) 택배배송 주문 상세 내역
+	public ArrayList<OrderCouponDTO> selectUsedCoupon(int payNo) {
+		Connection conn = null;
+		MypageDAOImpl dao = null;
+		ArrayList<OrderCouponDTO> list = null;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = new MypageDAOImpl(conn);
+			
+			list = dao.selectUsedCoupon(payNo);
+		} catch (Exception e) {
+			System.out.println("MypageService.selectUsedCoupon() error...");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+		} // try
+		return list;
+	} // selectUsedCoupon()
 	
 
 }

@@ -2,7 +2,6 @@ package servlets.order.persistence;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +9,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
-import servlets.order.domain.BoxOrderDTO;
 import servlets.order.domain.BoxOrderInfoDTO;
 import servlets.order.domain.BoxOrderProductDTO;
 import servlets.order.domain.BoxPayDTO;
@@ -19,24 +17,24 @@ import servlets.order.domain.OrderAddrBookDTO;
 import servlets.order.domain.OrderCouponDTO;
 import servlets.order.domain.OrderMemberInfoDTO;
 
-public class BoxOrderDAO implements BoxOrderImpl {
+public class BoxOrderImpl implements BoxOrderDAO {
 	
 	// 싱글톤
-	private BoxOrderDAO() {}
-	private static BoxOrderDAO instance = new BoxOrderDAO();
-	public static BoxOrderDAO getInstance() {
+	private BoxOrderImpl() {}
+	private static BoxOrderImpl instance = new BoxOrderImpl();
+	public static BoxOrderImpl getInstance() {
 		return instance;
 	}
 	
 	@Override
 	public ArrayList<BoxOrderProductDTO> selectProducts(Connection conn, String [] productsNo) throws SQLException {
-		String sql = " SELECT DISTINCT p.products_no, category_no, products_name, products_type, products_size, price, event_price, img_path, origin_name "
+		String sql = " SELECT DISTINCT p.products_no, category_no, products_name, products_type, products_size, price, event_price, img_path, system_name "
 				+ " FROM products p LEFT JOIN products_img i ON p.products_no = i.products_no "
 				+ " WHERE p.products_no IN( ";
 				for(int i = 0; i <= productsNo.length; i++) {
 					sql += productsNo[0]+", ";
 				} // for
-				sql += " -1 )  AND origin_name = 'View.png'";
+				sql += " -1 )  AND origin_name != 'View.png'";
 				
 		BoxOrderProductDTO dto = null;
 		ArrayList<BoxOrderProductDTO> list = null;
@@ -58,7 +56,7 @@ public class BoxOrderDAO implements BoxOrderImpl {
 					dto.setPrice(rs.getInt("price"));
 					dto.setEventPrice(rs.getInt("event_price"));
 					dto.setImgPath(rs.getString("img_path"));
-					dto.setOriginName(rs.getString("origin_name"));
+					dto.setOriginName(rs.getString("system_name"));
 					list.add(dto);
 				} while (rs.next());
 			} // if
@@ -358,10 +356,10 @@ public class BoxOrderDAO implements BoxOrderImpl {
 
 	@Override
 	public ArrayList<BoxOrderProductDTO> selectOrderProductList(Connection conn, int boxOrderNo) throws SQLException {
-		String sql = " SELECT DISTINCT products_name, img_path, origin_name "
+		String sql = " SELECT DISTINCT products_name, img_path, system_name "
 				+ " FROM products p JOIN box_order_products b ON p.products_no = b.products_no "
 				+ " JOIN products_img i ON p.products_no = i.products_no "
-				+ " WHERE box_order_no = "+boxOrderNo+" AND origin_name = 'View.png'";
+				+ " WHERE box_order_no = "+boxOrderNo+" AND origin_name != 'View.png'";
 				
 		BoxOrderProductDTO dto = null;
 		ArrayList<BoxOrderProductDTO> list = null;
@@ -377,7 +375,7 @@ public class BoxOrderDAO implements BoxOrderImpl {
 					dto = new BoxOrderProductDTO();
 					dto.setProductsName(rs.getString("products_name"));
 					dto.setImgPath(rs.getString("img_path"));
-					dto.setOriginName(rs.getString("origin_name"));
+					dto.setOriginName(rs.getString("system_name"));
 					list.add(dto);
 				} while (rs.next());
 			} // if
@@ -426,20 +424,6 @@ public class BoxOrderDAO implements BoxOrderImpl {
 		} // try
 		return dto;
 	} // selectShipOne
-	
-	
-	
-	@Override
-	public ArrayList<BoxOrderDTO> selectOrderList(Connection conn, int memberNo, Date startSearchDate, Date endSearchDate, int pageNo) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int updateOrder(Connection conn, int boxOrderNo) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }
 

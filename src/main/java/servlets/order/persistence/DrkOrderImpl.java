@@ -15,6 +15,10 @@ import servlets.order.domain.DrkShipDTO;
 
 public interface DrkOrderImpl {
 	
+	
+	
+	
+	/*
 	// 1. 주문, 배송지, 결제(카드, 계좌) 정보 추가
 	int insertDrkOrder(Connection conn, DrkOrderDTO dto) throws SQLException;
 	int insertDrkShip(Connection conn, DrkShipDTO dto) throws SQLException;
@@ -34,8 +38,9 @@ public interface DrkOrderImpl {
 	// 음용 시작 후
 	// 4. 매달 25일 - 결제 추가
 	int insertPay(Connection conn, DrkPayDTO dto) throws SQLException;
+	*/
 	
-	
+	/*
 	// 조회
 	// 5. 음용 내역 조회
 	List<DrkOrderDTO> selectList(Connection conn, int memberNo, int drkStatus) throws SQLException;
@@ -61,5 +66,6 @@ public interface DrkOrderImpl {
 	
 	// 12. 변경 상세 내역 조회
 	DrkChangesDTO selectChangesOne(Connection conn, int drkChangesNo) throws SQLException;
+	*/
 	
 }
