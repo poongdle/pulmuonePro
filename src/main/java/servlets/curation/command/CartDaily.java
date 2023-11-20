@@ -17,9 +17,11 @@ public class CartDaily implements CommandHandler{
 			System.out.println("> Cart start..");
 			CartService cartservice = CartService.getInstance();
 			int num = Integer.parseInt( request.getParameter("num") );
-			CurationDTO list = cartservice.cartdaily(num);
+			System.out.println(num);
+
+			List<CurationDTO> curationDTOs = cartservice.cartdaily(num); 
 			
-			request.setAttribute("list", list);
+			request.setAttribute("list", curationDTOs);
 		
 			return "/WEB-INF/views/curation/cartdaily.jsp";
 	}

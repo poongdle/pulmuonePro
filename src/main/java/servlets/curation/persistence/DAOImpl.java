@@ -78,7 +78,7 @@ public class DAOImpl implements CurationDAO{
 	//썸네일 이미지
 	@Override
 	public List<KidsDTO> select(Connection con,  int num) throws SQLException {
-		String sql = "select  img_no,  products_name, products_tag, system_name, price, "
+		String sql = "select products_tag,  products_name, img_no, system_name, price, "
 				+ " products_size, products_sub_name "
 				+ " from  products_img pi join products p on p.products_no = pi.products_no "
 				+ " where products_tag in ( ? )"
@@ -103,9 +103,9 @@ public class DAOImpl implements CurationDAO{
 				do {
 					dto = new KidsDTO();
 
+					dto.setProducts_tag(rs.getInt("products_tag"));
 					dto.setImg_no(rs.getInt("img_no"));
 					dto.setProducts_name(rs.getString("products_name"));
-					dto.setProducts_tag(rs.getInt("products_tag"));
 					dto.setSystem_name(rs.getString("system_name"));
 					dto.setPrice(rs.getInt("price"));
 					dto.setProducts_size(rs.getString("products_size"));
@@ -318,29 +318,55 @@ public class DAOImpl implements CurationDAO{
 
 	
 	@Override
-	public CurationDTO cartdaily(Connection con, int num) throws SQLException {
-		String sql ="select products_name, system_name, price, products_tag, p.products_no "
-				+ "from products p join products_img pi on p.products_no = pi.products_no "
-				+ "where origin_name not like 'View%' and img_no in ? "
-				+ "order by products_no";
-		PreparedStatement pstmt = null;
+	public List<CurationDTO> cartdaily(Connection con, int num) throws SQLException {
+		PreparedStatement pstmt = null;		
 		ResultSet rs = null;
+		String sql = " select * from cart_daily ";
 		pstmt = con.prepareStatement(sql);
-		pstmt.setInt(1,num);
-		CurationDTO dto = null;
-//		System.out.println("view");
+//		pstmt.setInt(1,tag);
+//		System.out.println(tag);
 //		System.out.println(sql);
-		rs = pstmt.executeQuery();
-		if(rs.next()) {
-			dto = CurationDTO.builder()
-					.products_name(rs.getString("products_name"))
-					.System_name(rs.getString("system_name"))
-					.price(rs.getInt("price"))
-					.products_tag(rs.getInt("products_tag"))
-					.products_no(rs.getString("products_no")).build();
+		List<CurationDTO> list = null;
+		rs = pstmt.executeQuery();		
+		if( rs.next() ) {
+			sql = " DELETE FROM products_wish where products_tag = ? ";			
+		}else {			
+			sql = " INSERT INTO products_wish "
+					+ "select products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price "
+					+ " , products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, event_tag, event_tag2 "
+					+ " from products "
+					+ " WHERE products_tag = ? ";
+		}	
+		try {
+			pstmt = con.prepareStatement(sql);
+			System.out.println(sql);
+			pstmt.setInt(1, num);
+			//			System.out.println(num);
+			//			System.out.println(num2);
+		
+			if ( rs.next() ) {
+				list = new ArrayList<CurationDTO>() ;
+				CurationDTO dto = null;
+
+				do {
+					dto = new CurationDTO();
+
+					dto.setProducts_name(rs.getString("products_name"));
+					dto.setSystem_name(rs.getString("system_name"));
+					dto.setPrice(rs.getInt("price"));
+					dto.setProducts_tag(rs.getInt("product_tag"));
+					dto.setProducts_no(rs.getString("products_no"));
+					list.add(dto);
+				} while (rs.next());
+			}
+
+		} finally {
+
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);         
 		}
-		rs.close();
-		pstmt.close();
-		return dto;
+
+		return list;
 	}
+
 }

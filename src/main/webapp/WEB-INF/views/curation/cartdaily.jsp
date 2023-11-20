@@ -722,7 +722,7 @@ String cartId = session.getId();
 								<ul class="nav nav-tabs nav-justified" id="myTab-area"
 									role="tablist">
 									<li class="nav-item" role="presentation"><a
-										href="/cart/daily/cartdaily.do" class="nav-link active"
+										href="/cart/daily.do" class="nav-link active"
 										style="padding-right: 4px; margin-bottom: 0px; height: 47px">
 											매일배송 </a></li>
 									<li class="nav-item" role="presentation"><a
@@ -761,13 +761,14 @@ String cartId = session.getId();
 														<input type="checkbox" id="chk-prd-0072840" name="cartIdx"
 															value="" checked="checked" data-itemcode="0072840">
 														<label for="chk-prd-0072840"><span class="hide">해당제품선택</span></label>
-													</div> <a
-													href="/product/daily/view.do?tag=${ list[0].products_tag}&eventIdx="
-													class="prd-cart"> <c:forEach var="dto" items="${tag }">
+													</div> 
+													
+													<a href="/product/daily/view.do?tag=${products_tag}&eventIdx="
+													class="prd-cart">
+													 <c:forEach var="dto" items="${tag }">
 															<div class="thumb">
 																<c:forEach var="dto" items="${list }">
-																	<img src="/file/download/product/${dto.system_name }"
-																		alt="">
+																	<img src="/file/download/product/${dto.system_name }" alt="">
 																</c:forEach>
 															</div>
 															<c:forEach var="dto" items="${list }">
@@ -935,10 +936,15 @@ String cartId = session.getId();
 													</div>
 												</b>
 											</dd>
-
-
 										</dl>
+										<form action="/daily/order/step1.do" method="GET">
+										<c:forEach var="dto" items="${list }">
+									<input type="hidden" name="item"
+										value='{"item":[{"itemCode":"${dto.products_no}","dayQty":[1,1,1,1,1]}]'>
+								</c:forEach>
 										<button type="button" id="allOrderBtn" class="btn-default">주문신청</button>
+									</form>
+								
 									</div>
 								</div>
 							</div>
@@ -948,6 +954,7 @@ String cartId = session.getId();
 			</div>
 			
 		</main>
+		
 	<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
 	<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 	<%@ include file="/WEB-INF/views/ui/cartmodal.jsp"%>

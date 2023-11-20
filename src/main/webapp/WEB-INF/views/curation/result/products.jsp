@@ -7,8 +7,13 @@
 <html lang="ko">
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
+	<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
+	<main class="products">
 
-	<script type="text/javascript">
+		<div id="container-wrapper" class="container-wrapper">
+			<!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
+
+<script type="text/javascript">
   var singleYn = 'N' == 'Y';
   $(function () {
 
@@ -72,7 +77,7 @@
   
 </script>
 
-	<script>
+<script>
 
 var singleYn = "N" == 'Y';
 var title = "${dto.products_name}";
@@ -109,7 +114,7 @@ function sendKakao() {
 
 </script>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 var nowArgs = undefined;
 window.orderProcess = function (args) {
   if (!window.is_signed) {
@@ -222,13 +227,43 @@ $(document).on("click", "#orderModal button", function (e) {
   }
 })
 </script>
+			<textarea id="orderPosLi" style="display: none">    &lt;li&gt;
+        &lt;label class="item-wrapper"&gt;
+            &lt;input name="custnum" type="radio" value="{custnumber}" data-prtn-id="{prtnId}" /&gt;
+            &lt;div class="item"&gt;
+                &lt;div class="contents"&gt;
+                    &lt;p class="name"&gt;
+                        {nickname} &lt;span style="margin-left: 0;"&gt;{custnumber}&lt;/span&gt;
+                    &lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/label&gt;
+    &lt;/li&gt;
+</textarea>
 
-	<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
-	<main class="products">
-		<!--S:container-wrapper -->
-		<div id="container-wrapper" class="container-wrapper">
-			<!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
+			<div class="modal" id="orderModal" tabindex="-1"
+				aria-labelledby="orderModal" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header" style="padding-bottom: 8px;">
+							<h5 class="modal-title" id="orderModalLabel">선택하세요</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body select-wrapper">
+							<ul class="product-content-list order">
 
+							</ul>
+						</div>
+						<div class="button-set">
+							<button type="button" class="button-basic black"
+								data-type="continue">기존 주문에 상품 추가</button>
+							<button type="button" class="button-basic primary"
+								data-type="new">신규 배송지로 주문</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<div class="breadcrumb-style">
 				<div class="container">
@@ -248,41 +283,34 @@ $(document).on("click", "#orderModal button", function (e) {
 						<li class="active"><b>03.</b>생활습관</li>
 					</ul>
 				</div>
+
 				<div class="question-part">
 					<div class="title">
-						<h3>
-							당신에게 추천드리는 <b>맞춤 상품</b>
-						</h3>
+						<h3>	당신에게 추천드리는 <b>맞춤 상품</b></h3>
 					</div>
 
-					<%
-					int[] no = { 1, 2, 3, 4, 5, 6, 7, 8 };
-					%>
 					<div class="card-item">
-						<c:set value="<%=new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }%>" var="arr"></c:set>
 						<div class="product-wrapper">
-							<c:forEach var="n" items="arr">
-								<p>${list[0].program_name }</p>
-							</c:forEach>
-							<c:forEach var="dto" items="${list}">
-								<div class="product-radio-group">
-									<label data-item-index="0" data-item-link="/"
-										data-item-image="/file/download/product/${dto.img_no}"
-										data-item-title="${dto.products_name }" data-item-desc="2100">
-										<input value="${dto.products_no }" name="itemCode"
-										type="checkbox" />
+							<p>${list[0].program_name }</p>
+							
+							<div class="product-radio-group">
+								<c:forEach var="dto" items="${list }">
+									<label data-item-index="1"
+										data-item-link="product/daily/view.do?tag=${dto.products_tag }&eventIdx="
+										data-item-image="https://mgreenjuice.pulmuone.com/file/download/product/20230227/1c884ddf-10fc-4cb8-854e-792ba5bc4875.png"
+										data-item-title="위러브 엑스투" data-item-desc="3500"> 
+										<input value="0073405" name="itemCode" type="checkbox">
 										<div class="check-display"></div>
-										<div class="thumb" data-product-preview="${dto.img_no}">
+										<div class="thumb" data-product-preview="${dto.products_tag }">
 											<img src="/file/download/product/${dto.system_name }" alt="">
 										</div>
-										<p data-product-preview="278">${dto.products_name }</p>
+										<p data-product-preview="${dto.products_tag }">${dto.products_name }</p>
 									</label>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
+								</c:forEach>
 
-					<div class="button-set sm" style="margin: 20px 0px">
+							</div>
+						</div>
+						<div class="button-set sm" style="margin: 20px 0px">
 							<button id="cartBtn" class="button-basic black">장바구니</button>
 							<form action="/daily/order/step1.do" method="GET">
 								<c:forEach var="dto" items="${list }">
@@ -294,7 +322,8 @@ $(document).on("click", "#orderModal button", function (e) {
 						</div>
 					</div>
 
-					<div class="result-text">${list[0].program_content }</div>
+					<div class="result-text">${list[0].program_content}</div>
+
 					<div class="alert-area">
 						<h4>생활습관 바꾸기</h4>
 						<ul>
@@ -303,7 +332,7 @@ $(document).on("click", "#orderModal button", function (e) {
 						</ul>
 					</div>
 					<div class="button-set">
-						'
+
 						<button class="button-basic border bottles prefix"
 							onclick="location.href='/customer/product/result/programs.do?singleYn=N'">
 							<i class="ico"></i> <i class="ico"></i> 내게 맞는 프로그램 추천
@@ -314,10 +343,11 @@ $(document).on("click", "#orderModal button", function (e) {
 							<i class="ico"></i> 카카오톡으로 공유
 						</button>
 					</div>
+
+
 				</div>
 			</div>
 		</div>
-
 		<div class="modal show" id="productPreviewModal" tabindex="-1"
 			style="display: none; padding-right: 17px;" aria-modal="true"
 			role="dialog">
@@ -366,5 +396,6 @@ $(document).on("click", "#orderModal button", function (e) {
 	<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 	<%@ include file="/WEB-INF/views/ui/cartmodal.jsp"%>
 	<%@ include file="/WEB-INF/views/ui/wishmodal.jsp"%>
+	<%@ include file="/WEB-INF/views/ui/kakaomodal.jsp"%>
 </body>
 </html>

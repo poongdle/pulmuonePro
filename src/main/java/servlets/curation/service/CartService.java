@@ -26,16 +26,23 @@ public class CartService {
 	      return instance;
 	   }
 
-		public CurationDTO cartdaily(int num) {
-			CurationDTO insertRow = null ;
-			try (Connection con = ConnectionProvider.getConnection() ) {			
-				DAOImpl dao = DAOImpl.getInstance();
-				insertRow = dao.cartdaily(con, num);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		public List<CurationDTO> cartdaily(int num) {
 			
-			return insertRow;
-		}
+			Connection con = null;
+			try {	
+
+				con  = ConnectionProvider.getConnection();
+				DAOImpl dao = DAOImpl.getInstance();
+				List<CurationDTO> dto = null;
+				dto= dao.cartdaily(con, num);
+				return dto;
+				
+			 } catch (NamingException | SQLException e) { 
+		         //e.printStackTrace();  syso("ListService.select() 에러 : ")
+		         throw new RuntimeException(e);
+		      } finally {
+		         JdbcUtil.close(con);
+		      }
+	   }
 
 }//class
