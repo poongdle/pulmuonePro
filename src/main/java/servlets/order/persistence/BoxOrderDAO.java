@@ -2,10 +2,8 @@ package servlets.order.persistence;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.util.ArrayList;
 
-import servlets.order.domain.BoxOrderDTO;
 import servlets.order.domain.BoxOrderInfoDTO;
 import servlets.order.domain.BoxOrderProductDTO;
 import servlets.order.domain.BoxPayDTO;

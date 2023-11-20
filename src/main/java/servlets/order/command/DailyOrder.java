@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mvc.command.CommandHandler;
+import servlets.order.domain.DrkOrderProductDTO;
+import servlets.order.service.DrkOrderService;
 
 public class DailyOrder implements CommandHandler {
 
@@ -16,23 +18,8 @@ public class DailyOrder implements CommandHandler {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("> DailyOrder.process..");
 		
-		/*
-	        item={
-	        		"item":
-	        			[
-		        			{"itemCode":"0071654"
-		        				 ,"dayQty":[1,1,1,1,1]
-		        			}
-		        			,  {"itemCode":"0071654"
-		        				 ,"dayQty":[1,1,1,1,1]
-		        			}
-	        			]
-	        }
-		*/
-		
 		// > 주문 내용 가져오기
 		
-		// 1. itemCode(productsNo) 가져오기
 		// item String
         String jsonStr = request.getParameter("item");		// {"item":[{"itemCode":"0071654","dayQty":[1,1,1,1,1]}]
         
@@ -68,10 +55,13 @@ public class DailyOrder implements CommandHandler {
         } // while
         
         
-
+        // > service 객체 생성
+        DrkOrderService service = DrkOrderService.getInstanse();
         
-        // > 상품 정보 출력
         
+        // 1. 상품 정보 출력
+        ArrayList<DrkOrderProductDTO> prdList = service.selectProducts(itemCodeList);
+        request.setAttribute("prdList", prdList);
         
         
 		return "/WEB-INF/views/order/daily/step1.jsp";
