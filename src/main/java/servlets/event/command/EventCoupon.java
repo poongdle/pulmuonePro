@@ -26,11 +26,26 @@ public class EventCoupon implements CommandHandler {
         String method = request.getMethod();
 
         if (method.equals("GET")) {
+
+            // 회원번호는 세션에서 가져옴
+            HttpSession session = request.getSession();
+            AuthInfo auth = (AuthInfo) session.getAttribute("auth");
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            
+            if (auth == null) {
+                // 로그인 정보가 없음, 사용자에게 로그인 요청 메시지 반환
+                response.getWriter().print("로그인 후 이용해주세요.");
+                return null;
+            }
+
             String coupon_no_str = request.getParameter("coupon_no");
             int coupon_no = Integer.parseInt(coupon_no_str);
 
             // ConnectionProvider를 사용하여 Connection 객체 얻기
             Connection conn = ConnectionProvider.getConnection();
+
             try {
                 // 쿠폰 번호로 쿠폰 정보 조회
                 CouponDTO coupon = eventCouponDAO.getCoupon(conn, coupon_no);
@@ -40,9 +55,6 @@ public class EventCoupon implements CommandHandler {
                     HaveCouponDTO haveCoupon = new HaveCouponDTO();
                     haveCoupon.setCoupon_no(coupon.getCoupon_no());
 
-                    // 회원번호는 세션에서 가져옴
-                    HttpSession session = request.getSession();
-                    AuthInfo auth = (AuthInfo) session.getAttribute("auth");
                     int memberNo = auth.getMemberNo();
                     haveCoupon.setMember_no(memberNo);
 
@@ -59,24 +71,24 @@ public class EventCoupon implements CommandHandler {
                     java.sql.Date expiryDate = new java.sql.Date(calendar.getTimeInMillis());
                     haveCoupon.setExpiry_date(expiryDate);
 
-                    // 나머지 필드 설정
-                    haveCoupon.setUsed(0); // 사용 여부 설정 (미사용)
+                    // 사용 여부 설정 (미사용)
+                    haveCoupon.setUsed(0);
 
                     // HaveCouponDTO 객체를 데이터베이스에 저장
                     int result = eventCouponDAO.setCoupon(conn, haveCoupon);
 
                     if(result > 0) {
                         // 쿠폰 발급 성공, 사용자에게 성공 메시지 반환
-                        response.getWriter().print("쿠폰이 성공적으로 발급되었습니다.");
+                        response.getWriter().print("<script>alert('로그인 후 이용해주세요.'); location.href='/login';</script>");
                     } else {
                         // 쿠폰 발급 실패, 사용자에게 실패 메시지 반환
-                        response.getWriter().print("쿠폰 발급에 실패하였습니다.");
+                        response.getWriter().print("<script>alert('쿠폰이 등록되었습니다.'); location.href='/coupon';</script>");
                     }
                     return null;
            
                 } else {
                 	// 쿠폰 정보가 없음, 사용자에게 실패 메시지 반환
-                    response.getWriter().print("쿠폰 정보가 없습니다.");
+                    response.getWriter().print("<script>alert('쿠폰 발급에 실패하였습니다.'); location.href='/coupon';</script>");
                     return null;
                 }
             } finally {

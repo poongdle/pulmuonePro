@@ -45,7 +45,7 @@
 									<div class="prd-area">
 										<c:forEach items="${ orderProductlist }" var="p">
 											<span class="thumb">
-												<img src="${ p.imgPath }/${ p.originName }" alt="">
+												<img src="/${ p.imgPath }/${ p.originName }" alt="">
 											</span>
 											<b class="prd-title" style="text-align: left">${ p.productsName }</b>
 										</c:forEach>

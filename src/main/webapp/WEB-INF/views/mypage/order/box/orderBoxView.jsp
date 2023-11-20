@@ -29,8 +29,8 @@
 		<ul>
 			<li><a href="/">홈</a></li>
 			<li><a href="/mypage">MY녹즙</a></li>
-			<li><a class="" href="/a-guide/deliveryOrder">택배배송 주문내역</a></li>
-			<li><a class="active" href="/a-guide/deliveryOrderDetails">택배배송 주문내역 상세</a></li>
+			<li><a class="" href="/mypage/box/orderBox.do">택배배송 주문내역</a></li>
+			<li><a class="active" href="/mypage/box/orderBoxView.do">택배배송 주문내역 상세</a></li>
 		</ul>
 	</div>
 </div>
@@ -90,6 +90,8 @@
 						ArrayList<BoxOrderProductDTO> prdList = order.getProductList();
 						
 						DecimalFormat decimalFormat = new DecimalFormat("#,###");
+						int orderStatus = -1;
+						String oStatus = null;
 						
 						Iterator<BoxOrderProductDTO> ir = prdList.iterator();
 						while(ir.hasNext()) {
@@ -99,7 +101,7 @@
 							<div class="item-wrapper">
 								<a class="item" href="/product/box/672">
 									<div class="thumb">
-										<img src="<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt="">
+										<img src="/<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt="">
 									</div>
 									<div class="contents">
 										<div class="product" style="padding-top:1px;">
@@ -107,24 +109,47 @@
 											<p class="title"><%= prd.getProductsName()  %><span><%= prd.getProductsSize() %></span></p>
 											<div class="span-tie">
 												<span>수량 <%= prd.getProductsCnt() %>개</span>
-												<span class="status"><%= order.getBoxOrderStatus() %></span>
+					<% 
+									orderStatus = order.getBoxOrderStatus();
+								    switch (orderStatus) {
+								        case -1:
+								        	oStatus = "주문취소";
+								            break;
+								        case 0:
+								            oStatus = "결제대기-(가상계좌)";
+								            break;
+								        case 1:
+								            oStatus = "결제완료";
+								            break;
+								        case 2:
+								            oStatus = "배송준비중";
+								            break;
+								        case 3:
+								            oStatus = "배송중";
+								            break;
+								        case 4:
+								            oStatus = "배송완료";
+								            break;
+								    } // switch
+					%>
+												<span class="status"><%= oStatus %></span>
 											</div>
 										</div>
 										<div class="info">
 					<%
-						int price = prd.getPrice();
-						int salePrice = prd.getEventPrice();
-						int cnt = Integer.parseInt(prd.getProductsCnt());
-						price *= cnt;
-						salePrice *= cnt;
-						if(prd.getPrice() != prd.getEventPrice() && prd.getEventPrice() != 0) {
+							int price = prd.getPrice();
+							int salePrice = prd.getEventPrice();
+							int cnt = Integer.parseInt(prd.getProductsCnt());
+							price *= cnt;
+							salePrice *= cnt;
+							if(prd.getPrice() != prd.getEventPrice() && prd.getEventPrice() != 0) {
 					%>
 										<div style="margin-bottom: -1px; padding-left:2px;" class="before-price-tag">
 											<p class="value origin" style="color:#333;"><%= decimalFormat.format(price) %></p>
 											<span class="unit">원</span>
 										</div>
 										<div style="margin-bottom: -1px; padding-left:2px;" class="price-tag right sm">
-											<p class="value" style="color:#333;"><%= decimalFormat.format(price) %></p>
+											<p class="value" style="color:#333;"><%= decimalFormat.format(salePrice) %></p>
 											<span class="unit">원</span>
 										</div>
 					<%
@@ -142,8 +167,40 @@
 								</a>
 								
 								<div class="button-area">
-									<button class="btn-default btn-white" onclick="location.href='/mypage/action/counsel/write?orderNum=13024'">1:1 문의</button>
-									<button class="btn-default btn-black invoice" data-invo="6813-2692-9623" data-courier="04"> 배송조회</button>
+									<button class="btn-default btn-white" onclick="location.href='/forum/inquiry/write.do">1:1 문의</button><!-- 왜 안되지? -->
+					<%
+							switch (order.getBoxOrderStatus()) {
+								 case -1:
+					%>
+												<button class="btn-default btn-black" style="background: grey" onclick="alert('주문취소된 상품입니다.')">주문취소</button>
+					<%
+									break;
+								case 0: case 1:
+					%>
+												<button class="btn-default btn-black" data-status="0" data-order-no="<%= order.getBoxOrderNo() %>">주문취소</button>
+					<%
+									break;
+								case 2: case 3: case 4:
+					%>
+												<form action="http://info.sweettracker.co.kr/tracking/5" method="post">
+										            <div class="form-group" style="display: none">
+										              <label for="t_key">API key</label>
+										              <input type="text" class="form-control" id="t_key" name="t_key" placeholder="제공받은 APIKEY" value="Ppgk5mfovfq2cMhSjFOnYA">
+										            </div>
+										            <div class="form-group" style="display: none">
+										              <label for="t_code">택배사 코드</label>
+										              <input type="text" class="form-control" name="t_code" id="t_code" placeholder="택배사 코드" value="04">
+										            </div>
+										            <div class="form-group" style="display: none">
+										              <label for="t_invoice">운송장 번호</label>
+										              <input type="text" class="form-control" name="t_invoice" id="t_invoice" placeholder="운송장 번호" value="<%= prd.getTrackingNo() %>">
+										            </div>
+										            <button class="btn-default invoice btn-black" data-invo="<%= prd.getTrackingNo() %>" data-status="2" >배송조회</button>
+										        </form>
+					<%
+									break;
+							} // switch
+					%>
 								</div>
 							</div>
 						</li>
@@ -164,19 +221,19 @@
 						<ul class="vertical-info-list">
 							<li>
 								<label>받으시는 분</label>
-								<p>신종혁</p>
+								<p>${ boxShip.boxReceiver }</p>
 							</li>
 							<li>
 								<label>연락처</label>
-								<p data-call-text="">010-2344-2891</p>
+								<p data-call-text="">${ boxShip.boxTel }</p>
 							</li>
 							<li>
 								<label>주소</label>
-								<p>[06690]서울 서초구 청두곶2길 6, 303호</p>
+								<p>[${ boxShip.boxZipCode }]${ boxShip.boxAddr }, ${ boxShip.boxAddrDetail }</p>
 							</li>
 							<li>
 								<label>배송메모</label>
-								<p></p>
+								<p>${ boxShip.boxMemo }</p>
 							</li>
 						</ul>
 					</div>
@@ -193,7 +250,9 @@
 							<li>
 								<label>상품 판매가</label>
 								<div class="price-tag xs">
-									<p class="value" style="color:#333;">30,700</p>
+									<p class="value" style="color:#333;">
+										<fmt:formatNumber value="${ boxPay.boxPrice }" type="number"></fmt:formatNumber>
+									</p>
 									<span class="unit">원</span>
 								</div>
 							</li>
@@ -201,7 +260,18 @@
 							<li>
 								<label>상품 할인 판매가</label>
 								<div class="price-tag xs">
-									<p class="value" style="color:#333;">30,700</p>
+									<c:choose>
+										<c:when test="${ boxPay.boxPrice eq boxPay.boxSalePrice or boxPay.boxSalePrice eq 0 }">
+											<p class="value" style="color:#333;">
+												<fmt:formatNumber value="${ boxPay.boxSalePrice }" type="number"></fmt:formatNumber>
+											</p>
+										</c:when>
+										<c:otherwise>
+											<p class="value" style="color:#db2929;">
+												<fmt:formatNumber value="${ boxPay.boxSalePrice }" type="number"></fmt:formatNumber>
+											</p>
+										</c:otherwise>
+									</c:choose>
 									<span class="unit">원</span>
 								</div>
 							</li>
@@ -209,7 +279,16 @@
 							<li>
 								<label>쿠폰 할인 금액</label>
 								<div class="price-tag xs">
-									<p class="value" style="color:#333;">0</p>
+									<c:choose>
+										<c:when test="${ boxPay.boxDiscountPrice eq 0 }">
+											<p class="value" style="color:#333;">0</p>
+										</c:when>
+										<c:otherwise>
+											<p class="value" style="color:#db2929;">
+												<fmt:formatNumber value="${ boxPay.boxDiscountPrice }" type="number"></fmt:formatNumber>
+											</p>
+										</c:otherwise>
+									</c:choose>
 									<span class="unit">원</span>
 								</div>
 							</li>
@@ -217,20 +296,34 @@
 							<li>
 								<label>배송비</label>
 								<div class="price-tag xs">
-									<p class="value" style="color:#333;">0</p>
+									<p class="value" style="color:#333;">
+										<fmt:formatNumber value="${ boxPay.boxShippingFee }" type="number"></fmt:formatNumber>
+									</p>
 									<span class="unit">원</span>
 								</div>
 							</li>
 							
 							<li>
 								<label>결제수단</label>
-								<p>신용카드</p>
+								<c:choose>
+									<c:when test="${ boxPay.boxPayMethod eq 0 }">
+										<p>신용카드</p>
+									</c:when>
+									<c:when test="${ boxPay.boxPayMethod eq 1 }">
+										<p>실시간 계좌이체</p>
+									</c:when>
+									<c:otherwise>
+										<p>가상계좌</p>
+									</c:otherwise>
+								</c:choose>
 							</li>
 							
 							<li style="margin-top:14px;" class="bigger">
 								<label>최종 결제금액</label>
 								<div class="price-tag sm">
-									<p class="value" style="color:#7acc12;">30,700</p>
+									<p class="value" style="color:#7acc12;">
+										<fmt:formatNumber value="${ boxPay.boxFinalPrice }" type="number"></fmt:formatNumber>
+									</p>
 									<span class="unit">원</span>
 								</div>
 							</li>
@@ -241,21 +334,42 @@
 								<label style="margin-bottom:0; margin-top:3px;font-size: 16px;color: #333">사용된 쿠폰</label>
 							</li>
 							
-							<li style="margin-top:13px;">
-								<label style="margin-bottom:3px;">11월 녹녹데이 택배배송 쿠폰</label>
-								<div class="price-tag xs" style="margin-top:4px;">
-									<p class="value" style="color:#333;">11</p>
-									<span class="unit">%</span>
-								</div>
-							</li>
+							<c:choose>
+								<c:when test="${ empty couponList }">
+									<li style="margin-top:13px;">
+										<label style="margin-bottom:3px;">없음</label>
+										<div class="price-tag xs" style="margin-top:4px;">
+											<p class="value" style="color:#333;"></p>
+											<span class="unit"></span>
+										</div>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${ couponList }" var="c">
+										<li style="margin-top:13px;">
+											<label style="margin-bottom:3px;">${ c.couponName }</label>
+											<div class="price-tag xs" style="margin-top:4px;">
+												<c:choose>
+													<c:when test="${ c.discount <= 1 }">
+														<p class="value" style="color:#333;">
+															<fmt:formatNumber value="${ c.discount*100 }" type="number"></fmt:formatNumber>
+														</p>
+														<span class="unit">%</span>
+													</c:when>
+													<c:otherwise>
+														<p class="value" style="color:#333;">
+															<fmt:formatNumber value="${ c.discount }" type="number"></fmt:formatNumber>
+														</p>
+														<span class="unit">원</span>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</li>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 							
-							<li style="margin-top:13px;">
-								<label style="margin-bottom:3px;">없음</label>
-								<div class="price-tag xs" style="margin-top:4px;">
-									<p class="value" style="color:#333;"></p>
-									<span class="unit"></span>
-								</div>
-							</li>
+							
 						</ul>
 						
 					</div>
