@@ -23,10 +23,10 @@ public interface CurationDAO {
    List<KidsDTO> selectList(Connection con) throws SQLException;
    List<KidsDTO> select(Connection con, int num) throws SQLException;
    
+//   int cartadd(Connection con, int tag) throws SQLException;
 // 장바구니
    
-   List<CurationDTO> cartdaily(Connection con , int num) throws SQLException;
-   int insert(Connection con,  CurationDTO dto) throws SQLException;
+  CurationDTO cartdaily(Connection con , int num) throws SQLException;
+  List<CurationDTO> dailyadd(Connection con,  CurationDTO dto) throws SQLException;
     
-   
 }
