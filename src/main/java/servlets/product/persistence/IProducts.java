@@ -39,5 +39,5 @@ public interface IProducts {
 	   List<ProductsDTO> selectwish(Connection con) throws SQLException;
 	   
 	   // MyPage 찜한 상품 삭제
-	   int wishdelete(Connection con,String user_id, String idx) throws SQLException;
+	   int wishdelete(Connection con,String user_id, String idx, String tag) throws SQLException;
 }

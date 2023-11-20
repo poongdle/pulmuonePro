@@ -5,33 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>풀무원 녹즙</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" type="image/x-icon"
-	href="/resources/assets/images/pul_favicon.png">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-	rel="stylesheet">
-<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
-<script src="/resources/assets/js/jquery.form.min.js"></script>
-<script src="/resources/assets/js/design.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
-<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/resources/assets/js/clipboard.min.js"></script>
-<script src="/resources/assets/js/fdd.js"></script>
-<script src="/resources/assets/js/request.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="/resources/assets/css/owl.theme.default.css">
-<script src="/resources/assets/js/owl.carousel.min.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/proview.css">
-<link rel="stylesheet" href="/resources/assets/css/list.css">
-<link rel="stylesheet" href="/resources/assets/css/style.css">
-</head>
+<%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
 	<script type="text/javascript">
     $().ready(function () {
@@ -83,7 +57,7 @@
 	var days = ["A", "B", "C", "D", "E"];
 
 	var itemType = "box";
-	var itemCode = "0073165";
+	var itemCode = "${dto.products_no}";
 	var eventIdx = "";
 
 	$(document).ready(function () {
@@ -287,48 +261,35 @@
 		});
 		//endregion
 	});
-
-// 	var data = {"feature":"\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cimg src\u003d\"/editor/download/5463\" title\u003d\"231114_프레시스무디_크리스마스에디션_그리너지,토마토.png\" class\u003d\"180b2488-e436-4a42-8b70-8b54e3038889.png\"\u003e\u003cbr style\u003d\"clear:both;\"\u003e\u003cimg src\u003d\"/editor/download/4497\" title\u003d\"221125_프레시스무디_토마토(1140).png\" class\u003d\"a5d2ad8f-8d66-4182-b712-21e1c01e7733.png\"\u003e\u0026nbsp;\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u0026nbsp;\u003c/div\u003e","featureMobile":"\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u003cimg src\u003d\"/editor/download/5463\" title\u003d\"231114_프레시스무디_크리스마스에디션_그리너지,토마토.png\" class\u003d\"180b2488-e436-4a42-8b70-8b54e3038889.png\"\u003e\u003cbr style\u003d\"clear:both;\"\u003e\u003cimg src\u003d\"/editor/download/4497\" title\u003d\"221125_프레시스무디_토마토(1140).png\" class\u003d\"a5d2ad8f-8d66-4182-b712-21e1c01e7733.png\"\u003e\u0026nbsp;\u003c/div\u003e\u003cdiv style\u003d\"text-align: center;\" align\u003d\"center\"\u003e\u0026nbsp;\u003c/div\u003e","nutrition":"{\"foodType\":{\"label\":\"식품의 유형\",\"value\":\"상세 참조\",\"sort\":1},\"producer\":{\"label\":\"생산지 및 소재지\",\"value\":\"상세 참조\",\"sort\":2},\"expirationDate\":{\"label\":\"제조연월일/유통기한 또는 품질유지기한\",\"value\":\"상세 참조\",\"sort\":3},\"packagingCapacity\":{\"label\":\"용량\",\"value\":\"상세 참조\",\"sort\":4,\"unit\":\"ml\"},\"packagingQty\":{\"label\":\"수량\",\"value\":\"상세 참조\",\"sort\":5},\"material\":{\"label\":\"원재료 및 함량\",\"value\":\"상세 참조\",\"sort\":6},\"nutrition\":{\"label\":\"영양성분\",\"value\":\"상세 참조\",\"sort\":7},\"geneticallyModifiedFood\":{\"label\":\"유전자변형식품 여부\",\"value\":\"해당 사항 없음\",\"sort\":11},\"importedFoodYn\":{\"label\":\"수입신고여부\",\"value\":\"해당 사항 없음\",\"sort\":13},\"consumerSafety\":{\"label\":\"소비자안전을 위한 주의사항\",\"value\":\"상세 참조\",\"sort\":12},\"csCallNum\":{\"label\":\"소비자 상담번호\",\"value\":\"080-800-0393\",\"sort\":14}}","detailImage1":"/product/20231114/8303f4fa-bb4a-4a32-b969-b094180ee1c0.png","limitSize":-1,"totalCount":0,"idx":637,"goodType":"BOX","itemCode":"0073165","thumbnail":"/product/20231114/8c0582a0-3868-4901-9987-2f6f9b707a00.png","productName":"프레시스무디 토마토 과채주스 6입","readNum":"6037","capacity":"190","unit":"ml","price":"27000","isHot":"Y","interestIdx":0,"slogan":"생기있는 아침을 위한 프레시 토마토 ","freebYn":"N","freebSloganYn":"N","freebQty":1,"isIce":"Y","unitBoxQty":"6","unitBox":"병","pkgIdx":0};
-// 	if (data.price) {
-// 		data.price = data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-// 	}
-// 	if (data.thumbnail) {
-// 		data.thumbnail = location.origin + "/file/download" + data.thumbnail;
-// 	}
-// 	if (data.detailImage1) {
-// 		data.detailImage1 = location.origin + "/file/download" + data.detailImage1;
-// 	}
-
-// 	window.kakaoShareData = {
-// 		key: 84344,
-// 		data: {
-// 			mobilehost: "https://mgreenjuice.pulmuone.com/",
-// 			webhost: "https://greenjuice.pulmuone.com/",
-// 			detailImage1: data.detailImage1,
-// 			weight: "190ml X 6병",
-// 			path: location.pathname,
-// 			productName: data.productName,
-// 			slogan: data.slogan,
-// 			thumbnail: data.thumbnail,
-// 			price: data.price,
-// 		}
-// 	};
+	window.kakaoShareData = {		
+			key: 100891,
+			data: {
+				mobilehost: "http://localhost",
+				webhost: "http://localhost/",
+				detailImage1: location.origin+ "/file/download"+'/product/${dto.system_name}',			
+				weight: "${dto.products_size}",
+				path: "product/daily/view.do?tag=${dto.products_tag}",
+				productName: "${dto.products_name}",
+				slogan: "${dto.products_sub_name}",
+				thumbnail: location.origin+ "/file/download"+'/product/${dto.system_name}',
+				price: "<fmt:formatNumber value="${dto.price }" pattern="#,###" />",
+			}	
+		};
 
 
-	//    region reviewPopup
-// 	$(document).on('click', '.review-item', function () {
-// 		const title = $(this).find('.title').text();
-// 		const content = $(this).find('.title').next().text();
-// 		const thumbnail = $(this).find('.thumb img').attr('src')
-// 		const nameAndDateEl = $(this).find('.span-tie')
+		//    region reviewPopup
+		$(document).on('click', '.review-item', function () {
+			const title = $(this).find('.title').text();
+			const content = $(this).find('.title').next().text();
+			const thumbnail = $(this).find('.thumb img').attr('src')
+			const nameAndDateEl = $(this).find('.span-tie')
 
-// 		const reviewModal = $('#reviewModal')
-// 		reviewModal.find('.header h4').text(title)
-// 		reviewModal.find('.thumb-area img').attr('src', thumbnail)
-// 		reviewModal.find('.scrollable p').text(content)
-// 		reviewModal.find('.scrollable .span-tie').replaceWith(nameAndDateEl.clone())
-// 	})
-	//    endregion
+			const reviewModal = $('#reviewModal')
+			reviewModal.find('.header h4').text(title)
+			reviewModal.find('.thumb-area img').attr('src', thumbnail)
+			reviewModal.find('.scrollable p').text(content)
+			reviewModal.find('.scrollable .span-tie').replaceWith(nameAndDateEl.clone())
+		})		
 
 </script>
 	<script>

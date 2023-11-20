@@ -270,48 +270,55 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 													</a>
 													<div class="btn-area btn-area-center">
 														<c:if test="${ auth.getName() ne null }">
-															<c:forEach items="${wishlist }" var="dao">
-																<c:choose>
-																	<c:when test="${dao.products_tag eq dto.products_tag }">
-																		<button type="button"
-																			data-wish-id="${dto.products_tag }"
-																			data-wish-type="daily"
-																			class="btn-round btn-white wishlistBtn active">
-																			<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																				찜하기</span>
-																		</button>
-																	</c:when>
-																	<c:otherwise>
-																		<button type="button"
-																			data-wish-id="${dto.products_tag }"
-																			data-wish-type="daily"
-																			class="btn-round btn-white wishlistBtn ">
-																			<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																				찜하기</span>
-																		</button>
-																		<button type="button"
-																			data-cart-id="${dto.products_no }"
-																			data-cart-type="daily" data-cart-event=""
-																			class="btn-round addCartBtn">
-																			<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																				담기</span>
-																		</button>
-																	</c:otherwise>
-																</c:choose>
-															</c:forEach>
+															<c:choose>
+																<c:when test="${dto.wish_status eq 1 }">
+																	<button type="button"
+																		data-wish-id="${dto.products_tag }"
+																		data-wish-type="daily"
+																		class="btn-round btn-white wishlistBtn active ">
+																		<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																			찜하기</span>
+																	</button>
+																	<button type="button"
+																		data-cart-id="${dto.products_no }"
+																		data-cart-type="daily" data-cart-event=""
+																		class="btn-round addCartBtn">
+																		<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																			담기</span>
+																	</button>
+																</c:when>
+																<c:otherwise>
+																	<button type="button"
+																		data-wish-id="${dto.products_tag }"
+																		data-wish-type="daily"
+																		class="btn-round btn-white wishlistBtn ">
+																		<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																			찜하기</span>
+																	</button>
+																	<button type="button"
+																		data-cart-id="${dto.products_no }"
+																		data-cart-type="daily" data-cart-event=""
+																		class="btn-round addCartBtn">
+																		<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																			담기</span>
+																	</button>
+																</c:otherwise>
+															</c:choose>
 														</c:if>
-														<button type="button" data-wish-id="${dto.products_tag }"
-															data-wish-type="daily"
-															class="btn-round btn-white wishlistBtn ">
-															<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																찜하기</span>
-														</button>
-														<button type="button" data-cart-id="${dto.products_no }"
-															data-cart-type="daily" data-cart-event=""
-															class="btn-round addCartBtn">
-															<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																담기</span>
-														</button>
+														<c:if test="${ auth.getName() eq null }">
+															<button type="button" data-wish-id="${dto.products_tag }"
+																data-wish-type="daily"
+																class="btn-round btn-white wishlistBtn ">
+																<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																	찜하기</span>
+															</button>
+															<button type="button" data-cart-id="${dto.products_no }"
+																data-cart-type="daily" data-cart-event=""
+																class="btn-round addCartBtn">
+																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																	담기</span>
+															</button>
+														</c:if>
 													</div>
 												</div>
 											</div>
@@ -323,7 +330,6 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 						<!--E:추천제품-->
 					</div>
 				</div>
-
 				<!--S:띠배너 슬라이드-->
 				<div class="banner-area survey">
 					<div class="banner-list">
@@ -336,7 +342,6 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 					</div>
 				</div>
 				<!--E:띠배너 슬라이드-->
-
 				<!--E:이벤트 슬라이드-->
 				<div class="bg-w">
 					<div class="container">
@@ -346,9 +351,7 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 									<i class="ico ico-arr-right6"></i>
 								</a>
 							</h2>
-
 							<div class="event-list" data-carousel="items">
-
 								<a class="item"
 									href="https://greenjuice.pulmuone.com/taste/taste?pkgIdx=56"
 									title="베스트 녹즙"> <img
@@ -375,20 +378,13 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 									src="/file/download/banner/ba6cd618-ea64-4c9e-a6ed-18186f895d6b.png"
 									alt="">
 								</a>
-
 							</div>
 							<ul class="event-list-dot" data-carousel="dot">
-
 								<li class=""></li>
-
 								<li class=""></li>
-
 								<li class=""></li>
-
 								<li class=""></li>
-
 								<li class=""></li>
-
 							</ul>
 						</div>
 					</div>
@@ -672,8 +668,9 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 				</div>
 			</div>
 		</main>
-		<%@ include file="/WEB-INF/views/layouts/sidebar.jsp"%>
+		<%@ include file="/WEB-INF/views/layouts/quick_menu.jsp"%>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
+		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 		<%@ include file="/WEB-INF/views/ui/wishmodal.jsp"%>
 		<%@ include file="/WEB-INF/views/ui/cartmodal.jsp"%>
 

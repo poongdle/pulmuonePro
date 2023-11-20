@@ -7,12 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import auth.AuthInfo;
-import domain.order.box.OrderCouponDTO;
-import domain.order.box.OrderMemberInfoDTO;
-import domain.order.box.BoxOrderProductDTO;
-import domain.order.box.OrderAddrBookDTO;
 import mvc.command.CommandHandler;
-import service.order.box.BoxOrderService;
+import servlets.order.domain.BoxOrderProductDTO;
+import servlets.order.domain.OrderCouponDTO;
+import servlets.order.domain.OrderMemberInfoDTO;
+import servlets.order.service.BoxOrderService;
 
 public class BoxOrder implements CommandHandler {
 
@@ -21,8 +20,8 @@ public class BoxOrder implements CommandHandler {
 		System.out.println("> BoxOrder.process..");
 		
 		String productsNo [] = request.getParameterValues("productsNo");
+		
 		HttpSession session = request.getSession(false);
-
 		AuthInfo member = (AuthInfo) session.getAttribute("auth");
 		int memberNo = member.getMemberNo();
 		
@@ -36,8 +35,6 @@ public class BoxOrder implements CommandHandler {
 		if (clist != null) {
 			request.setAttribute("couponList", clist);
 		} // if
-		
-		 
 		
 		return "/WEB-INF/views/order/box/step1.jsp";
 	} // process()

@@ -5,52 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>풀무원 녹즙</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' connect.facebook.net www.google-analytics.com www.googletagmanager.com wcs.naver.net t1.daumcdn.net t1.kakaocdn.net stdpay.inicis.com cdn.jsdelivr.net stdux.inicis.com  ; object-src ">
-<link rel="shortcut icon" type="image/x-icon"
-	href="/resources/assets/images/pul_favicon.png">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-	rel="stylesheet">
-<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
-<script src="/resources/assets/js/jquery.form.min.js"></script>
-<script src="/resources/assets/js/design.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
-<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
-  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
-
-<script src="/resources/assets/js/clipboard.min.js"></script>
-<script src="/resources/assets/js/fdd.js"></script>
-<script src="/resources/assets/js/request.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="/resources/assets/css/owl.theme.default.css">
-<script src="/resources/assets/js/owl.carousel.min.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/proview.css">
-<link rel="stylesheet" href="/resources/assets/css/list.css">
-<link rel="stylesheet" href="/resources/assets/css/style.css">
-</head>
+<%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
-
-<script>
-Kakao.init('c153013cc3f2b9900924ea8e382fbf8d');
-//       function KakaoShare(propKey) {
-//         this.propKey = propKey;
-//         try {
-//           Kakao.init(this.propKey);
-//         } catch (e) {
-
-//         }
-//       }
-//       var kakaoAppKey = 'c153013cc3f2b9900924ea8e382fbf8d';
-//       var share = new KakaoShare(kakaoAppKey);
-	</script>
 	<script>
 	var formatter = new Intl.NumberFormat();
 	var days = ["A", "B", "C", "D", "E"];
@@ -76,7 +32,7 @@ Kakao.init('c153013cc3f2b9900924ea8e382fbf8d');
         $('input[name=coupon]').click(function () {
             const li = $(this).closest('li');
             li.toggleClass('active', this.checked)
-            const data = li.data('prop')
+            const data = li.data('prop')            
             const ul = $(this).closest('ul');
 
             var currentAmt = parseInt('');
@@ -201,7 +157,6 @@ Kakao.init('c153013cc3f2b9900924ea8e382fbf8d');
 			}
 		});
 		//endregion
-
 		//region 바로 구매
 		$("#orderBtn").click(function () {
 			if (itemType != "daily") {
@@ -227,7 +182,6 @@ Kakao.init('c153013cc3f2b9900924ea8e382fbf8d');
 				const dayQty = days.map(function (x, i) {
 					return selectedDays.includes(i) ? 1 : 0;
 				});
-
 				window.orderProcess({ item: [{itemCode, dayQty}] });
 			} else {
 				// 추천 패키지 선택 시
@@ -259,7 +213,7 @@ Kakao.init('c153013cc3f2b9900924ea8e382fbf8d');
 		//endregion
 	});
 
-// 	var data = '${dto.content}';	
+	var data = '${dto.content}';	
 	window.kakaoShareData = {		
 		key: 100891,
 		data: {

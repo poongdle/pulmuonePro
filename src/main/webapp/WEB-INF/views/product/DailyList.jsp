@@ -5,56 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>풀무원 녹즙</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" type="image/x-icon"
-	href="/resources/assets/images/pul_favicon.png">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-	rel="stylesheet">
-<script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
-<script src="/resources/assets/js/jquery.form.min.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/assets/css/bootstrap-fdd.css">
-<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/resources/assets/js/clipboard.min.js"></script>
-<script src="/resources/assets/js/fdd.js"></script>
-<script src="/resources/assets/js/request.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="/resources/assets/css/owl.theme.default.css">
-<script src="/resources/assets/js/owl.carousel.min.js"></script>
-<script src="/resources/assets/js/design.js"></script>
-<!-- <link rel="stylesheet" href="/resources/assets/css/list.css"> -->
-<link rel="stylesheet" href="/resources/assets/css/style.css">
-<script type="text/javascript">
-<c:choose>
-<c:when test="${ auth.getName() eq null }">
-window.is_signed = false;
-</c:when>
-<c:otherwise>
-window.is_signed = true;
-window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderCode":"XQNGV"};
-</c:otherwise>
-</c:choose>
-</script>
-<script>
-	window.dataLayer = window.dataLayer || [];
-
-	function gtag() {
-		dataLayer.push(arguments);
-	}
-
-	gtag('js', new Date());
-
-	gtag('config', 'UA-150666346-1');
-
-	var timer = undefined
-</script>
-</head>
+<%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
 	<script type="text/javascript">
 		var category = "${param.category}";
@@ -170,7 +121,7 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 							<div id="head-items" class="owl-carousel owl-loaded owl-drag">
 								<div class="owl-stage-outer">
 									<div class="owl-stage"
-										style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 6170px;">										
+										style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 6170px;">
 										<c:forEach items="${bestlist }" var="dto" varStatus="status">
 											<div class="owl-item active" style="width: 308.5px;">
 												<div class="prd-area">
@@ -227,36 +178,40 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 													</a>
 													<div class="btn-area btn-area-center">
 														<c:if test="${ auth.getName() ne null }">
-														<c:choose>
-														<c:when test="${dto.wish_status eq 1 }">
-															<button type="button" data-wish-id="${dto.products_tag }"
-																data-wish-type="daily"
-																class="btn-round btn-white wishlistBtn active ">
-																<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																	찜하기</span>
-															</button>
-															<button type="button" data-cart-id="${dto.products_no }"
-																data-cart-type="daily" data-cart-event=""
-																class="btn-round addCartBtn">
-																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																	담기</span>
-															</button>
-															</c:when>
-															<c:otherwise>
-															<button type="button" data-wish-id="${dto.products_tag }"
-																data-wish-type="daily"
-																class="btn-round btn-white wishlistBtn ">
-																<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																	찜하기</span>
-															</button>
-															<button type="button" data-cart-id="${dto.products_no }"
-																data-cart-type="daily" data-cart-event=""
-																class="btn-round addCartBtn">
-																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																	담기</span>
-															</button>
-															</c:otherwise>
-														</c:choose>
+															<c:choose>
+																<c:when test="${dto.wish_status eq 1 }">
+																	<button type="button"
+																		data-wish-id="${dto.products_tag }"
+																		data-wish-type="daily"
+																		class="btn-round btn-white wishlistBtn active ">
+																		<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																			찜하기</span>
+																	</button>
+																	<button type="button"
+																		data-cart-id="${dto.products_no }"
+																		data-cart-type="daily" data-cart-event=""
+																		class="btn-round addCartBtn">
+																		<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																			담기</span>
+																	</button>
+																</c:when>
+																<c:otherwise>
+																	<button type="button"
+																		data-wish-id="${dto.products_tag }"
+																		data-wish-type="daily"
+																		class="btn-round btn-white wishlistBtn ">
+																		<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																			찜하기</span>
+																	</button>
+																	<button type="button"
+																		data-cart-id="${dto.products_no }"
+																		data-cart-type="daily" data-cart-event=""
+																		class="btn-round addCartBtn">
+																		<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																			담기</span>
+																	</button>
+																</c:otherwise>
+															</c:choose>
 														</c:if>
 														<c:if test="${ auth.getName() eq null }">
 															<button type="button" data-wish-id="${dto.products_tag }"
@@ -288,7 +243,7 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 					<div class="cbody-wrap">
 						<div class="bg-light-gray over-section"
 							style="margin-bottom: 120px">
-							<div class="container">
+							<div class="container">								
 								<c:choose>
 									<c:when test="${param.category eq null  }">
 										<div class="tag-place">
@@ -352,6 +307,18 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 											<button data-idx="395" type="button" class="tag-btn item ">식사대용</button>
 										</div>
 									</c:when>
+									<c:otherwise>
+										<div class="tag-place">
+											<button data-idx="242" type="button" class="tag-btn item">유기농</button>
+											<button data-idx="7" type="button" class="tag-btn item">융복합녹즙</button>
+											<button data-idx="478" type="button" class="tag-btn item">케일</button>
+											<button data-idx="479" type="button" class="tag-btn item">양배추</button>
+											<button data-idx="262" type="button" class="tag-btn item">식물성유산균</button>
+											<button data-idx="327" type="button" class="tag-btn item">발효유</button>
+											<button data-idx="395" type="button" class="tag-btn item">식사대용</button>
+											<button data-idx="457" type="button" class="tag-btn item">이달의녹즙</button>
+										</div>
+									</c:otherwise>
 								</c:choose>
 								<div class="tab-content" id="tab-content-depth2">
 									<div class="prd-list-head">
@@ -411,53 +378,55 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 													</div>
 												</a>
 												<div class="btn-area btn-area-center">
-														<c:if test="${ auth.getName() ne null }">
+													<c:if test="${ auth.getName() ne null }">
 														<c:choose>
-														<c:when test="${dto.wish_status eq 1 }">
-															<button type="button" data-wish-id="${dto.products_tag }"
-																data-wish-type="daily"
-																class="btn-round btn-white wishlistBtn active ">
-																<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																	찜하기</span>
-															</button>
-															<button type="button" data-cart-id="${dto.products_no }"
-																data-cart-type="daily" data-cart-event=""
-																class="btn-round addCartBtn">
-																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																	담기</span>
-															</button>
+															<c:when test="${dto.wish_status eq 1 }">
+																<button type="button"
+																	data-wish-id="${dto.products_tag }"
+																	data-wish-type="daily"
+																	class="btn-round btn-white wishlistBtn active ">
+																	<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																		찜하기</span>
+																</button>
+																<button type="button" data-cart-id="${dto.products_no }"
+																	data-cart-type="daily" data-cart-event=""
+																	class="btn-round addCartBtn">
+																	<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																		담기</span>
+																</button>
 															</c:when>
 															<c:otherwise>
-															<button type="button" data-wish-id="${dto.products_tag }"
-																data-wish-type="daily"
-																class="btn-round btn-white wishlistBtn ">
-																<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																	찜하기</span>
-															</button>
-															<button type="button" data-cart-id="${dto.products_no }"
-																data-cart-type="daily" data-cart-event=""
-																class="btn-round addCartBtn">
-																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																	담기</span>
-															</button>
+																<button type="button"
+																	data-wish-id="${dto.products_tag }"
+																	data-wish-type="daily"
+																	class="btn-round btn-white wishlistBtn ">
+																	<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																		찜하기</span>
+																</button>
+																<button type="button" data-cart-id="${dto.products_no }"
+																	data-cart-type="daily" data-cart-event=""
+																	class="btn-round addCartBtn">
+																	<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																		담기</span>
+																</button>
 															</c:otherwise>
 														</c:choose>
-														</c:if>
-														<c:if test="${ auth.getName() eq null }">
-															<button type="button" data-wish-id="${dto.products_tag }"
-																data-wish-type="daily"
-																class="btn-round btn-white wishlistBtn ">
-																<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																	찜하기</span>
-															</button>
-															<button type="button" data-cart-id="${dto.products_no }"
-																data-cart-type="daily" data-cart-event=""
-																class="btn-round addCartBtn">
-																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																	담기</span>
-															</button>
-														</c:if>
-													</div>
+													</c:if>
+													<c:if test="${ auth.getName() eq null }">
+														<button type="button" data-wish-id="${dto.products_tag }"
+															data-wish-type="daily"
+															class="btn-round btn-white wishlistBtn ">
+															<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																찜하기</span>
+														</button>
+														<button type="button" data-cart-id="${dto.products_no }"
+															data-cart-type="daily" data-cart-event=""
+															class="btn-round addCartBtn">
+															<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																담기</span>
+														</button>
+													</c:if>
+												</div>
 											</div>
 										</c:forEach>
 									</div>
@@ -476,8 +445,9 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 				</form>
 			</div>
 		</main>
-		<%@ include file="/WEB-INF/views/layouts/sidebar.jsp"%>
+		<%@ include file="/WEB-INF/views/layouts/quick_menu.jsp"%>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
+		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 		<%@ include file="/WEB-INF/views/ui/wishmodal.jsp"%>
 		<%@ include file="/WEB-INF/views/ui/cartmodal.jsp"%>
 	</div>

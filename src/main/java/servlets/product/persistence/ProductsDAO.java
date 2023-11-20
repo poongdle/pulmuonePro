@@ -442,8 +442,7 @@ public class ProductsDAO implements IProducts {
 		pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1,tag);		
 		rs = pstmt.executeQuery();		
-		int insertRow = 0;
-		int updateRow = 0;
+		int insertRow = 0;		
 		if( rs.next() ) {
 			sql = " DELETE FROM products_wish where products_tag = ? ";			
 			sql1 = " UPDATE products "
@@ -469,7 +468,7 @@ public class ProductsDAO implements IProducts {
 		insertRow = pstmt.executeUpdate();
 		pstmt = con.prepareStatement(sql1);
 		pstmt.setInt(1,tag);
-		updateRow = pstmt.executeUpdate();
+		pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -529,10 +528,14 @@ public class ProductsDAO implements IProducts {
 		return list;
 	}
 	@Override
-	public int wishdelete(Connection con, String user_id, String idx) throws SQLException {
+	public int wishdelete(Connection con, String user_id, String idx, String tag) throws SQLException {
 		String sql = " DELETE FROM products_wish ";
 				sql += String.format(" where member_id = '%s' ", user_id);
 				sql += String.format(" and idx in (%s) ", idx);
+				
+		String sql1 = " UPDATE products "
+					+ " set wish_status = 0 ";
+				sql1 += String.format(" where products_tag in (%s) ", tag);		
 		
 		PreparedStatement pstmt = null;
 		int deleteRow = 0;
@@ -545,7 +548,8 @@ public class ProductsDAO implements IProducts {
 //			System.out.println(idx);
 //			System.out.println(sql);
 			deleteRow = pstmt.executeUpdate();
-			
+			pstmt = con.prepareStatement(sql1);
+			pstmt.executeUpdate();				
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

@@ -14,5 +14,4 @@ public class AuthInfo {
 	private int memberNo;
 	private String memberId;
 	private String name;
-	
 }
