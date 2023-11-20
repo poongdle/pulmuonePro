@@ -11966,7 +11966,7 @@ a.btn.dropdown-toggle.qty::after {
   margin: 0 auto 10px;
   display: block;
   border-radius: 50%;
-  background: #e5e5e5 url("../images/common/ico_caution.png") no-repeat center center;
+  background: #e5e5e5 url("/resources/assets/images/common/ico_caution.png") no-repeat center center;
 }
 
 .caution-unit h3 {
@@ -33174,7 +33174,7 @@ a.text-dark:hover {
   top: 50%;
   margin-left: -50px;
   margin-top: -50px;
-  background: #fff url("../images/loading_pulmuone.gif") no-repeat center;
+  background: #fff url("/resources/assets/images/common/loading_pulmuone.gif") no-repeat center;
   border-radius: 10px;
 }
 
@@ -33188,7 +33188,7 @@ a.text-dark:hover {
   top: 50%;
   margin-left: -50px;
   margin-top: -50px;
-  background: #fff url("../images/loading_pulmuone.gif") no-repeat center;
+  background: #fff url("/resources/assets/images/common/loading_pulmuone.gif") no-repeat center;
   border-radius: 10px;
 }
 
@@ -38517,4 +38517,76 @@ html {
   top: 0px;
   right: 0;
   z-index: 1;
+}
+
+
+
+/* [신종혁] customModal 추가  */
+#customModal {
+  padding: 0px 10px !important;
+}
+
+#customModal .modal-body ul > li {
+  text-align: left;
+  font-size: 14px;
+  padding: 5px 0px;
+  padding-left: 15px;
+  position: relative;
+}
+
+#customModal .modal-body ul > li:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  left: 0px;
+  top: 12px;
+  background: #555;
+  border-radius: 50%;
+}
+
+#customModal .modal-dialog {
+  max-width: 500px;
+}
+
+#customModal .modal-header {
+  border-bottom: 0px;
+  padding: 20px 20px 0px;
+}
+
+#customModal .modal-body {
+  text-align: center;
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.44;
+  letter-spacing: -1.2px;
+  text-align: center;
+  color: #333;
+  padding: 30px 20px 40px;
+  background: #fff;
+}
+
+#customModal .modal-footer {
+  background: #7acc12;
+  height: 60px;
+  border-bottom-right-radius: 26px;
+  border-bottom-left-radius: 26px;
+  font-family: "Noto Sans KR";
+  font-size: 15px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.73;
+  letter-spacing: -1.13px;
+  color: #fff;
+  text-align: center;
+  justify-content: center;
+}
+
+#customModal .modal-footer.disabled {
+  background-color: grey;
 }

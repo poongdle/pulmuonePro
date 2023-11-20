@@ -52,7 +52,6 @@
             <u:isLogin>
                <p class="welcome">
                   <b style="margin: 0;"><c:out value="${ auth.getName() }" /> <a href="/member/logout.do" type="button" class="logout-btn">로그아웃</a></b>님, 건강한 습관 풀무원녹즙입니다.
-<%--                   <b style="margin: 0;"> <a href="/member/logout.do" type="button" class="logout-btn">로그아웃</a></b>님, 건강한 습관 풀무원녹즙입니다. --%>
                </p>
             </u:isLogin>
             <a href="/mypage.do" data-require-login="true"> 
@@ -235,9 +234,9 @@
 </header>
 <script type="text/javascript">
    $('.logout-btn').click(function (){
-       if(confirm('로그아웃 하시겠습니까?')){
-   
-       }
+//        if(confirm('로그아웃 하시겠습니까?')){
+   			
+//        }
    })
    $(document).ready(function(){
        $('.welcome b').hover(function() {
