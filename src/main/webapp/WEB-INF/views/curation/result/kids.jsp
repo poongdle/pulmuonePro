@@ -284,7 +284,7 @@ $(document).on("click", "#orderModal button", function (e) {
 							</ul>
 						</div>
 
-						<form action="/cart/daily/cartdaily.do'" method="GET">
+						<form action="/daily/order/step1.do" method="GET">
 							<div class="button-set sm" style="margin: 20px 0px">
 								<input type="hidden" name="item" value='{"item":[{"itemCode":"${dto.products_no}","dayQty":[1,1,1,1,1]}]'>
 								<button id="cartBtn" class="button-basic black" >장바구니</button>
