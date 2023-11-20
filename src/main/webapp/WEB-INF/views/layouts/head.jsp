@@ -29,6 +29,7 @@
 <script src="/resources/assets/js/build/ckeditor.js"></script>
 <script src="/resources/assets/js/build/ko.js"></script>
 
+<script src="/resources/assets/js/message.js"></script>
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
 <script src="/resources/assets/js/request.js"></script>

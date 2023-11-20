@@ -5,7 +5,6 @@
 
 
 
-
 <body>
 	<div class="wrapper">
 
@@ -51,14 +50,14 @@
 								<div class="form-input none-dt">
 			                        <dl>
 			                            <dd>
-			                                <input type="text" id="loginId" name="memberId" placeholder="아이디" value="aaaaaaaa"/>
+			                                <input type="text" id="loginId" name="memberId" placeholder="아이디"/>
 			                            </dd>
 			                        </dl>
 			                    </div>
 			                    <div class="form-input none-dt">
 			                        <dl>
 			                            <dd>
-			                                <input type="password" id="loginPwd" name="pwd" placeholder="비밀번호" autocomplete="off" value="a1234567!"/>
+			                                <input type="password" id="loginPwd" name="pwd" placeholder="비밀번호" autocomplete="off"/>
 			                            </dd>
 			                        </dl>
 			                    </div>
@@ -124,5 +123,107 @@
 <%-- 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %> --%>
 
  	</div>
+ 	
+ 	
+<script type="text/javascript">
+	$(document).ready(function () {
+		var loginId = localStorage.getItem("memberId");
+		var autoLogin = localStorage.getItem("autoLogin");
+		if (loginId) {
+			$("#loginId").val(loginId);
+			$("#rememberId").prop("checked", true);
+			$("#loginPwd").focus();
+		}
+		else {
+			$("#loginId").focus();
+		}
+
+		if(autoLogin){
+				$('input[name=rememberUser]').click();
+		}
+
+		$("#loginId, #loginPwd").keyup(function (e) {
+			if (e.keyCode == 13) {
+				$("#loginBtn").click();
+			}
+		});
+
+		const params = Object.fromEntries(new URLSearchParams(location.search));
+		const redirectUrl = params.redirectUrl
+		const token = params.token;
+
+		$("#loginBtn").click(function () {
+			$(".input-text").text("");
+			$(".idError,.pwdError").removeClass("input-error");
+
+			$("#loginId").val($.trim($("#loginId").val()));
+			$("#loginPwd").val($.trim($("#loginPwd").val()));
+
+			if ($("#loginId").val() == "") {
+				$(".idError").addClass("input-error");
+				$("#loginIdErrorMsg").text('! ' + message.member.regist.id.empty);
+				return false;
+			}
+			if ($("#loginPwd").val() == "") {
+				$(".pwdError").addClass("input-error");
+				$("#loginErrorMsg").text('! ' + message.member.regist.password.empty);
+				$("#loginPwd").focus();
+				return false;
+			}
+			
+			
+			if ($("#rememberId").prop("checked")) {
+				localStorage.setItem("memberId", $("#loginId").val());
+			} else {
+				localStorage.removeItem("memberId");
+			}
+			
+			
+// 			var body = $("#loginForm").serializeObject();
+// 			console.log(body)
+// 			body.redirectUrl = redirectUrl;
+// 			body.token = token;
+
+// 			post({
+// 				"url": "/member/login",
+// 				"param": body
+// 			}, function (response) {
+// 				if ($("#rememberId").prop("checked")) {
+// 					localStorage.setItem("memberId", $("#loginId").val());
+// 				} else {
+// 					localStorage.removeItem("memberId");
+// 				}
+
+// 				if (!!redirectUrl && redirectUrl !== 'undefined') {
+// 					return location.replace(redirectUrl);
+// 				}
+
+// 				location.replace(response.RESULT_MSG);
+
+// 			}, function (failResponse) {
+// 				if(failResponse?.RESULT_CODE ==='2000'){
+// 						alert('해당 임시 비밀 번호는 유효 시간 초과로 사용이 불가합니다. 임시 비밀번호 재발급 후 이용해주시기 바랍니다.',function(){
+// 								location.href = '/member/find/password';
+// 						},'임시 비밀번호 받기')
+// 				}else {
+// 				$(".idError,.pwdError").addClass("input-error");
+// 				alert(failResponse.RESULT_MSG.error || failResponse.RESULT_MSG);
+
+// 				}
+// 			});
+		});
+
+		$("#auto-login").click(function (e){
+				if(!localStorage.getItem('autoLogin')){
+						localStorage.setItem('autoLogin','true');
+				}else{
+						localStorage.removeItem('autoLogin');
+				}
+		})
+
+	});
+</script>
+
+
 </body>
 </html>
