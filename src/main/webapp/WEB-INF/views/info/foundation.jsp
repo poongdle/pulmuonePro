@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
+<script type="text/javascript" src="/resources/assets/js/common.ui.js"></script>
+<script type="text/javascript" src="/resources/assets/js/message.js"></script>
+<script type="text/javascript" src="/resources/assets/js/front.ui.js"></script>
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 		<main class="page">
@@ -13,9 +16,11 @@
         var type = "foundation";
         if ( type == "staff" ) {
             tabOpen(1);
+
         }
         if (location.hash.startsWith("#tab=") && location.hash.substring(5) === "1") {
             tabOpen(1);
+
         }
         /* else {
 			tabOpen(1);
@@ -2216,6 +2221,7 @@
 </script>
 </div>
 		</main>
+		<%@ include file="/WEB-INF/views/layouts/quick_menu.jsp"%>	
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
 		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 	</div>

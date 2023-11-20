@@ -3,6 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
+<script type="text/javascript">
+<c:choose>
+<c:when test="${ auth.getName() eq null }">
+window.is_signed = false;
+</c:when>
+<c:otherwise>
+window.is_signed = true;
+window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderCode":"XQNGV"};
+</c:otherwise>
+</c:choose>
+</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".visual-area").fddCarousel({
@@ -184,7 +195,7 @@
 											<i class="ico ico-personal-03"></i>
 										</div> <span>배송일정변경</span>
 								</a></li>
-								<li class="item"><a href="/mypage/action/interest"
+								<li class="item"><a href="/mypage/product/list.do"
 									data-require-login="">
 										<div class="cover">
 											<i class="ico ico-personal-04"></i>
@@ -259,48 +270,55 @@
 													</a>
 													<div class="btn-area btn-area-center">
 														<c:if test="${ auth.getName() ne null }">
-															<c:forEach items="${wishlist }" var="dao">
-																<c:choose>
-																	<c:when test="${dao.products_tag eq dto.products_tag }">
-																		<button type="button"
-																			data-wish-id="${dto.products_tag }"
-																			data-wish-type="daily"
-																			class="btn-round btn-white wishlistBtn active">
-																			<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																				찜하기</span>
-																		</button>
-																	</c:when>
-																	<c:otherwise>
-																		<button type="button"
-																			data-wish-id="${dto.products_tag }"
-																			data-wish-type="daily"
-																			class="btn-round btn-white wishlistBtn ">
-																			<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																				찜하기</span>
-																		</button>
-																		<button type="button"
-																			data-cart-id="${dto.products_no }"
-																			data-cart-type="daily" data-cart-event=""
-																			class="btn-round addCartBtn">
-																			<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																				담기</span>
-																		</button>
-																	</c:otherwise>
-																</c:choose>
-															</c:forEach>
+															<c:choose>
+																<c:when test="${dto.wish_status eq 1 }">
+																	<button type="button"
+																		data-wish-id="${dto.products_tag }"
+																		data-wish-type="daily"
+																		class="btn-round btn-white wishlistBtn active ">
+																		<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																			찜하기</span>
+																	</button>
+																	<button type="button"
+																		data-cart-id="${dto.products_no }"
+																		data-cart-type="daily" data-cart-event=""
+																		class="btn-round addCartBtn">
+																		<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																			담기</span>
+																	</button>
+																</c:when>
+																<c:otherwise>
+																	<button type="button"
+																		data-wish-id="${dto.products_tag }"
+																		data-wish-type="daily"
+																		class="btn-round btn-white wishlistBtn ">
+																		<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																			찜하기</span>
+																	</button>
+																	<button type="button"
+																		data-cart-id="${dto.products_no }"
+																		data-cart-type="daily" data-cart-event=""
+																		class="btn-round addCartBtn">
+																		<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																			담기</span>
+																	</button>
+																</c:otherwise>
+															</c:choose>
 														</c:if>
-														<button type="button" data-wish-id="${dto.products_tag }"
-															data-wish-type="daily"
-															class="btn-round btn-white wishlistBtn ">
-															<i class="ico ico-prd-wish"></i> <span class="hide">제품
-																찜하기</span>
-														</button>
-														<button type="button" data-cart-id="${dto.products_no }"
-															data-cart-type="daily" data-cart-event=""
-															class="btn-round addCartBtn">
-															<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
-																담기</span>
-														</button>
+														<c:if test="${ auth.getName() eq null }">
+															<button type="button" data-wish-id="${dto.products_tag }"
+																data-wish-type="daily"
+																class="btn-round btn-white wishlistBtn ">
+																<i class="ico ico-prd-wish"></i> <span class="hide">제품
+																	찜하기</span>
+															</button>
+															<button type="button" data-cart-id="${dto.products_no }"
+																data-cart-type="daily" data-cart-event=""
+																class="btn-round addCartBtn">
+																<i class="ico ico-prd-cart"></i> <span class="hide">장바구니에
+																	담기</span>
+															</button>
+														</c:if>
 													</div>
 												</div>
 											</div>
@@ -312,7 +330,6 @@
 						<!--E:추천제품-->
 					</div>
 				</div>
-
 				<!--S:띠배너 슬라이드-->
 				<div class="banner-area survey">
 					<div class="banner-list">
@@ -325,7 +342,6 @@
 					</div>
 				</div>
 				<!--E:띠배너 슬라이드-->
-
 				<!--E:이벤트 슬라이드-->
 				<div class="bg-w">
 					<div class="container">
@@ -335,25 +351,23 @@
 									<i class="ico ico-arr-right6"></i>
 								</a>
 							</h2>
-
 							<div class="event-list" data-carousel="items">
-
 								<a class="item"
 									href="https://greenjuice.pulmuone.com/taste/taste?pkgIdx=56"
 									title="베스트 녹즙"> <img
 									src="/file/download/banner/4d1a4dd5-821c-41db-a0d6-3535adb53a8e.png"
 									alt="">
-								</a> <a class="item left"
+								</a> <a class="item "
 									href="https://greenjuice.pulmuone.com/taste/taste?pkgIdx=54"
 									title="건강한 한 끼"> <img
 									src="/file/download/banner/b9842c83-f89d-4687-8351-c71beeba16e4.png"
 									alt="">
-								</a> <a class="item active"
+								</a> <a class="item "
 									href="https://greenjuice.pulmuone.com/taste/taste?pkgIdx=53"
 									title="아이사랑"> <img
 									src="/file/download/banner/57d7c4a5-9e5f-4158-9067-f8e2746a2ee8.png"
 									alt="">
-								</a> <a class="item right"
+								</a> <a class="item "
 									href="https://greenjuice.pulmuone.com/product/daily/743"
 									title="이달의 녹즙(비타맥스 엑스투)"> <img
 									src="/file/download/banner/c4f1a598-5bf4-4cb9-9acf-c733f86d3faf.png"
@@ -364,20 +378,13 @@
 									src="/file/download/banner/ba6cd618-ea64-4c9e-a6ed-18186f895d6b.png"
 									alt="">
 								</a>
-
 							</div>
 							<ul class="event-list-dot" data-carousel="dot">
-
 								<li class=""></li>
-
 								<li class=""></li>
-
-								<li class="active"></li>
-
 								<li class=""></li>
-
 								<li class=""></li>
-
+								<li class=""></li>
 							</ul>
 						</div>
 					</div>
@@ -394,7 +401,7 @@
 										style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1200px;">
 										<div class="owl-item active" style="width: 300px;">
 											<div class="prd-area">
-												<a href="/event/event/view/2957" title="제품 상세페이지로 가기">
+												<a href="/event/event/view.do?event_no=30" title="제품 상세페이지로 가기">
 													<div class="badges">
 														<span class="badge badge-new">NEW</span> <span
 															class="badge badge-sale">SALE</span>
@@ -661,40 +668,12 @@
 				</div>
 			</div>
 		</main>
+		<%@ include file="/WEB-INF/views/layouts/quick_menu.jsp"%>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
-		<div class="modal fade" id="alertModal" tabindex="-1"
-			aria-labelledby="alertModalLabel" style="display: none;"
-			aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="alertModalLabel"></h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">로그인 후 찜한상품으로 담을 수 있습니다.</div>
-					<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="confirmModal" tabindex="-1"
-			aria-labelledby="confirmModalLabel" style="display: none;"
-			aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="confirmModalLabel"></h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">제품이 담겼습니다. 담은 제품을 확인하시겠습니까?</div>
-					<div class="modal-footer">
-						<button type="button" class="cancel" data-dismiss="modal">취소</button>
-						<button type="button" class="confirm">확인</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
+		<%@ include file="/WEB-INF/views/ui/wishmodal.jsp"%>
+		<%@ include file="/WEB-INF/views/ui/cartmodal.jsp"%>
+
 	</div>
 </body>
 </html>
