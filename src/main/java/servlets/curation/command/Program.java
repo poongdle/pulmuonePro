@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import mvc.command.CommandHandler;
 import servlets.curation.domain.CurationDTO;
-import servlets.curation.service.ProductService;
 import servlets.curation.service.ProgramService;
 
 public class Program implements CommandHandler{
@@ -48,6 +47,7 @@ public class Program implements CommandHandler{
 			break;
 		}
 
+		
 		List<CurationDTO> list = pg.selectPG(path, num);
 		
 		request.setAttribute("list", list);
