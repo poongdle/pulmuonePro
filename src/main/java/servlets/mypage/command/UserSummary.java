@@ -1,6 +1,7 @@
 package servlets.mypage.command;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,8 @@ import mvc.command.CommandHandler;
 import servlets.inquiry.service.InquiryListService;
 import servlets.mypage.dto.BoxOrderSimpleInfoDTO;
 import servlets.mypage.service.MypageService;
+import servlets.product.domain.ProductsDTO;
+import servlets.product.service.ListService;
 
 public class UserSummary implements CommandHandler {
 
@@ -53,7 +56,9 @@ public class UserSummary implements CommandHandler {
 		
 		
 		// 5. 리뷰 관련
-		
+		ListService listService = ListService.getInstance();
+		List<ProductsDTO> reviewlist = listService.selectreview(memberNo);
+		request.setAttribute("reviewlist", reviewlist);
 		
 		// 6. 1:1 문의 관련
 		String user_id = member.getMemberId();		

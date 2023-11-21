@@ -26,6 +26,7 @@ public class MemberSignUpStep4 implements CommandHandler {
 			response.setContentType("text/html; charset=UTF-8");
 			
 			String name = request.getParameter("name");
+			
 			String tel = request.getParameter("tel");
 			String rrnBirthDate = request.getParameter("rrnBirthDate");
 			String rrnGenderCode = request.getParameter("rrnGenderCode");
@@ -56,7 +57,6 @@ public class MemberSignUpStep4 implements CommandHandler {
 			MemberService memberService = new MemberService();
 			int rowCount = memberService.signup(dto);
 
-			
 			request.setAttribute("memberId", memberId);
 			request.setAttribute("pwd", pwd);
 			

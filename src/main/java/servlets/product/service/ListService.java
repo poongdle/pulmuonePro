@@ -128,15 +128,47 @@ public class ListService {
 			JdbcUtil.close(con);
 		}
 	}
-	public List<ProductsDTO> selectwish(){
+	public List<ProductsDTO> selectwish(String user_id){
 		//
 		Connection con = null;
 		try {
 			con = ConnectionProvider.getConnection();
 			ProductsDAO dao = ProductsDAO.getInstance();
 			List<ProductsDTO> wishlist = null;															
-			wishlist =	dao.selectwish(con);					
+			wishlist =	dao.selectwish(con,user_id);					
 			return wishlist;
+		} catch (NamingException | SQLException e) { 
+			//e.printStackTrace();  syso("ListService.select() 에러 : ")
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(con);
+		}
+	}
+	public List<ProductsDTO> selectreview(int memberNo){
+		//
+		Connection con = null;
+		try {
+			con = ConnectionProvider.getConnection();
+			ProductsDAO dao = ProductsDAO.getInstance();
+			List<ProductsDTO> reviewlist = null;															
+			reviewlist =	dao.selectreview(con,memberNo);					
+			return reviewlist;
+		} catch (NamingException | SQLException e) { 
+			//e.printStackTrace();  syso("ListService.select() 에러 : ")
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(con);
+		}
+	}
+	public List<ProductsDTO> selectmyreview(int memberNo){
+		//
+		Connection con = null;
+		try {
+			con = ConnectionProvider.getConnection();
+			ProductsDAO dao = ProductsDAO.getInstance();
+			List<ProductsDTO> reviewlist = null;															
+			reviewlist =	dao.selectmyreview(con,memberNo);					
+			return reviewlist;
 		} catch (NamingException | SQLException e) { 
 			//e.printStackTrace();  syso("ListService.select() 에러 : ")
 			throw new RuntimeException(e);

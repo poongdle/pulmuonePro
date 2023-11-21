@@ -51,10 +51,10 @@ public interface MypageDAO {
 	// 4. 쿠폰 관련
 			
 			
-	// 5. 리뷰 관련
+	// 5. 리뷰 관련 servlets.review 참조
 			
 			
-	// 6. 1:1 문의 관련
+	// 6. 1:1 문의 관련 servlets.inquiry 참조 
 	
 	
 }
