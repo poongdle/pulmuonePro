@@ -137,8 +137,8 @@
 									<div class="title">
 										<h2>음용스케쥴</h2>
 										<div class="button-set">
-											<a style="cursor: pointer" href="/mypage/drink/drink/change-history/230000234094?nickname=음용1" class="rounded-button">홈페이지 변경내역</a>
-											<a href="/mypage/drink/drink/change/230000234094/23812" class="rounded-button primary">음용상품변경</a>
+											<a style="cursor: pointer" href="/mypage/order/daily/changeHistory.do?orderNo=1" class="rounded-button">홈페이지 변경내역</a>
+											<a href="/mypage/order/daily/change.do?orderNo=1" class="rounded-button primary">음용상품변경</a>
 											<button type="button" id="changeDayBtn" class="rounded-button black">배송일정변경</button>
 										</div>
 									</div>

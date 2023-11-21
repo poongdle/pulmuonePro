@@ -113,7 +113,7 @@
 											<dt style="padding-left:20px; width:125px;"><label>희망중지일</label></dt>
 											<dd>
 												<div>
-													<input type="text" readonly="" name="startDate" data-placeholder="날짜를 입력하세요." required="" aria-required="true">
+													<input type="text" readonly="" name="startDate" data-placeholder="날짜를 입력하세요." required="" aria-required="true" value="2023. 11. 24">
 												</div>
 											</dd>
 										</dl>
