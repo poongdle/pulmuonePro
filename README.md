@@ -71,8 +71,15 @@
 <details>
 <summary>김정주</summary>
 <div markdown="1">
-이벤트: ...<br>
-쿠폰:..<br>
+<h4>🌴 이벤트</h4>
+🌟 이벤트 페이지 <br><br>
+  
+  - 진행중인이벤트 <br>
+  - 종료된이벤트<br>
+  - 당첨자발표<br>
+  - 친구초대<br>
+  - 회원혜택<br>
+
 </div>
 <hr>
 </details>
