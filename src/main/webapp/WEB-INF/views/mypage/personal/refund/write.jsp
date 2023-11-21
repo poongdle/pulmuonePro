@@ -122,6 +122,7 @@
 		                  </div>
 		                </div>
 		              </dd>
+		              <input type="hidden" id="insttCode" name="insttCode" value="">
 		            </dl>
 		          </div>
 		          <div class="form-input">
@@ -130,7 +131,7 @@
 		                <label for="accountHolder">예금주</label>
 		              </dt>
 		              <dd>
-		                <input type="text" value="<%= request.getParameter("acctOwner") %>" name="accountHolder" id="accountHolder">
+		                <input type="text" value="<%= request.getParameter("acctOwner") != null ? request.getParameter("acctOwner") : ""%>" name="accountHolder" id="accountHolder">
 		              </dd>
 		            </dl>
 		          </div>
@@ -140,7 +141,7 @@
 		                <label for="bankAccount">계좌번호</label>
 		              </dt>
 		              <dd>
-<!-- 		              	<input type="hidden" value="${ acctNum }"> -->
+		              	<input type="hidden" value="${ acctNum }">
 <%-- 		              	<input type="hidden" value="<%= request.getParameter("acctNum") %>"> --%>
 		                <input value="<%= request.getParameter("acctNum") %>" class="numberOnly" type="number" name="bankAccount" id="bankAccount">
 		                <button type="button" id="verify" class="btn-square btn-black">계좌인증</button>
@@ -176,9 +177,6 @@
 					
 			</div> <!-- container aside-layout main -->
 
-		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
-		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
- 	</div> <!-- wrapper -->
 <script>
 	$(function () {
 	    $("div.item p").each(function(index) {
@@ -194,17 +192,22 @@
 
     //region dropdown
     $('.dropdown-item').click(function () {
-      const select = $('#bankCode')
-      select.text($(this).text())
-      select.data('value', $(this).data('value'))
+      const select = $('#bankCode');
+      select.text($(this).text());
+      select.data('value', $(this).data('value'));
       $('#verify').prop('v', false);
-      $('#verify').text('계좌인증')
-      $('#verify').prop('disabled', false)
-    })
+      $('#verify').text('계좌인증');
+      $('#verify').prop('disabled', false);
+    });
 
     
 //     $('.dropdown-item[data-value=11]').click();
-    $('.dropdown-item[data-value=<%= request.getParameter("insttCode") %>]').click();
+
+    if ("<%= request.getParameter("insttCode") %>" != null) {
+	    $('.dropdown-item[data-value=<%= request.getParameter("insttCode") %>]').click();
+
+   	}
+
     
 
     
@@ -256,24 +259,61 @@
         if ($('input[name=agree]:checked').length === 0) {
           return alert('개인정보 수집 이용약관에 동의해주세요')
         }
-        if ("1601") {
-          post({url: '/mypage/personal/refund/1601', param: $.param(data)},
-                  function (r) {
-                    if (r.RESULT_MSG) {
-                      alert('환불계좌가 정상적으로 수정되었습니다.',
-                              () => location.href = '/mypage/personal/refund')
-                    } else {
-                      return alert('잘못된 요청입니다.')
-                    }
-                  })
+	    var params = null;
+	    params = $("#accountForm").serialize();
+        if (<%= request.getParameter("acctNum") %> != null) {
+			$.ajax({
+				url:"/member/refund/modifyRefundAcct.ajax" , 
+				dataType:"json",
+				type:"POST",
+				data: params,
+				cache:false ,
+				success: function ( data,  textStatus, jqXHR ){
+					if( data.rowCount == "1" ) {
+						ajaxStatus = true;
+		 				alert( "환불계좌가 정상적으로 수정되었습니다.", ()=>{location.href='/mypage/personal/refund.do'});
+
+					} else {  
+						alert("잘못된 요청입니다.");
+					}
+				 
+				},
+				error:function (){
+				 alert("에러~~~ ");
+				}
+			});
+        	
+//           post({url: '/mypage/personal/refund/1601', param: $.param(data)},
+//                   function (r) {
+//                     if (r.RESULT_MSG) {
+//                       alert('환불계좌가 정상적으로 수정되었습니다.',
+//                               () => location.href = '/mypage/personal/refund')
+//                     } else {
+//                       return alert('잘못된 요청입니다.')
+//                     }
+//                   })
         } else {
-          post({url: '/mypage/personal/refund', param: $.param(data)}, function (r) {
-            if (r.RESULT_MSG) {
-              alert('환불계좌가 정상적으로 등록되었습니다.', () => location.href = '/mypage/personal/refund')
-            } else {
-              return alert('잘못된 요청입니다.')
-            }
-          })
+			$.ajax({
+				url:"/member/refund/writeRefundAcct.ajax" , 
+				dataType:"json",
+				type:"POST",
+				data: params,
+				cache:false ,
+				success: function ( data,  textStatus, jqXHR ){
+					if( data.rowCount == "1" ) {
+						ajaxStatus = true;
+		 				alert( "환불계좌가 정상적으로 등록되었습니다.", ()=>{location.href='/mypage/personal/refund.do'});
+
+					} else {  
+						alert("잘못된 요청입니다.");
+					}
+				 
+				},
+				error:function (){
+				 alert("에러~~~ ");
+				}
+			});
+        	
         }
       }
     })
@@ -286,23 +326,25 @@
     //  endregion
 
     //  region verify
-    $('#verify').click(function () {
-      var el = $(this)
-      if (!el.prop('v')) {
-        const data = checkForm();
-        if (data) {
-          post({url: '/mypage/personal/refund/verify', param: $.param(data)}, function (r) {
-            if (r.RESULT_MSG) {
-              el.text('인증완료')
-              el.prop('disabled', true)
-              el.prop('v', true);
-            } else {
-              alert('계좌인증에 실패하였습니다. 다시 시도해주세요.')
-            }
-          })
-        }
-      }
-    })
+//     $('#verify').click(function () {
+//       $("#insttCode").val($('#bankCode').data('value'));
+//       var el = $(this)
+//       if (!el.prop('v')) {
+//         const data = checkForm();
+//         if (data) {
+//           post({url: '/mypage/personal/refund/verify', param: $.param(data)}, function (r) {
+//             if (r.RESULT_MSG) {
+//               el.text('인증완료')
+//               el.prop('disabled', true)
+//               el.prop('v', true);
+              
+//             } else {
+//               alert('계좌인증에 실패하였습니다. 다시 시도해주세요.')
+//             }
+//           })
+//         }
+//       }
+//     })
 
     //  endregion
   });
@@ -313,8 +355,8 @@
 <script>
 	$("#verify").on("click", function() {
 		var el = $(this);
-		alert("인증되었습니다. (임시)");		
-        
+		alert("인증되었습니다.");		
+		 $("#insttCode").val($('#bankCode').data('value'));
 		el.text('인증완료')
         el.prop('disabled', true)
         el.prop('v', true);
@@ -356,6 +398,10 @@
 		</div>
 	</div>
 </div>
+		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
+		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
+ 	</div> <!-- wrapper -->
+
 
 
 

@@ -12,6 +12,7 @@ import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import servlets.member.dao.MemberDAOImpl;
 import servlets.member.dto.MemberDTO;
+import servlets.refund.dao.RefundDAOImpl;
 
 public class MemberService {
 	
@@ -169,8 +170,6 @@ public class MemberService {
 		return rowCount;
 	}
 	
-	
-	
 	private String getRandomInvCode() {
 		String charRange = "abcdefgehijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		int charRangeLength = charRange.length();
@@ -179,7 +178,7 @@ public class MemberService {
 		
 		StringBuilder invCodeBuilder = new StringBuilder(invCodeLength);
 		for (int i = 0; i < invCodeLength; i++) {
-			randomIndex = (int) ( Math.random() * (charRangeLength + 1) );
+			randomIndex = (int) ( Math.random() * (charRangeLength) );
 			invCodeBuilder.append(charRange.charAt(randomIndex));
 		}
 		
@@ -237,6 +236,9 @@ public class MemberService {
 		
 		return dto;
 	}
+
+
+
 
 
 

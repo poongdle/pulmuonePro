@@ -13,7 +13,7 @@ import servlets.product.domain.ProductsDTO;
 import servlets.product.service.AddService;
 import servlets.product.service.ListService;
 
-public class AddBoxList implements CommandHandler{
+public class BoxWishList implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -22,7 +22,12 @@ public class AddBoxList implements CommandHandler{
 		int tag = Integer.parseInt(request.getParameter("tag"));
 		HttpSession session = request.getSession(false);
 		AuthInfo auth = (AuthInfo) session.getAttribute("auth");
-		String user_id = auth.getMemberId();
+		String user_id = null;
+		if(auth == null) {
+			user_id = null;
+		}else {
+			user_id = auth.getMemberId();												
+		}
 		int insertRow = 0;		
 		insertRow = addService.wishadd(user_id,tag);
 

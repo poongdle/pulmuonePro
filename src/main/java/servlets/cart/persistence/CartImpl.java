@@ -29,47 +29,6 @@ public class CartImpl implements CartDAO{
 	public static CartImpl getInstance() {
 		return instance;
 	}
-
-	//	@Override
-	//	public int cartadd(Connection con, int tag) throws SQLException {
-	//		PreparedStatement pstmt = null;		
-	//		ResultSet rs = null;
-	//		String sql = " select * from cart_daily ";
-	//		pstmt = con.prepareStatement(sql);
-	////		pstmt.setInt(1,tag);
-	////		System.out.println(tag);
-	////		System.out.println(sql);
-	//		rs = pstmt.executeQuery();		
-	//		int insertRow = 0;
-	//		if( rs.next() ) {
-	//			sql = " DELETE FROM products_wish where products_tag = ? ";			
-	//		}else {			
-	//			sql = " INSERT INTO products_wish "
-	//					+ "select products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price "
-	//					+ " , products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, event_tag, event_tag2 "
-	//					+ " from products "
-	//					+ " WHERE products_tag = ? ";
-	//		}		
-	//		try {
-	//			pstmt = con.prepareStatement(sql);	
-	//			pstmt.setInt(1,tag);
-	////			System.out.println("wishadd");
-	////			System.out.println(tag);
-	////			System.out.println(sql);
-	//			insertRow = pstmt.executeUpdate();
-	//			
-	//		} catch (SQLException e) {
-	//			e.printStackTrace();
-	//		} catch (Exception e) {
-	//			e.printStackTrace();
-	//		} finally {
-	//			JdbcUtil.close(pstmt);
-	//		}
-	//		
-	//		return insertRow;
-	//	}
-
-
 	
 // 장바구니 - 쿼리 확인	
 	@Override
@@ -110,44 +69,51 @@ public class CartImpl implements CartDAO{
 
 
 	@Override
-	public ArrayList<CartDTO> cartList(Connection con, int num) throws SQLException {
-		String sql = " select  img_no,  products_name, products_tag, system_name, price, "
-				+ "				 products_size, products_sub_name "
-				+ "				from  products_img pi join products p on p.products_no = pi.products_no "
-				+ "				where products_tag in ? "
-				+ "				order by img_no desc; ";
+
+	public ArrayList<CartDTO> cartList(Connection con, String products_no) throws SQLException {
+		/*
+		 * String sql =
+		 * "  select  products_name, products_tag, system_name, price, products_size , p.products_no "
+		 * + "from  products_img pi join products p on p.products_no = pi.products_no "
+		 * + "where p.products_no in ? " + "order by products_no desc";
+		 */				
+		
+		String sql = " SELECT DISTINCT p.products_no,products_tag, products_name, price, products_size, img_path, system_name "
+				+ " FROM products p LEFT JOIN products_img i ON p.products_no = i.products_no "
+		        + " WHERE p.products_no in ('0073156')";
+//				sql += String.format(" WHERE p.products_no in (%s) ", products_no);
+				sql += " AND origin_name != 'View.png'";
+
 		
 		PreparedStatement pstmt = null;		
 		ResultSet rs = null;
 		ArrayList<CartDTO> list = null;
+		CartDTO dto = null;
 
 		try {
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();	
 			
 			if ( rs.next() ) {
 				list = new ArrayList<CartDTO>();
-				CartDTO dto = null;
 
 				do {
 					dto = new CartDTO();
 
-					dto.setProducts_tag(rs.getInt("products_tag"));
+					dto.setProducts_no(rs.getString("products_no"));
+					dto.setProducts_tag(rs.getShort("products_tag"));
 					dto.setProducts_name(rs.getString("products_name"));
-					dto.setImg_no(rs.getInt("img_no"));
-					dto.setSystem_name(rs.getString("system_name"));
 					dto.setPrice(rs.getInt("price"));
+					dto.setImg_path(rs.getString("img_path"));
+					dto.setSystem_name(rs.getString("system_name"));
 					dto.setProducts_size(rs.getString("products_size"));
-					dto.setProducts_sub_name(rs.getString("products_sub_name"));
+
 					list.add(dto);
 
 				} while (rs.next());
 			} // if
-		} catch (Exception e) {
-			System.out.println("BoxOrderDAO selectCoupon() error...");
-			e.printStackTrace();
+
 		} finally {
 			JdbcUtil.close(pstmt);
 			JdbcUtil.close(rs);

@@ -13,8 +13,8 @@
 
 <script type="text/javascript">
 	$(function() {
-		alert("회원가입이 완료되었습니다.");
-		$("#login").submit();
+		alert("회원가입이 완료되었습니다.", ()=>{location.href='/member/login.do'});
+// 		$("#login").submit();
 	});
 	
 // 	location.href = "/index.jsp";

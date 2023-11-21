@@ -134,6 +134,7 @@ LocalDate now = LocalDate.now();
 				</div>
 		</main>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
+<<<<<<< HEAD
 		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 		<script>
 			function OnloadImg(url) {
@@ -152,5 +153,10 @@ LocalDate now = LocalDate.now();
 		<img src="/resources/assets/images/common/couponGuide.png"
 			style="display: none" id="guideImage" alt="">
 	</div>
+=======
+		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>		
+		<img src="/resources/assets/images/common/couponGuide.png" style="display: none" id="guideImage" alt="">
+	</div>	
+>>>>>>> branch 'develop' of https://github.com/dhl1031/pulmuonePro.git
 </body>
 </html>
