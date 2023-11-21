@@ -207,7 +207,7 @@ public class MemberService {
 		
 		StringBuilder invCodeBuilder = new StringBuilder(invCodeLength);
 		for (int i = 0; i < invCodeLength; i++) {
-			randomIndex = (int) ( Math.random() * (charRangeLength + 1) );
+			randomIndex = (int) ( Math.random() * (charRangeLength) );
 			invCodeBuilder.append(charRange.charAt(randomIndex));
 		}
 		
