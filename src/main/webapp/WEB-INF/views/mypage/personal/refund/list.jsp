@@ -53,6 +53,7 @@
 							</div>
 							<div class="btn-area-right" style="margin-top:20px; margin-right:2px;">
 								<form action="/mypage/personal/refund/write.do" method="post" id="acctInfo">
+									<input type="hidden" name="insttCode" value="${ insttCode }">
 									<input type="hidden" name="insttName" value="${ insttName }">
 									<input type="hidden" name="acctOwner" value="${ acctOwner }">
 									<input type="hidden" name="acctNum" value="${ acctNum }">

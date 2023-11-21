@@ -28,6 +28,7 @@
 		          환불계좌 등록
 		        </h2>
 		      </div>
+		      <form id="accountForm">
 		      <div style="width:640px;">
 		        <div class="input-group">
 		          <div class="form-input select">
@@ -129,7 +130,7 @@
 		                <label for="accountHolder">예금주</label>
 		              </dt>
 		              <dd>
-		                <input type="text" value="${ acctOwner }" name="accountHolder" id="accountHolder">
+		                <input type="text" value="<%= request.getParameter("acctOwner") %>" name="accountHolder" id="accountHolder">
 		              </dd>
 		            </dl>
 		          </div>
@@ -139,8 +140,9 @@
 		                <label for="bankAccount">계좌번호</label>
 		              </dt>
 		              <dd>
-		              	<input type="hidden" value="${ acctNum }">
-		                <input value="${ acctNum }" class="numberOnly" type="number" name="bankAccount" id="bankAccount">
+<!-- 		              	<input type="hidden" value="${ acctNum }"> -->
+<%-- 		              	<input type="hidden" value="<%= request.getParameter("acctNum") %>"> --%>
+		                <input value="<%= request.getParameter("acctNum") %>" class="numberOnly" type="number" name="bankAccount" id="bankAccount">
 		                <button type="button" id="verify" class="btn-square btn-black">계좌인증</button>
 		              </dd>
 		            </dl>
@@ -169,6 +171,7 @@
 		          <button type="button" style="padding:0; width:140px;" id="register" class="btn-default btn-default">등록</button>
 		        </div>
 		      </div>
+		      </form>
     		</div>
 					
 			</div> <!-- container aside-layout main -->
@@ -200,7 +203,9 @@
     })
 
     
-    $('.dropdown-item[data-value=11]').click();
+//     $('.dropdown-item[data-value=11]').click();
+    $('.dropdown-item[data-value=<%= request.getParameter("insttCode") %>]').click();
+    
 
     
     //endregion
@@ -307,7 +312,12 @@
 
 <script>
 	$("#verify").on("click", function() {
+		var el = $(this);
 		alert("인증되었습니다. (임시)");		
+        
+		el.text('인증완료')
+        el.prop('disabled', true)
+        el.prop('v', true);
 	});
 
 
@@ -329,7 +339,23 @@
 </div>
 
 
-
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="confirmModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="cancel" data-dismiss="modal">취소</button>
+				<button type="button" class="confirm">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
