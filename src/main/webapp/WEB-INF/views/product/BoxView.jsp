@@ -631,10 +631,10 @@
 									data-wish-id="${dto.products_tag }"></button>
 							</c:otherwise>
 						</c:choose>
-						<!-- 품절용 가이드 추가 -->													
+						<!-- 품절용 가이드 추가 -->											
+							<input type="hidden" name="qty" value="1">
 							<button id="cartBtn" class="button-fix black">장바구니</button>
-							<button id="orderBtn" class="button-fix primary">바로구매</button>
-						
+							<a href="/box/order/step1.do?productsNo=${dto.products_no }&qty=1"><button id="orderBtn" class="button-fix primary">바로구매</button></a>
 					</div>
 				</div>
 			</div>
