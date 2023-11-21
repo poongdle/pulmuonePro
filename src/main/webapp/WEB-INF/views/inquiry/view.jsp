@@ -62,7 +62,7 @@
                            </div>
                        </div>
 
-                       <div class="board-content answer">
+                       <div class="board-content answer" style="display: none;">
                            <span class="ellipse">A.</span>
                            <div class="content">
                                <p>안녕하세요. 고객님. 하루 한 병 건강한 습관 풀무원녹즙입니다.
