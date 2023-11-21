@@ -1,5 +1,7 @@
 package servlets.cart.domain;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +16,8 @@ public class CartDTO {
 
 	private int program_no;         		// 프로그램번호
 	private int img_no;	     	 			// 작성자
-	
+	private String program_name;      	// 프로그램명
+	private String dayweek;      		// 요일
 	private String products_no;      		// 상품번호
 	private String products_name;      	// 상품명
 	private String program_content;    	// 프로그램 내용
@@ -23,7 +26,7 @@ public class CartDTO {
 	private int price;
 	private int products_tag;
 	private String Products_size;
-	private String Products_sub_name;
+	private String img_path;
 	
 	private int cart_no;  
 	private int member_no;  
@@ -33,5 +36,7 @@ public class CartDTO {
 	private int thu_cnt;    
 	private int fir_cnt;   
 	private String reg_date;
+	
+
 }
 

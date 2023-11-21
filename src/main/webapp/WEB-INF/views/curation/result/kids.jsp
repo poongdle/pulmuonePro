@@ -370,7 +370,9 @@
 							</ul>
 						</div>
 						<div class="button-set sm" style="margin: 20px 0px">
+								<form action="/cart/kidcart.do">
 								<button id="cartBtn" class="button-basic black">장바구니</button>
+								</form>
 								<form action="/daily/order/step1.do" method="GET">
 								<c:forEach var="dto" items="${list }">
 									<input type="hidden" name="item"

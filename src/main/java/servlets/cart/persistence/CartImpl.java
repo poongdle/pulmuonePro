@@ -110,44 +110,53 @@ public class CartImpl implements CartDAO{
 
 
 	@Override
-	public ArrayList<CartDTO> cartList(Connection con, int num) throws SQLException {
-		String sql = " select  img_no,  products_name, products_tag, system_name, price, "
-				+ "				 products_size, products_sub_name "
-				+ "				from  products_img pi join products p on p.products_no = pi.products_no "
-				+ "				where products_tag in ? "
-				+ "				order by img_no desc; ";
+	public ArrayList<CartDTO> cartList(Connection con, ArrayList<String> products_no) throws SQLException {
+		/*
+		 * String sql =
+		 * "  select  products_name, products_tag, system_name, price, products_size , p.products_no "
+		 * + "from  products_img pi join products p on p.products_no = pi.products_no "
+		 * + "where p.products_no in ? " + "order by products_no desc";
+		 */
+		
+		Iterator<String> ir = products_no.iterator();
+		
+		String sql = " SELECT DISTINCT p.products_no,products_tag, products_name, price, products_size, img_path, system_name "
+				+ " FROM products p LEFT JOIN products_img i ON p.products_no = i.products_no "
+				+ " WHERE p.products_no IN( ";
+				while (ir.hasNext()) {
+					String prd = (String) ir.next();
+					sql += prd+",";
+				} // while
+				sql += " -1 )  AND origin_name != 'View.png'";
 		
 		PreparedStatement pstmt = null;		
 		ResultSet rs = null;
 		ArrayList<CartDTO> list = null;
+		CartDTO dto = null;
 
 		try {
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();	
 			
 			if ( rs.next() ) {
 				list = new ArrayList<CartDTO>();
-				CartDTO dto = null;
-
 				do {
 					dto = new CartDTO();
 
+					dto.setProducts_no(rs.getString("products_no"));
 					dto.setProducts_tag(rs.getInt("products_tag"));
 					dto.setProducts_name(rs.getString("products_name"));
-					dto.setImg_no(rs.getInt("img_no"));
-					dto.setSystem_name(rs.getString("system_name"));
 					dto.setPrice(rs.getInt("price"));
+					dto.setImg_path(rs.getString("img_path"));
+					dto.setSystem_name(rs.getString("system_name"));
 					dto.setProducts_size(rs.getString("products_size"));
-					dto.setProducts_sub_name(rs.getString("products_sub_name"));
+				
 					list.add(dto);
 
 				} while (rs.next());
 			} // if
-		} catch (Exception e) {
-			System.out.println("BoxOrderDAO selectCoupon() error...");
-			e.printStackTrace();
+		
 		} finally {
 			JdbcUtil.close(pstmt);
 			JdbcUtil.close(rs);
