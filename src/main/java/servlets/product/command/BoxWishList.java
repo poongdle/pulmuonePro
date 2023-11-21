@@ -13,7 +13,7 @@ import servlets.product.domain.ProductsDTO;
 import servlets.product.service.AddService;
 import servlets.product.service.ListService;
 
-public class AddBoxList implements CommandHandler{
+public class BoxWishList implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
