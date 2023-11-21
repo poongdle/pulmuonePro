@@ -79,9 +79,10 @@ public class DAOImpl implements CurationDAO{
 	public List<KidsDTO> select(Connection con,  int num) throws SQLException {
 		String sql = "select  img_no,  products_name, products_tag, system_name, price, "
 				+ " products_size, products_sub_name "
-				+ "from  products_img pi join products p on p.products_no = pi.products_no "
-				+ "where img_no in ( ? ) "
-				+ "order by img_no desc"; 
+				+ " from  products_img pi join products p on p.products_no = pi.products_no "
+				+ " where products_tag in ( ? )"
+				+ " and origin_name like 'View%' "
+				+ "order by img_no asc"; 
 
 		ArrayList<KidsDTO> list = null;
 		PreparedStatement pstmt = null;
