@@ -10,6 +10,23 @@
 		<div id="container-wrapper" class="container-wrapper"> 		
  <script type="text/javascript">
 	$().ready(function() {
+		pkgIdx = "${param.pkgIdx}";
+		if(pkgIdx == 58){
+			$("#tasting-intro-tab2").addClass("active");
+			$("#tasting-tab2").addClass("active show");			
+		}else if(pkgIdx == 56){
+			$("#tasting-intro-tab3").addClass("active");
+			$("#tasting-tab3").addClass("active show");
+		}else if(pkgIdx == 54){
+			$("#tasting-intro-tab4").addClass("active");
+			$("#tasting-tab4").addClass("active show");
+		}else if(pkgIdx == 53){
+			$("#tasting-intro-tab5").addClass("active");
+			$("#tasting-tab5").addClass("active show");
+		}else{
+			$("#tasting-intro-tab1").addClass("active");
+			$("#tasting-tab1").addClass("active show");
+		}
 		
 		$("#myTab-area a").click(function (e) {
 			var href = $(this).attr("href");
@@ -53,7 +70,7 @@
 				<ul class="nav nav-tabs nav-justified" id="myTab-area" role="tablist">
 
 						<li class="nav-item" role="presentation">
-							<a href="/taste/taste.do?pkgIdx=229" class="nav-link active tabico_4" id="tasting-intro-tab1" data-target="#tasting-tab1" data-toggle="tab" role="tab" aria-controls="tasting-tab1" aria-selected="true">
+							<a href="/taste/taste.do?pkgIdx=229" class="nav-link  tabico_4" id="tasting-intro-tab1" data-target="#tasting-tab1" data-toggle="tab" role="tab" aria-controls="tasting-tab1" aria-selected="false">
 								<b>이달의녹즙</b>
 								<span>유기농 과채와 멀티비타민,
 미네랄로 하루 영양 채우기!</span>
@@ -61,28 +78,28 @@
 							<i></i>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a href="/taste/taste.do?pkgIdx=58" class="nav-link  tabico_3" id="tasting-intro-tab2" data-target="#tasting-tab2" data-toggle="tab" role="tab" aria-controls="tasting-tab2" aria-selected="true">
+							<a href="/taste/taste.do?pkgIdx=58" class="nav-link   tabico_3" id="tasting-intro-tab2" data-target="#tasting-tab2" data-toggle="tab" role="tab" aria-controls="tasting-tab2" aria-selected="false">
 								<b>융복합 녹즙</b>
 								<span> 900만병 판매! TV 속 융복합 건강기능식품</span>
 							</a>
 							<i></i>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a href="/taste/taste.do?pkgIdx=56" class="nav-link  tabico_4" id="tasting-intro-tab3" data-target="#tasting-tab3" data-toggle="tab" role="tab" aria-controls="tasting-tab3" aria-selected="true">
+							<a href="/taste/taste.do?pkgIdx=56" class="nav-link  tabico_4" id="tasting-intro-tab3" data-target="#tasting-tab3" data-toggle="tab" role="tab" aria-controls="tasting-tab3" aria-selected="false">
 								<b>BEST 녹즙</b>
 								<span>인기있는 BEST 녹즙을 한 번에 만나보고 싶으신</span>
 							</a>
 							<i></i>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a href="/taste/taste.do?pkgIdx=54" class="nav-link  tabico_2" id="tasting-intro-tab4" data-target="#tasting-tab4" data-toggle="tab" role="tab" aria-controls="tasting-tab4" aria-selected="true">
+							<a href="/taste/taste.do?pkgIdx=54" class="nav-link  tabico_2" id="tasting-intro-tab4" data-target="#tasting-tab4" data-toggle="tab" role="tab" aria-controls="tasting-tab4" aria-selected="false">
 								<b>건강한 한 끼</b>
 								<span>하루 한 병, 건강한 한 끼 식사 대용</span>
 							</a>
 							<i></i>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a href="/taste/taste.do?pkgIdx=53" class="nav-link  tabico_5" id="tasting-intro-tab5" data-target="#tasting-tab5" data-toggle="tab" role="tab" aria-controls="tasting-tab5" aria-selected="true">
+							<a href="/taste/taste.do?pkgIdx=53" class="nav-link  tabico_5" id="tasting-intro-tab5" data-target="#tasting-tab5" data-toggle="tab" role="tab" aria-controls="tasting-tab5" aria-selected="false">
 								<b>아이 사랑</b>
 								<span>어린이, 청소년들을 위한 녹즙을 만나보고 싶으신!</span>
 							</a>
@@ -91,7 +108,7 @@
 					
 				</ul>
 				<div class="tab-content" id="myTabContent">
-						<div class="tab-pane fade active show" role="tabpane" id="tasting-tab1" aria-labelledby="tasting-intro-tab1">
+						<div class="tab-pane fade " role="tabpane" id="tasting-tab1" aria-labelledby="tasting-intro-tab1">
 							<div class="prd-list">								
 								<div class="prd-area">
 									<button type="button" class="btn-preview" data-itemcode="0074095" data-product-preview="743" title="제품 상세페이지 팝업 열기">
