@@ -41,6 +41,10 @@ public class EventCoupon implements CommandHandler {
             }
 
             String coupon_no_str = request.getParameter("coupon_no");
+            if (coupon_no_str == null || coupon_no_str.equals("undefined")) {
+                response.getWriter().print("{\"message\":\"잘못된 요청입니다.\"}");
+                return null;
+            }
             int coupon_no = Integer.parseInt(coupon_no_str);
 
             // ConnectionProvider를 사용하여 Connection 객체 얻기
@@ -78,12 +82,11 @@ public class EventCoupon implements CommandHandler {
                     int result = eventCouponDAO.setCoupon(conn, haveCoupon);
 
                     if(result > 0) {
-                        // 쿠폰 발급 성공, 사용자에게 성공 메시지 반환
-                        response.getWriter().print("<script>alert('로그인 후 이용해주세요.'); location.href='/login';</script>");
+                    	response.getWriter().print("{\"message\":\"쿠폰이 발급되었습니다.\"}");
                     } else {
-                        // 쿠폰 발급 실패, 사용자에게 실패 메시지 반환
-                        response.getWriter().print("<script>alert('쿠폰이 등록되었습니다.'); location.href='/coupon';</script>");
+                        response.getWriter().print("{\"message\":\"쿠폰 발급에 실패하였습니다.\"}");
                     }
+
                     return null;
            
                 } else {
