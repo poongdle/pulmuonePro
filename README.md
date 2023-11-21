@@ -71,8 +71,15 @@
 <details>
 <summary>김정주</summary>
 <div markdown="1">
-이벤트: ...<br>
-쿠폰:..<br>
+<h4>🌴 이벤트</h4>
+🌟 이벤트 페이지 <br><br>
+  
+  - 진행중인이벤트 <br>
+  - 종료된이벤트<br>
+  - 당첨자발표<br>
+  - 친구초대<br>
+  - 회원혜택<br>
+
 </div>
 <hr>
 </details>
@@ -80,9 +87,23 @@
 <details>
 <summary>박민석</summary>
 <div markdown="1">
-메인: ...
-택배배송 상품:<br>
-매일배송 상품:<br>
+<h4>🌴 메인 페이지</h4>
+  
+<h4>🌴 택배배송/매일배송 페이지</h4>
+🌟 상품<br><br>
+
+  - 상품 조회
+  - 상품 검색
+  - 찜
+  - 상품 상세보기
+
+<h4>💻 MARKUP </h4>
+
+  - Header 상품 검색(기능X)
+  - 시음선물(주문X)
+  - 창업안내(글작성X)
+  - 리뷰페이지
+
 </div>
 <hr>
 </details>
@@ -133,7 +154,10 @@
   
 🌟<strong>배송가능지역</strong> <br>
   - 배송가능 지역 검색하기 <br><br>
-  
+
+<h4>💻 MARKUP </h4>
+
+- 제휴브랜드
 </div>
 <hr>
 </details>

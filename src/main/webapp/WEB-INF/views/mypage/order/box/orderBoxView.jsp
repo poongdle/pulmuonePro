@@ -99,7 +99,7 @@
 					%>
 						<li>
 							<div class="item-wrapper">
-								<a class="item" href="/product/box/672">
+								<a class="item" href="/product/box/view.do?tag=<%= prd.getProductsTag() %>">
 									<div class="thumb">
 										<img src="/<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt="">
 									</div>
@@ -167,7 +167,7 @@
 								</a>
 								
 								<div class="button-area">
-									<button class="btn-default btn-white" onclick="location.href='/forum/inquiry/write.do">1:1 문의</button><!-- 왜 안되지? -->
+									<button class="btn-default btn-white" onclick="location.href='/forum/inquiry/write.do'">1:1 문의</button><!-- 왜 안되지? -->
 					<%
 							switch (order.getBoxOrderStatus()) {
 								 case -1:
