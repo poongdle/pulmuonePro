@@ -18,10 +18,6 @@
 <script src="/resources/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/resources/assets/js/jquery.form.min.js"></script>
 
-<!--  2.1.4 로 버젼 다운 3.6.4 사용하는 인원 없으면 삭제 요망 -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
-
 <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/resources/assets/js/design.js"></script>
@@ -45,7 +41,7 @@ window.is_signed = false;
 </c:when>
 <c:otherwise>
 window.is_signed = true;
-window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderCode":"XQNGV"};
+window.kakaoSimpleData = {"memberId":"${ auth.getMemberId() }","name":"${auth.getName()}","recommenderCode":"XQNGV"};
 </c:otherwise>
 </c:choose>
 </script>

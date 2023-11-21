@@ -378,7 +378,7 @@
 								<form action="/daily/order/step1.do" method="GET">
 								<c:forEach var="dto" items="${list }">
 									<input type="hidden" name="item"
-										value='{"item":[{"itemCode":"${dto.products_no}","dayQty":[1,1,1,1,1]}]'>
+										value='{"item":[{"itemCode":"${dto.products_no}, ${dto.products_no }","dayQty":[1,1,1,1,1]}]'>
 								</c:forEach>
 								<button id="orderBtn" class="button-basic primary">주문하기</button>
 							</form>
