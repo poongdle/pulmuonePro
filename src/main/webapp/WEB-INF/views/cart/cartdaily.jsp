@@ -765,7 +765,6 @@ String cartId = session.getId();
 													
 													<a href="/product/daily/view.do?tag=${products_tag}&eventIdx="
 													class="prd-cart">
-													 <c:forEach var="dto" items="${tag }">
 															<div class="thumb">
 																<c:forEach var="dto" items="${list }">
 																	<img src="/file/download/product/${dto.system_name }" alt="">
@@ -780,7 +779,6 @@ String cartId = session.getId();
 																	<span>원</span>
 																</div>
 															</c:forEach>
-														</c:forEach>
 												</a>
 
 

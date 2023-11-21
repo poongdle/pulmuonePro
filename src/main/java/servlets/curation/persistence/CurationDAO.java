@@ -27,7 +27,7 @@ public interface CurationDAO {
 //   int cartadd(Connection con, int tag) throws SQLException;
 // 장바구니
    
-   int addcart (Connection con , int num) throws SQLException;
+   List<CurationDTO> addcart (Connection con , int num) throws SQLException;
   List<CurationDTO> dailyadd(Connection con,  CurationDTO dto) throws SQLException;
 //ArrayList<CurationDTO> addcart(Connection con, ArrayList<String> products_tag) throws SQLException;
 }

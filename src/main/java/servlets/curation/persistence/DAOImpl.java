@@ -320,7 +320,7 @@ public class DAOImpl implements CurationDAO{
 	
 	
 	@Override
-	public int addcart(Connection con, int num) throws SQLException {
+	public List<CurationDTO> addcart(Connection con, int num) throws SQLException {
 		PreparedStatement pstmt = null;		
 		ResultSet rs = null;
 		String sql = " select * from cart_daily ";
@@ -330,15 +330,13 @@ public class DAOImpl implements CurationDAO{
 //		System.out.println(sql);
 		List<CurationDTO> list = null;
 		rs = pstmt.executeQuery();	
-		int insertRow=0;
-		if( rs.next() ) {
-			sql = " DELETE FROM products_wish where products_tag = ? ";			
-		}else {			
-			sql = " INSERT INTO products_wish "
-					+ "select products_no, category_no, products_name, products_sub_name, products_type, content, price, event_price "
-					+ " , products_size, delivery_type, tag_no1, tag_no2, tag_no3, tag_no4, tag_no5, products_tag, reg_date, event_tag, event_tag2 "
-					+ " from products "
-					+ " WHERE products_tag = ? ";
+		if( rs.next() ) {			
+			sql ="select products_tag,  products_name, img_no, system_name, price, "
+					+ " products_size, products_sub_name "
+					+ " from  products_img pi join products p on p.products_no = pi.products_no "
+					+ " where products_tag in ? "
+					+ " and origin_name like 'View%' "
+					+ " order by img_no asc;";
 		}	
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -354,12 +352,15 @@ public class DAOImpl implements CurationDAO{
 				do {
 					dto = new CurationDTO();
 
+					dto.setProducts_tag(rs.getInt("products_tag"));
 					dto.setProducts_name(rs.getString("products_name"));
+					dto.setImg_no(rs.getInt("img_no"));
 					dto.setSystem_name(rs.getString("system_name"));
 					dto.setPrice(rs.getInt("price"));
-					dto.setProducts_tag(rs.getInt("product_tag"));
-					dto.setProducts_no(rs.getString("products_no"));
+					dto.setProducts_size(rs.getString("products_size"));
+					dto.setProducts_sub_name(rs.getString("products_sub_name"));
 					list.add(dto);
+					
 				} while (rs.next());
 			}
 
@@ -369,7 +370,7 @@ public class DAOImpl implements CurationDAO{
 			JdbcUtil.close(rs);         
 		}
 
-		return insertRow;
+		return list;
 	}
 	
 	
