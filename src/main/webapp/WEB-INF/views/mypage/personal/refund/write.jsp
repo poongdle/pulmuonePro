@@ -143,7 +143,7 @@
 		              <dd>
 		              	<input type="hidden" value="${ acctNum }">
 <%-- 		              	<input type="hidden" value="<%= request.getParameter("acctNum") %>"> --%>
-		                <input value="${ acctNum }" class="numberOnly" type="number" name="bankAccount" id="bankAccount">
+		                <input value="<%= request.getParameter("acctNum") %>" class="numberOnly" type="number" name="bankAccount" id="bankAccount">
 		                <button type="button" id="verify" class="btn-square btn-black">계좌인증</button>
 		              </dd>
 		            </dl>
@@ -257,6 +257,7 @@
           return alert('개인정보 수집 이용약관에 동의해주세요')
         }
         if (<%= request.getParameter("acctNum") %> != null) {
+        	alert( "환불계좌가 정상적으로 수정되었습니다.");
 //           post({url: '/mypage/personal/refund/1601', param: $.param(data)},
 //                   function (r) {
 //                     if (r.RESULT_MSG) {
@@ -269,38 +270,30 @@
         } else {
 			var ajaxStatus = false;
 		    var params = null;
+		    alert( "환불계좌가 정상적으로 등록되었습니다.");
 		    params = $("#accountForm").serialize();
 // 		    params = $("#accountForm").serialize();
-			$.ajax({
-				url:"/member/refund/writeRefundAcct.ajax" , 
-				dataType:"json",
-				type:"POST",
-				data: params,
-				cache:false ,
-				success: function ( data,  textStatus, jqXHR ){
-					if( data.rowCount == "1" ) {
-						ajaxStatus = true;
-		 				alert( "환불계좌가 정상적으로 등록되었습니다.", ()=>{location.href='/mypage/personal/refund.do'});
+// 			$.ajax({
+// 				url:"/member/refund/writeRefundAcct.ajax" , 
+// 				dataType:"json",
+// 				type:"POST",
+// 				data: params,
+// 				cache:false ,
+// 				success: function ( data,  textStatus, jqXHR ){
+// 					if( data.rowCount == "1" ) {
+// 						ajaxStatus = true;
+// 		 				alert( "환불계좌가 정상적으로 등록되었습니다.", ()=>{location.href='/mypage/personal/refund.do'});
 
-					} else {  
-						alert("잘못된 요청입니다.");
-					}
+// 					} else {  
+// 						alert("잘못된 요청입니다.");
+// 					}
 				 
-				},
-				error:function (){
-				 alert("에러~~~ ");
-				}
-			});
+// 				},
+// 				error:function (){
+// 				 alert("에러~~~ ");
+// 				}
+// 			});
         	
-        	
-        	
-//           post({url: '/mypage/personal/refund', param: $.param(data)}, function (r) {
-//             if (r.RESULT_MSG) {
-//               alert('환불계좌가 정상적으로 등록되었습니다.', () => location.href = '/mypage/personal/refund.do')
-//             } else {
-//               return alert('잘못된 요청입니다.')
-//             }
-//           })
         }
       }
     })
