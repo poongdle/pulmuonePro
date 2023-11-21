@@ -24,7 +24,12 @@ public class AddWishList implements CommandHandler{
 		int tag = Integer.parseInt(request.getParameter("tag"));
 		HttpSession session = request.getSession(false);
 		AuthInfo auth = (AuthInfo) session.getAttribute("auth");
-		String user_id = auth.getMemberId();
+		String user_id = null;
+		if(auth == null) {
+			user_id = null;
+		}else {
+			user_id = auth.getMemberId();												
+		}
 		int insertRow = 0;		
 		insertRow = addService.wishadd(user_id,tag);
 		
