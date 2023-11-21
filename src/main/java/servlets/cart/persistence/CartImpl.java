@@ -127,7 +127,7 @@ public class CartImpl implements CartDAO{
 		PreparedStatement pstmt = null;		
 		ResultSet rs = null;
 		ArrayList<CartDTO> list = null;
-
+		CartDTO dto = null;
 
 		try {
 			System.out.println(sql);
