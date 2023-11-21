@@ -36,8 +36,13 @@ public interface IProducts {
 	   int wishadd(Connection con, String user_id, int tag) throws SQLException;
 	   
 	   // MyPage 찜한 상품 목록 
-	   List<ProductsDTO> selectwish(Connection con) throws SQLException;
+	   List<ProductsDTO> selectwish(Connection con, String user_id) throws SQLException;
 	   
 	   // MyPage 찜한 상품 삭제
 	   int wishdelete(Connection con,String user_id, String idx, String tag) throws SQLException;
+	   
+	   // MyPage 리뷰 상품 목록
+	   List<ProductsDTO> selectreview(Connection con, int memberNo) throws SQLException;
+	   List<ProductsDTO> selectmyreview(Connection con, int memberNo) throws SQLException;
+	   
 }

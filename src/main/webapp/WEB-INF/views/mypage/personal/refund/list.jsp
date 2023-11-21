@@ -83,6 +83,7 @@
 			</div> <!-- container aside-layout main -->
 
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
+		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 
  	</div> <!-- wrapper -->
  	
