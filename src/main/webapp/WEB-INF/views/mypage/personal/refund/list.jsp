@@ -98,20 +98,34 @@
 </script>
 
 <script type="text/javascript">
-//     $().ready(
-//         function () {
-// 				$('#delete').click(function (){
-// 					confirmDesign("", "환불계좌를 삭제하시겠습니까?",function(){
-// 						post({url:'/mypage/personal/refund/delete/1503'},function (r){
-// 							if(r.RESULT_MSG){
-// 								alert('삭제되었습니다.',()=>location.reload())
-// 							}else {
-// 								return alert('잘못된 요청입니다.',()=>location.reload())
-// 							}
-// 						})
-// 					})
-// 				})
-//         })
+    $().ready(
+        function () {
+				$('#delete').click(function (){
+					confirmDesign("", "환불계좌를 삭제하시겠습니까?",function(){
+						var params = null;
+						$.ajax({
+							url:"/member/refund/deleteRefundAcct.ajax" , 
+							dataType:"json",
+							type:"POST",
+							data: params,
+							cache:false ,
+							success: function ( data,  textStatus, jqXHR ){
+								if( data.rowCount == "1" ) {
+									ajaxStatus = true;
+					 				alert( "삭제되었습니다.", ()=>location.reload());
+
+								} else {  
+									alert("잘못된 요청입니다.",()=>location.reload());
+								}
+							 
+							},
+							error:function (){
+							 alert("에러~~~ ");
+							}
+						});
+					})
+				})
+        })
 </script>
 
 

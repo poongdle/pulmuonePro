@@ -70,24 +70,19 @@ public class CartImpl implements CartDAO{
 
 	@Override
 
-	public ArrayList<CartDTO> cartList(Connection con, ArrayList<String> products_no) throws SQLException {
+	public ArrayList<CartDTO> cartList(Connection con, String products_no) throws SQLException {
 		/*
 		 * String sql =
 		 * "  select  products_name, products_tag, system_name, price, products_size , p.products_no "
 		 * + "from  products_img pi join products p on p.products_no = pi.products_no "
 		 * + "where p.products_no in ? " + "order by products_no desc";
-		 */
-		
-		Iterator<String> ir = products_no.iterator();
+		 */				
 		
 		String sql = " SELECT DISTINCT p.products_no,products_tag, products_name, price, products_size, img_path, system_name "
 				+ " FROM products p LEFT JOIN products_img i ON p.products_no = i.products_no "
-				+ " WHERE p.products_no IN( ";
-				while (ir.hasNext()) {
-					String prd = (String) ir.next();
-					sql += prd+",";
-				} // while
-				sql += " -1 )  AND origin_name != 'View.png'";
+		        + " WHERE p.products_no in ('0073156')";
+//				sql += String.format(" WHERE p.products_no in (%s) ", products_no);
+				sql += " AND origin_name != 'View.png'";
 
 		
 		PreparedStatement pstmt = null;		
@@ -107,7 +102,7 @@ public class CartImpl implements CartDAO{
 					dto = new CartDTO();
 
 					dto.setProducts_no(rs.getString("products_no"));
-					dto.setProducts_tag(rs.getInt("products_tag"));
+					dto.setProducts_tag(rs.getShort("products_tag"));
 					dto.setProducts_name(rs.getString("products_name"));
 					dto.setPrice(rs.getInt("price"));
 					dto.setImg_path(rs.getString("img_path"));

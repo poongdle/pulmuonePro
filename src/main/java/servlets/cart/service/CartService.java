@@ -46,7 +46,7 @@ public class CartService {
 		}
 
 
-		public ArrayList<CartDTO> cartList(ArrayList<String> products_no){
+		public ArrayList<CartDTO> cartList(String products_no){
 
 			Connection con = null;
 			try {
