@@ -41,9 +41,9 @@
 <script>
 $(document).ready(function() {
     $("#content-editor-area > a").click(function(e) {
-        e.preventDefault();  // 기본적인 링크 클릭 동작을 막습니다.
+        e.preventDefault();
 
-        var couponLink = $(this).attr('href');  // 쿠폰 링크를 가져옵니다.
+        var couponLink = $(this).attr('href');
 
         $.ajax({
             url: couponLink,
@@ -52,8 +52,8 @@ $(document).ready(function() {
                 console.log('AJAX 요청을 시작합니다.');
             },
             success: function(response) {
-                // 서버로부터 응답을 받았을 때 실행되는 코드입니다.
-                var message = response.message;  // 응답에서 메시지를 가져옵니다.
+               
+                var message = response.message;
 
                 // 모달 창에 메시지를 표시하고, 모달 창을 보이게 합니다.
                 $('#alertModal .modal-body').text(message);
