@@ -188,7 +188,7 @@
  	
 <script type="text/javascript">
 
-	let timer;
+
 	window.prompt = function (message, callback, okBtnText) {
 		$("#customModalLabel").html("");
 //  	$("#customModal .modal-body").html(message);

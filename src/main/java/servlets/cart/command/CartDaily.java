@@ -29,7 +29,7 @@ public class CartDaily implements CommandHandler{
 			itemCodeList = String.join(", ",itemCodeLists);
 		}
 		System.out.println(itemCodeList);      
-      	
+
 		CartService cartService = CartService.getInstance();
 		ArrayList<CartDTO> list = cartService.cartList(itemCodeList);
 

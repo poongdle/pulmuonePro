@@ -6,15 +6,14 @@ import javax.servlet.http.HttpSession;
 
 import auth.AuthInfo;
 import mvc.command.CommandHandler;
-import servlets.member.service.MemberService;
 import servlets.refund.dto.RefundDTO;
 import servlets.refund.service.RefundService;
 
-public class WriteRefundAcct implements CommandHandler {
+public class DeleteRefundAcct implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("WriteRefundAcct.java : 환불계좌 등록 ajax 처리");
+		System.out.println("DeleteRefundAcct.java : 환불계좌 삭제 ajax 처리");
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -23,20 +22,11 @@ public class WriteRefundAcct implements CommandHandler {
 		AuthInfo auth = (AuthInfo) session.getAttribute("auth");		
 		
 		int memberNo = auth.getMemberNo();
-		String insttCode = request.getParameter("insttCode");
-		String acctOwner = request.getParameter("accountHolder");
-		String acctNum = request.getParameter("bankAccount");
 		
 		int rowCount = 0;
-		RefundDTO dto = RefundDTO.builder().memberNo(memberNo)
-											.insttCode(insttCode)
-											.acctOwner(acctOwner)
-											.acctNum(acctNum)
-											.build();
-		
+
 		RefundService refundService = new RefundService();
-		
-		rowCount = refundService.writeRefundAcct(dto);
+		rowCount = refundService.deleteRefundAcct(memberNo);
 		
 		
 		String jsonResult = String.format("{ \"rowCount\": %d }", rowCount);
