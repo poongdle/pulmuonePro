@@ -184,8 +184,7 @@
 											<i class="ico ico-personal-03"></i>
 										</div> <span>배송일정변경</span>
 								</a></li>
-								<li class="item"><a href="/mypage/action/interest"
-									data-require-login="">
+								<li class="item"><a href="/mypage/action/interest/list.do" data-require-login="">
 										<div class="cover">
 											<i class="ico ico-personal-04"></i>
 										</div> <span>찜한상품</span>
