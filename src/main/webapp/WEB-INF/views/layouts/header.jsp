@@ -73,7 +73,7 @@
                <i class="ico ico-myIcon"></i>
                <span class="hide">로그인 페이지 / 마이 페이지로 가기</span>
             </a>
-             <a href="/cart/daily/cartdaily.do">
+             <a href="/cart/daily.do">
                <div class="counter hide" data-cart-size=""></div> <i class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
             </a>
          </div>
