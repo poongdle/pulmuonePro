@@ -19,7 +19,12 @@ public class WishList implements CommandHandler{
 		System.out.println(">WishList.process ");
 		HttpSession session = request.getSession(false);
 		AuthInfo auth = (AuthInfo) session.getAttribute("auth");
-		String user_id = auth.getMemberId();
+		String user_id = null;
+		if(auth == null) {
+			user_id = null;
+		}else {
+			user_id = auth.getMemberId();												
+		}
 		ListService listService = ListService.getInstance();				
 		List<ProductsDTO> wishlist = listService.selectwish(user_id);
 		request.setAttribute("wishlist", wishlist);
