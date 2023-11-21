@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import servlets.coupon.domain.HaveCouponDTO;
 import servlets.mypage.dto.BoxOrderListDTO;
 import servlets.mypage.dto.BoxOrderSimpleInfoDTO;
 import servlets.order.domain.BoxPayDTO;
