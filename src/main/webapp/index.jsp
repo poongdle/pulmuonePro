@@ -661,7 +661,10 @@
 				</div>
 			</div>
 		</main>
+		
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
+		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
+		
 		<div class="modal fade" id="alertModal" tabindex="-1"
 			aria-labelledby="alertModalLabel" style="display: none;"
 			aria-hidden="true">
