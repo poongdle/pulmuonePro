@@ -3,14 +3,14 @@ package servlets.mypage.service;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Map;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
+import servlets.event.domain.HaveCouponDTO;
+import servlets.mypage.dao.MypageDAO;
 import servlets.mypage.dao.MypageDAOImpl;
 import servlets.mypage.dto.BoxOrderListDTO;
 import servlets.mypage.dto.BoxOrderSimpleInfoDTO;
-import servlets.order.domain.BoxOrderDTO;
 import servlets.order.domain.BoxPayDTO;
 import servlets.order.domain.BoxShipDTO;
 import servlets.order.domain.OrderCouponDTO;
@@ -208,6 +208,5 @@ public class MypageService {
 		} // try
 		return list;
 	} // selectUsedCoupon()
-	
 
 }

@@ -8,10 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
+import jdbc.connection.ConnectionProvider;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import servlets.event.domain.HaveCouponDTO;
 import servlets.mypage.dto.BoxOrderListDTO;
 import servlets.mypage.dto.BoxOrderSimpleInfoDTO;
 import servlets.order.domain.BoxOrderProductDTO;
@@ -449,7 +451,53 @@ public class MypageDAOImpl implements MypageDAO {
 	
 	
 	// 3. 시음선물 관련
-	
+	@Override
+    public ArrayList<HaveCouponDTO> selectCoupon(int memberNo) {
+        ArrayList<HaveCouponDTO> coupons = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "SELECT * FROM haveCoupon WHERE member_no = ?";
+
+            conn = ConnectionProvider.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, memberNo);
+            rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+                HaveCouponDTO coupon = new HaveCouponDTO();
+                coupon.setCoupon_no(rs.getInt("coupon_no"));
+                coupon.setMember_no(rs.getInt("member_no"));
+                coupon.setIssue_date(rs.getDate("issue_date"));
+                coupon.setExpiry_date(rs.getDate("expiry_date"));
+                coupon.setUsed(rs.getInt("used"));
+                coupon.setBox_pay_no(rs.getInt("box_pay_no"));
+                coupon.setDrk_pay_no(rs.getInt("drk_pay_no"));
+                coupons.add(coupon);
+            }
+        } catch (Exception e) {
+            System.out.println("MypageDAOImpl.getCouponsByMemberNo() error...");
+            e.printStackTrace();
+        } finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return coupons;
+    }
 	
 	// 4. 쿠폰 관련
 				
