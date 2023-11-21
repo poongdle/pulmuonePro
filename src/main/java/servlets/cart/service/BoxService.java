@@ -29,41 +29,5 @@ public class BoxService {
 	      return instance;
 	   }
 
-		public int dailyadd(CartDTO dto){
-			Connection con =  null;
-			try {	
-				con = ConnectionProvider.getConnection();
-				CartImpl dao = CartImpl.getInstance();
-				int rowcount = dao.dailyadd(con, dto);
-				return rowcount;
-				
-		     } catch (NamingException | SQLException e) { 
-		         //e.printStackTrace();  syso("ListService.select() 에러 : ")
-		         throw new RuntimeException(e);
-		      } finally {
-		         JdbcUtil.close(con);
-		      }
-		}
-
-
-		public ArrayList<CartDTO> cartList(ArrayList<String> products_no){
-
-			Connection con = null;
-			try {
-				con = ConnectionProvider.getConnection();
-				CartImpl dao = CartImpl.getInstance();
-				ArrayList<CartDTO> list = null;
-
-				list = dao.cartList(con, products_no);
-
-				return list;
-			}catch (Exception e) {
-					System.out.println("CartService 에러");
-					e.printStackTrace();
-					throw new RuntimeException(e);
-				} finally {
-					JdbcUtil.close(con);
-				} // try
-		}
 		
 }//class
