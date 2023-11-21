@@ -615,24 +615,7 @@
             		</form>
             		
             		<div style="margin-bottom:1px; overflow-y: scroll;height: 480px;">
-<<<<<<< HEAD
                 		<ul class="product-content-list add-popup" id="add-product-targets"></ul>
-=======
-                		<ul class="product-content-list add-popup" id="add-product-targets">
-                			<li class="product-add" style="cursor:pointer;" data-available="null" data-addproduct="0071654">
-    							<div class="thumb">
-    								<img src="/file/download/product/f1dfce0b-663c-4486-a7a3-188f199ba502.jpg" onerror="this.src='/resources/assets/images/common/no_img.png'" alt="">
-    							</div>
-    							<div class="contents">
-        							<p class="name">위러브플러스<span>(130ml)</span></p>
-        							<div class="info">
-            							<span class="price"><b>2,900</b> 원</span>
-        							</div>
-    							</div>
-							</li>
-						</ul>
-						
->>>>>>> branch 'develop' of https://github.com/poongdle/pulmuonePro.git
 		                <div style="padding: 0px 20px 20px">
 		                    <button id="add-product-more" style="width: 100%" class="btn-default btn-white">더보기</button>
 		                </div>
@@ -654,7 +637,6 @@
 					, cache: false
 					, type:"GET"
 					, data: { pageNo: pageNo }
-					, async: false
 					, success: function(response){
 						const a = response.prdArr;
 						var tpl = null;
@@ -678,10 +660,9 @@
 				        
 				        root.find("#addProductModalLabel").on("click", function () {
 							$('#addressModal').modal('hide');
-							alert("test");
 						});
 				        
-				        var hasNext = a[0].totalCount > $('#addProductModal').find('.item').length;
+				        var hasNext = a[0].totalCount > $('#addProductModal').find('.product-add').length;
 				        if (hasNext) {
 				        	root.next().show().click(function () {
 				        		showPrds(pageNo + 1);
@@ -711,12 +692,11 @@
 		function showAddress(pageNo) {
 			$('#addressModal').addClass("loading");
 			$.ajax({
-					url: '/order/addressBook.ajax'
+					url: '/order/addressBook.do'
 					, dataType: "json"
 					, cache: false
 					, type:"GET"
 					, data: { pageNo: pageNo }
-					, async: false
 					, success: function(response){
 						const a = response.addrArr;
 						if (a.length > 0) {

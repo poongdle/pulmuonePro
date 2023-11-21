@@ -11,11 +11,12 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%
+
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	String sql = " SELECT p.products_no, products_name, products_size, price, img_path, system_name "
+	String sql = " SELECT p.products_no, products_name, products_size, price, img_path, system_name, COUNT(p.products_no) OVER() total_count "
 				+ " FROM products p LEFT JOIN products_img i ON p.products_no = i.products_no "
 	            	+ " JOIN products_pct c ON p.category_no = c.category_no "
 	            + " WHERE c.category_no IN (1, 4, 31, 60, 62, 64) AND origin_name != 'View.png' "
@@ -32,7 +33,7 @@
 		JSONObject jsonObj = new JSONObject();
 	
 		String productsNo, productsName, produtsSize, imgPath, systemName;
-		int price;
+		int price, totalCount;
 		
 		while (rs.next()) {
 			productsNo = rs.getString("products_no");
@@ -41,6 +42,7 @@
 			price = rs.getInt("price");
 			imgPath = rs.getString("img_path");
 			systemName = rs.getString("system_name");
+			totalCount = rs.getInt("total_count");
 	
 			jsonObj.put("productsNo", productsNo);
 			jsonObj.put("productsName", productsName);
@@ -48,6 +50,7 @@
 			jsonObj.put("price", price);
 			jsonObj.put("imgPath", imgPath);
 			jsonObj.put("systemName", systemName);
+			jsonObj.put("totalCount", totalCount);
 			
 			jsonPrd.add(jsonObj);
 		} // while

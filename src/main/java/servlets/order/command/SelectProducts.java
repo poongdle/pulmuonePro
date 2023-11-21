@@ -12,7 +12,7 @@ public class SelectProducts implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("> SelectProducts.process..");
-		return "/WEB-INF/views/order/SelectProducts.jsp";
+		return "/WEB-INF/views/order/selectProducts.jsp";
 	} // process()
 
 }
