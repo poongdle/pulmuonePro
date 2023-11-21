@@ -382,9 +382,28 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public int delete(MemberDTO dto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(int memberNo) throws SQLException {
+		int rowCount = 0;
+
+		String sql = "DELETE FROM member "
+					+ "WHERE member_no = ? ";
+		PreparedStatement pstmt = null;
+
+		try {
+			pstmt = this.conn.prepareStatement(sql);
+
+			pstmt.setInt(1, memberNo);
+
+			rowCount = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("MemberDAOImpl_delete : Exception");
+			e.printStackTrace();
+		} finally {
+			pstmt.close();
+		}
+
+		return rowCount;
 	}
 
 

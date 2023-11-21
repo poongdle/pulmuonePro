@@ -82,39 +82,6 @@
 			</div>
 			<div class="container aside-layout" style="padding-bottom: 120px;">
 				<%@ include file="/WEB-INF/views/layouts/mypage/aside.jsp"%>
-				<script>
-  $(document).on("click", "#mypage_lnb .indepth>a", function (e) {
-    var parent = $(this).parents("li");
-    if (parent.hasClass("active")) {
-      parent.removeClass("active");
-    } else {
-      parent.addClass("active");
-    }
-    e.preventDefault();
-    return false;
-  });
-  $(document).ready(function () {
-    var item = undefined;
-    $("#mypage_lnb .sub-navigation a").each(function (ix, elem) {
-      var el = $(elem);
-      if (location.pathname.startsWith(el.attr("href")) && !item) {
-        item = el;
-      }
-    })
-    if (!item) {
-      $("#mypage_lnb .lnb-style>li>a").each(function (ix, elem) {
-        var el = $(elem);
-        if (el.attr("href") && location.pathname.startsWith(el.attr("href")) && !item) {
-          item = el;
-        }
-      })
-    }
-    if (item) {
-      item.parents("li").addClass("active");
-      item.parents(".indepth").addClass("active");
-    }
-  })
-</script>
 				<div class="container">
 					<div class="border-wrapper">
 						<h2 class="container-title">찜한 상품</h2>
@@ -161,7 +128,6 @@
 												</div>
 											</a>
 										</div>
-
 										<button type="button" data-idx="${dto.idx }" data-tag="${dto.products_tag}"
 											class="btn-delete">
 											<i class="ico ico-prd-delete"></i> <span class="hide">카트에서
@@ -193,21 +159,5 @@
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/ui/modal.jsp"%>
-	<script>
-	
-	let currentCate = `${param.category}`;
-	if( ${param.category == null || param.category == ""} ) currentCate = "전체";  
-	$(".inquiry-cate-select .dropdown-toggle").text(currentCate);
-	$(".inquiry-cate-select .dropdown-item").on("click", function(){
-		let val = $(this).data("value");
-		if( val != "" ) {
-			location.href = `/mypage/inquiry/list.do?category=\${ val }`;		
-		}else {
-			location.href = "/mypage/inquiry/list.do";
-			
-		}
-	})
-</script>
-
 </body>
 </html>

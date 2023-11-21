@@ -139,7 +139,7 @@
 												<img src="/<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt="">
 											</div>
 										<div class="contents">
-											<a href="/product/box/<%= prd.getProductsNo() %>" class="prd-info">
+											<a href="/product/box/view.do?tag=<%= prd.getProductsTag() %>" class="prd-info">
 												<div class="product">
 													<label class="category"><%= prd.getProductsType() %></label>
 													<div style="display:flex;justify-content: space-between">
@@ -177,7 +177,7 @@
 											</div>
 										</div>
 											<div class="button-area">
-												<button class="btn-default btn-white" onclick="location.href='/forum/inquiry/write.do">1:1 문의</button><!-- 왜 안되지? -->
+												<button class="btn-default btn-white" onclick="location.href='/forum/inquiry/write.do'">1:1 문의</button><!-- 왜 안되지? -->												
 												<%
 													switch (orderStatus) {
 												        case -1:
@@ -225,14 +225,7 @@
 					</div>
 				</div>
 			</div>
-
-			<div style="" id="mini-side-nav">
-				<a href="/mypage/drink/drink"><img src="/resources/assets/images/ui/quick1.png" alt=""></a>
-				<a id="quickChangeDrink" href="/mypage/drink/drink/change/230000234094/23812"><img src="/resources/assets/images/ui/quick2.png" alt=""></a>
-				<a id="quickChangeSchedule" href="/mypage/drink/drink/pause/230000234094/23812"><img src="/resources/assets/images/ui/quick3.png" alt=""></a>
-				<a href="/mypage/drink/bill"><img src="/resources/assets/images/ui/quick4.png" alt=""></a>
-				<a href="#"><img src="/resources/assets/images/ui/quickTop.png" alt=""></a>
-			</div>
+	
 		
 		</div>
 	
@@ -286,103 +279,6 @@
 		</div>
 	</div>
 </div>
-
-<script>
-  $(document).on("click", "#mypage_lnb .indepth>a", function (e) {
-    var parent = $(this).parents("li");
-    if (parent.hasClass("active")) {
-      parent.removeClass("active");
-    } else {
-      parent.addClass("active");
-    }
-    e.preventDefault();
-    return false;
-  });
-  $(document).ready(function () {
-    var item = undefined;
-    $("#mypage_lnb .sub-navigation a").each(function (ix, elem) {
-      var el = $(elem);
-      if (location.pathname.startsWith(el.attr("href")) && !item) {
-        item = el;
-      }
-    })
-    if (!item) {
-      $("#mypage_lnb .lnb-style>li>a").each(function (ix, elem) {
-        var el = $(elem);
-        if (el.attr("href") && location.pathname.startsWith(el.attr("href")) && !item) {
-          item = el;
-        }
-      })
-    }
-    if (item) {
-      item.parents("li").addClass("active");
-      item.parents(".indepth").addClass("active");
-    }
-  })
-</script>
-
-<script>
-  var windowRef = null;
-  function openWindowPop(url, name){
-    var image = document.getElementById('guideImage');
-    var w = image.width;
-    var h = image.height;
-    var options = `width=${w},height=${h}, status=no, menubar=no, toolbar=no, resizable=no`;
-	if(windowRef===null|| windowRef.closed){
-
-    windowRef = window.open('', name, options);
-    windowRef.document.write(`<img src="${url}" width="${w}" maxWidth=100vw />`);
-    windowRef.document.body.style.margin=0;
-	}else {
-    windowRef.focus();
-	}
-
-  }
-  $(function(){
-
-    axios.get('/user_summary/default').then(function (response) {
-
-      const {info, customerVo} = response.data.RESULT_MSG;
-
-		const ec = ( !info.overEnd) && (info.complex||info.hasHp) && customerVo.phiCustomerVo.intfacId == '0' && customerVo.phiCustomerVo.dlvyCustYn==='Y'
-        if(ec&&customerVo){
-          $('#quickChangeDrink').attr('href', `/mypage/drink/drink/change/${customerVo.custnumber}/${customerVo.prtnId}`)
-          $('#quickChangeSchedule').attr('href', `/mypage/drink/drink/pause/${customerVo.custnumber}/${customerVo.prtnId}`)
-        }else {
-          $('#quickChangeDrink').attr('href', `/mypage?with=01`)
-          $('#quickChangeSchedule').attr('href', `/mypage?with=01`)
-        }
-        console.log(window.innerWidth)
-        if(window.innerWidth>1450){
-          $('#mini-side-nav').show();
-        }
-    }).catch(function (error) {
-      if(window.innerWidth>1450) {
-        $('#mini-side-nav').show()
-      }
-	});
-    window.addEventListener('resize', function(){
-	  if(window.innerWidth>1450){
-		$('#mini-side-nav').show();
-	  }else {
-		$('#mini-side-nav').hide();
-	  }
-	})
-  })
-</script>
-
-<script type="text/javascript">
-	$(document).ready(function () {
-        $(".visual-area").fddCarousel({ auto: 5000 });
-		$(".event-area").fddCarousel({ auto: 5000, activeClick: true });
-		$('.prd-list.owl-carousel').owlCarousel({
-            items: 4,
-            nav: true,
-		  loop:false
-		});		
-	});	
-</script>
-
 <script>
   	$(function () {
 		let searchMonth = '';

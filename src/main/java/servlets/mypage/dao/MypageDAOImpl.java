@@ -155,7 +155,7 @@ public class MypageDAOImpl implements MypageDAO {
 				+ " WHERE member_no = ? AND box_order_date BETWEEN ? AND ? "
 				+ " ORDER BY box_order_date DESC ";
 		
-		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, system_name, tracking_no "
+		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, system_name, tracking_no,products_tag "
 				+ " FROM box_order_products o JOIN products p ON o.products_no = p.products_no "
 										+ " JOIN products_img i ON p.products_no = i.products_no "
 										+ " JOIN box_ship s ON o.box_order_no = s.box_order_no "
@@ -204,6 +204,7 @@ public class MypageDAOImpl implements MypageDAO {
 							pdto.setImgPath(rs2.getString("img_path"));
 							pdto.setOriginName(rs2.getString("system_name"));
 							pdto.setTrackingNo(rs2.getString("tracking_no"));
+							pdto.setProductsTag(rs2.getString("products_tag"));
 							list2.add(pdto);
 						} while (rs2.next());
 					} // if
@@ -235,7 +236,7 @@ public class MypageDAOImpl implements MypageDAO {
 				+ " FROM box_order "
 				+ " WHERE box_order_no = ? ";
 		
-		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, system_name, tracking_no "
+		String sql2 = " SELECT DISTINCT p.products_no, products_type, products_name, products_size, products_cnt, price, event_price, img_path, system_name, tracking_no, products_tag "
 				+ " FROM box_order_products o JOIN products p ON o.products_no = p.products_no "
 										+ " JOIN products_img i ON p.products_no = i.products_no "
 										+ " JOIN box_ship s ON o.box_order_no = s.box_order_no "
@@ -279,6 +280,7 @@ public class MypageDAOImpl implements MypageDAO {
 						pdto.setImgPath(rs2.getString("img_path"));
 						pdto.setOriginName(rs2.getString("system_name"));
 						pdto.setTrackingNo(rs2.getString("tracking_no"));
+						pdto.setProductsTag(rs2.getString("products_tag"));
 						list2.add(pdto);
 					} while (rs2.next());
 					odto.setProductList(list2);

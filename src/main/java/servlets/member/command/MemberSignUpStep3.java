@@ -34,8 +34,8 @@ public class MemberSignUpStep3 implements CommandHandler {
 			String memberId = request.getParameter("memberId");
 			String pwd = request.getParameter("memberPwd");
 			String email = request.getParameter("email");
-			int adApproval = ( request.getParameter("agree3").equals("Y") ? 1 : 0 );
-			int marketingApproval = ( request.getParameter("agree4").equals("Y") ? 1 : 0 );
+			int adApproval = ( request.getParameter("agree3") != null ? 1 : 0 );
+			int marketingApproval = ( request.getParameter("agree4") != null ? 1 : 0 );
 			
 			
 			request.setAttribute("name", name);

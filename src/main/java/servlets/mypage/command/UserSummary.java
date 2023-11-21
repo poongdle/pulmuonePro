@@ -1,6 +1,7 @@
 package servlets.mypage.command;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,8 +9,11 @@ import javax.servlet.http.HttpSession;
 
 import auth.AuthInfo;
 import mvc.command.CommandHandler;
+import servlets.inquiry.service.InquiryListService;
 import servlets.mypage.dto.BoxOrderSimpleInfoDTO;
 import servlets.mypage.service.MypageService;
+import servlets.product.domain.ProductsDTO;
+import servlets.product.service.ListService;
 
 public class UserSummary implements CommandHandler {
 
@@ -20,8 +24,7 @@ public class UserSummary implements CommandHandler {
 		// > 회원 정보 가져오기
 		HttpSession session = request.getSession(false);
 		AuthInfo member = (AuthInfo) session.getAttribute("auth");
-		int memberNo = member.getMemberNo();
-		
+		int memberNo = member.getMemberNo();		
 		// > service 객체 생성
 		MypageService service = new MypageService();
 		
@@ -53,10 +56,17 @@ public class UserSummary implements CommandHandler {
 		
 		
 		// 5. 리뷰 관련
-		
+		ListService listService = ListService.getInstance();
+		List<ProductsDTO> reviewlist = listService.selectreview(memberNo);
+		request.setAttribute("reviewlist", reviewlist);
 		
 		// 6. 1:1 문의 관련
-		
+		String user_id = member.getMemberId();		
+		int totalCount = 0;
+		String category = "all";
+		InquiryListService inquiryListService = new InquiryListService();
+		totalCount = inquiryListService.selectCount(user_id, category);
+		request.setAttribute("totalCount", totalCount);
 		
 		
 		return "/WEB-INF/views/mypage/userSummary.jsp";

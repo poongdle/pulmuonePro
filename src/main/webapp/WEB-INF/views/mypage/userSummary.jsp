@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="/WEB-INF/views/layouts/head.jsp" %>
@@ -53,13 +54,13 @@
 							<li>
 								<a href="/mypage/action/review.do" class="item">
 									<label>리뷰</label>
-									<span>5</span>
+									<span>${fn:length(reviewlist) }</span>
 								</a>
 							</li>
 							<li>
 								<a href="/mypage/inquiry/list.do" class="item">
 									<label>1:1 문의</label>
-									<span style="border-bottom: none;color: #999">0</span>
+									<span style="border-bottom: none;color: #999">${ totalCount }</span>
 								</a>
 							</li>
 						</ul>
@@ -213,7 +214,7 @@
 			</div> <!-- container aside-layout main -->
 
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
-
+		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
  	</div> <!-- wrapper -->
 <script>
 	$(function () {

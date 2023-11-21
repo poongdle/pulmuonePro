@@ -27,7 +27,7 @@ public interface MemberDAO {
 	int updatePwd(int memberNo, String newPwd) throws SQLException;
 
 	// 3. 회원 탈퇴
-	int delete(MemberDTO dto) throws SQLException;
+	int delete(int memberNo) throws SQLException;
 
 
 

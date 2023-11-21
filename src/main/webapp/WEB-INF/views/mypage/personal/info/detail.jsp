@@ -21,7 +21,7 @@
 		</div>
 		<div class="container aside-layout main" style="padding-bottom:100px; ">
 			<%@ include file="/WEB-INF/views/layouts/mypage/aside.jsp" %>
-<div class="container">
+			<div class="container">
 			<div class="border-wrapper">
 				<h2 class="container-title">
 					개인정보 변경
@@ -124,7 +124,7 @@
 						</dl>
 					</div>
 					<div class="btn-area-right">
-						<button class="rounded-button" type="button" onclick="location.href='/member/quit'">회원탈퇴</button>
+						<button class="rounded-button" type="button" onclick="location.href='/member/quit.do'">회원탈퇴</button>
 					</div>
 					<span id="errorMark" style="color: #ee1c25;padding-inline: 8px;font-size: 13px;display: none">!</span>
 					<span id="emailError" class="message" style="color: #ee1c25;font-size: 13px;"></span>
@@ -269,7 +269,7 @@
 						<button type="button" class="button-text" data-toggle="modal" data-target="#adverPolicy">내용보기</button>
 					</div>
 					<div class="button-set" style="margin-top:20px;">
-						<button type="button" class="button-basic border" onclick="location.href='/mypage/personal/info'">
+						<button type="button" class="button-basic border" onclick="location.href='/mypage/personal/info.do'">
 							취소
 						</button>
 						<button type="button" class="button-basic primary" id="saveBtn">
@@ -284,7 +284,7 @@
 			</div> <!-- container aside-layout main -->
 
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %>
-
+		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
  	</div> <!-- wrapper -->
  	
 <script>
@@ -298,17 +298,18 @@
 </script>
 
 <script>
+$(function () {
 	// 관심사 선택
 	$('.interest[value=${ interestCode1 }]').attr("checked", "checked");
 	$('.interest[value=${ interestCode2 }]').attr("checked", "checked");
 	$('.interest[value=${ interestCode3 }]').attr("checked", "checked");
 	if (${ adApproval } == 1) {
-		$("adYn").attr("checked", "checked");
+		$("#adYn").attr("checked", "checked");
 	}
 	if (${ marketingApproval } == 1) {
-		$("marketingYn").attr("checked", "checked");
+		$("#marketingYn").attr("checked", "checked");
 	}
-
+});
 
 </script>
 
@@ -745,6 +746,114 @@
 			<div class="modal-body">
 			</div>
 			<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="modal fade" id="marketingPolicy" tabindex="-1" aria-labelledby="marketingPolicyLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="marketingPolicyLabel">마케팅 활용</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">
+				
+<script type="text/javascript">
+	$().ready(function() {
+		// header - 공유버튼 숨김
+		$(".sns-share").hide();
+	});
+</script>
+
+<style>
+	.agreement-wrap th,td { word-break: break-all; width:auto; }
+	.agreement-wrap table { border-right:1px #eee solid; border-top:1px #eee solid; margin-bottom:15px; }
+	.agreement-wrap th { padding:10px; border-bottom:1px #333 solid; border-left:1px #eee solid; }
+	.agreement-wrap td { padding:10px; border-bottom:1px #eee solid; border-left:1px #eee solid; }
+</style>
+
+<div class="container" style="width:100%; min-width:auto; padding:30px;">
+	<div class="agreement-wrap">
+		<table style="width: 100%">
+			<tbody><tr>
+				<th>수집•이용 목적</th>
+				<th>수집 항목</th>
+				<th>보유기간</th>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">
+
+					신상품 홍보 및 맞춤형 광고, 광고성 정보
+					(메시지전송)
+				</td>
+				<td>성명, 휴대전화번호, 생년월일, 성별, 주소</td>
+				<td style="font-weight: bold">
+					회원 탈퇴 및 동의 철회 시
+				</td>
+			</tr>
+		</tbody></table>
+		<p>※ 고객님은 마케팅 활용 동의를 거부할 권리가 있으며, 동의를 거부할 경우 회원가입, 상품구매 등 기본 서비스 이용에는 제한을 받지 않습니다.</p>
+	</div>
+</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="adverPolicy" tabindex="-1" aria-labelledby="adverPolicyLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="adverPolicyLabel">광고성 정보 수신</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">
+				
+<script type="text/javascript">
+	$().ready(function() {
+		// header - 공유버튼 숨김
+		$(".sns-share").hide();
+	});
+</script>
+
+<style>
+	.agreement-wrap th,td { word-break: break-all; width:auto; }
+	.agreement-wrap table { border-right:1px #eee solid; border-top:1px #eee solid; margin-bottom:15px; }
+	.agreement-wrap th { padding:10px; border-bottom:1px #333 solid; border-left:1px #eee solid; }
+	.agreement-wrap td { padding:10px; border-bottom:1px #eee solid; border-left:1px #eee solid; }
+</style>
+
+<div class="container" style="width:100%; min-width:auto; padding:30px;">
+	<div class="agreement-wrap">
+		<table style="width:100%;">
+			<tbody><tr>
+				<th>수집•이용 목적</th>
+				<th>수집 항목</th>
+				<th>보유기간</th>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">
+					광고성 정보
+
+					(메시지전송)
+				</td>
+				<td>휴대전화번호</td>
+				<td style="font-weight: bold">
+					회원 탈퇴 및 동의 철회 시
+				</td>
+			</tr>
+		</tbody></table>
+		<p>※ 고객님은 광고성 정보 수신 동의를 거부할 권리가 있으며, 동의를 거부할 경우 회원가입, 상품구매 등 기본 서비스 이용에는 제한을 받지 않습니다.</p>
+	</div>
+</div>
+
+			</div>
 		</div>
 	</div>
 </div>
