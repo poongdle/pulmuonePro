@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import servlets.event.domain.HaveCouponDTO;
+import servlets.coupon.domain.HaveCouponDTO;
 import servlets.mypage.dto.BoxOrderListDTO;
 import servlets.mypage.dto.BoxOrderSimpleInfoDTO;
 import servlets.order.domain.BoxPayDTO;
@@ -51,7 +51,6 @@ public interface MypageDAO {
 			
 			
 	// 4. 쿠폰 관련
-	ArrayList<HaveCouponDTO> selectCoupon(int memberNo);
 			
 			
 	// 5. 리뷰 관련 servlets.review 참조

@@ -11,8 +11,8 @@ import javax.servlet.http.HttpSession;
 import auth.AuthInfo;
 import jdbc.connection.ConnectionProvider;
 import mvc.command.CommandHandler;
-import servlets.event.domain.CouponDTO;
-import servlets.event.domain.HaveCouponDTO;
+import servlets.coupon.domain.CouponDTO;
+import servlets.coupon.domain.HaveCouponDTO;
 import servlets.event.persistence.EventCouponDAO;
 import servlets.event.persistence.IEventCoupon;
 

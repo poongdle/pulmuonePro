@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import servlets.event.domain.HaveCouponDTO;
+import servlets.coupon.domain.HaveCouponDTO;
 import servlets.mypage.dao.MypageDAO;
 import servlets.mypage.dao.MypageDAOImpl;
 import servlets.mypage.dto.BoxOrderListDTO;
