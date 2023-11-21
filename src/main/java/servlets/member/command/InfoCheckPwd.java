@@ -30,9 +30,6 @@ public class InfoCheckPwd implements CommandHandler {
 			String memberId = auth.getMemberId();
 			String pwd = request.getParameter("pwd");
 			
-			System.out.println(memberId);
-			System.out.println(pwd);
-			
 			MemberService memberService = new MemberService();
 			MemberDTO dto = memberService.login(memberId, pwd);
 			System.out.println(dto);
@@ -43,8 +40,8 @@ public class InfoCheckPwd implements CommandHandler {
 				request.setAttribute("tel", dto.getTel());
 				
 				String email = dto.getEmail();
-				request.setAttribute("emailId", email.substring(0, email.indexOf("@")));
-				request.setAttribute("emailHost", email.substring(email.indexOf("@")));
+				request.setAttribute("emailId", email.split("@")[0]);
+				request.setAttribute("emailHost", email.split("@")[1]);
 				request.setAttribute("interestCode1", dto.getInterestCode1());
 				request.setAttribute("interestCode2", dto.getInterestCode2());
 				request.setAttribute("interestCode3", dto.getInterestCode3());
