@@ -51,33 +51,33 @@
 					</div>
 					<div class="vis-list" data-carousel="items">
 						<a class="item"
-							href="https://greenjuice.pulmuone.com/event/event/view/3058"
+							href="/event/event/view.do?event_no=36"
 							target="_blank" title="11월 브랜드데이"
 							style="background-color: #ffffff"> <img
 							src="/file/download/banner/0d3bc825-0970-4f85-9f7d-295f9d54e857.png"
 							alt="">
 						</a> <a class="item"
-							href="https://greenjuice.pulmuone.com/event/event/view/2957"
+							href="/event/event/view.do?event_no=30"
 							title="키즈프리 한 달 야채 프로젝트" style="background-color: #111111"> <img
 							src="/file/download/banner/e637a24e-8db2-47f2-8f0d-68b3d62529b9.png"
 							alt="">
 						</a> <a class="item"
-							href="https://greenjuice.pulmuone.com/product/daily/743"
+							href="/product/daily/view.do?tag=743"
 							title="비타맥스 엑스투" style="background-color: #ffffff"> <img
 							src="/file/download/banner/846fc1e1-4818-4eef-80ff-94b7f47daca1.png"
 							alt="">
 						</a> <a class="item"
-							href="https://greenjuice.pulmuone.com/event/event/view.do?event_no=35"
+							href="/event/event/view.do?event_no=35"
 							title="키즈프리 유기농 주스" style="background-color: #111111"> <img
 							src="/file/download/banner/896f670f-2e4c-44d3-9fbd-5b823b20c679.png"
 							alt="">
 						</a> <a class="item"
-							href="https://greenjuice.pulmuone.com/event/event/view/2997"
+							href="/event/event/view.do?event_no=33"
 							title="풀무원녹즙 쿠폰 사용 가이드" style="background-color: #ffffff"> <img
 							src="/file/download/banner/39447d58-8d60-4a85-b4b6-c3622ca41825.png"
 							alt="">
 						</a> <a class="item"
-							href="https://greenjuice.pulmuone.com/taste/taste" title="시음선물"
+							href="/taste/taste.do" title="시음선물"
 							style="background-color: #ffffff"> <img
 							src="/file/download/banner/cf57865c-d559-4193-bce1-075b28c60a61.png"
 							alt="">

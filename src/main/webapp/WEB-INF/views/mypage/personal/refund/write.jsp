@@ -143,7 +143,7 @@
 		              <dd>
 		              	<input type="hidden" value="${ acctNum }">
 <%-- 		              	<input type="hidden" value="<%= request.getParameter("acctNum") %>"> --%>
-		                <input value="${ acctNum }" class="numberOnly" type="number" name="bankAccount" id="bankAccount">
+		                <input value="<%= request.getParameter("acctNum") %>" class="numberOnly" type="number" name="bankAccount" id="bankAccount">
 		                <button type="button" id="verify" class="btn-square btn-black">계좌인증</button>
 		              </dd>
 		            </dl>
@@ -202,9 +202,12 @@
 
     
 //     $('.dropdown-item[data-value=11]').click();
-    if (<%= request.getParameter("insttCode") %>) {
+
+    if ("<%= request.getParameter("insttCode") %>" != null) {
 	    $('.dropdown-item[data-value=<%= request.getParameter("insttCode") %>]').click();
-	}
+
+   	}
+
     
 
     
@@ -256,7 +259,30 @@
         if ($('input[name=agree]:checked').length === 0) {
           return alert('개인정보 수집 이용약관에 동의해주세요')
         }
+	    var params = null;
+	    params = $("#accountForm").serialize();
         if (<%= request.getParameter("acctNum") %> != null) {
+			$.ajax({
+				url:"/member/refund/modifyRefundAcct.ajax" , 
+				dataType:"json",
+				type:"POST",
+				data: params,
+				cache:false ,
+				success: function ( data,  textStatus, jqXHR ){
+					if( data.rowCount == "1" ) {
+						ajaxStatus = true;
+		 				alert( "환불계좌가 정상적으로 수정되었습니다.", ()=>{location.href='/mypage/personal/refund.do'});
+
+					} else {  
+						alert("잘못된 요청입니다.");
+					}
+				 
+				},
+				error:function (){
+				 alert("에러~~~ ");
+				}
+			});
+        	
 //           post({url: '/mypage/personal/refund/1601', param: $.param(data)},
 //                   function (r) {
 //                     if (r.RESULT_MSG) {
@@ -267,10 +293,6 @@
 //                     }
 //                   })
         } else {
-			var ajaxStatus = false;
-		    var params = null;
-		    params = $("#accountForm").serialize();
-// 		    params = $("#accountForm").serialize();
 			$.ajax({
 				url:"/member/refund/writeRefundAcct.ajax" , 
 				dataType:"json",
@@ -292,15 +314,6 @@
 				}
 			});
         	
-        	
-        	
-//           post({url: '/mypage/personal/refund', param: $.param(data)}, function (r) {
-//             if (r.RESULT_MSG) {
-//               alert('환불계좌가 정상적으로 등록되었습니다.', () => location.href = '/mypage/personal/refund.do')
-//             } else {
-//               return alert('잘못된 요청입니다.')
-//             }
-//           })
         }
       }
     })
@@ -313,25 +326,25 @@
     //  endregion
 
     //  region verify
-    $('#verify').click(function () {
-      $("#insttCode").val($('#bankCode').data('value'));
-      var el = $(this)
-      if (!el.prop('v')) {
-        const data = checkForm();
-        if (data) {
-          post({url: '/mypage/personal/refund/verify', param: $.param(data)}, function (r) {
-            if (r.RESULT_MSG) {
-              el.text('인증완료')
-              el.prop('disabled', true)
-              el.prop('v', true);
+//     $('#verify').click(function () {
+//       $("#insttCode").val($('#bankCode').data('value'));
+//       var el = $(this)
+//       if (!el.prop('v')) {
+//         const data = checkForm();
+//         if (data) {
+//           post({url: '/mypage/personal/refund/verify', param: $.param(data)}, function (r) {
+//             if (r.RESULT_MSG) {
+//               el.text('인증완료')
+//               el.prop('disabled', true)
+//               el.prop('v', true);
               
-            } else {
-              alert('계좌인증에 실패하였습니다. 다시 시도해주세요.')
-            }
-          })
-        }
-      }
-    })
+//             } else {
+//               alert('계좌인증에 실패하였습니다. 다시 시도해주세요.')
+//             }
+//           })
+//         }
+//       }
+//     })
 
     //  endregion
   });
@@ -342,8 +355,8 @@
 <script>
 	$("#verify").on("click", function() {
 		var el = $(this);
-		alert("인증되었습니다. (임시)");		
-        
+		alert("인증되었습니다.");		
+		 $("#insttCode").val($('#bankCode').data('value'));
 		el.text('인증완료')
         el.prop('disabled', true)
         el.prop('v', true);

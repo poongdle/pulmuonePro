@@ -1,19 +1,15 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="servlets.product.persistence.ProductsDAO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-String cartId = session.getId();
-%>
+
 
 <!DOCTYPE html>
 <html lang="ko">
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
+
 	<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 	<main class="Cart">
-	
+
 <div id="container-wrapper" class="container-wrapper"> <!-- TODO : 회원쪽 페이지들은 <div class="container-wrapper member"> -->
 
 <script>
@@ -170,14 +166,8 @@ String cartId = session.getId();
     </div>
 </div>
 
-<script type="text/javascript" charset="UTF-8" src="//t1.daumcdn.net/adfit/static/kp.js"></script>
 <script type="text/javascript">
-    kakaoPixel('8037876667464136529').viewCart();
-</script>
-
-
-<script type="text/javascript">
-	var type = "daily";
+	var type = "box";
 	var gap = type == 'daily' ? 4 : 1;
 
 	function calculateTotalPrice() {
@@ -334,7 +324,7 @@ String cartId = session.getId();
 				}
 
 				newDelete({
-					url: "/cart?type=daily" + s,
+					url: "/cart?type=box" + s,
 				}, function () {
 					alert("삭제되었습니다.");
 					parent.remove();
@@ -360,7 +350,7 @@ String cartId = session.getId();
 
 			confirmDesign("", "삭제하시겠습니까?", function () {
 				newDelete({
-					url: "/cart?type=daily" + param,
+					url: "/cart?type=box" + param,
 				}, function () {
 					alert("삭제되었습니다.");
 					$(".order-item-list>*:has([name='cartIdx']:checked)").remove();
@@ -426,8 +416,6 @@ String cartId = session.getId();
 	})
 </script>
 
-	
-
 <div class="contents-area">
 	<div class="container">
 		<div class="location">
@@ -439,12 +427,12 @@ String cartId = session.getId();
 				<h2 class="cont-title" style="font-weight: 400">장바구니</h2>
 				<ul class="nav nav-tabs nav-justified" id="myTab-area" role="tablist">
 					<li class="nav-item" role="presentation">
-						<a href="/cart/daily" class="nav-link active" style="padding-right: 4px; margin-bottom: 0px; height: 47px">
+						<a href="/cart/daily.do" class="nav-link " style="padding-right: 4px; margin-bottom: 0px; height: 47px">
 							매일배송
 						</a>
 					</li>
 					<li class="nav-item" role="presentation">
-						<a href="/cart/box" class="nav-link " style="margin-bottom: 0px; height: 47px">
+						<a href="/cart/box" class="nav-link active" style="margin-bottom: 0px; height: 47px">
 							택배배송
 						</a>
 					</li>
@@ -454,10 +442,10 @@ String cartId = session.getId();
 			<div id="profile" role="tabpanel" aria-labelledby="profile-t">
 				<div class="prd-cart-area">
 					<div class="prd-cart-list-area" style="padding-top: 15px;">
-						<span>매일 아침 신선하게 배송됩니다.</span>
+						<span>주문하실 상품과 수량을 확인하세요.</span>
 						<div data-empty-action="Y" style=" display: none">
 							<div class="empty-area" style="padding: 160px 0">
-								<img src="/resources/assets/images/ui/ico-alert.png" alt="empty">
+								<img src="/resources/images/ui/ico-alert.png" alt="empty">
 								<b>장바구니가 비어있습니다.</b>
 							</div>
 						</div>
@@ -470,209 +458,80 @@ String cartId = session.getId();
 							</div>
 							<button type="button" class="btn-round2 deleteAll">선택 삭제</button>
 						</div>
-						<ul class="prd-cart-list  order-item-list">
+						<ul class="prd-cart-list cart-box-list order-item-list">
+		
+
+<li class="order-item" data-len="1" data-id="" data-event-idx="" data-prod-id="672" data-itemcode="0072964" data-origin-price="30700" data-price="30700" data-delivery-price="0" data-delivery-one-price="0" data-delivery-per="" data-limit-size="-1" style="padding: 20px 0 18px;">
+	<div class="prd-cart-info-area">
+		<div class="flex-l">
+			
+				<div class="checkbox chk-type3" style="margin-top: 33px">
+					<input type="checkbox" id="chk-prd-0072964" name="cartIdx" value="" data-itemcode="0072964" data-event-idx="" checked="checked">
+					<label for="chk-prd-0072964"><span class="hide">해당제품선택</span></label>
+				</div>
+			
+			<a class="thumb">
+				<img src="/file/download/product/cd399ead-476f-4c1d-bdcd-8b7868df04f9.png" alt="">
+			</a>
+			<div class="prd-info-select-amount">
+				<a href="/product/box/view.do?tag=${dto.products_tag }&eventIdx=" class="prd-info">
+					<em>냉장상품</em>
+					<b class="prd-title">
+						프레시업 5가지맛 혼합 7입
+					</b>
+					<span class="volume">(190ml X 7병)</span>
+				</a>
+				<input type="hidden" data-count="0" value="1">
+
+				
+				
+					<div class="prd-select-amount">
+						<button type="button" class="btn-minus prod-remove"><span class="hide">제품 빼기</span></button>
+						<em data-itemcount-view="0">1</em>
+						<button type="button" class="prod-add">+<span class="hide">제품 추가</span></button>
+					</div>
+				
+			</div>
+		</div>
+		<div class="prd-cart-btn-price">
+			<div>
+				
+					<button type="button" data-wish-type="box" data-wish-id="672" class="btn-wishList ">
+						<i class="ico ico-wishlist"></i>
+						<span class="hide">제품 찜하기</span>
+					</button>
+					<button type="button" class="btn-delete btn-prd-delete" data-cart-idx="" data-event-idx="" data-itemcode="0072964">
+						<i class="ico ico-prd-delete"></i>
+						<span class="hide">카트에서 삭제</span>
+					</button>
+				
+			</div>
+			<div class="price-info">
+
+				
+					
+					
+						<b class="now-price">
+							<b data-print-price="30700">
+								30,700
+							</b>
+							<span>원</span>
+						</b>
+					
+				
+
+			</div>
+		</div>
+	</div>
+	
+		
+		
+	
+
+</li>
+
+								
 							
-								
-								
-									
-
-<li data-id="34454" data-itemcode="0072840" class="order-item order-chk" data-price="2000">
-  
-  <div class="checkbox chk-type3">
-    <input type="checkbox" id="chk-prd-34454" name="cartIdx" value="34454" checked="checked" data-itemcode="0072840">
-    <label for="chk-prd-34454"><span class="hide">해당제품선택</span></label>
-  </div>
-  
-  <a href="/product/daily/view.do?tag=430&eventIdx=" class="prd-cart">
-    <div class="thumb">
-      <img src="/file/download/product/ecc8e6be-08ba-42a0-a9f9-a620944fe11d.jpg" alt="">
-    </div>
-    <div class="prd-info">
-      <b class="prd-title">
-        슈퍼키즈하이
-      </b>
-      
-        
-        
-          <b class="now-price">
-            2,000
-            <span> 원</span>
-          </b>
-        
-      
-    </div>
-  </a>
-  <div class="prd-cart-select-daily">
-    <ul data-cart-idx="34454" data-itemcode="0072840">
-    
-      
-      <li>
-        <input type="hidden" data-count="0" value="1">
-        <span>월</span>
-        <div class="prd-select-daily">
-          <button type="button" class="prod-add ea-control" data-index="0">+<span class="hide">제품 추가</span></button>
-          <em data-itemcount-view="0">1</em>
-          <button type="button" class="prod-remove ea-control btn-minus" data-index="0"><span class="hide">제품 빼기</span></button>
-        </div>
-      </li>
-    
-      
-      <li>
-        <input type="hidden" data-count="1" value="0">
-        <span>화</span>
-        <div class="prd-select-daily">
-          <button type="button" class="prod-add ea-control" data-index="1">+<span class="hide">제품 추가</span></button>
-          <em data-itemcount-view="1">0</em>
-          <button type="button" class="prod-remove ea-control btn-minus" data-index="1"><span class="hide">제품 빼기</span></button>
-        </div>
-      </li>
-    
-      
-      <li>
-        <input type="hidden" data-count="2" value="1">
-        <span>수</span>
-        <div class="prd-select-daily">
-          <button type="button" class="prod-add ea-control" data-index="2">+<span class="hide">제품 추가</span></button>
-          <em data-itemcount-view="2">1</em>
-          <button type="button" class="prod-remove ea-control btn-minus" data-index="2"><span class="hide">제품 빼기</span></button>
-        </div>
-      </li>
-    
-      
-      <li>
-        <input type="hidden" data-count="3" value="0">
-        <span>목</span>
-        <div class="prd-select-daily">
-          <button type="button" class="prod-add ea-control" data-index="3">+<span class="hide">제품 추가</span></button>
-          <em data-itemcount-view="3">0</em>
-          <button type="button" class="prod-remove ea-control btn-minus" data-index="3"><span class="hide">제품 빼기</span></button>
-        </div>
-      </li>
-    
-      
-      <li>
-        <input type="hidden" data-count="4" value="1">
-        <span>금</span>
-        <div class="prd-select-daily">
-          <button type="button" class="prod-add ea-control" data-index="4">+<span class="hide">제품 추가</span></button>
-          <em data-itemcount-view="4">1</em>
-          <button type="button" class="prod-remove ea-control btn-minus" data-index="4"><span class="hide">제품 빼기</span></button>
-        </div>
-      </li>
-    
-    </ul>
-  </div>
-  
-  <button type="button" class="btn-wishList " data-wish-type="daily" data-wish-id="430">
-    <i class="ico ico-wishlist"></i>
-    <span class="hide">제품 찜하기</span>
-  </button>
-  <button type="button" class="btn-delete btn-prd-delete" data-cart-idx="34454" data-itemcode="0072840">
-    <i class="ico ico-prd-delete"></i>
-    <span class="hide">카트에서 삭제</span>
-  </button>
-  
-</li>
-
-
-<li data-id="34453" data-itemcode="0072976" class="order-item order-chk" data-price="1600">
-  
-  <div class="checkbox chk-type3">
-    <input type="checkbox" id="chk-prd-34453" name="cartIdx" value="34453" checked="checked" data-itemcode="0072976">
-    <label for="chk-prd-34453"><span class="hide">해당제품선택</span></label>
-  </div>
-  
-  <a href="/product/daily/view.do?tag=438&eventIdx=" class="prd-cart">
-    <div class="thumb">
-      <img src="/file/download/product/7bad52bc-f656-493c-856e-8ed41dc487dc.jpg" alt="">
-    </div>
-    <div class="prd-info">
-      <b class="prd-title">
-        채소습관 케일
-      </b>
-      
-        
-        
-          <b class="now-price">
-            1,600
-            <span> 원</span>
-          </b>
-        
-      
-    </div>
-  </a>
-  <div class="prd-cart-select-daily">
-    <ul data-cart-idx="34453" data-itemcode="0072976">
-    
-      
-      <li>
-        <input type="hidden" data-count="0" value="0">
-        <span>월</span>
-        <div class="prd-select-daily">
-          <button type="button" class="prod-add ea-control" data-index="0">+<span class="hide">제품 추가</span></button>
-          <em data-itemcount-view="0">0</em>
-          <button type="button" class="prod-remove ea-control btn-minus" data-index="0"><span class="hide">제품 빼기</span></button>
-        </div>
-      </li>
-    
-      
-      <li>
-        <input type="hidden" data-count="1" value="1">
-        <span>화</span>
-        <div class="prd-select-daily">
-          <button type="button" class="prod-add ea-control" data-index="1">+<span class="hide">제품 추가</span></button>
-          <em data-itemcount-view="1">1</em>
-          <button type="button" class="prod-remove ea-control btn-minus" data-index="1"><span class="hide">제품 빼기</span></button>
-        </div>
-      </li>
-    
-      
-      <li>
-        <input type="hidden" data-count="2" value="0">
-        <span>수</span>
-        <div class="prd-select-daily">
-          <button type="button" class="prod-add ea-control" data-index="2">+<span class="hide">제품 추가</span></button>
-          <em data-itemcount-view="2">0</em>
-          <button type="button" class="prod-remove ea-control btn-minus" data-index="2"><span class="hide">제품 빼기</span></button>
-        </div>
-      </li>
-    
-      
-      <li>
-        <input type="hidden" data-count="3" value="1">
-        <span>목</span>
-        <div class="prd-select-daily">
-          <button type="button" class="prod-add ea-control" data-index="3">+<span class="hide">제품 추가</span></button>
-          <em data-itemcount-view="3">1</em>
-          <button type="button" class="prod-remove ea-control btn-minus" data-index="3"><span class="hide">제품 빼기</span></button>
-        </div>
-      </li>
-    
-      
-      <li>
-        <input type="hidden" data-count="4" value="0">
-        <span>금</span>
-        <div class="prd-select-daily">
-          <button type="button" class="prod-add ea-control" data-index="4">+<span class="hide">제품 추가</span></button>
-          <em data-itemcount-view="4">0</em>
-          <button type="button" class="prod-remove ea-control btn-minus" data-index="4"><span class="hide">제품 빼기</span></button>
-        </div>
-      </li>
-    
-    </ul>
-  </div>
-  
-  <button type="button" class="btn-wishList " data-wish-type="daily" data-wish-id="438">
-    <i class="ico ico-wishlist"></i>
-    <span class="hide">제품 찜하기</span>
-  </button>
-  <button type="button" class="btn-delete btn-prd-delete" data-cart-idx="34453" data-itemcode="0072976">
-    <i class="ico ico-prd-delete"></i>
-    <span class="hide">카트에서 삭제</span>
-  </button>
-  
-</li>
-
 						</ul>
 						
 						</div>
@@ -687,7 +546,7 @@ String cartId = session.getId();
 						
 							<div class="banner-area this-prd" style="margin-bottom: 0px">
 								<div class="banner-list">
-									<a class="item" href="/event/event/view/2394" title="장바구니_친구초대" style="background-color: #">
+									<a class="item" href="/event/event/view.do?event_no=2" title="장바구니_친구초대" style="background-color: #">
 										<img src="/file/download/banner/5944914d-b8f7-4d8d-90fc-e1cea9cb2d93.png" alt="">
 									</a>
 								</div>
@@ -698,13 +557,13 @@ String cartId = session.getId();
 					<div class="prd-checkout-area">
 						<dl>
 							<dt class="list-head">
-								<em class="count">선택한 상품 <span data-count-view="item">2</span>개</em>
+								<em class="count">선택한 상품 <span data-count-view="item">1</span>개</em>
 							</dt>
 							<dd>
-								<span>상품 판매가 (4주)</span>
+								<span>상품 판매가 </span>
 								<b>
 									<div class="now-price">
-										<b data-price-view="origin">36,800</b>
+										<b data-price-view="origin">30,700</b>
 										<span>원</span>
 									</div>
 								</b>
@@ -714,31 +573,36 @@ String cartId = session.getId();
 								<span>상품 할인 판매가</span>
 								<b>
 									<div class="now-price">
-										<b data-price-view="sale" class="">36,800</b>
+										<b data-price-view="sale" class="">30,700</b>
 										<span>원</span>
 									</div>
 								</b>
 							</dd>
+							
+							<dd>
+								<span>배송비</span>
+								<b>
+									<div class="now-price">
+										<b data-price-view="delivery">0</b>
+										<span>원</span>
+									</div>
+								</b>
+							</dd>
+							
 							
 							
 							<dd class="checkout-sum">
-								<span>4주예상 주문금액</span>
+								<span>주문금액</span>
 								<b>
 									<div class="now-price">
-										<b data-price-view="total">36,800</b>
+										<b data-price-view="total">30,700</b>
 										<span>원</span>
 									</div>
 								</b>
 							</dd>
 							
-							
 						</dl>
-						
-						<form action="/daily/order/step1.do" method="GET">
-							<input type="hidden" name="item"
-								value='{"item":[{"itemCode":"0072976","dayQty":[1,1,1,1,1]}]}'>
-						<button type="button" id="allOrderBtn" class="btn-default">주문신청</button>
-						</form>
+						<button type="button" id="allOrderBtn" class="btn-default">주문하기</button>
 					</div>
 				</div>
 			</div>
@@ -747,6 +611,7 @@ String cartId = session.getId();
 </div>
 
 </div>
+
 	</main>
 	<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
 	<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>

@@ -39,6 +39,10 @@ public class MemberQuit implements CommandHandler {
 //			JSONObject jsonResult = new JSONObject();
 //			jsonResult.put("memberNo" , dto.getMemberNo());
 			
+			if (auth != null) {
+				session.invalidate();
+			}
+			
 			return jsonResult;
 		}
 	}

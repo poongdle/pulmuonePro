@@ -81,31 +81,10 @@
         $(".bmi-wrapper").removeClass('active')
       }
     })
-
-    $('form.curation').submit(function (e) {
-      e.preventDefault();
-      const requestBody = $(this).serializeObject();
-      const goal = Object.keys(requestBody).find(e => e > 0) // 건강목표 유효성 체크
-      if (!goal) {
-        alert('1개 이상의 목표를 선택해 주세요')
-        return;
-      }
-      // 체중 키 입력 필수 아니라고 함
-      if (requestBody[6]) {
-        if (!requestBody.tallness) {
-          alert('체중 및 키를 입력해 주세요');
-        } else if (!requestBody.weight) {
-          alert('체중 및 키를 입력해 주세요');
-        } else {
-          requestBody[6] = getBmi(requestBody.weight, requestBody.tallness);
-        }
-      }
-      sessionStorage.setItem('req1', JSON.stringify(requestBody));
-      location.href = '/customer/product/step2.do';
-    })
   })
 </script>
 
+<<<<<<< HEAD
 <div class="breadcrumb-style">
     <div class="container">
 		<div class="container">
@@ -131,6 +110,32 @@
                 <span>다수 항목 선택 가능</span>
             </div>
             <div class="filled-radio-group" id="health" value="all">
+=======
+				<div class="breadcrumb-style">
+					<div class="container">
+						<div class="container">
+							<ul>
+								<li><a>홈</a></li>
+								<li><a class="active">맞춤큐레이션</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+					<div class="container curation">
+						<div class="curation-progress-bar">
+							<ul>
+								<li class="active"><b>01.</b>건강목표</li>
+								<li><b>02.</b>식이섭취</li>
+								<li><b>03.</b>생활습관</li>
+							</ul>
+						</div>
+						<div class="question-part">
+							<div class="title">
+								<h3>평소 관심있는 건강 목표를 선택하세요.</h3>
+								<span>다수 항목 선택 가능</span>
+							</div>
+							<div class="filled-radio-group" id="health" value="all">
+>>>>>>> branch 'develop' of https://github.com/dhl1031/pulmuonePro.git
 
                 <label class="item">
                       <input type="checkbox" name="tired" value="0" class="checkGoal">
@@ -219,17 +224,40 @@
     </div>
 </form>
 
+<<<<<<< HEAD
 <script>
+=======
+						<div class="modal fade" id="alertModal" tabindex="-1"
+							aria-labelledby="alertModalLabel" style="display: none;">
+							<div class="modal-dialog modal-dialog-centered">
+								<div id="modal" class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="alertModalLabel"></h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close"></button>
+									</div>
+									<div class="modal-body">1개 이상의 목표를 선택해 주세요</div>
+									<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				<script>
+>>>>>>> branch 'develop' of https://github.com/dhl1031/pulmuonePro.git
 
 //체크박스 선택 없으면 모달창
 $("#nextPage").on("click", function() {
 	if($("input:checkbox:checked").is(":checked") == true){
-		var data = $(this).val();
+		var data = $("input:checkbox:checked").val();
+					
 		if (data.length > 0) {
 			$(this).attr("checked", true);
 		}
 		$("#alertModal").hide();
 		location.href= "/customer/product/step2.do"
+	}else{
+		alert('1개 이상의 목표를 선택해 주세요');
 	}	
 })
 
