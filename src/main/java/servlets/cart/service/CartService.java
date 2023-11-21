@@ -39,13 +39,17 @@ public class CartService {
 		      }
 		}
 
-		public ArrayList<CartDTO> cartList(int num){
+
+		public ArrayList<CartDTO> cartList(ArrayList<String> products_no){
+
 			Connection con = null;
 			try {
 				con = ConnectionProvider.getConnection();
 				CartImpl dao = CartImpl.getInstance();
 				ArrayList<CartDTO> list = null;
-				list = dao.cartList(con, num);
+
+				list = dao.cartList(con, products_no);
+
 				return list;
 			}catch (Exception e) {
 					System.out.println("CartService 에러");
