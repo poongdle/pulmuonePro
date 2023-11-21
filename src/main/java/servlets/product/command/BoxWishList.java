@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.util.SystemPropertyReplacerListener;
-
 import auth.AuthInfo;
 import mvc.command.CommandHandler;
 import servlets.product.domain.ProductsDTO;
 import servlets.product.service.AddService;
 import servlets.product.service.ListService;
 
-public class AddWishList implements CommandHandler{
+public class BoxWishList implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(">AddWishList.process ");
+		System.out.println(">AddBoxList.process ");
 		AddService addService = AddService.getInstance();
 		int tag = Integer.parseInt(request.getParameter("tag"));
 		HttpSession session = request.getSession(false);
@@ -32,8 +30,8 @@ public class AddWishList implements CommandHandler{
 		}
 		int insertRow = 0;		
 		insertRow = addService.wishadd(user_id,tag);
-		
-		return "/WEB-INF/views/product/DailyList.jsp";
+
+		return "/WEB-INF/views/product/BoxList.jsp";
 		
 		
 	}
