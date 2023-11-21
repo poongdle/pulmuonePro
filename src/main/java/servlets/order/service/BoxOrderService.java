@@ -33,8 +33,7 @@ public class BoxOrderService {
 		try {
 			conn = ConnectionProvider.getConnection();
 			BoxOrderImpl dao = BoxOrderImpl.getInstance();
-			ArrayList<BoxOrderProductDTO> list = null;
-			list = dao.selectProducts(conn, productsNo);
+			ArrayList<BoxOrderProductDTO> list = dao.selectProducts(conn, productsNo);
 			return list;
 		} catch (Exception e) {
 			System.out.println("BoxOrderService.selectProducts() 에러");

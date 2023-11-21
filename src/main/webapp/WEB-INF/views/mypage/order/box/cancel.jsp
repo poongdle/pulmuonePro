@@ -187,7 +187,7 @@
 											<span class="unit">원</span>
 										</div>
 										<div class="price-tag right sm">
-											<p class="value sale" style="color:#333;" data-eachprice="<%= salePrice %>"><%= decimalFormat.format(salePrice) %></p>
+											<p class="value sale" style="color:#333;" data-eachprice="<%= salePrice %>"><%= decimalFormat.format(-salePrice) %></p>
 											<span class="unit">원</span>
 										</div>
 					<%

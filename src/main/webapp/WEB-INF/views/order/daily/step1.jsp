@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ include file="/WEB-INF/views/layouts/head.jsp"%>
+<%@ include file="/WEB-INF/views/layouts/modalHead.jsp"%>
 
 <script>
 	var type = "daily";
@@ -560,6 +560,7 @@
 		</main>
 		
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
+		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 		
 		<div class="modal" id="addressModal" tabindex="-1" aria-labelledby="addressModal" style="display: none;" aria-hidden="true">
 		    <div class="modal-dialog modal-dialog-centered">
