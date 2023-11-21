@@ -11,6 +11,7 @@ String cartId = session.getId();
 <html lang="ko">
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
+
 	<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 	<main class="Cart">
 
@@ -42,11 +43,14 @@ String cartId = session.getId();
 		<script type="text/javascript" charset="UTF-8"
 			src="//t1.daumcdn.net/adfit/static/kp.js"></script>
 		<script type="text/javascript">
+
     kakaoPixel('8037876667464136529').viewCart();
 </script>
 
 
+
 <script type="text/javascript">
+
 	var type = "daily";
 	var gap = type == 'daily' ? 4 : 1;
 
@@ -282,7 +286,9 @@ String cartId = session.getId();
 					alertWithRedirect("로그인 후 이용가능합니다.", "/member/login?redirectUrl=" + location.href)
 					return;
 				}
+
 				location.href = "/order/box/step1.do?item=" + encodeURIComponent(JSON.stringify(order));
+
 				return;
 			}
 			else {
@@ -295,7 +301,6 @@ String cartId = session.getId();
 		calculateTotalPrice();
 	})
 </script>
-
 
 		<div class="contents-area">
 			<div class="container">
@@ -520,6 +525,7 @@ String cartId = session.getId();
 									</c:forEach>
 									<button type="button" id="allOrderBtn" class="btn-default">주문신청</button>
 								</form>
+
 							</div>
 						</div>
 					</div>

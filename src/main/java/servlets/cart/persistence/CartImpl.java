@@ -110,6 +110,7 @@ public class CartImpl implements CartDAO{
 
 
 	@Override
+
 	public ArrayList<CartDTO> cartList(Connection con, ArrayList<String> products_no) throws SQLException {
 		/*
 		 * String sql =
@@ -128,11 +129,12 @@ public class CartImpl implements CartDAO{
 					sql += prd+",";
 				} // while
 				sql += " -1 )  AND origin_name != 'View.png'";
+
 		
 		PreparedStatement pstmt = null;		
 		ResultSet rs = null;
 		ArrayList<CartDTO> list = null;
-		CartDTO dto = null;
+
 
 		try {
 			System.out.println(sql);
@@ -141,6 +143,7 @@ public class CartImpl implements CartDAO{
 			
 			if ( rs.next() ) {
 				list = new ArrayList<CartDTO>();
+
 				do {
 					dto = new CartDTO();
 
@@ -151,12 +154,12 @@ public class CartImpl implements CartDAO{
 					dto.setImg_path(rs.getString("img_path"));
 					dto.setSystem_name(rs.getString("system_name"));
 					dto.setProducts_size(rs.getString("products_size"));
-				
+
 					list.add(dto);
 
 				} while (rs.next());
 			} // if
-		
+
 		} finally {
 			JdbcUtil.close(pstmt);
 			JdbcUtil.close(rs);
