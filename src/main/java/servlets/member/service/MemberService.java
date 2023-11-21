@@ -146,6 +146,31 @@ public class MemberService {
 	}
 	
 	
+	// 6. 회원 탈퇴
+	public int quit(int memberNo) {
+		Connection conn = null;
+		MemberDAOImpl dao = null;
+		
+		int rowCount = 0;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = new MemberDAOImpl(conn);
+			rowCount = dao.delete(memberNo);
+			
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+		
+		return rowCount;
+	}
+	
+	
+	
 	private String getRandomInvCode() {
 		String charRange = "abcdefgehijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		int charRangeLength = charRange.length();
@@ -212,6 +237,8 @@ public class MemberService {
 		
 		return dto;
 	}
+
+
 
 
 

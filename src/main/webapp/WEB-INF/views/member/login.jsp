@@ -119,8 +119,6 @@
 		        </ul>
 		    </div>
 		</div>
-		
-<%-- 		<%@ include file="/WEB-INF/views/layouts/footer.jsp" %> --%>
 
  	</div>
  	
