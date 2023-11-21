@@ -24,7 +24,7 @@
 ## Environment
 
 #### Skills
-- JAVA SE-11
+- JDK-11 (JAVA)
 - Tomcat server 8.5v
 - Oracle 11g
 - ojdbc6
@@ -56,41 +56,96 @@
 <details>
 <summary>고경림</summary>
 <div markdown="1">
-맞춤큐레이션: ...
+맞춤큐레이션:..<br>
+장바구니: ..<br>
 </div>
+<hr>
 </details>
 
 <details>
 <summary>김정주</summary>
 <div markdown="1">
-이벤트: ...
+이벤트: ...<br>
+쿠폰:..<br>
 </div>
+<hr>
 </details>
 
 <details>
 <summary>박민석</summary>
 <div markdown="1">
 메인: ...
+택배배송 상품:<br>
+매일배송 상품:<br>
 </div>
+<hr>
 </details>
 
 <details>
 <summary>신종혁</summary>
-<div markdown="1">
-로그인/회원가입: ...
+<div markdown="1"><br>
+🌟 로그인/회원가입 <br><br>
+  
+  - 아이디 찾기<br>
+  - 비밀번호 찾기<br>
+
+🌟 환불계좌 관리 페이지<br>
+
+  - 환불계좌 등록/변경 페이지<br>
+
+🌟 개인정보 페이지<br>
+
+  - 변경 시, 비밀번호 확인<br>
+
+🌟 개인정보 변경 페이지<br><br>
 </div>
+<hr>
 </details>
 
 <details>
 <summary>이동현</summary>
 <div markdown="1">
-고객기쁨센터: ...
+<h4>🌴 고객기쁨센터</h4>
+🌟<strong>FAQ</strong> <br> <br>
+  
+  - FAQ 검색<br>
+  - 카테고리별 목록 조회<br>
+  - (관리자) FAQ 등록<br>
+  - (관리자) FAQ 삭제<br><br>
+  
+🌟<strong>1:1문의</strong> <br>
+  - 1:1 문의등록<br>
+  - 1:1 문의내역<br>
+  - 1:1 문의 유형별 보기<br>
+  - 1:1 문의 삭제<br><br>
+
+🌟<strong>공지사항</strong> <br>
+  - (관리자) 공지사항 등록<br>
+  - (관리자) 수정하기 <br>
+  - (관리자) 삭제하기 <br>
+  - 공지사항 목록 조회<br><br>
+  
+🌟<strong>배송가능지역</strong> <br>
+  - 배송가능 지역 검색하기 <br><br>
+  
 </div>
+<hr>
 </details>
 
 <details>
 <summary>이지현</summary>
-<div markdown="1">
-주문/배송: ...
+<div markdown="1"><br>
+🌟<strong>택배배송 주문</strong><br><br>
+  
+  - 주문서 작성<br>
+  - 주문서 작성 완료 -> 확인
+
+🌟<strong>마이페이지</strong><br>
+
+  - My녹즙(택배 배송 관련 부분)<br>
+  - 택배배송 주문내역<br>
+  - 주문 취소<br>
+  - 주문 내역 조회<br>
+  - 배송 조회<br><br>
 </div>
 </details>
