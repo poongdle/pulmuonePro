@@ -529,7 +529,7 @@
 		function showAddress(pageNo) {
 			$('#addressModal').addClass("loading");
 			$.ajax({
-					url: '/order/addressBook.ajax'
+					url: '/order/addressBook.do'
 					, dataType: "json"
 					, cache: false
 					, type:"GET"
