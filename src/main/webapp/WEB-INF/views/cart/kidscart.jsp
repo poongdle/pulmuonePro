@@ -736,19 +736,15 @@ String cartId = session.getId();
 						
 						<form action="/daily/order/step1.do" method="GET">
 							<input type="hidden" name="item"
-								value='{"item":[{"itemCode":"430","dayQty":[1,1,1,1,1]}]}'>
-						<button type="button" id="allOrderBtn" class="btn-default">주문신청</button></form>
+								value='{"item":[{"itemCode":"0072976","dayQty":[1,1,1,1,1]}]}'>
+						<button type="button" id="allOrderBtn" class="btn-default">주문신청</button>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-
-
-
-
 
 </div>
 	</main>
