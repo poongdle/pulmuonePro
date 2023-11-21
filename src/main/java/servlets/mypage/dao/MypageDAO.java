@@ -54,10 +54,10 @@ public interface MypageDAO {
 	ArrayList<HaveCouponDTO> selectCoupon(int memberNo);
 			
 			
-	// 5. 리뷰 관련
+	// 5. 리뷰 관련 servlets.review 참조
 			
 			
-	// 6. 1:1 문의 관련
+	// 6. 1:1 문의 관련 servlets.inquiry 참조 
 	
 	
 }

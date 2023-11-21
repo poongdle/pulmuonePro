@@ -50,6 +50,150 @@
 <br>
 
 
+## 폴더구조
+```
+└─main
+    ├─java
+    │  ├─auth
+    │  │  ├─command
+    │  │  └─service
+    │  ├─filter
+    │  ├─jdbc
+    │  │  └─connection
+    │  ├─mvc
+    │  │  ├─command
+    │  │  └─controller
+    │  └─servlets
+    │      ├─cart
+    │      │  ├─command
+    │      │  ├─domain
+    │      │  ├─persistence
+    │      │  └─service
+    │      ├─curation
+    │      │  ├─command
+    │      │  ├─controller
+    │      │  ├─domain
+    │      │  ├─persistence
+    │      │  └─service
+    │      ├─etc
+    │      │  └─command
+    │      ├─event
+    │      │  ├─command
+    │      │  ├─domain
+    │      │  ├─persistence
+    │      │  └─service
+    │      ├─faq
+    │      │  ├─command
+    │      │  ├─dao
+    │      │  ├─model
+    │      │  └─service
+    │      ├─franchiseSearch
+    │      │  ├─command
+    │      │  ├─dao
+    │      │  ├─model
+    │      │  └─service
+    │      ├─info
+    │      │  └─command
+    │      ├─inquiry
+    │      │  ├─command
+    │      │  ├─dao
+    │      │  ├─model
+    │      │  └─service
+    │      ├─member
+    │      │  ├─command
+    │      │  ├─dao
+    │      │  ├─dto
+    │      │  └─service
+    │      ├─mypage
+    │      │  ├─command
+    │      │  ├─dao
+    │      │  ├─dto
+    │      │  └─service
+    │      ├─notice
+    │      │  ├─command
+    │      │  ├─dao
+    │      │  ├─model
+    │      │  └─service
+    │      ├─order
+    │      │  ├─command
+    │      │  ├─domain
+    │      │  ├─persistence
+    │      │  └─service
+    │      ├─product
+    │      │  ├─command
+    │      │  ├─domain
+    │      │  ├─persistence
+    │      │  └─service
+    │      ├─refund
+    │      │  ├─command
+    │      │  ├─dao
+    │      │  ├─dto
+    │      │  └─service
+    │      ├─reivew
+    │      │  └─command
+    │      ├─search
+    │      │  └─command
+    │      ├─taste
+    │      │  └─command
+    │      └─utils
+    └─webapp
+        ├─file
+        │  └─download
+        │      ├─banner
+        │      └─product
+        ├─META-INF
+        ├─resources
+        │  └─assets
+        │      ├─css
+        │      ├─images
+        │      │  ├─common
+        │      │  ├─contents
+        │      │  ├─event
+        │      │  │  ├─thumbnail
+        │      │  │  └─view
+        │      │  └─ui
+        │      └─js
+        │          └─build
+        └─WEB-INF
+            ├─inc
+            ├─lib
+            ├─tags
+            └─views
+                ├─cart
+                ├─curation
+                │  └─result
+                ├─etc
+                ├─event
+                │  └─end
+                ├─faq
+                ├─franchiseSearch
+                ├─info
+                ├─inquiry
+                ├─layouts
+                │  ├─event
+                │  ├─forum
+                │  └─mypage
+                ├─member
+                │  ├─find
+                │  └─regist
+                ├─mypage
+                │  ├─order
+                │  │  └─box
+                │  └─personal
+                │      ├─info
+                │      └─refund
+                ├─notice
+                ├─order
+                │  ├─box
+                │  ├─daily
+                │  ├─inicis
+                │  └─taste
+                ├─product
+                ├─review
+                ├─taste
+                └─ui
+```
+
 
 
 ## 팀원 담당 페이지 소개
