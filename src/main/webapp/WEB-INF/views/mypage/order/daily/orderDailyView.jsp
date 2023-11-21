@@ -113,7 +113,7 @@
 										
 										<th>음용시작일</th>
 										<td class="between" style="position: relative ; display: table-cell">
-											<span>2023.10.05</span>
+											<span>2023.10.04</span>
 										</td>
 									</tr>
 									
@@ -126,8 +126,8 @@
 										<tr>
 											<th>배송정보</th>
 											<td colspan="3">
-												신종혁(자택) / 010-2344-2891 / 서울 서초구 청두곶2길 6 469-9 303호 
-												<a href="/mypage/drink/drink/stop/230000234094/23812" class="button-text">음용중지</a>
+												임재석(자택) / 010-1234-1234 / 서울 서초구 청두곶2길 6 303호 
+												<a href="/mypage/order/daily/stop.do?orderNo=1" class="button-text">음용중지</a>
 											</td>
 										</tr>
 									</tbody>
@@ -137,8 +137,8 @@
 									<div class="title">
 										<h2>음용스케쥴</h2>
 										<div class="button-set">
-											<a style="cursor: pointer" href="/mypage/drink/drink/change-history/230000234094?nickname=음용1" class="rounded-button">홈페이지 변경내역</a>
-											<a href="/mypage/drink/drink/change/230000234094/23812" class="rounded-button primary">음용상품변경</a>
+											<a style="cursor: pointer" href="/mypage/order/daily/changeHistory.do?orderNo=1" class="rounded-button">홈페이지 변경내역</a>
+											<a href="/mypage/order/daily/change.do?orderNo=1" class="rounded-button primary">음용상품변경</a>
 											<button type="button" id="changeDayBtn" class="rounded-button black">배송일정변경</button>
 										</div>
 									</div>
@@ -251,10 +251,10 @@
 															<td style="color: rgb(102, 102, 102); line-height: 3; background-color: rgb(255, 255, 255);">
 																<div style="cursor:pointer;" class="checkDrink day-with-symbol"><span>20</span></div>
 															</td>
-															<td style="color: rgb(51, 51, 51); line-height: 3; background-color: rgb(255, 255, 255); cursor: pointer; font-weight: bold;">
+															<td style="color: rgb(51, 51, 51); line-height: 3; background-color: rgb(255, 255, 255);">
 																<div style="cursor:pointer;" class="checkDrink day-with-symbol"><span>21</span></div>
 															</td>
-															<td style="color: rgb(102, 102, 102); line-height: 3; background-color: rgb(255, 255, 255); cursor: pointer;">
+															<td style="color: rgb(102, 102, 102); line-height: 3; background-color: rgb(255, 255, 255); cursor: pointer; font-weight: bold;">
 																<div style="cursor:pointer;" class="checkDrink day-with-symbol"><span>22</span></div>
 															</td>
 															<td style="color: rgb(102, 102, 102); line-height: 3; background-color: rgb(255, 255, 255); cursor: pointer;">
@@ -326,7 +326,7 @@
 													</li>
 													<li>
 														<label>금</label>
-														<span class="active">2</span>
+														<span class="active">1</span>
 													</li>
 												</ul>
 																		
@@ -335,7 +335,7 @@
 														<div data-item-code="undefined" class="item">
 															<span class="number">1</span>
 															<div class="thumb">
-																<img src="/file/download/product/20230220/5e98ba4b-ea3d-4b14-b7db-a6b4399981dc.png" alt="">
+																<img src="/file/download/product/5e98ba4b-ea3d-4b14-b7db-a6b4399981dc.png" alt="">
 															</div>
 														</div>
 													</li>
@@ -343,7 +343,7 @@
 														<div data-item-code="undefined" class="item">
 															<span class="number">1</span>
 															<div class="thumb">
-																<img src="/file/download/product/20221108/abde0d7f-d546-4cc4-acec-99a4b895b9d7.jpg" alt="">
+																<img src="/file/download/product/abde0d7f-d546-4cc4-acec-99a4b895b9d7.jpg" alt="">
 															</div>
 														</div>
 													</li>
@@ -351,7 +351,7 @@
 														<div data-item-code="undefined" class="item">
 															<span class="number">1</span>
 															<div class="thumb">
-																<img src="/file/download/product/20220310/4cf0398b-fb18-45f9-97c4-be8b5bd2edd6.jpg" alt="">
+																<img src="/file/download/product/4cf0398b-fb18-45f9-97c4-be8b5bd2edd6.jpg" alt="">
 															</div>
 														</div>
 													</li>
@@ -359,7 +359,7 @@
 														<div data-item-code="undefined" class="item">
 															<span class="number">1</span>
 															<div class="thumb">
-																<img src="/file/download/product/20230302/42da9a6f-9889-4ff7-bf77-af5989855f86.jpg" alt="">
+																<img src="/file/download/product/42da9a6f-9889-4ff7-bf77-af5989855f86.jpg" alt="">
 															</div>
 														</div>
 													</li>
@@ -367,13 +367,7 @@
 														<div data-item-code="undefined" class="item">
 															<span class="number">1</span>
 															<div class="thumb">
-																<img src="/file/download/product/20230302/685a5aac-588c-4366-82c4-217f17b38067.jpg" alt="">
-															</div>
-														</div>
-														<div data-item-code="undefined" class="item">
-															<span class="number">1</span>
-															<div class="thumb">
-																<img src="/file/download/product/20230417/0512477d-b440-4adf-9cd3-3cc9ca29ab98.png" alt="">
+																<img src="/file/download/product/685a5aac-588c-4366-82c4-217f17b38067.jpg" alt="">
 															</div>
 														</div>
 													</li>
