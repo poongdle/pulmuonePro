@@ -59,28 +59,6 @@
         $(".bmi-wrapper").removeClass('active')
       }
     })
-
-    $('form.curation').submit(function (e) {
-      e.preventDefault();
-      const requestBody = $(this).serializeObject();
-      const goal = Object.keys(requestBody).find(e => e > 0) // 건강목표 유효성 체크
-      if (!goal) {
-        alert('1개 이상의 목표를 선택해 주세요')
-        return;
-      }
-      // 체중 키 입력 필수 아니라고 함
-      if (requestBody[6]) {
-        if (!requestBody.tallness) {
-          alert('체중 및 키를 입력해 주세요');
-        } else if (!requestBody.weight) {
-          alert('체중 및 키를 입력해 주세요');
-        } else {
-          requestBody[6] = getBmi(requestBody.weight, requestBody.tallness);
-        }
-      }
-      sessionStorage.setItem('req1', JSON.stringify(requestBody));
-      location.href = '/customer/product/step2.do';
-    })
   })
 </script>
 
@@ -94,7 +72,6 @@
 						</div>
 					</div>
 				</div>
-				<form class="curation">
 					<div class="container curation">
 						<div class="curation-progress-bar">
 							<ul>
@@ -178,7 +155,7 @@
 							</button>
 						</div>
 
-						<div class="modal fade show" id="alertModal" tabindex="-1"
+						<div class="modal fade" id="alertModal" tabindex="-1"
 							aria-labelledby="alertModalLabel" style="display: none;">
 							<div class="modal-dialog modal-dialog-centered">
 								<div id="modal" class="modal-content">
@@ -193,19 +170,21 @@
 							</div>
 						</div>
 					</div>
-				</form>
 
 				<script>
 
 //체크박스 선택 없으면 모달창
 $("#nextPage").on("click", function() {
 	if($("input:checkbox:checked").is(":checked") == true){
-		var data = $(this).val();
+		var data = $("input:checkbox:checked").val();
+					
 		if (data.length > 0) {
 			$(this).attr("checked", true);
 		}
 		$("#alertModal").hide();
 		location.href= "/customer/product/step2.do"
+	}else{
+		alert('1개 이상의 목표를 선택해 주세요');
 	}	
 })
 

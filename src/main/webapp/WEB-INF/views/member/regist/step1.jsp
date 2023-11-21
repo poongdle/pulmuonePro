@@ -35,7 +35,7 @@
 		                <div class="button-set" style="margin: 46px 0 40px"> 
 <!-- 		                	<form action="/member/regist/step2.do" method="post"> -->
 <!-- 		                    <button type="button" onclick="javascript:fnPopup();" class="button-basic primary btn-certify" style="width: 460px; height: 69px">실명인증하기 -->
-		                    <button type="submit" id="auth" class="button-basic primary btn-certify" style="width: 460px; height: 69px">실명인증하기</button>
+		                    <button type="button" id="auth" class="button-basic primary btn-certify" style="width: 460px; height: 69px">실명인증하기</button>
 <!-- 		                    </form> -->
 		                </div>
 		            </li>
@@ -71,7 +71,6 @@
 		prompt();
 	});
 	
-	let timer;
 	window.prompt = function (message, callback, okBtnText) {
 		$("#customModalLabel").html("");
 //  	$("#customModal .modal-body").html(message);
