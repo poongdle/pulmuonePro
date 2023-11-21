@@ -3,8 +3,8 @@
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
 <!-- header -->
 <header id="header">
-<%@ page import="auth.AuthInfo" %>
-<%-- <%
+<%-- <%@ page import="auth.AuthInfo" %>
+<%
     AuthInfo authInfo = (AuthInfo) session.getAttribute("auth");
     String loginInfo;
     if (authInfo == null) {
@@ -51,7 +51,7 @@
                   <a href="/customer/product/product.do">맞춤큐레이션</a>
                </li>
                <li>
-                  <a href="/taste/taste">시음선물</a>
+                  <a href="/taste/taste.do">시음선물</a>
                </li>
                <li>
                   <a href="/event/event/list.do">이벤트</a>
@@ -73,11 +73,11 @@
                <i class="ico ico-myIcon"></i>
                <span class="hide">로그인 페이지 / 마이 페이지로 가기</span>
             </a>
-             <a href="/cart/daily/cartdaily.do">
+             <a href="/cart/daily.do">
                <div class="counter hide" data-cart-size=""></div> <i class="ico ico-cart1"></i> <span class="hide">장바구니로 가기</span>
             </a>
          </div>
-         <form class="search-area" action="/product/search">
+         <form class="search-area" action="/product/search.do">
             <input type="text" id="" name="searchKeyword" value="" title="검색어 입력">
             <button>
                <i class="ico ico-srh1"></i>

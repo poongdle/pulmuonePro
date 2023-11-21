@@ -1,12 +1,14 @@
 package servlets.curation.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@Builder
 public class CurationDTO {
 
 	private int curation_no;

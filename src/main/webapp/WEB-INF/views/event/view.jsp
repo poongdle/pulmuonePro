@@ -35,7 +35,7 @@
 								</button>
 							</div>
 							
-							
+							<%-- 
 							<div class="board-cont event-board" style="position: relative; min-height: 100px;">
 								<div id="content-editor-area" style="line-height:0;">
 								    <c:forEach var="image" items="${eventView.images}">
@@ -53,30 +53,9 @@
 								    </c:forEach>
 								</div>
 							</div>			
-							
-<script>
-$(document).ready(function() {
-    $("a").click(function(event) {
-        event.preventDefault();
-
-        var coupon_no = $(this).attr('data-coupon-no');
-
-        $.ajax({
-            type: "GET",
-            url: "/event/coupon.do?coupon_no=" + coupon_no,
-            success: function(response) {
-                // 쿠폰 발급 성공 시 로직
-                arlrt("쿠폰 발급 성공");
-            },
-            error: function(response) {
-                // 쿠폰 발급 실패 시 로직
-            	arlrt("쿠폰 발급 실패");
-            }
-        });
-    });
-});
-</script>
-
+							 --%>
+							 
+							<%@ include file="/WEB-INF/views/layouts/event/event_view.jsp"%>
 
 							<c:if test="${eventView.event.event_cmt == 1}">
 							    <%@ include file="/WEB-INF/views/layouts/event/comment_area.jsp"%>

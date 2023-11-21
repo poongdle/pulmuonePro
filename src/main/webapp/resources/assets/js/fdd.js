@@ -74,7 +74,7 @@ function addCartToServer(type, data, eventIdx) {
     codes.push(item.itemCode);
   }
 
-  axios.post(`/product_available.do`, { ids: codes }).then(function (r) {
+  axios.post(`/product_available`, { ids: codes }).then(function (r) {
     var o = r.data.RESULT_MSG;
 	
     var lockIds = o.fails.map(x => x.itemCode);
@@ -477,12 +477,12 @@ let timer;
   $(document).on("click", "[data-product-preview]", function (e) {
     var that = $(this);
     var id = parseInt(that.attr("data-product-preview"), 10);
+	
     if (id) {
       $("#productPreviewModal .modal-content").html("");
       $("#productPreviewModal").addClass("loading").modal('show');
 
       $("#productPreviewModal .modal-content").load("/product/preview/modalview.do?num=" + id, function () {
-
         $("#productPreviewModal").removeClass("loading");
       });
     }
