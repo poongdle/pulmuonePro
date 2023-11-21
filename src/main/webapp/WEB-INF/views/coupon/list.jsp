@@ -58,31 +58,13 @@ LocalDate now = LocalDate.now();
 						<div class="info-copy"></div>
 						<div class="price-tag coupon right">
 							<label>사용가능한 쿠폰</label>
-							<p class="value">${fn:length(couponList)}</p>
+							<p class="value">${usableCoupons}</p>
 						</div>
 					</div>
 					<div class="coupon-item-list">
 						<ul id="pagable-list" data-list-object="append">
 							<c:forEach var="coupon" items="${couponInfoList}" varStatus="status">
 							<c:set var="haveCoupon" value="${couponList[status.index]}" />
-								<li>
-								    <c:choose>
-							            <c:when test="${haveCoupon.used == 1}">
-							                <div class="item disabled">
-							            </c:when>
-							            <c:otherwise>
-							                <div class="item ">
-							            </c:otherwise>
-							        </c:choose>
-										<div style="min-height: 175px" class="body">
-											<div
-												style="display: flex; justify-content: space-between; min-height: 35px">
-												<h4>${coupon.coupon_name}</h4>
-												<a style="padding: 0 18px; font-size: 13px; height: 34px"
-													href="/mypage/drink/bill" class="rounded-button">사용하러가기</a>
-											</div>
-											<div class="date">
-												<p>${haveCoupon.issue_date}~${haveCoupon.expiry_date}</p>
 												<c:set var="expiryDateObj" value="${haveCoupon.expiry_date}" scope="page" />
 												<%
 													LocalDate expiryDate = null;
@@ -101,6 +83,26 @@ LocalDate now = LocalDate.now();
 	
 													long daysLeft = expiryDate != null ? ChronoUnit.DAYS.between(today, expiryDate) : 0;
 												%>
+								<% if (daysLeft >= 1) { %>
+								<li>
+								    <c:choose>
+							            <c:when test="${haveCoupon.used == 1}">
+							                <div class="item disabled">
+							            </c:when>
+							            <c:otherwise>
+							                <div class="item ">
+							            </c:otherwise>
+							        </c:choose>
+										<div style="min-height: 175px" class="body">
+											<div
+												style="display: flex; justify-content: space-between; min-height: 35px">
+												<h4>${coupon.coupon_name}</h4>
+												<c:if test="${haveCoupon.used != 1}">
+												    <a style="padding: 0 18px; font-size: 13px; height: 34px" href="/mypage/drink/bill" class="rounded-button">사용하러가기</a>
+												</c:if>
+											</div>
+											<div class="date">
+												<p>${haveCoupon.issue_date}~${haveCoupon.expiry_date}</p>
 												<span><%=daysLeft%>일 남음</span>
 											</div>
 											<ul>
@@ -110,14 +112,22 @@ LocalDate now = LocalDate.now();
 											</ul>
 										</div>
 										<div class="foot">
-											<p class="price">${coupon.discount}<span>원</span>
+											<p class="price">
+											    <c:choose>
+											        <c:when test="${coupon.discount < 1}">
+											            <fmt:formatNumber value="${coupon.discount}" type="number" minFractionDigits="2" maxFractionDigits="2" /><span>%</span>
+											        </c:when>
+											        <c:otherwise>
+											            <fmt:formatNumber value="${coupon.discount}" type="number" pattern="#"/><span>원</span>
+											        </c:otherwise>
+											    </c:choose>
 											</p>
 											<p class="out">사용완료</p>
 											<%-- <P>${haveCoupon.used}</P> --%>
 										</div>
 									</div>
 								</li>
-								
+								<% } %>
 							</c:forEach>
 						</ul>
 					</div>
@@ -134,8 +144,6 @@ LocalDate now = LocalDate.now();
 				</div>
 		</main>
 		<%@ include file="/WEB-INF/views/layouts/footer.jsp"%>
-<<<<<<< HEAD
-		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>
 		<script>
 			function OnloadImg(url) {
 				var img = new Image();
@@ -153,10 +161,5 @@ LocalDate now = LocalDate.now();
 		<img src="/resources/assets/images/common/couponGuide.png"
 			style="display: none" id="guideImage" alt="">
 	</div>
-=======
-		<%@ include file="/WEB-INF/views/ui/footermodal.jsp"%>		
-		<img src="/resources/assets/images/common/couponGuide.png" style="display: none" id="guideImage" alt="">
-	</div>	
->>>>>>> branch 'develop' of https://github.com/dhl1031/pulmuonePro.git
 </body>
 </html>

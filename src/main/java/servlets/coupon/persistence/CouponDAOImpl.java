@@ -20,7 +20,7 @@ public class CouponDAOImpl implements CouponDAO {
 		ResultSet rs = null;
 
 		try {
-			String sql = "SELECT * FROM have_coupon WHERE member_no = ?";
+			String sql = "SELECT * FROM have_coupon WHERE member_no = ? ORDER BY used ASC";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memberNo);
@@ -64,7 +64,7 @@ public class CouponDAOImpl implements CouponDAO {
 	            coupon = new CouponDTO();
 	            coupon.setCoupon_no(rs.getInt("coupon_no"));
 	            coupon.setCoupon_name(rs.getString("coupon_name"));
-	            coupon.setDiscount(rs.getInt("discount"));
+	            coupon.setDiscount(rs.getDouble("discount"));
 	            coupon.setDelivery_type(rs.getInt("delivery_type"));
 	            coupon.setDuplication(rs.getInt("duplication"));
 	            coupon.setUse_month(rs.getInt("use_month"));

@@ -26,9 +26,18 @@ public class CouponList implements CommandHandler{
 				
 		List<HaveCouponDTO> couponList = couponService.getCouponsByMemberNo(memberNo);
 		List<CouponDTO> couponInfoList = couponService.getCouponInfosByMemberNo(memberNo);
+		
+        int usableCoupons = 0;
+        for (HaveCouponDTO coupon : couponList) {
+            if (coupon.getUsed() == 0) {
+                usableCoupons++;
+            }
+        }
+		
 		//1.  포워딩 전 데이터 저장
 		request.setAttribute("couponList", couponList);
 		request.setAttribute("couponInfoList", couponInfoList);
+		request.setAttribute("usableCoupons", usableCoupons);
 
 		return "/WEB-INF/views/coupon/list.jsp";
 	}
