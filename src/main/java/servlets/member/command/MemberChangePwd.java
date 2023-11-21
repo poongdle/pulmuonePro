@@ -15,6 +15,8 @@ public class MemberChangePwd implements CommandHandler {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
+		
+		
 		String memberId = request.getParameter("memberId");
 		String pwd = request.getParameter("nowMemberPwd");
 		String newPwd = request.getParameter("memberPwd");

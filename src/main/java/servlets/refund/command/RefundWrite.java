@@ -15,12 +15,11 @@ public class RefundWrite implements CommandHandler {
 		
 		if (method.equals("GET")) {
 
-
+//			return "/mypage/personal/refund.do";
 		} else {
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 			
-//			request.setAttribute("acctNum", request.getParameter("acctNum"));
 		}
 		
 		String path = "/WEB-INF/views/mypage/personal/refund/write.jsp";
