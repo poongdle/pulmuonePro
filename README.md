@@ -44,7 +44,7 @@
 <br>
 
 ## ERD
-...
+![Frame 1](https://github.com/dhl1031/pulmuonePro/assets/141328665/e7d926ee-72e6-4ea8-8b1f-13b16951c3a2)
 <br>
 <br>
 <br>
@@ -53,7 +53,7 @@
 
 
 ## 팀원 담당 페이지 소개
-<details>
+<details open>
 <summary>고경림</summary>
 <div markdown="1">
 <h4>🌴 맞춤큐레이션</h4>
@@ -68,26 +68,47 @@
 <hr>
 </details>
 
-<details>
+<details open>
 <summary>김정주</summary>
 <div markdown="1">
-이벤트: ...<br>
-쿠폰:..<br>
+<h4>🌴 이벤트</h4>
+🌟 이벤트 페이지 <br><br>
+  
+  - 진행중인이벤트 <br>
+  - 종료된이벤트<br>
+  - 당첨자발표<br>
+  - 친구초대<br>
+  - 회원혜택<br>
+
 </div>
 <hr>
 </details>
 
-<details>
+<details open>
 <summary>박민석</summary>
 <div markdown="1">
-메인: ...
-택배배송 상품:<br>
-매일배송 상품:<br>
+<h4>🌴 메인 페이지</h4>
+  
+<h4>🌴 택배배송/매일배송 페이지</h4>
+🌟 상품<br><br>
+
+  - 상품 조회
+  - 상품 검색
+  - 찜
+  - 상품 상세보기
+
+<h4>💻 MARKUP </h4>
+
+  - Header 상품 검색(기능X)
+  - 시음선물(주문X)
+  - 창업안내(글작성X)
+  - 리뷰페이지
+
 </div>
 <hr>
 </details>
 
-<details>
+<details open>
 <summary>신종혁</summary>
 <div markdown="1"><br>
 🌟 로그인/회원가입 <br><br>
@@ -108,7 +129,7 @@
 <hr>
 </details>
 
-<details>
+<details open>
 <summary>이동현</summary>
 <div markdown="1">
 <h4>🌴 고객기쁨센터</h4>
@@ -133,12 +154,15 @@
   
 🌟<strong>배송가능지역</strong> <br>
   - 배송가능 지역 검색하기 <br><br>
-  
+
+<h4>💻 MARKUP </h4>
+
+- 제휴브랜드
 </div>
 <hr>
 </details>
 
-<details>
+<details open>
 <summary>이지현</summary>
 <div markdown="1"><br>
 🌟<strong>택배배송 주문</strong><br><br>

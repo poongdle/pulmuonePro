@@ -59,7 +59,7 @@
 							<li>
 								<a href="/mypage/inquiry/list.do" class="item">
 									<label>1:1 문의</label>
-									<span style="border-bottom: none;color: #999">0</span>
+									<span style="border-bottom: none;color: #999">${ totalCount }</span>
 								</a>
 							</li>
 						</ul>
