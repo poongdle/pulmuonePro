@@ -56,8 +56,14 @@
 <details>
 <summary>고경림</summary>
 <div markdown="1">
-맞춤큐레이션:..<br>
-장바구니: ..<br>
+<h4>🌴 맞춤큐레이션</h4>
+🌟 큐레이션 진행 <br><br>
+  
+  - 결과 출력 <br>
+  - 키즈 프로그램 조회<br>
+
+🌟 장바구니 조회<br>
+
 </div>
 <hr>
 </details>
