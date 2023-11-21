@@ -5,69 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
-	<script>
-	$(function (){
-		$('input[name=chk-prd1]').change(function () {
-			const checked = $('input[name=chk-prd1]:checked')
-			const checkedCnt = checked.length
-
-			const total = $('input[name=chk-prd1]').length
-			$('.prd-checkout-area .count span').text(checkedCnt)
-			$('#chk-all').prop('checked', total === checkedCnt)
-
-		})
-		$('#chk-all').click(function () {
-			$('input[name=chk-prd1]').prop('checked', $(this).is(':checked'))
-			$('input[name=chk-prd1]').trigger('change');
-		})
-		$(document).on('click', '.btn-delete', function () {
-			const idx = $(this).data('idx');
-			const tag = $(this).data('tag');
-			const el = $(this)
-			confirmDesign("","찜한상품을 삭제하시겠습니까?",function(){
-			  $.post("/mypage/product/delete.do?idx="+idx+"&tag="+tag,) 						
-			  .done(function(data){
-				  alert('목록에서 삭제되었습니다', () => location.reload())
-			  })
-			  .fail(function(data){
-				  alert('잘못된 요청입니다.');
-			  })
-			})
-			});		
-		$(document).on("click", '#deleteBtn', function () {
-			const checked = $('input[name=chk-prd1]:checked')
-			if (checked.length === 0) {
-				return alert('선택된 상품이 없습니다.');
-			}
-			const idxes = checked.map((i, v) => $(v).closest('li').data('idx')).toArray();
-			const tags = checked.map((i, v) => $(v).closest('li').data('tag')).toArray();
-			confirmDesign("","찜한상품을 삭제하시겠습니까?",function(){
-				  $.post("/mypage/product/delete.do?idx="+idxes+"&tag="+tags,) 						
-				  .done(function(data){
-					  alert('목록에서 삭제되었습니다', () => location.reload())
-				  })
-				  .fail(function(data){
-					  alert('잘못된 요청입니다.');
-				  })
-				})
-
-		});
-	});
-	function hrefMove(_this) {
-		let isSale = $(_this).data('issale');
-		let url = $(_this).data('url');
-		if (isSale == 'X') {
-			alert("판매가 중지된 상품입니다.");
-		} else if (isSale == 'N') {
-			alert("판매가 일지 중단된 상품입니다.");
-		} else {
-			location.href = url
-		}
-	}
-
-</script>
 	<div class="wrapper">
-
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
 		<main class="page forum">
 			<div class="breadcrumb-style">
@@ -75,8 +13,8 @@
 					<ul>
 						<li><a href="/">홈</a></li>
 						<li><a href="/mypage.do">MY녹즙</a></li>
-						<li><a class="" href="">활동정보</a></li>
-						<li><a class="active" href="">찜한상품</a></li>
+						<li><a class="" href="/mypage/product/list.do">활동정보</a></li>
+						<li><a class="active" href="/mypage/action/review.do">리뷰</a></li>
 					</ul>
 				</div>
 			</div>
@@ -109,8 +47,9 @@
 							data-list-object="append"
 							style="border: 1px solid #e5e5e5; border-radius: 10px">
 							<c:forEach items="${wishlist }" var="dto">
-								<li data-idx="${dto.idx }" data-tag="${dto.products_tag}"><label class="item-wrapper">
-										<input name="chk-prd1" type="checkbox">
+								<li data-idx="${dto.idx }" data-tag="${dto.products_tag}"><label
+									class="item-wrapper"> <input name="chk-prd1"
+										type="checkbox">
 										<div class="item">
 											<a
 												data-url="/product/daily/view.do?tag=${dto.products_tag }&eventIdx="
@@ -128,8 +67,9 @@
 												</div>
 											</a>
 										</div>
-										<button type="button" data-idx="${dto.idx }" data-tag="${dto.products_tag}"
-											class="btn-delete">
+
+										<button type="button" data-idx="${dto.idx }"
+											data-tag="${dto.products_tag}" class="btn-delete">
 											<i class="ico ico-prd-delete"></i> <span class="hide">카트에서
 												삭제</span>
 										</button>
@@ -159,5 +99,21 @@
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/ui/modal.jsp"%>
+	<script>
+	
+	let currentCate = `${param.category}`;
+	if( ${param.category == null || param.category == ""} ) currentCate = "전체";  
+	$(".inquiry-cate-select .dropdown-toggle").text(currentCate);
+	$(".inquiry-cate-select .dropdown-item").on("click", function(){
+		let val = $(this).data("value");
+		if( val != "" ) {
+			location.href = `/mypage/inquiry/list.do?category=\${ val }`;		
+		}else {
+			location.href = "/mypage/inquiry/list.do";
+			
+		}
+	})
+</script>
+
 </body>
 </html>

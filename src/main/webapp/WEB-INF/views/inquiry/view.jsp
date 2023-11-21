@@ -12,9 +12,9 @@
                 <div class="wrap">
                     <ul>
                         <li><a href="/">홈</a></li>
-                        <li><a href="">MY녹즙</a></li>
-                        <li><a href="">활동정보</a></li>
-                        <li><a class="active">1:1 문의</a></li>
+                        <li><a href="/mypage.do">MY녹즙</a></li>
+                        <li><a href="/mypage/product/list.do">활동정보</a></li>                        
+                        <li><a class="active" href="/mypage/inquiry/list.do">1:1 문의</a></li>
                     </ul>
                 </div>
             </div>
