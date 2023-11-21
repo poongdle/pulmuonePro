@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/layouts/head.jsp"%>
 <body>
-<script type="text/javascript">
+	<script type="text/javascript">
 <c:choose>
 <c:when test="${ auth.getName() eq null }">
 window.is_signed = false;
@@ -154,27 +154,27 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 										</div>
 									</div>
 								</c:otherwise>
-							</c:choose>							
-<!-- <div class="member-area" style="position:relative;overflow: visible" data-summary-view="#member_info"> -->
-<!--         <div class="personal-info"> -->
-<!--             <div class="user-info"> -->
-<%--                 <strong><span>${auth.getName()}</span>님 안녕하세요!</strong> --%>
-<!--                 <div class="pmenu-coupon"> -->
-<!--                     <a href="/mypage/benefit/coupon" title="해당페이지로 가기"> -->
-<!--                         <span>1</span> -->
-<!--                         <i class="ico"></i> -->
-<!--                     </a> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--             <div class="billing-area">                 -->
-<!--                     <div class="billing-prd" style="min-height: 40px; margin-bottom: 15px"></div> -->
-<!--                         <div class="tasting-btn"> -->
-<!--                             <span>시음 선물로 풀무원녹즙을 경험해 보세요.</span> -->
-<!--                             <a href="/taste/taste" class="button btn-default">시음 선물하기</a> -->
-<!--                         </div>                                     -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </div> -->
+							</c:choose>
+							<!-- <div class="member-area" style="position:relative;overflow: visible" data-summary-view="#member_info"> -->
+							<!--         <div class="personal-info"> -->
+							<!--             <div class="user-info"> -->
+							<%--                 <strong><span>${auth.getName()}</span>님 안녕하세요!</strong> --%>
+							<!--                 <div class="pmenu-coupon"> -->
+							<!--                     <a href="/mypage/benefit/coupon" title="해당페이지로 가기"> -->
+							<!--                         <span>1</span> -->
+							<!--                         <i class="ico"></i> -->
+							<!--                     </a> -->
+							<!--                 </div> -->
+							<!--             </div> -->
+							<!--             <div class="billing-area">                 -->
+							<!--                     <div class="billing-prd" style="min-height: 40px; margin-bottom: 15px"></div> -->
+							<!--                         <div class="tasting-btn"> -->
+							<!--                             <span>시음 선물로 풀무원녹즙을 경험해 보세요.</span> -->
+							<!--                             <a href="/taste/taste" class="button btn-default">시음 선물하기</a> -->
+							<!--                         </div>                                     -->
+							<!--             </div> -->
+							<!--         </div> -->
+							<!--     </div> -->
 							<!--S:개인화 메뉴-->
 							<ul class="personal-menu" data-summary-view="#member_menu">
 								<li class="item"><a href="/mypage/drink/drink"
@@ -401,7 +401,8 @@ window.kakaoSimpleData = {"memberId":"aaaaaaaa","name":"임재석","recommenderC
 										style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1200px;">
 										<div class="owl-item active" style="width: 300px;">
 											<div class="prd-area">
-												<a href="/event/event/view.do?event_no=30" title="제품 상세페이지로 가기">
+												<a href="/event/event/view.do?event_no=30"
+													title="제품 상세페이지로 가기">
 													<div class="badges">
 														<span class="badge badge-new">NEW</span> <span
 															class="badge badge-sale">SALE</span>
