@@ -10,18 +10,7 @@
 		<div id="container-wrapper" class="container-wrapper"> 		
  <script type="text/javascript">
 	$().ready(function() {
-		// 다음
-        var formatter = new Intl.NumberFormat();
-		$("#nextTasting").click(function() {
-			if ( !$("input:radio[name=recommendType]").is(':checked') ) {
-				alert( "추천 유형을 선택해주세요.");
-				return;
-			}
-			var recommendType = $("input[name=recommendType]:checked").val();
-
-			location.href = "/taste/recommend/"+recommendType+"" ;
-		});
-
+		
 		$("#myTab-area a").click(function (e) {
 			var href = $(this).attr("href");
 			history.replaceState({}, '', href);
@@ -103,8 +92,7 @@
 				</ul>
 				<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade active show" role="tabpane" id="tasting-tab1" aria-labelledby="tasting-intro-tab1">
-							<div class="prd-list">
-								
+							<div class="prd-list">								
 								<div class="prd-area">
 									<button type="button" class="btn-preview" data-itemcode="0074095" data-product-preview="743" title="제품 상세페이지 팝업 열기">
 										<span class="badge-day">월</span>
