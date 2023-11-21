@@ -86,7 +86,7 @@ LocalDate now = LocalDate.now();
 								<% if (daysLeft >= 1) { %>
 								<li>
 								    <c:choose>
-							            <c:when test="${haveCoupon.used == 1}">
+							            <c:when test="${haveCoupon.used == 1} ">
 							                <div class="item disabled">
 							            </c:when>
 							            <c:otherwise>
