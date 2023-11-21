@@ -176,7 +176,7 @@
 															<span class="volume">(${dto.products_size })</span>
 														</div>
 													</a>
-													<div class="btn-area btn-area-center">
+													<div class="btn-area btn-area-center">													
 														<c:if test="${ auth.getName() ne null }">
 															<c:choose>
 																<c:when test="${dto.wish_status eq 1 }">

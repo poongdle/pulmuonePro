@@ -39,25 +39,25 @@
 								</a>
 							</li>
 							<li>
-								<a href="/taste/taste" class="item">
+								<a href="/taste/taste.do" class="item">
 									<label>시음선물</label>
 									<span class="blank_copy">선물해보세요</span>
 								</a>
 							</li>
 							<li>
-								<a href="/event/event/view/friends" class="item">
+								<a href="/event/event/view.do?event_no=2" class="item">
 									<label>쿠폰</label>
 									<span class="blank_copy">친구초대하고 쿠폰받으세요</span>
 								</a>
 							</li>
 							<li>
-								<a href="/mypage/action/review" class="item">
+								<a href="/mypage/action/review.do" class="item">
 									<label>리뷰</label>
 									<span>5</span>
 								</a>
 							</li>
 							<li>
-								<a href="/mypage/action/counsel" class="item">
+								<a href="/mypage/inquiry/list.do" class="item">
 									<label>1:1 문의</label>
 									<span style="border-bottom: none;color: #999">0</span>
 								</a>

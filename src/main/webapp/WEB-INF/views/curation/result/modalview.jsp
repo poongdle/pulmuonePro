@@ -6,13 +6,13 @@
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close"></button>
 				<div class="thumb-normal">
-					<c:forEach var="dto" items="${list2 }">
+					<c:forEach var="dto" items="${list2 }" begin="0" end="0">
 						<img src="/file/download/product/${dto.system_name }">
 					</c:forEach>
 				</div>
 			</div>
 
-			<c:forEach var="dto" items="${list2}">
+			<c:forEach var="dto" items="${list2}" begin="0" end="0">
 				<div class="modal-body">
 					<div class="info-area">
 						<h2>${dto.products_name }</h2>

@@ -82,7 +82,7 @@
 						<label class="item-wrapper">
 							<div class="item" href="/">
 								<a class="thumb">
-									<img src="<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt="">
+									<img src="/<%= prd.getImgPath() %>/<%= prd.getOriginName() %>" alt="">
 								</a>
 								<div class="contents">
 									<div class="product">

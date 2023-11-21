@@ -82,7 +82,7 @@ public class EventCoupon implements CommandHandler {
                     int result = eventCouponDAO.setCoupon(conn, haveCoupon);
 
                     if(result > 0) {
-                        response.getWriter().print("{\"message\":\"쿠폰이 발급되었습니다.\"}");
+                    	response.getWriter().print("{\"message\":\"쿠폰이 발급되었습니다.\"}");
                     } else {
                         response.getWriter().print("{\"message\":\"쿠폰 발급에 실패하였습니다.\"}");
                     }
