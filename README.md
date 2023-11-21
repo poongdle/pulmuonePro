@@ -44,7 +44,7 @@
 <br>
 
 ## ERD
-...
+![Frame 1](https://github.com/dhl1031/pulmuonePro/assets/141328665/e7d926ee-72e6-4ea8-8b1f-13b16951c3a2)
 <br>
 <br>
 <br>
@@ -53,7 +53,7 @@
 
 
 ## 팀원 담당 페이지 소개
-<details>
+<details open>
 <summary>고경림</summary>
 <div markdown="1">
 <h4>🌴 맞춤큐레이션</h4>
@@ -68,7 +68,7 @@
 <hr>
 </details>
 
-<details>
+<details open>
 <summary>김정주</summary>
 <div markdown="1">
 <h4>🌴 이벤트</h4>
@@ -84,7 +84,7 @@
 <hr>
 </details>
 
-<details>
+<details open>
 <summary>박민석</summary>
 <div markdown="1">
 <h4>🌴 메인 페이지</h4>
@@ -108,7 +108,7 @@
 <hr>
 </details>
 
-<details>
+<details open>
 <summary>신종혁</summary>
 <div markdown="1"><br>
 🌟 로그인/회원가입 <br><br>
@@ -129,7 +129,7 @@
 <hr>
 </details>
 
-<details>
+<details open>
 <summary>이동현</summary>
 <div markdown="1">
 <h4>🌴 고객기쁨센터</h4>
@@ -162,7 +162,7 @@
 <hr>
 </details>
 
-<details>
+<details open>
 <summary>이지현</summary>
 <div markdown="1"><br>
 🌟<strong>택배배송 주문</strong><br><br>
