@@ -28,8 +28,6 @@
 				</h2>
 			</div>
 			<div class="box-partition nobox" style="width:640px;">
-				<form id="memberForm">
-				<input type="hidden" id="myRecommendCode" value="${ invCode }">
 				<div class="part" style="padding:10px 0 20px;">
 					<div class="part-head">
 						<h5>기본정보</h5>
@@ -52,7 +50,7 @@
 									<label for="id">아이디</label>
 								</dt>
 								<dd>
-									<input type="text" id="id" name="id" value="${ auth.getMemberId() }" disabled="">
+									<input type="text" id="id" name="id" value="${ auth.getMemberId }" disabled="">
 								</dd>
 							</dl>
 						</div>
@@ -224,26 +222,17 @@
 								<i></i>
 							</div>
 							<p>카카오</p>
-							<c:choose>
-								<c:when test="${ kakaoToken != null }">
 										<div class="sns-link active">
 											<span>연결완료</span>
 										</div>
-								</c:when>
-							</c:choose> 		
+									
 						</div>
 						<div class="naver item">
 							<div class="ico">
 								<i></i>
 							</div>
 							<p>네이버</p>
-							<c:choose>
-								<c:when test="${ naverToken != null }">
-										<div class="sns-link active">
-											<span>연결완료</span>
-										</div>
-								</c:when>
-							</c:choose> 	
+
 						</div>
 					</div>
 				</div>
@@ -278,7 +267,6 @@
 					</div>
 				</div>
 			</div>
-			</form>
 		</div>
 					
 			</div> <!-- container aside-layout main -->
@@ -298,456 +286,11 @@
 </script>
 
 <script>
-	// 관심사 선택
-	$('.interest[value=${ interestCode1 }]').attr("checked", "checked");
-	$('.interest[value=${ interestCode2 }]').attr("checked", "checked");
-	$('.interest[value=${ interestCode3 }]').attr("checked", "checked");
-	if (${ adApproval } == 1) {
-		$("adYn").attr("checked", "checked");
-	}
-	if (${ marketingApproval } == 1) {
-		$("marketingYn").attr("checked", "checked");
-	}
+	// 미완
+	$(".interest[value=\${ interestCode1 }").attr("checked", "checked");
 
 
 </script>
-
-<script type="text/javascript">
-	let host = "";
-	$().ready(function() {
-
-		$('.my-page-change-info-input.new-pwd-li').hide();
-
-		$(".recommendCode").click(function (){
-			$('#myRecommendCode').attr('type', 'text');
-			// input에 담긴 데이터를 선택
-			$('#myRecommendCode').select();
-            const text = $('#myRecommendCode').val();
-			//  clipboard에 데이터 복사
-			var copy = document.execCommand('copy');
-			// input box를 다시 hidden 처리
-			$('#myRecommendCode').attr('type', 'hidden');
-			alert(`복사완료 <br> 추천코드는 ${ invCode } 입니다.`)
-		})
-
-		$("#recommenderCodeBtn").click(function (){
-
-			let recommenderCode = $("#recommenderCode").val();
-			if(recommenderCode == undefined || recommenderCode.trim() == ''){
-				return alert("추천인 코드를 입력해주세요.")
-			}
-			get({
-				"url": "/mypage/personal/info/detail/" + $("#recommenderCode").val(),
-				"param": {}
-			}, function(response) {
-				alert("등록되었습니다.")
-				$("#recommenderCodeBtn").prop("disabled", true);
-				$("#recommenderCode").prop("disabled", true);
-			}, function (responseFail){
-				alert(responseFail.RESULT_MSG)
-			});
-		})
-
-		$(".pwdHidden").hide();
-
-		// // 모바일 청구서 수신동의시
-		// $("#adYn").click(function() {
-		// 	if($("#market신ingYn").is(":checked")){
-		//
-	    //     }else{
-	    //     	alert("마케팅 수신동의을 선택하세요");
-	    //     	$('input[name="adYn"]').attr('checked', false);
-	    //     }
-		// });
-		//
-		// $("#marketingYn").click(function() {
-		// 	if($("#marketingYn").is(":checked")){
-		//
-	    //     }else{
-	    //     	$('input[name="adYn"]').attr('checked', false);
-	    //     }
-		// });
-
-		// 비밀번호 변경 버튼 클릭
-		$("#changePwdBtn").click(function() {
-			trim("#memberPwd");
-			var pwd = $("#memberPwd").val();
-			if ( pwd == "" ) {
-				alert( "비밀번호를 입력해주세요.");
-			}
-			$(".pwdHidden").show();
-			$(".pwdShow").hide();
-			$(".pwdHidden").find("input[type=text], input[type=password]").prop("disabled", false);
-		});
-
-		// 비밀번호 변경 취소 버튼 클릭
-		$("#cancelChangePwdBtn").click(function() {
-			$(".pwdHidden").find("input[type=text], input[type=password]").val("");
-			$(".pwdHidden").find("input[type=text], input[type=password]").prop("readonly", true);
-			$(".pwdHidden").find("input[type=text], input[type=password]").prop("disabled", true);
-			hideError("memberPwdError");
-			hideError("memberPwdConfirmError");
-			$(".pwdHidden").hide();
-			$(".pwdShow").show();
-		});
-
-		// 휴대폰 번호 변경 버튼 클릭
-		$("#changePhoneNumberBtn").click(function() {
-			windowOpen('popupChk', "AgAFQlExMDPEbSSDgn7NhVWQ1sHTqKHCBzIr86G0mv4DizVKOUUp3xVSB7k1FPc6Qd+huZEsefMYlVNXQEgq88UgDW4AvVRyRPbMcsR+xGxYnqSYbgqAiubBsUifcb/UMRIC/Pz+IIpflm2AZf/xT8MmYP965Bh7LhDOB3aQC74376i87P/moVuJJ0v8fmM/7OnV/M7WuWoc4odOgSeamaUMq0KST/qF4bp7gutqDZDLXbH8oQFTeOENQeiFqzTjmqXljS/D3tyux6AUQeowLL1u2EC7vAqBa+M2Zw+caaByk0hTeBM+5WrPiYjXmQ+bP+nv0rrxyoaCygGs3h93klMsiTen+2QMkbRTIy4Rn3uasoRH8gRrHhsMtxDd4MmKu/yPoYeFYdfKr08160mVJP3JtjbdSS5hCf2fPnKMmqPvy1ndbpxNq2i2JDTwFh1GerwktKZgyWF6lrv+uqAuQ1BSlod0JtKY0llB4Ao5vr7VwnJQPPp42WBvcIIieIio9N1zhRaU+pJW3N/bjNA7DlKtXtQ/0+6hdQ0xmXh5960VL4o0aX352cWWQQCDYlnKn2/dk1qSCmY=");
-		});
-
-
-		$("#memberPwd").keyup(function(e) {
-			var pwd = $(this).val();
-			var id = "show2891";
-
-			if ( pwd == "" ) {
-				showError("memberPwdError", message.member.regist.password.empty);
-			}
-			else if ( pwd.indexOf(" ") > -1 ) {
-				showError("memberPwdError", message.member.regist.password.space);
-			}
-			else if ( !message.member.regist.password.isFormat(pwd) ) {
-				showError("memberPwdError", message.member.regist.password.format);
-			}
-			else if ( message.member.regist.password.isConnect(pwd) ) {
-				showError("memberPwdError", message.member.regist.password.connect);
-			}
-			else if ( pwd.indexOf(id) > -1 ) {
-				showError("memberPwdError", message.member.regist.password.sameId);
-			}
-			else {
-				hideError("memberPwdError");
-			}
-		});
-		$("#memberPwd").blur(function() {
-			$(this).keyup();
-		});
-
-		$("#memberPwdConfirm").keyup(function(e) {
-			var pwdConfirm = $(this).val();
-			var pwd = $("#memberPwd").val();
-
-			if ( pwdConfirm == "" ) {
-				showError("memberPwdConfirmError", message.member.regist.password.more);
-			}
-			else if ( pwdConfirm != pwd ) {
-				showError("memberPwdConfirmError", message.member.regist.password.notMatch);
-			}
-			else {
-				hideError("memberPwdConfirmError");
-			}
-		});
-		$("#memberPwdConfirm").blur(function() {
-			$(this).keyup();
-		});
-
-		$("#email, #emailHost").keyup(function(e) {
-
-			var email = $("#email").val();
-			var emailHost = $("#emailHost").val() || $("#emailHostList").val();
-			var fullEmail = email + "@" + emailHost;
-			if ( email == "" ) {
-				$('#errorMark').css('display','inline-block');
-				$('#emailError').css('display','inline-block');
-				showError("emailError", message.member.regist.email.empty);
-			}
-			else if ( emailHost == "" ) {
-				$('#errorMark').css('display','inline-block');
-				$('#emailError').css('display','inline-block');
-				showError("emailError", message.member.regist.email.empty);
-			}
-			else if ( !message.member.regist.email.isFormat(fullEmail) ) {
-				$('#errorMark').css('display','inline-block');
-				$('#emailError').css('display','inline-block');
-				showError("emailError", message.member.regist.email.format);
-			}
-			else {
-				$('#errorMark').css('display','none');
-				$('#emailError').css('display','none')
-				hideError("emailError", message.member.regist.email.format);
-				// post({
-				// 	url: "/member/duplicate/email"
-				// 	, param: {
-				// 		"idOrEmail": fullEmail,
-				// 		"useMemberId": "Y"
-				// 	}
-				// }, function(response) {
-				// 	if ( response.RESULT_MSG ) {
-				// 		showError("emailError", message.member.regist.email.duplicate);
-				// 	}
-				// 	else {
-				// 		$('#errorMark').css('display','none');
-				// 		$('#emailError').css('display','none');
-				// 		// hideError("emailError");
-				// 		// showSuccess("emailError", message.member.regist.email.ok);
-				// 	}
-				// });
-			}
-		});
-
-		$("#email, #emailHost").blur(function() {
-			$(this).keyup();
-		});
-
-		$("#emailHostList").change(function() {
-			$("#emailHost").val("");
-			if ( $(this).val() == "1" ) {
-				$("#emailHost").prop("disabled", false);
-			}
-			else if ( $(this).val() == "" ) {
-				$("#emailHost").prop("disabled", true);
-			}
-			else {
-				$("#emailHost").prop("disabled", false);
-				$("#emailHost").prop("readonly", false);
-				$("#emailHost").val($(this).val());
-			}
-
-			$("#email").keyup();
-		});
-
-		$("#emailHostList").change();
-		$("#emailHost").val("naver.com");
-		// $("#email").keyup();
-
-		var interest = [];
-
-		$(".interest").change(function() {
-			if ( $(this).prop("checked") ) {
-
-				if ( interest.length >= 3 ) {
-					alert( message.member.regist.interest.max);
-					$(this).prop("checked", false);
-					$(this).next().css({
-						"borderColor": "",
-						"backgroundColor": ""
-					});
-					return false;
-				}
-				//rcRandomColor();
-				interest.push($(this).val());
-			}
-			else {
-				for ( var i in interest ) {
-					if ( interest[i] == $(this).val() ) {
-						interest.splice(i, 1);
-					}
-				}
-			}
-
-		});
-
-		// 네이버 연동 클릭
-		$("#snsNaver").change(function() {
-			if ( $(this).prop("checked") ) {
-				disablesSns("N", false, true);
-				window.open("https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=i7eb3o1oVsnPsxrI4jQ5&redirect_uri=https://greenjuice.pulmuone.com/sns/naver&state=932907786154283149778152319702194390199&state=%7B%7D", "popup_window", "width=500, height=300, scrollbars=yes");
-			}
-			else {
-				$("#snsNaver").prop("checked", true);
-				confirmDesign("", "네이버 연결을 해지하시겠습니까?", function() {
-					get({
-						"url": "/sns/naver/disconnect",
-						"param": {}
-					}, function(response) {
-						disablesSns("N", false);
-					});
-				});
-			}
-		});
-
-		// 카카오 연동 클릭
-		$("#snsKakao").click(function() {
-			if ( $(this).prop("checked") ) {
-				disablesSns("K", false, true);
-				window.open("https://kauth.kakao.com/oauth/authorize?client_id=4631f2522dc407a8035e73aaa5d1bd17&redirect_uri=https://greenjuice.pulmuone.com/sns/kko&response_type=code&scope=account_ci,phone_number,name,birthyear,birthday,gender,account_email&state=%7B%7D", "popup_window", "width=500, height=300, scrollbars=yes");
-			}
-			else {
-				confirmDesign("", "카카오 연결을 해지하시겠습니까?", function() {
-					get({
-						"url": "/sns/kakao/disconnect",
-						"param": {}
-					}, function(response) {
-						disablesSns("K", false);
-					});
-				});
-			}
-
-		});
-
-		$("#saveBtn").click(function() {
-
-			if ( $(".pwdHidden").css("display") != "none" ) {
-				$("#memberPwd").keyup();
-				$("#memberPwdConfirm").keyup();
-			}
-
-			$("#email").keyup();
-
-			if ( hasError() ) {
-				return false;
-			}
-
-			// if ( interest.length == 0 ) {
-			// 	alert( message.member.regist.interest.empty);
-			// 	return false;
-			// }
-
-			var interestValue = "";
-			for ( var i in interest ) {
-				interestValue += interest[i];
-
-				if ( i < interest.length - 1 ) {
-					interestValue += ",";
-				}
-			}
-
-			$("#interest").val(interestValue);
-
-			confirmDesign("", message.save["confirm-mod"], function() {
-				post({
-					url: "/mypage/personal/info/detail",
-					param: $("#memberForm").serialize()
-				}, function(response) {
-					if(response.RESULT_CODE == "200"){
-						alert("회원정보가 저장되었습니다.", () => location.reload());
-					}
-				}, function(failResponse) {
-					for ( var key in failResponse.RESULT_MSG ) {
-						if ( key == "showAlert" ) {
-							alert(failResponse.RESULT_MSG[key]);
-						}
-						else {
-							alert(failResponse.RESULT_MSG[key]);
-						}
-					}
-					// if(failResponse.RESULT_MSG.memberPwdError != undefined){
-					// 	alert("",failResponse.RESULT_MSG.memberPwdError);
-					// } else if(failResponse.RESULT_MSG.memberPwdConfirmError != undefined){
-					// 	alert("",failResponse.RESULT_MSG.memberPwdConfirmError);
-					// } else if(failResponse.RESULT_MSG.emailError != undefined){
-					// 	alert("",failResponse.RESULT_MSG.emailError);
-					// }else if(failResponse.RESULT_MSG.showAlert != undefined){
-					// 	alert("",failResponse.RESULT_MSG.showAlert);
-					// }
-				});
-			});
-
-		});
-
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-		// 이메일 선택 st
-		$('.dropdown-item').click(function(){
-			const value = $(this).data('value');
-			const text = $(this).text();
-
-			const cl = $(this).get(0).classList;
-			if(cl.contains('email')){
-				$('.dropdown-toggle.email').text(text);
-				$('.dropdown-toggle.email').data('value',value);
-				if(value != '1'){
-					$('#emailHost').val(value);
-					$('#emailHost').attr('readonly',true);
-					// select dropdown 이메일 선택시 validation체크 start
-					const selectedFullEmail = $('#email').val() + '@' + $('#emailHost').val();
-					if ( selectedFullEmail == "" ) {
-						$('#emailError').css('display','inline-block');
-						$('#errorMark').css('display','inline-block');
-						showError("emailError", message.member.regist.email.empty);
-					}
-					else if ( !message.member.regist.email.isFormat(selectedFullEmail) ) {
-						$('#errorMark').css('display','inline-block');
-						$('#emailError').css('display','inline-block');
-						showError("emailError", message.member.regist.email.format);
-					}
-					// else {
-					// 	post({
-					// 		url: "/member/duplicate/email"
-					// 		, param: {
-					// 			"idOrEmail": selectedFullEmail,
-					// 			"useMemberId": "Y"
-					// 		}
-					// 	}, function(response) {
-					// 		if ( response.RESULT_MSG ) {
-					// 			showError("emailError", message.member.regist.email.duplicate);
-					// 		}
-					// 		else {
-					// 			$('#errorMark').css('display','none');
-					// 			$('#emailError').css('display','none');
-					// 			// hideError("emailError");
-					// 			// showSuccess("emailError", message.member.regist.email.ok);
-					// 		}
-					// 	});
-					// }
-					// select dropdown 이메일 선택시 validation체크 end
-					if(host == ''){
-						let fullEmail = $("#email").val();
-						let splitEmail = fullEmail.split("@");
-						host = splitEmail[1];
-						$("#email").val(splitEmail[0])
-
-					}
-				}else{
-					$('#emailHost').val('');
-					$('#emailHost').focus();
-					$('#emailHost').attr('readonly',false);
-				}
-			}
-		});
-		// 이메일 선택 ed
-	});
-
-	function disablesSns(type, onOff, existsPrepareJob) {
-		if ( type == "N" ) {
-			$("#snsNaver").prop("checked", onOff);
-			if ( onOff == true ) {
-				alert( "네이버 계정이 연결되었습니다.");
-			}
-			else {
-				if(!existsPrepareJob) {
-					alert( "네이버 계정 연결이 해지되었습니다.");
-				}
-			}
-		}
-		else if ( type == "K" ) {
-			$("#snsKakao").prop("checked", onOff);
-			if ( onOff == true ) {
-				alert( "카카오 계정이 연결되었습니다.");
-			}
-			else {
-				if(!existsPrepareJob) {
-					alert( "카카오 계정 연결이 해지되었습니다.");
-				}
-			}
-		}
-	}
-</script>
-
-<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="alertModalLabel"></h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				</button>
-			</div>
-			<div class="modal-body">
-			</div>
-			<button type="button" class="modal-footer" data-dismiss="modal">확인</button>
-		</div>
-	</div>
-</div>
 
 
 </body>
