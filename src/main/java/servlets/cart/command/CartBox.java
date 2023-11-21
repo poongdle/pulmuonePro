@@ -16,13 +16,13 @@ import servlets.cart.domain.CartDTO;
 import servlets.cart.service.CartService;
 
 
-public class CartDaily implements CommandHandler{
+public class CartBox implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 
-		System.out.println("> Cartdaily start..");
+		System.out.println("> CartBox start..");
 
 		String jsonStr = request.getRealPath("url");
 		Pattern pattern = Pattern.compile("/cart/daily.do");
@@ -60,7 +60,7 @@ public class CartDaily implements CommandHandler{
 		request.setAttribute("list", list);
 
 
-		return "/WEB-INF/views/cart/cartdaily.jsp";
+		return "/WEB-INF/views/cart/cartbox.jsp";
 
 	}
 
