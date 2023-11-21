@@ -272,8 +272,7 @@
 					</div>
 	
 					<div class="modal-body" style="max-height: 80vh; overflow-y: scroll">
-						<div class="drinking-list address" style="margin: 0">
-						</div>
+						<div class="drinking-list address" style="margin: 0"></div>
 						<div style="padding: 20px">
 		                    <button class="btn-default btn-white" style="width: 100%">더보기</button>
 		                </div>
@@ -281,7 +280,6 @@
 					
 				</div>
 			</div>
-		</div>
 		</div>
 		
 		<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" style="display: none;" aria-hidden="true">
@@ -531,7 +529,7 @@
 		function showAddress(pageNo) {
 			$('#addressModal').addClass("loading");
 			$.ajax({
-					url: '/order/addressBook.do'
+					url: '/order/addressBook.ajax'
 					, dataType: "json"
 					, cache: false
 					, type:"GET"
@@ -594,7 +592,9 @@
 					        } else {
 					        	root.next().hide();
 					        } // if
+					        
 							$('#addressModal').removeClass("loading")
+							
 						} else if (pageNo == 0) {
 					    	alert('등록된 주소록이 없습니다.');
 							$b('#addressModal').modal("hide");
@@ -637,6 +637,7 @@
 		      	} // if
 		    } // if
 		})
+		
 		$(document).on("click", "#top_move_pointer", function() {
 			$(document).scrollTop(0);
 		});

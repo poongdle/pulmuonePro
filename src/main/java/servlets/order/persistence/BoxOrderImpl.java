@@ -28,7 +28,7 @@ public class BoxOrderImpl implements BoxOrderDAO {
 	
 	@Override
 	public ArrayList<BoxOrderProductDTO> selectProducts(Connection conn, String [] productsNo) throws SQLException {
-		String sql = " SELECT DISTINCT p.products_no, category_no, products_name, products_type, products_size, price, event_price, img_path, system_name "
+		String sql = " SELECT DISTINCT p.products_no, category_no, products_name, products_type, products_size, price, NVL(event_price, price) event_price, img_path, system_name "
 				+ " FROM products p LEFT JOIN products_img i ON p.products_no = i.products_no "
 				+ " WHERE p.products_no IN( ";
 				for(int i = 0; i <= productsNo.length; i++) {
