@@ -12,4 +12,6 @@ public interface IEventCoupon {
 	
 	public CouponDTO getCoupon(Connection conn, int coupon_no) throws SQLException;
 	
+	boolean checkDuplicateCoupon(Connection conn, int couponNo, int memberNo) throws SQLException;
+	
 }

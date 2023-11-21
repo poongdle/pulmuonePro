@@ -46,6 +46,16 @@ public class EventCouponDAO implements IEventCoupon {
 	    return null;
 	}
 	
+	// 중복 체크
+	public boolean checkDuplicateCoupon(Connection conn, int couponNo, int memberNo) throws SQLException {
+	    String sql = "SELECT * FROM have_coupon WHERE coupon_no = ? AND member_no = ?";
+	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        pstmt.setInt(1, couponNo);
+	        pstmt.setInt(2, memberNo);
+	        ResultSet rs = pstmt.executeQuery();
+	        return rs.next(); // 중복된 쿠폰 수령 이력이 있는지 확인
+	    }
+	}
 	
 }
 
