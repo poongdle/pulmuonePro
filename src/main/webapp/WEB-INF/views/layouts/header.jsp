@@ -3,8 +3,8 @@
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
 <!-- header -->
 <header id="header">
-<%@ page import="auth.AuthInfo" %>
-<%-- <%
+<%-- <%@ page import="auth.AuthInfo" %>
+<%
     AuthInfo authInfo = (AuthInfo) session.getAttribute("auth");
     String loginInfo;
     if (authInfo == null) {
