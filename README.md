@@ -55,8 +55,6 @@
 └─main
     ├─java
     │  ├─auth
-    │  │  ├─command
-    │  │  └─service
     │  ├─filter
     │  ├─jdbc
     │  │  └─connection
