@@ -12,7 +12,7 @@ public interface CartDAO {
 
 // 장바구니
 
-ArrayList<CartDTO> cartList (Connection con , ArrayList<String> products_no) throws SQLException;
+ArrayList<CartDTO> cartList (Connection con , String products_no) throws SQLException;
 
   int dailyadd(Connection con,  CartDTO dto) throws SQLException;
 //ArrayList<CurationDTO> addcart(Connection con, ArrayList<String> products_tag) throws SQLException;
