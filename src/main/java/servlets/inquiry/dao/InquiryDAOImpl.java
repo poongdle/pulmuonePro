@@ -52,6 +52,7 @@ public class InquiryDAOImpl implements InquiryDAO{
 				if( category != "all" ) {
 					sql += "AND inquiry_cate = ? ";
 				}
+				sql += " ORDER BY inquiry_no DESC ";
 		System.out.println(category);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
