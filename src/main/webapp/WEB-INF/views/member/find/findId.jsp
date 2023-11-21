@@ -82,7 +82,6 @@
 		prompt();
 	});
 	
-	let timer;
 	window.prompt = function (message, callback, okBtnText) {
 		$("#customModalLabel").html("");
 //  	$("#customModal .modal-body").html(message);

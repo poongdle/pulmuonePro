@@ -170,35 +170,6 @@ public class MemberService {
 		return rowCount;
 	}
 	
-	// 7. 환불계좌 등록
-	public int writeRefundAcct(int memberNo, String insttCode, String acctOwner, String acctNum) {
-		Connection conn = null;
-		RefundDAOImpl dao = null;
-		
-		int rowCount = 0;
-		
-		String invCode = getRandomInvCode();
-//		dto.setInvCode(invCode);
-		
-		try {
-			conn = ConnectionProvider.getConnection();
-			dao = new RefundDAOImpl(conn);
-//			rowCount = dao.insert(dto);
-			
-			
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(conn);
-		}
-		
-		return rowCount;
-	}
-	
-	
-	
 	private String getRandomInvCode() {
 		String charRange = "abcdefgehijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		int charRangeLength = charRange.length();
@@ -207,7 +178,7 @@ public class MemberService {
 		
 		StringBuilder invCodeBuilder = new StringBuilder(invCodeLength);
 		for (int i = 0; i < invCodeLength; i++) {
-			randomIndex = (int) ( Math.random() * (charRangeLength + 1) );
+			randomIndex = (int) ( Math.random() * (charRangeLength) );
 			invCodeBuilder.append(charRange.charAt(randomIndex));
 		}
 		

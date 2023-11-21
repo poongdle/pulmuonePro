@@ -10,11 +10,11 @@ import servlets.member.service.MemberService;
 import servlets.refund.dto.RefundDTO;
 import servlets.refund.service.RefundService;
 
-public class WriteRefundAcct implements CommandHandler {
+public class ModifyRefundAcct implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("WriteRefundAcct.java : 환불계좌 등록 ajax 처리");
+		System.out.println("ModifyRefundAcct.java : 환불계좌 변경 ajax 처리");
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -36,7 +36,7 @@ public class WriteRefundAcct implements CommandHandler {
 		
 		RefundService refundService = new RefundService();
 		
-		rowCount = refundService.writeRefundAcct(dto);
+		rowCount = refundService.modifyRefundAcct(dto);
 		
 		
 		String jsonResult = String.format("{ \"rowCount\": %d }", rowCount);
