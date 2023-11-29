@@ -39,3 +39,6 @@ replay_pid*
 
 /build
 /bin/
+
+# API key
+apikey.js
