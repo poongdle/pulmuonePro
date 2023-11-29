@@ -10,6 +10,7 @@
 <script src="/resources/assets/js/owl.carousel.min.js"></script>
 <script src="/resources/assets/js/clipboard.min.js"></script>
 <script src="/resources/assets/js/fdd.js"></script>
+<script src="/resources/assets/js/apikey.js"></script>
 <body>
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/views/layouts/header.jsp"%>
@@ -192,11 +193,10 @@
 												            break;
 												        case 2: case 3: case 4:
 												%>
-												<!-- <button class="btn-default invoice btn-black" data-invo="6813-2692-9623" data-status="2" >배송조회</button> -->
 												<form action="http://info.sweettracker.co.kr/tracking/5" method="post">
 										            <div class="form-group" style="display: none">
 										              <label for="t_key">API key</label>
-										              <input type="text" class="form-control" id="t_key" name="t_key" placeholder="제공받은 APIKEY" value="Ppgk5mfovfq2cMhSjFOnYA">
+										              <input type="text" class="form-control" id="t_key" name="t_key" placeholder="제공받은 APIKEY" value="">
 										            </div>
 										            <div class="form-group" style="display: none">
 										              <label for="t_code">택배사 코드</label>
@@ -279,6 +279,13 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	const tracking_api = config.apikey;
+	$(function () {
+		$("#t_key").val(tracking_api);
+	})
+</script>
 <script>
   	$(function () {
 		let searchMonth = '';

@@ -42,11 +42,9 @@ public class BoxOrderImpl implements BoxOrderDAO {
 		ResultSet rs = null;
 		
 		try {
-			System.out.println("try");
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				System.out.println("if");
 				list = new ArrayList<>();
 				do {
 					dto = new BoxOrderProductDTO();
