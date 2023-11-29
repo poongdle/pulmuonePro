@@ -428,5 +428,3 @@ public class BoxOrderImpl implements BoxOrderDAO {
 	} // selectShipOne
 
 }
-
-
